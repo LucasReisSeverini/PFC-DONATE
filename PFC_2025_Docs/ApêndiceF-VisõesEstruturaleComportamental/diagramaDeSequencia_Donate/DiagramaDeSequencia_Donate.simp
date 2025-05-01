@@ -1,0 +1,959 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sim-project version="14.82" multi-file="no" uid="simp2729efe290034df993e0e6386e46b01e" creation-date="05/01/2025 14:06:50">
+  <meta>
+    <name>DiagramaDeSequencia_Doante</name>
+    <authors>Dilton Thales</authors>
+    <description />
+  </meta>
+  <counters models="1">
+    <entity-names>
+      <counter>
+        <item-type type-id="actor" type="Actor" />
+        <value>1</value>
+      </counter>
+      <counter>
+        <item-type type="Unknown" />
+        <value>3</value>
+      </counter>
+      <counter>
+        <item-type type-id="lifeline" type="Lifeline" />
+        <value>3</value>
+      </counter>
+      <counter>
+        <item-type type-id="fragment" type="Fragment" />
+        <value>1</value>
+      </counter>
+      <counter>
+        <item-type type-id="activation-bar" type="Execution Specification" />
+        <value>6</value>
+      </counter>
+      <counter>
+        <item-type type-id="sequence-action" type="Message" />
+        <value>22</value>
+      </counter>
+    </entity-names>
+    <entity-ids>
+      <counter>
+        <item-type type-id="actor" type="Actor" />
+        <value>2</value>
+      </counter>
+      <counter>
+        <item-type type-id="activation-bar" type="Execution Specification" />
+        <value>7</value>
+      </counter>
+      <counter>
+        <item-type type-id="lifeline" type="Lifeline" />
+        <value>4</value>
+      </counter>
+      <counter>
+        <item-type type-id="fragment" type="Fragment" />
+        <value>2</value>
+      </counter>
+      <counter>
+        <item-type type-id="sequence-action" type="Message" />
+        <value>23</value>
+      </counter>
+      <counter>
+        <item-type type-id="text" type="Text" />
+        <value>3</value>
+      </counter>
+    </entity-ids>
+    <diagrams>
+      <counter>
+        <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlSequenceDiagram</type>
+        <value>1</value>
+      </counter>
+    </diagrams>
+    <fields />
+  </counters>
+  <alias-groups />
+  <management uid="md-46282895930d4c7faaac222f93d0224f" name="" task-id-sequence="0">
+    <persons>
+      <person id="">
+        <first-name>Dilton</first-name>
+        <last-name>Thales</last-name>
+        <role />
+        <e-mail />
+        <phone-number />
+        <description />
+        <color>#00000000</color>
+      </person>
+    </persons>
+    <teams />
+    <sprints />
+    <projects />
+    <modules />
+    <tasks />
+    <to-dos />
+  </management>
+  <glossary id="glsr-32bb52e583c147edb7a29dab43458a34" name="" order-index="-1" />
+  <types default="UML">
+    <type-sets>
+      <type-set file="UmlTypes.xml" />
+    </type-sets>
+    <custom-types>
+      <parameters />
+      <types />
+    </custom-types>
+  </types>
+  <items>
+    <item id="b350fc070d6340c6a9d1634427f8fe8a" cid="SM021" type="sequence-action" name="Message21" creation-date="05/01/2025 14:27:27" from="846f15511c99415abce1417421bb7f5c" to="6c6961a1ceb744c0954769ff8370338b" visibility="package">
+      <sequence-action type="reply" message=" TelaCadastro : sucesso" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="8647932c7a7e4522aad38195298d0279" cid="SM019" type="sequence-action" name="Message19" creation-date="05/01/2025 14:25:56" from="467f56924cf24cbdb45a12e3c78c4af9" to="7f194a94c4bf46a385510aa7e7b11966" visibility="package">
+      <sequence-action type="reply" message="emailDisponivel (true)" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="09a60fe52683419cb49c7c2abeeec4c5" cid="SM002" type="sequence-action" name="Message2" creation-date="05/01/2025 14:18:45" from="adca49b88eb0480c93f84a3d0c7d4f9c" to="075093822ce44651aa0588e47d4a7fc0" visibility="package">
+      <sequence-action type="call" message="ExibiListaDeTopicos()" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="f7f03f165f69427c9d109ad6cb9e91ce" cid="ES002" type="activation-bar" name="ExecutionSpecification2" owner="be1c0e3a54984327af5596145924c3fa" creation-date="05/01/2025 14:11:40" visibility="undefined">
+      <activation-bar lifeline-ref="be1c0e3a54984327af5596145924c3fa" />
+    </item>
+    <item id="467f56924cf24cbdb45a12e3c78c4af9" cid="ES006" type="activation-bar" name="ExecutionSpecification6" owner="773dc7d11e384b4b94d0047070f9e595" creation-date="05/01/2025 14:22:33" visibility="undefined">
+      <activation-bar lifeline-ref="773dc7d11e384b4b94d0047070f9e595" />
+    </item>
+    <item id="24c90b71ae3b4e23b9a64c226cd4a141" cid="SM020" type="sequence-action" name="Message20" creation-date="05/01/2025 14:26:39" from="c7a9987631cb4645a973445fe3f94e3f" to="a94093ffa8f74c239391c85dddcb7733" visibility="package">
+      <sequence-action type="reply" message="verificaSenhaHash()" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="586ffb550f974124b5b72070b58ef727" cid="SM001" type="sequence-action" name="Message1" creation-date="05/01/2025 14:15:06" from="6976ecb39f14414fa0363bc1bc6deac4" to="f7f03f165f69427c9d109ad6cb9e91ce" visibility="package">
+      <sequence-action type="call" message="PreencheEmailSenha()" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="863eba495c704660a66b3e45d2198de8" cid="SM004" type="sequence-action" name="Message4" creation-date="05/01/2025 14:20:48" from="a94093ffa8f74c239391c85dddcb7733" to="c7a9987631cb4645a973445fe3f94e3f" visibility="package">
+      <sequence-action type="send" message="autenticar(email, senha)" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="799e350ee17141e98f05f5fd9bfbfc2d" cid="ES004" type="activation-bar" name="ExecutionSpecification4" owner="cd25881a513a44b29394e0e97cd06cd6" creation-date="05/01/2025 14:11:52" visibility="undefined">
+      <activation-bar lifeline-ref="cd25881a513a44b29394e0e97cd06cd6" />
+    </item>
+    <item id="f06cde92a0e048339c1d04d230d97b10" cid="SM001" type="sequence-action" name="Message1" creation-date="05/01/2025 14:15:06" from="110f0fbab0be427eb80499eb690cd668" to="6c6961a1ceb744c0954769ff8370338b" visibility="package">
+      <sequence-action type="call" message="SelecionarCadastrarUsuario()" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="5a8c3563821b41bebbd5ed3d3960229c" cid="SM001" type="sequence-action" name="Message1" creation-date="05/01/2025 14:15:06" from="e820439c977245acbc1a47f532375043" to="adca49b88eb0480c93f84a3d0c7d4f9c" visibility="package">
+      <sequence-action type="call" message="SelecionarDicas()" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="be1c0e3a54984327af5596145924c3fa" cid="LL001" type="lifeline" name="TelaEntrar" creation-date="05/01/2025 14:08:03" visibility="undefined">
+      <owned-items />
+      <lifeline classifier-name="" selector="" is-multi-object="false" />
+    </item>
+    <item id="7c08832eed3e4eb3b8144453590b925c" cid="ES006" type="activation-bar" name="ExecutionSpecification6" owner="1d29136be0d648b2ae2e20a233e8fb93" creation-date="05/01/2025 14:22:33" visibility="undefined">
+      <activation-bar lifeline-ref="1d29136be0d648b2ae2e20a233e8fb93" />
+    </item>
+    <item id="1207663e10d14f59a4e91f36deff6224" cid="SM018" type="sequence-action" name="Message18" creation-date="05/01/2025 14:22:48" from="799e350ee17141e98f05f5fd9bfbfc2d" to="9bb1a6035a6743009746ab297aeb2c8b" visibility="package">
+      <sequence-action type="call" message="BuscarConteudo(&quot;ComoFazer a Coleta&quot;)" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="c7a9987631cb4645a973445fe3f94e3f" cid="ES004" type="activation-bar" name="ExecutionSpecification4" owner="1c4485957a0e4ef88b20a8cf88cbc4dd" creation-date="05/01/2025 14:11:52" visibility="undefined">
+      <activation-bar lifeline-ref="1c4485957a0e4ef88b20a8cf88cbc4dd" />
+    </item>
+    <item id="801cb3252a9b44939cf012dad25942bb" cid="LL002" type="lifeline" name="ControladorEntrar" creation-date="05/01/2025 14:08:18" visibility="undefined">
+      <owned-items />
+      <lifeline classifier-name="" selector="" is-multi-object="false" />
+    </item>
+    <item id="173fab04755e45b880cd695fe447f9b9" cid="SM020" type="sequence-action" name="Message20" creation-date="05/01/2025 14:26:39" from="7f194a94c4bf46a385510aa7e7b11966" to="846f15511c99415abce1417421bb7f5c" visibility="package">
+      <sequence-action type="reply" message="ServicoUsuario : gerarHashSenha()     salvarUsuario(nome, email, hashSenha)       " is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="110f0fbab0be427eb80499eb690cd668" cid="ES001" type="activation-bar" name="ExecutionSpecification1" owner="bb09bdf27d8248ccadcbc6e827c06369" creation-date="05/01/2025 14:07:55" visibility="undefined" />
+    <item id="1c4485957a0e4ef88b20a8cf88cbc4dd" cid="LL002" type="lifeline" name="ServiçoEntrar" creation-date="05/01/2025 14:08:18" visibility="undefined">
+      <owned-items />
+      <lifeline classifier-name="" selector="" is-multi-object="false" />
+    </item>
+    <item id="8a4ea04bc1514a98bfb94f26cd97cf6d" cid="ES006" type="activation-bar" name="ExecutionSpecification6" owner="9b083fab521c4f7fbf84d00bb35f2f6d" creation-date="05/01/2025 14:22:33" visibility="undefined">
+      <activation-bar lifeline-ref="9b083fab521c4f7fbf84d00bb35f2f6d" />
+    </item>
+    <item id="699fb1446853449689443918935851ad" cid="SM002" type="sequence-action" name="Message2" creation-date="05/01/2025 14:18:45" from="f7f03f165f69427c9d109ad6cb9e91ce" to="a94093ffa8f74c239391c85dddcb7733" visibility="package">
+      <sequence-action type="call" message="SelecionarEntrar()" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="4feae80eaac44f36a3acc85395420580" cid="AC001" type="actor" name="Usuário" creation-date="05/01/2025 14:07:41" visibility="undefined">
+      <owned-items />
+    </item>
+    <item id="adca49b88eb0480c93f84a3d0c7d4f9c" cid="ES002" type="activation-bar" name="ExecutionSpecification2" owner="2834d3e922d045db8c7e19e5b9dc76bb" creation-date="05/01/2025 14:11:40" visibility="undefined">
+      <activation-bar lifeline-ref="2834d3e922d045db8c7e19e5b9dc76bb" />
+    </item>
+    <item id="86526668333a450dac538b9b60c81ad3" cid="LL001" type="lifeline" name="TelaEntrar" creation-date="05/01/2025 14:08:03" visibility="undefined">
+      <owned-items />
+      <lifeline classifier-name="" selector="" is-multi-object="false" />
+    </item>
+    <item id="7f194a94c4bf46a385510aa7e7b11966" cid="ES004" type="activation-bar" name="ExecutionSpecification4" owner="0942e326ff6c45f0bd81350c74f10ccc" creation-date="05/01/2025 14:11:52" visibility="undefined">
+      <activation-bar lifeline-ref="0942e326ff6c45f0bd81350c74f10ccc" />
+    </item>
+    <item id="9621095efb074838ad72962a65e9a089" cid="SM022" type="sequence-action" name="Message22" creation-date="05/01/2025 14:29:14" from="6c6961a1ceb744c0954769ff8370338b" to="110f0fbab0be427eb80499eb690cd668" visibility="package">
+      <sequence-action type="reply" message="ExibeMensagem(&quot;Cadastro realizado com sucesso&quot;)" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="6976ecb39f14414fa0363bc1bc6deac4" cid="ES001" type="activation-bar" name="ExecutionSpecification1" owner="4feae80eaac44f36a3acc85395420580" creation-date="05/01/2025 14:07:55" visibility="undefined" />
+    <item id="36aeab0314a14d1b89e63c939e44bff2" cid="ES002" type="activation-bar" name="ExecutionSpecification2" owner="b31ca8769ece4e5ea2bb16b9198e54e0" creation-date="05/01/2025 14:11:40" visibility="undefined">
+      <activation-bar lifeline-ref="b31ca8769ece4e5ea2bb16b9198e54e0" />
+    </item>
+    <item id="1d29136be0d648b2ae2e20a233e8fb93" cid="LL003" type="lifeline" name="BancoDeDados" creation-date="05/01/2025 14:21:27" visibility="undefined">
+      <owned-items />
+      <lifeline classifier-name="" selector="" is-multi-object="false" />
+    </item>
+    <item id="7f5a460b8b5742d392d0225915e06543" cid="SM022" type="sequence-action" name="Message22" creation-date="05/01/2025 14:29:14" from="f7f03f165f69427c9d109ad6cb9e91ce" to="6976ecb39f14414fa0363bc1bc6deac4" visibility="package">
+      <sequence-action type="reply" message="Redireciona para tela inicial autenticado" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="2834d3e922d045db8c7e19e5b9dc76bb" cid="LL001" type="lifeline" name="TelaDonate" creation-date="05/01/2025 14:08:03" visibility="undefined">
+      <owned-items />
+      <lifeline classifier-name="" selector="" is-multi-object="false" />
+    </item>
+    <item id="e820439c977245acbc1a47f532375043" cid="ES001" type="activation-bar" name="ExecutionSpecification1" owner="5979c3a24bdf48929863c97532dce9fa" creation-date="05/01/2025 14:07:55" visibility="undefined" />
+    <item id="9337740ad7c4433a946793adac5d5c47" cid="LL002" type="lifeline" name="ServiçoDonate" creation-date="05/01/2025 14:08:18" visibility="undefined">
+      <owned-items />
+      <lifeline classifier-name="" selector="" is-multi-object="false" />
+    </item>
+    <item id="773dc7d11e384b4b94d0047070f9e595" cid="LL003" type="lifeline" name="BancoDeDados" creation-date="05/01/2025 14:21:27" visibility="undefined">
+      <owned-items />
+      <lifeline classifier-name="" selector="" is-multi-object="false" />
+    </item>
+    <item id="cd25881a513a44b29394e0e97cd06cd6" cid="LL002" type="lifeline" name="ServiçoDicas" creation-date="05/01/2025 14:08:18" visibility="undefined">
+      <owned-items />
+      <lifeline classifier-name="" selector="" is-multi-object="false" />
+    </item>
+    <item id="5979c3a24bdf48929863c97532dce9fa" cid="AC001" type="actor" name="Usuário" creation-date="05/01/2025 14:07:41" visibility="undefined">
+      <owned-items />
+    </item>
+    <item id="c80df555f70942fa818925912c1aa3f6" cid="SM021" type="sequence-action" name="Message21" creation-date="05/01/2025 14:27:27" from="075093822ce44651aa0588e47d4a7fc0" to="adca49b88eb0480c93f84a3d0c7d4f9c" visibility="package">
+      <sequence-action type="reply" message="ExibeTexto((&quot;Lave as mãos, utilize frasco esterilizado...&quot;)" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="27f706dfdede4f3a919260795edff6fc" cid="SM020" type="sequence-action" name="Message20" creation-date="05/01/2025 14:26:39" from="799e350ee17141e98f05f5fd9bfbfc2d" to="075093822ce44651aa0588e47d4a7fc0" visibility="package">
+      <sequence-action type="reply" message="DicaDto()" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="f733ba9b6f044d0ca510af304a663f6a" cid="ES001" type="activation-bar" name="ExecutionSpecification1" owner="08985da43c954c6781096c1ea7c0eba2" creation-date="05/01/2025 14:07:55" visibility="undefined" />
+    <item id="d69efe0d8f5e438c85112ea2ab34dadf" cid="LL002" type="lifeline" name="ControladorUsuario" creation-date="05/01/2025 14:08:18" visibility="undefined">
+      <owned-items />
+      <lifeline classifier-name="" selector="" is-multi-object="false" />
+    </item>
+    <item id="d75052a5f0b34640b6297d0063403108" cid="SM002" type="sequence-action" name="Message2" creation-date="05/01/2025 14:18:45" from="6c6961a1ceb744c0954769ff8370338b" to="846f15511c99415abce1417421bb7f5c" visibility="package">
+      <sequence-action type="call" message="PreencheDados(nome, email, senha)" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="5e534568c9674d97900a7cfcad89bfdb" cid="LL003" type="lifeline" name="BancoDeDados" creation-date="05/01/2025 14:21:27" visibility="undefined">
+      <owned-items />
+      <lifeline classifier-name="" selector="" is-multi-object="false" />
+    </item>
+    <item id="1914acc646d5479ca4b9cdd0f169938c" cid="SM021" type="sequence-action" name="Message21" creation-date="05/01/2025 14:27:27" from="a94093ffa8f74c239391c85dddcb7733" to="f7f03f165f69427c9d109ad6cb9e91ce" visibility="package">
+      <sequence-action type="reply" message="TelaEntrar(tokenJWT)" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="15db87dfc4214dbbb96dc4dd36ceebb3" cid="SM019" type="sequence-action" name="Message19" creation-date="05/01/2025 14:25:56" from="7c08832eed3e4eb3b8144453590b925c" to="c7a9987631cb4645a973445fe3f94e3f" visibility="package">
+      <sequence-action type="reply" message="Usuario(email, senhaHash)" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="283f389f29b847a696d014a21fa03a90" cid="SM018" type="sequence-action" name="Message18" creation-date="05/01/2025 14:22:48" from="c7a9987631cb4645a973445fe3f94e3f" to="7c08832eed3e4eb3b8144453590b925c" visibility="package">
+      <sequence-action type="call" message="autenticarUsuario(email, senha)" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="a94093ffa8f74c239391c85dddcb7733" cid="ES003" type="activation-bar" name="ExecutionSpecification3" owner="801cb3252a9b44939cf012dad25942bb" creation-date="05/01/2025 14:11:48" visibility="undefined">
+      <activation-bar lifeline-ref="801cb3252a9b44939cf012dad25942bb" />
+    </item>
+    <item id="5ac8eff26b1a453f9d5921ba7b694ed1" cid="SM018" type="sequence-action" name="Message18" creation-date="05/01/2025 14:22:48" from="7f194a94c4bf46a385510aa7e7b11966" to="467f56924cf24cbdb45a12e3c78c4af9" visibility="package">
+      <sequence-action type="call" message="criarUsuario(nome, email, senha)                                   verificarEmailExiste(email)" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="ad22b2d2672843de830635f9e223c6d8" cid="SM019" type="sequence-action" name="Message19" creation-date="05/01/2025 14:25:56" from="9bb1a6035a6743009746ab297aeb2c8b" to="799e350ee17141e98f05f5fd9bfbfc2d" visibility="package">
+      <sequence-action type="reply" message="TextoDaDica()" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="9097921794f5488986196e97b0bf15f3" cid="LL002" type="lifeline" name="ControladorDicas" creation-date="05/01/2025 14:08:18" visibility="undefined">
+      <owned-items />
+      <lifeline classifier-name="" selector="" is-multi-object="false" />
+    </item>
+    <item id="fc01c4a271ab4757aa1b3c7195e6c686" cid="ES004" type="activation-bar" name="ExecutionSpecification4" owner="a632777e9c2d47bfa3b195686aa96a7d" creation-date="05/01/2025 14:11:52" visibility="undefined">
+      <activation-bar lifeline-ref="a632777e9c2d47bfa3b195686aa96a7d" />
+    </item>
+    <item id="657e8fccd86b4727ae393040e7a63afd" cid="SM022" type="sequence-action" name="Message22" creation-date="05/01/2025 14:29:14" from="adca49b88eb0480c93f84a3d0c7d4f9c" to="e820439c977245acbc1a47f532375043" visibility="package">
+      <sequence-action type="reply" message="ApresentaMensagemNaInterface()" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="846f15511c99415abce1417421bb7f5c" cid="ES003" type="activation-bar" name="ExecutionSpecification3" owner="d69efe0d8f5e438c85112ea2ab34dadf" creation-date="05/01/2025 14:11:48" visibility="undefined">
+      <activation-bar lifeline-ref="d69efe0d8f5e438c85112ea2ab34dadf" />
+    </item>
+    <item id="6314005395844e69a4d19f636f230289" cid="SM004" type="sequence-action" name="Message4" creation-date="05/01/2025 14:20:48" from="846f15511c99415abce1417421bb7f5c" to="7f194a94c4bf46a385510aa7e7b11966" visibility="package">
+      <sequence-action type="send" message="CadastrarUsuario(nome, email, senha)" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="075093822ce44651aa0588e47d4a7fc0" cid="ES003" type="activation-bar" name="ExecutionSpecification3" owner="9097921794f5488986196e97b0bf15f3" creation-date="05/01/2025 14:11:48" visibility="undefined">
+      <activation-bar lifeline-ref="9097921794f5488986196e97b0bf15f3" />
+    </item>
+    <item id="2706627f82d643eeaa2895896e77d003" cid="ES003" type="activation-bar" name="ExecutionSpecification3" owner="7b53664ab233437dbfc6544b18b155de" creation-date="05/01/2025 14:11:48" visibility="undefined">
+      <activation-bar lifeline-ref="7b53664ab233437dbfc6544b18b155de" />
+    </item>
+    <item id="9bb1a6035a6743009746ab297aeb2c8b" cid="ES006" type="activation-bar" name="ExecutionSpecification6" owner="5e534568c9674d97900a7cfcad89bfdb" creation-date="05/01/2025 14:22:33" visibility="undefined">
+      <activation-bar lifeline-ref="5e534568c9674d97900a7cfcad89bfdb" />
+    </item>
+    <item id="6c6961a1ceb744c0954769ff8370338b" cid="ES002" type="activation-bar" name="ExecutionSpecification2" owner="86526668333a450dac538b9b60c81ad3" creation-date="05/01/2025 14:11:40" visibility="undefined">
+      <activation-bar lifeline-ref="86526668333a450dac538b9b60c81ad3" />
+    </item>
+    <item id="bb09bdf27d8248ccadcbc6e827c06369" cid="AC001" type="actor" name="Usuário" creation-date="05/01/2025 14:07:41" visibility="undefined">
+      <owned-items />
+    </item>
+    <item id="aabb1cceb3d84b5890efd13a04b02eab" cid="SM004" type="sequence-action" name="Message4" creation-date="05/01/2025 14:20:48" from="075093822ce44651aa0588e47d4a7fc0" to="799e350ee17141e98f05f5fd9bfbfc2d" visibility="package">
+      <sequence-action type="send" message="SelecionaTopico(&quot;Como fazer a coleta&quot;)" is-asynchronous="false" return-value="" assign-to-variable="">
+        <parameters />
+      </sequence-action>
+    </item>
+    <item id="0942e326ff6c45f0bd81350c74f10ccc" cid="LL002" type="lifeline" name="ServiçoUsuario" creation-date="05/01/2025 14:08:18" visibility="undefined">
+      <owned-items />
+      <lifeline classifier-name="" selector="" is-multi-object="false" />
+    </item>
+  </items>
+  <models>
+    <model id="pa94a2bf814384ac7ba801bc9d3265c5b_769187694" name="Model1" namespace="" order-index="1">
+      <meta>
+        <authors>
+          <author> </author>
+        </authors>
+        <description />
+        <creation-date>05/01/2025 14:07:25</creation-date>
+        <change-date>01/01/0001 00:00:00</change-date>
+        <revision-count>0</revision-count>
+        <version />
+      </meta>
+      <abstract-items />
+      <sub-models />
+      <diagram type="uml-sequence" id="paba8c076ecdc4b879d50a43aba4a4b9d_441017654" name="SequenceDiagram1" order-index="1" uid="" name-style="" auto-routed-paths="false" default-line-style="default" view-location="0,-450" zoom="0.7">
+        <style>
+          <background-color index="1" color="#FFFFFFFF" />
+          <background-color index="2" color="#FFFFFFFF" />
+          <background-type type="solid" />
+        </style>
+        <meta>
+          <authors>
+            <author> </author>
+          </authors>
+          <description />
+          <creation-date>05/01/2025 14:07:25</creation-date>
+          <change-date>05/01/2025 15:16:39</change-date>
+          <revision-count>0</revision-count>
+          <version />
+        </meta>
+        <abstract-items>
+          <item id="947558234ebe419f936868c2309f16ee" cid="SM021" type="sequence-action" name="Message21" creator="" creation-date="05/01/2025 14:27:27" from="90a8a237a90641e287abd0b6065fdc40" to="8216930edb5543c68ada19b2a53bb26a" visibility="package">
+            <sequence-action type="reply" message="Texto(&quot;Renderiza mensagem &quot;Coleta confirmada para 02/05/2025 às 10h com código XZ-123&quot;)" is-asynchronous="false" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="05aef093686e4ab79dc1c356b2710b57" cid="SM022" type="sequence-action" name="Message22" creator="" creation-date="05/01/2025 14:29:14" from="8216930edb5543c68ada19b2a53bb26a" to="65a3753370244890a78e2c28302f4658" visibility="package">
+            <sequence-action type="reply" message="ApresentaMensagemNaInterface()" is-asynchronous="false" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="90a8a237a90641e287abd0b6065fdc40" cid="ES003" type="activation-bar" name="ExecutionSpecification3" owner="4778b25101094102b6e08e8df57507fc" creator="" creation-date="05/01/2025 14:11:48">
+            <activation-bar lifeline-ref="4778b25101094102b6e08e8df57507fc" />
+          </item>
+          <item id="4778b25101094102b6e08e8df57507fc" cid="LL002" type="lifeline" name="ControladorDonate" creator="" creation-date="05/01/2025 14:08:18">
+            <owned-items />
+            <lifeline classifier-name="" selector="" is-multi-object="false" />
+          </item>
+          <item id="a7b76358497c4a018f8428f380e92c2a" cid="LL003" type="lifeline" name="BancoDeDados" creator="" creation-date="05/01/2025 14:21:27">
+            <owned-items />
+            <lifeline classifier-name="" selector="" is-multi-object="false" />
+          </item>
+          <item id="8216930edb5543c68ada19b2a53bb26a" cid="ES002" type="activation-bar" name="ExecutionSpecification2" owner="4e3e0e0c99cf4b91bf4b554add238504" creator="" creation-date="05/01/2025 14:11:40">
+            <activation-bar lifeline-ref="4e3e0e0c99cf4b91bf4b554add238504" />
+          </item>
+          <item id="8b4374e5594b4de89d50c49ef1122f18" cid="SM002" type="sequence-action" name="Message2" creator="" creation-date="05/01/2025 14:18:45" from="8216930edb5543c68ada19b2a53bb26a" to="90a8a237a90641e287abd0b6065fdc40" visibility="package">
+            <sequence-action type="call" message="EnvioFormularioColeta()" is-asynchronous="false" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="65a3753370244890a78e2c28302f4658" cid="ES001" type="activation-bar" name="ExecutionSpecification1" owner="03d3a08df9cf4f3ba064ab53bcbe2052" creator="" creation-date="05/01/2025 14:07:55" />
+          <item id="27e1d3dee86c49abb36ea78e1013b822" cid="ES006" type="activation-bar" name="ExecutionSpecification6" owner="a7b76358497c4a018f8428f380e92c2a" creator="" creation-date="05/01/2025 14:22:33">
+            <activation-bar lifeline-ref="a7b76358497c4a018f8428f380e92c2a" />
+          </item>
+          <item id="4e3e0e0c99cf4b91bf4b554add238504" cid="LL001" type="lifeline" name="TelaDonate" creator="" creation-date="05/01/2025 14:08:03">
+            <owned-items />
+            <lifeline classifier-name="" selector="" is-multi-object="false" />
+          </item>
+          <item id="a7fd913e97da48f19cd9eda186d90c9f" cid="ES004" type="activation-bar" name="ExecutionSpecification4" owner="9337740ad7c4433a946793adac5d5c47" creator="" creation-date="05/01/2025 14:11:52">
+            <activation-bar lifeline-ref="9337740ad7c4433a946793adac5d5c47" />
+          </item>
+          <item id="ff385bc2e14f481aab99804277638a0a" cid="SM019" type="sequence-action" name="Message19" creator="" creation-date="05/01/2025 14:25:56" from="27e1d3dee86c49abb36ea78e1013b822" to="a7fd913e97da48f19cd9eda186d90c9f" visibility="package">
+            <sequence-action type="reply" message="SucessoAgendamento()" is-asynchronous="false" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="03d3a08df9cf4f3ba064ab53bcbe2052" cid="AC001" type="actor" name="Usuário" creator="" creation-date="05/01/2025 14:07:41">
+            <owned-items />
+          </item>
+          <item id="7eca8d6f80714ff7998ae523b939c176" cid="SM004" type="sequence-action" name="Message4" creator="" creation-date="05/01/2025 14:20:48" from="90a8a237a90641e287abd0b6065fdc40" to="a7fd913e97da48f19cd9eda186d90c9f" visibility="package">
+            <sequence-action type="send" message="AgendaColeta()" is-asynchronous="false" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="83caeeb500034774ac4c93728927bec2" cid="SM018" type="sequence-action" name="Message18" creator="" creation-date="05/01/2025 14:22:48" from="a7fd913e97da48f19cd9eda186d90c9f" to="27e1d3dee86c49abb36ea78e1013b822" visibility="package">
+            <sequence-action type="call" message="validarDados()&#xD;&#xA;encontrarBancoLeiteMaisProximo()&#xD;&#xA;salvarAgendamento()&#xD;&#xA;criarNotificacao()" is-asynchronous="false" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="88fb622ce9754f5db1b15aab4d547d20" cid="SM001" type="sequence-action" name="Message1" creator="" creation-date="05/01/2025 14:15:06" from="65a3753370244890a78e2c28302f4658" to="8216930edb5543c68ada19b2a53bb26a" visibility="package">
+            <sequence-action type="call" message="AgendarColeta()" is-asynchronous="false" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="44c254139d44465b9cb2d2ca01865383" cid="SM020" type="sequence-action" name="Message20" creator="" creation-date="05/01/2025 14:26:39" from="a7fd913e97da48f19cd9eda186d90c9f" to="90a8a237a90641e287abd0b6065fdc40" visibility="package">
+            <sequence-action type="reply" message="RespostaHttp (200 OK)" is-asynchronous="false" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+        </abstract-items>
+        <layer id="2993819706d24d6787956b46c4d57db8" name="Default" visible="true" enabled="true" locked="false">
+          <item id="03d3a08df9cf4f3ba064ab53bcbe2052" iid="c906f0a5174742049f1d1ff328fd5514" creation-date="05/01/2025 14:07:41" order-index="0" type="lifeline">
+            <layout ax="164" ay="279" awidth="140" aheight="510" x="164" y="279" width="140" height="519" expanded="186,27,140,519" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="65a3753370244890a78e2c28302f4658" iid="ddc71180843943328201f7bf0071442d" container="03d3a08df9cf4f3ba064ab53bcbe2052" container-iid="c906f0a5174742049f1d1ff328fd5514" creation-date="05/01/2025 14:07:55" order-index="1" type="entity">
+            <layout ax="224" ay="376" awidth="20" aheight="397" x="224" y="376" width="20" height="397" expanded="246,124,20,397" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="4e3e0e0c99cf4b91bf4b554add238504" iid="4b57751abfea478a85e93512f991ec13" creation-date="05/01/2025 14:08:03" order-index="2" type="lifeline">
+            <layout ax="381" ay="279" awidth="140" aheight="510" x="381" y="279" width="140" height="636" expanded="403,27,140,529" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="4778b25101094102b6e08e8df57507fc" iid="8af4659d5f9440f29c9acb74e9f64bb0" creation-date="05/01/2025 14:08:18" order-index="3" type="lifeline">
+            <layout ax="632" ay="279" awidth="140" aheight="500" x="632" y="279" width="140" height="500" expanded="654,27,140,529" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="90a8a237a90641e287abd0b6065fdc40" iid="a50e21574e16470c9a9028511799e2c8" container="4778b25101094102b6e08e8df57507fc" container-iid="8af4659d5f9440f29c9acb74e9f64bb0" creation-date="05/01/2025 14:11:48" order-index="5" type="entity">
+            <layout ax="692" ay="381" awidth="20" aheight="376" x="692" y="381" width="20" height="376" expanded="714,129,20,376" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="8216930edb5543c68ada19b2a53bb26a" iid="1e1af690445346f4be52e3d1ae999d41" container="4e3e0e0c99cf4b91bf4b554add238504" container-iid="4b57751abfea478a85e93512f991ec13" creation-date="05/01/2025 14:11:40" order-index="4" type="entity">
+            <layout ax="441" ay="381" awidth="20" aheight="376" x="441" y="381" width="20" height="376" expanded="463,129,20,376" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="9337740ad7c4433a946793adac5d5c47" iid="9aca087cc3f74b5ca376182e7f042c94" creation-date="05/01/2025 14:08:18" order-index="0" type="lifeline">
+            <layout ax="854" ay="279" awidth="140" aheight="500" x="854" y="279" width="140" height="500" expanded="854,279,140,500" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="a7fd913e97da48f19cd9eda186d90c9f" iid="fd794e7db4c24133953f1c109f1718b8" container="9337740ad7c4433a946793adac5d5c47" container-iid="9aca087cc3f74b5ca376182e7f042c94" creation-date="05/01/2025 14:11:52" order-index="6" type="entity">
+            <layout ax="914" ay="381" awidth="20" aheight="349" x="914" y="381" width="20" height="349" expanded="936,129,20,349" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="88fb622ce9754f5db1b15aab4d547d20" iid="742a9fd0175c4fc58a9a66e4e57ba793" creation-date="05/01/2025 14:15:06" order-index="7" type="relation">
+            <layout message-x="342" message-y="425" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="244" y1="405" x2="441" y2="405" start-border-pos="0.2682619647355164" end-border-pos="0.9840425531914894" start-local-pos="29" end-local-pos="24" name-position="0,20">
+              <points>
+                <point x="244" y="405" />
+                <point x="441" y="405" />
+              </points>
+            </layout>
+            <relation from="65a3753370244890a78e2c28302f4658" from-iid="ddc71180843943328201f7bf0071442d" to="8216930edb5543c68ada19b2a53bb26a" to-iid="1e1af690445346f4be52e3d1ae999d41" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="8b4374e5594b4de89d50c49ef1122f18" iid="1bca56b5896c46cda9dbeb6ac19cd6f1" creation-date="05/01/2025 14:18:45" order-index="8" type="relation">
+            <layout message-x="566.5" message-y="450.9131" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="461" y1="433" x2="692" y2="433" start-border-pos="0.2845744680851064" end-border-pos="0.9654255319148937" start-local-pos="52" end-local-pos="52" name-position="-9.5,17.913086">
+              <points>
+                <point x="461" y="433" />
+                <point x="692" y="433" />
+              </points>
+            </layout>
+            <relation from="8216930edb5543c68ada19b2a53bb26a" from-iid="1e1af690445346f4be52e3d1ae999d41" to="90a8a237a90641e287abd0b6065fdc40" to-iid="a50e21574e16470c9a9028511799e2c8" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="7eca8d6f80714ff7998ae523b939c176" iid="bb53c022343c414799bbe16698acdfc2" creation-date="05/01/2025 14:20:48" order-index="9" type="relation">
+            <layout message-x="813" message-y="468" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="712" y1="448" x2="914" y2="448" start-border-pos="0.2945478723404255" end-border-pos="0.9520057306590258" start-local-pos="67" end-local-pos="67" name-position="0,20">
+              <points>
+                <point x="712" y="448" />
+                <point x="914" y="448" />
+              </points>
+            </layout>
+            <relation from="90a8a237a90641e287abd0b6065fdc40" from-iid="a50e21574e16470c9a9028511799e2c8" to="a7fd913e97da48f19cd9eda186d90c9f" to-iid="fd794e7db4c24133953f1c109f1718b8" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="a7b76358497c4a018f8428f380e92c2a" iid="677e6cb88eec4d949d95caa2a178b445" creation-date="05/01/2025 14:21:27" order-index="10" type="lifeline">
+            <layout ax="1076" ay="279" awidth="140" aheight="500" x="1076" y="279" width="140" height="500" expanded="1098,27,140,529" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="27e1d3dee86c49abb36ea78e1013b822" iid="d11a032832ea4c718367004cbc4e3ec9" container="a7b76358497c4a018f8428f380e92c2a" container-iid="677e6cb88eec4d949d95caa2a178b445" creation-date="05/01/2025 14:22:33" order-index="11" type="entity">
+            <layout ax="1136" ay="381" awidth="20" aheight="305" x="1136" y="381" width="20" height="305" expanded="1158,129,20,305" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="83caeeb500034774ac4c93728927bec2" iid="f4146d62e0d8439d91d5738246e40776" creation-date="05/01/2025 14:22:48" order-index="12" type="relation">
+            <layout message-x="1045" message-y="533.9131" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="934" y1="476" x2="1136" y2="476" start-border-pos="0.3180515759312321" end-border-pos="0.9221311475409836" start-local-pos="95" end-local-pos="95" name-position="10,57.913086">
+              <points>
+                <point x="934" y="476" />
+                <point x="1136" y="476" />
+              </points>
+            </layout>
+            <relation from="a7fd913e97da48f19cd9eda186d90c9f" from-iid="fd794e7db4c24133953f1c109f1718b8" to="27e1d3dee86c49abb36ea78e1013b822" to-iid="d11a032832ea4c718367004cbc4e3ec9" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="ff385bc2e14f481aab99804277638a0a" iid="e8b9ba12e5a346bb8730c1d384dbd8b7" creation-date="05/01/2025 14:25:56" order-index="13" type="relation">
+            <layout message-x="1033.5" message-y="635" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="1136" y1="604" x2="934" y2="604" start-border-pos="0.8172131147540984" end-border-pos="0.40974212034383956" start-local-pos="223" end-local-pos="223" name-position="-1.5,31">
+              <points>
+                <point x="1136" y="604" />
+                <point x="934" y="604" />
+              </points>
+            </layout>
+            <relation from="27e1d3dee86c49abb36ea78e1013b822" from-iid="d11a032832ea4c718367004cbc4e3ec9" to="a7fd913e97da48f19cd9eda186d90c9f" to-iid="fd794e7db4c24133953f1c109f1718b8" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="44c254139d44465b9cb2d2ca01865383" iid="c64af965736140a793ee2f7d136e6e61" creation-date="05/01/2025 14:26:39" order-index="14" type="relation">
+            <layout message-x="813" message-y="652" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="914" y1="632" x2="712" y2="632" start-border-pos="0.8202005730659025" end-border-pos="0.4168882978723404" start-local-pos="251" end-local-pos="251" name-position="0,20">
+              <points>
+                <point x="914" y="632" />
+                <point x="712" y="632" />
+              </points>
+            </layout>
+            <relation from="a7fd913e97da48f19cd9eda186d90c9f" from-iid="fd794e7db4c24133953f1c109f1718b8" to="90a8a237a90641e287abd0b6065fdc40" to-iid="a50e21574e16470c9a9028511799e2c8" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="947558234ebe419f936868c2309f16ee" iid="bac20dce3b0840e888e4440a2b9efb6e" creation-date="05/01/2025 14:27:27" order-index="15" type="relation">
+            <layout message-x="594.5" message-y="726" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="692" y1="670" x2="461" y2="670" start-border-pos="0.807845744680851" end-border-pos="0.4421542553191489" start-local-pos="289" end-local-pos="289" name-position="18.5,56">
+              <points>
+                <point x="692" y="670" />
+                <point x="461" y="670" />
+              </points>
+            </layout>
+            <relation from="90a8a237a90641e287abd0b6065fdc40" from-iid="a50e21574e16470c9a9028511799e2c8" to="8216930edb5543c68ada19b2a53bb26a" to-iid="1e1af690445346f4be52e3d1ae999d41" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="05aef093686e4ab79dc1c356b2710b57" iid="3225c2695a974eff9b7b14a1d2b11761" creation-date="05/01/2025 14:29:14" order-index="16" type="relation">
+            <layout message-x="342.5" message-y="734" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="441" y1="703" x2="244" y2="703" start-border-pos="0.785904255319149" end-border-pos="0.45591939546599497" start-local-pos="322" end-local-pos="327" name-position="0.5,31">
+              <points>
+                <point x="441" y="703" />
+                <point x="244" y="703" />
+              </points>
+            </layout>
+            <relation from="8216930edb5543c68ada19b2a53bb26a" from-iid="1e1af690445346f4be52e3d1ae999d41" to="65a3753370244890a78e2c28302f4658" to-iid="ddc71180843943328201f7bf0071442d" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="5979c3a24bdf48929863c97532dce9fa" iid="0fad999e0d3d46f78d5f363d1fa04029" creation-date="05/01/2025 14:07:41" order-index="0" type="lifeline">
+            <layout ax="164" ay="883" awidth="140" aheight="510" x="164" y="883" width="140" height="519" expanded="164,883,140,510" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="e820439c977245acbc1a47f532375043" iid="fcd8ac4f6e9b437f9ca6b491a4be7e2c" container="5979c3a24bdf48929863c97532dce9fa" container-iid="0fad999e0d3d46f78d5f363d1fa04029" creation-date="05/01/2025 14:07:55" order-index="1" type="entity">
+            <layout ax="224" ay="970" awidth="20" aheight="397" x="224" y="970" width="20" height="397" expanded="224,970,20,397" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="2834d3e922d045db8c7e19e5b9dc76bb" iid="0218fb5769fd4a2fa2a9ae2d3c751175" creation-date="05/01/2025 14:08:03" order-index="2" type="lifeline">
+            <layout ax="371" ay="883" awidth="140" aheight="510" x="371" y="883" width="140" height="636" expanded="371,883,140,510" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="9097921794f5488986196e97b0bf15f3" iid="257514daeb36451f8f2e7fd40c61a057" creation-date="05/01/2025 14:08:18" order-index="3" type="lifeline">
+            <layout ax="622" ay="883" awidth="140" aheight="500" x="622" y="883" width="140" height="500" expanded="622,883,140,500" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="075093822ce44651aa0588e47d4a7fc0" iid="f494a93a6fba42759cfde842da7d38eb" container="9097921794f5488986196e97b0bf15f3" container-iid="257514daeb36451f8f2e7fd40c61a057" creation-date="05/01/2025 14:11:48" order-index="4" type="entity">
+            <layout ax="682" ay="985" awidth="20" aheight="376" x="682" y="985" width="20" height="376" expanded="682,985,20,376" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="adca49b88eb0480c93f84a3d0c7d4f9c" iid="e59214a538e84628a01f0739a136c3d3" container="2834d3e922d045db8c7e19e5b9dc76bb" container-iid="0218fb5769fd4a2fa2a9ae2d3c751175" creation-date="05/01/2025 14:11:40" order-index="5" type="entity">
+            <layout ax="431" ay="985" awidth="20" aheight="376" x="431" y="985" width="20" height="376" expanded="431,985,20,376" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="cd25881a513a44b29394e0e97cd06cd6" iid="08ed8f8c7fac403a96f9087012be2d83" creation-date="05/01/2025 14:08:18" order-index="6" type="lifeline">
+            <layout ax="844" ay="883" awidth="140" aheight="500" x="844" y="883" width="140" height="500" expanded="844,883,140,500" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="799e350ee17141e98f05f5fd9bfbfc2d" iid="7ef4c94f6eb84360bcf914756d519263" container="cd25881a513a44b29394e0e97cd06cd6" container-iid="08ed8f8c7fac403a96f9087012be2d83" creation-date="05/01/2025 14:11:52" order-index="7" type="entity">
+            <layout ax="904" ay="985" awidth="20" aheight="349" x="904" y="985" width="20" height="349" expanded="904,985,20,349" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="5a8c3563821b41bebbd5ed3d3960229c" iid="c9d6a6653bcc4614a4be827ba3f8c553" creation-date="05/01/2025 14:15:06" order-index="8" type="relation">
+            <layout message-x="337.5" message-y="1029" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="244" y1="1009" x2="431" y2="1009" start-border-pos="0.27455919395465994" end-border-pos="0.9840425531914894" start-local-pos="39" end-local-pos="24" name-position="-0.5,20">
+              <points>
+                <point x="244" y="1009" />
+                <point x="431" y="1009" />
+              </points>
+            </layout>
+            <relation from="e820439c977245acbc1a47f532375043" from-iid="fcd8ac4f6e9b437f9ca6b491a4be7e2c" to="adca49b88eb0480c93f84a3d0c7d4f9c" to-iid="e59214a538e84628a01f0739a136c3d3" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="09a60fe52683419cb49c7c2abeeec4c5" iid="50612a858e384ab48210bde47298f680" creation-date="05/01/2025 14:18:45" order-index="9" type="relation">
+            <layout message-x="565.5" message-y="1055" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="451" y1="1037" x2="682" y2="1037" start-border-pos="0.2845744680851064" end-border-pos="0.9654255319148937" start-local-pos="52" end-local-pos="52" name-position="-0.5,18">
+              <points>
+                <point x="451" y="1037" />
+                <point x="682" y="1037" />
+              </points>
+            </layout>
+            <relation from="adca49b88eb0480c93f84a3d0c7d4f9c" from-iid="e59214a538e84628a01f0739a136c3d3" to="075093822ce44651aa0588e47d4a7fc0" to-iid="f494a93a6fba42759cfde842da7d38eb" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="aabb1cceb3d84b5890efd13a04b02eab" iid="a32511bab3b241bdaad331d043b17910" creation-date="05/01/2025 14:20:48" order-index="10" type="relation">
+            <layout message-x="803" message-y="1072" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="702" y1="1052" x2="904" y2="1052" start-border-pos="0.2945478723404255" end-border-pos="0.9520057306590258" start-local-pos="67" end-local-pos="67" name-position="0,20">
+              <points>
+                <point x="702" y="1052" />
+                <point x="904" y="1052" />
+              </points>
+            </layout>
+            <relation from="075093822ce44651aa0588e47d4a7fc0" from-iid="f494a93a6fba42759cfde842da7d38eb" to="799e350ee17141e98f05f5fd9bfbfc2d" to-iid="7ef4c94f6eb84360bcf914756d519263" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="5e534568c9674d97900a7cfcad89bfdb" iid="334e888147c64b48b791457d2e1ed33f" creation-date="05/01/2025 14:21:27" order-index="11" type="lifeline">
+            <layout ax="1066" ay="883" awidth="140" aheight="500" x="1066" y="883" width="140" height="500" expanded="1066,883,140,500" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="9bb1a6035a6743009746ab297aeb2c8b" iid="ef3e6695699744c5baa66a695270f8bb" container="5e534568c9674d97900a7cfcad89bfdb" container-iid="334e888147c64b48b791457d2e1ed33f" creation-date="05/01/2025 14:22:33" order-index="12" type="entity">
+            <layout ax="1126" ay="985" awidth="20" aheight="305" x="1126" y="985" width="20" height="305" expanded="1126,985,20,305" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="1207663e10d14f59a4e91f36deff6224" iid="b9638a3966b04e23a96b51af1ab81c10" creation-date="05/01/2025 14:22:48" order-index="13" type="relation">
+            <layout message-x="1035" message-y="1138" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="924" y1="1080" x2="1126" y2="1080" start-border-pos="0.3180515759312321" end-border-pos="0.9221311475409836" start-local-pos="95" end-local-pos="95" name-position="10,58">
+              <points>
+                <point x="924" y="1080" />
+                <point x="1126" y="1080" />
+              </points>
+            </layout>
+            <relation from="799e350ee17141e98f05f5fd9bfbfc2d" from-iid="7ef4c94f6eb84360bcf914756d519263" to="9bb1a6035a6743009746ab297aeb2c8b" to-iid="ef3e6695699744c5baa66a695270f8bb" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="ad22b2d2672843de830635f9e223c6d8" iid="b2f8b0a2aee94725b219135e16e26531" creation-date="05/01/2025 14:25:56" order-index="14" type="relation">
+            <layout message-x="1026" message-y="1239" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="1126" y1="1208" x2="924" y2="1208" start-border-pos="0.8172131147540984" end-border-pos="0.40974212034383956" start-local-pos="223" end-local-pos="223" name-position="1,31">
+              <points>
+                <point x="1126" y="1208" />
+                <point x="924" y="1208" />
+              </points>
+            </layout>
+            <relation from="9bb1a6035a6743009746ab297aeb2c8b" from-iid="ef3e6695699744c5baa66a695270f8bb" to="799e350ee17141e98f05f5fd9bfbfc2d" to-iid="7ef4c94f6eb84360bcf914756d519263" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="27f706dfdede4f3a919260795edff6fc" iid="8c5cb419166a4017a61cd3cce76d1380" creation-date="05/01/2025 14:26:39" order-index="15" type="relation">
+            <layout message-x="806" message-y="1262" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="904" y1="1236" x2="702" y2="1236" start-border-pos="0.8202005730659025" end-border-pos="0.4168882978723404" start-local-pos="251" end-local-pos="251" name-position="3,26">
+              <points>
+                <point x="904" y="1236" />
+                <point x="702" y="1236" />
+              </points>
+            </layout>
+            <relation from="799e350ee17141e98f05f5fd9bfbfc2d" from-iid="7ef4c94f6eb84360bcf914756d519263" to="075093822ce44651aa0588e47d4a7fc0" to-iid="f494a93a6fba42759cfde842da7d38eb" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="c80df555f70942fa818925912c1aa3f6" iid="ff417e9eb89c48bd88b6e6a4ac40b476" creation-date="05/01/2025 14:27:27" order-index="16" type="relation">
+            <layout message-x="583.5" message-y="1320" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="682" y1="1274" x2="451" y2="1274" start-border-pos="0.807845744680851" end-border-pos="0.4421542553191489" start-local-pos="289" end-local-pos="289" name-position="17.5,46">
+              <points>
+                <point x="682" y="1274" />
+                <point x="451" y="1274" />
+              </points>
+            </layout>
+            <relation from="075093822ce44651aa0588e47d4a7fc0" from-iid="f494a93a6fba42759cfde842da7d38eb" to="adca49b88eb0480c93f84a3d0c7d4f9c" to-iid="e59214a538e84628a01f0739a136c3d3" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="657e8fccd86b4727ae393040e7a63afd" iid="2f783a383f8e4204b959790decb7b12a" creation-date="05/01/2025 14:29:14" order-index="17" type="relation">
+            <layout message-x="337.5" message-y="1351" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="431" y1="1307" x2="244" y2="1307" start-border-pos="0.785904255319149" end-border-pos="0.4622166246851386" start-local-pos="322" end-local-pos="337" name-position="-0.5,44">
+              <points>
+                <point x="431" y="1307" />
+                <point x="244" y="1307" />
+              </points>
+            </layout>
+            <relation from="adca49b88eb0480c93f84a3d0c7d4f9c" from-iid="e59214a538e84628a01f0739a136c3d3" to="e820439c977245acbc1a47f532375043" to-iid="fcd8ac4f6e9b437f9ca6b491a4be7e2c" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="4feae80eaac44f36a3acc85395420580" iid="14915f901c094d8b9dd261e7f53d991e" creation-date="05/01/2025 14:07:41" order-index="0" type="lifeline">
+            <layout ax="120" ay="-411" awidth="200" aheight="570" x="120" y="-411" width="140" height="519" expanded="120,-411,200,570" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="6976ecb39f14414fa0363bc1bc6deac4" iid="d4c4cc93e4e647a2809f7f26568c4c5f" container="4feae80eaac44f36a3acc85395420580" container-iid="14915f901c094d8b9dd261e7f53d991e" creation-date="05/01/2025 14:07:55" order-index="1" type="entity">
+            <layout ax="210" ay="-319" awidth="20" aheight="425" x="210" y="-319" width="20" height="425" expanded="210,-319,20,425" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="be1c0e3a54984327af5596145924c3fa" iid="2859fbda022443f8a7990c6c41d7f61a" creation-date="05/01/2025 14:08:03" order-index="2" type="lifeline">
+            <layout ax="331" ay="-411" awidth="200" aheight="570" x="331" y="-411" width="140" height="636" expanded="331,-385,200,570" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="801cb3252a9b44939cf012dad25942bb" iid="021c030c8dc8429a8fd53c5193527f06" creation-date="05/01/2025 14:08:18" order-index="3" type="lifeline">
+            <layout ax="582" ay="-411" awidth="200" aheight="580" x="582" y="-411" width="140" height="500" expanded="582,-385,200,580" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="a94093ffa8f74c239391c85dddcb7733" iid="bace854c53ce41bd9af0e7c5a6132286" container="801cb3252a9b44939cf012dad25942bb" container-iid="021c030c8dc8429a8fd53c5193527f06" creation-date="05/01/2025 14:11:48" order-index="4" type="entity">
+            <layout ax="672" ay="-319" awidth="20" aheight="404" x="672" y="-319" width="20" height="404" expanded="672,-319,20,404" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="f7f03f165f69427c9d109ad6cb9e91ce" iid="17fff51b099044068829db6fd0aed41c" container="be1c0e3a54984327af5596145924c3fa" container-iid="2859fbda022443f8a7990c6c41d7f61a" creation-date="05/01/2025 14:11:40" order-index="5" type="entity">
+            <layout ax="421" ay="-312" awidth="20" aheight="397" x="421" y="-312" width="20" height="397" expanded="421,-312,20,397" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="1c4485957a0e4ef88b20a8cf88cbc4dd" iid="bdb6c78ad186498887d942ded5662a0b" creation-date="05/01/2025 14:08:18" order-index="6" type="lifeline">
+            <layout ax="804" ay="-411" awidth="200" aheight="580" x="804" y="-411" width="140" height="500" expanded="804,-385,200,580" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="c7a9987631cb4645a973445fe3f94e3f" iid="072b40672c7d4d0fbe3ec774c5aa5232" container="1c4485957a0e4ef88b20a8cf88cbc4dd" container-iid="bdb6c78ad186498887d942ded5662a0b" creation-date="05/01/2025 14:11:52" order-index="7" type="entity">
+            <layout ax="894" ay="-312" awidth="20" aheight="370" x="894" y="-312" width="20" height="370" expanded="894,-312,20,370" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="586ffb550f974124b5b72070b58ef727" iid="4f5dc2f016cd4912b8c63403b3a248e5" creation-date="05/01/2025 14:15:06" order-index="8" type="relation">
+            <layout message-x="326" message-y="-251" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="230" y1="-271" x2="421" y2="-271" start-border-pos="0.2782352941176471" end-border-pos="0.9741813602015114" start-local-pos="48" end-local-pos="41" name-position="0,20">
+              <points>
+                <point x="230" y="-271" />
+                <point x="421" y="-271" />
+              </points>
+            </layout>
+            <relation from="6976ecb39f14414fa0363bc1bc6deac4" from-iid="d4c4cc93e4e647a2809f7f26568c4c5f" to="f7f03f165f69427c9d109ad6cb9e91ce" to-iid="17fff51b099044068829db6fd0aed41c" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="699fb1446853449689443918935851ad" iid="113bbb12a96c433fb53df1e5ed6a1cdc" creation-date="05/01/2025 14:18:45" order-index="9" type="relation">
+            <layout message-x="544" message-y="-213" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="441" y1="-228" x2="672" y2="-228" start-border-pos="0.30289672544080604" end-border-pos="0.9436881188118812" start-local-pos="84" end-local-pos="91" name-position="-12,15">
+              <points>
+                <point x="441" y="-228" />
+                <point x="672" y="-228" />
+              </points>
+            </layout>
+            <relation from="f7f03f165f69427c9d109ad6cb9e91ce" from-iid="17fff51b099044068829db6fd0aed41c" to="a94093ffa8f74c239391c85dddcb7733" to-iid="bace854c53ce41bd9af0e7c5a6132286" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="863eba495c704660a66b3e45d2198de8" iid="a2a22a4f2ecc4dc1a4699b422dbf4037" creation-date="05/01/2025 14:20:48" order-index="10" type="relation">
+            <layout message-x="793" message-y="-165" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="692" y1="-185" x2="894" y2="-185" start-border-pos="0.33292079207920794" end-border-pos="0.9141891891891891" start-local-pos="134" end-local-pos="127" name-position="0,20">
+              <points>
+                <point x="692" y="-185" />
+                <point x="894" y="-185" />
+              </points>
+            </layout>
+            <relation from="a94093ffa8f74c239391c85dddcb7733" from-iid="bace854c53ce41bd9af0e7c5a6132286" to="c7a9987631cb4645a973445fe3f94e3f" to-iid="072b40672c7d4d0fbe3ec774c5aa5232" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="1d29136be0d648b2ae2e20a233e8fb93" iid="c28d33094d6046ad9610ea0287b652bc" creation-date="05/01/2025 14:21:27" order-index="11" type="lifeline">
+            <layout ax="1026" ay="-411" awidth="200" aheight="580" x="1026" y="-411" width="140" height="500" expanded="1026,-385,200,580" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="7c08832eed3e4eb3b8144453590b925c" iid="e4c8ec27c70f4a5dbccaeea1d53d139f" container="1d29136be0d648b2ae2e20a233e8fb93" container-iid="c28d33094d6046ad9610ea0287b652bc" creation-date="05/01/2025 14:22:33" order-index="12" type="entity">
+            <layout ax="1116" ay="-319" awidth="20" aheight="333" x="1116" y="-319" width="20" height="333" expanded="1116,-319,20,333" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="283f389f29b847a696d014a21fa03a90" iid="03c310bbc1d54f4ca58ea3a1eb9ad46a" creation-date="05/01/2025 14:22:48" order-index="13" type="relation">
+            <layout message-x="1025" message-y="-152.08691" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="914" y1="-203" x2="1116" y2="-203" start-border-pos="0.3236486486486486" end-border-pos="0.9129129129129129" start-local-pos="109" end-local-pos="116" name-position="10,50.913086">
+              <points>
+                <point x="914" y="-203" />
+                <point x="1116" y="-203" />
+              </points>
+            </layout>
+            <relation from="c7a9987631cb4645a973445fe3f94e3f" from-iid="072b40672c7d4d0fbe3ec774c5aa5232" to="7c08832eed3e4eb3b8144453590b925c" to-iid="e4c8ec27c70f4a5dbccaeea1d53d139f" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="15db87dfc4214dbbb96dc4dd36ceebb3" iid="5469613076724683a33d8f2994181a56" creation-date="05/01/2025 14:25:56" order-index="14" type="relation">
+            <layout message-x="1017" message-y="-52" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="1116" y1="-75" x2="914" y2="-75" start-border-pos="0.8168168168168168" end-border-pos="0.4101351351351351" start-local-pos="244" end-local-pos="237" name-position="2,23">
+              <points>
+                <point x="1116" y="-75" />
+                <point x="914" y="-75" />
+              </points>
+            </layout>
+            <relation from="7c08832eed3e4eb3b8144453590b925c" from-iid="e4c8ec27c70f4a5dbccaeea1d53d139f" to="c7a9987631cb4645a973445fe3f94e3f" to-iid="072b40672c7d4d0fbe3ec774c5aa5232" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="24c90b71ae3b4e23b9a64c226cd4a141" iid="44f87d917228438fae276fc23c9fffac" creation-date="05/01/2025 14:26:39" order-index="15" type="relation">
+            <layout message-x="788.5" message-y="-16" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="894" y1="-29" x2="692" y2="-29" start-border-pos="0.8087837837837838" end-border-pos="0.42945544554455445" start-local-pos="283" end-local-pos="290" name-position="-4.5,13">
+              <points>
+                <point x="894" y="-29" />
+                <point x="692" y="-29" />
+              </points>
+            </layout>
+            <relation from="c7a9987631cb4645a973445fe3f94e3f" from-iid="072b40672c7d4d0fbe3ec774c5aa5232" to="a94093ffa8f74c239391c85dddcb7733" to-iid="bace854c53ce41bd9af0e7c5a6132286" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="1914acc646d5479ca4b9cdd0f169938c" iid="2e31f543a3f24e48869628705d00b704" creation-date="05/01/2025 14:27:27" order-index="16" type="relation">
+            <layout message-x="570.5" message-y="56.5" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="672" y1="9" x2="441" y2="9" start-border-pos="0.7970297029702971" end-border-pos="0.4521410579345088" start-local-pos="328" end-local-pos="321" name-position="14.5,47.5">
+              <points>
+                <point x="672" y="9" />
+                <point x="441" y="9" />
+              </points>
+            </layout>
+            <relation from="a94093ffa8f74c239391c85dddcb7733" from-iid="bace854c53ce41bd9af0e7c5a6132286" to="f7f03f165f69427c9d109ad6cb9e91ce" to-iid="17fff51b099044068829db6fd0aed41c" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="7f5a460b8b5742d392d0225915e06543" iid="62bb93e9e0d34741a982b53c58dadf55" creation-date="05/01/2025 14:29:14" order-index="17" type="relation">
+            <layout message-x="337.5" message-y="62" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="421" y1="27" x2="230" y2="27" start-border-pos="0.7865239294710328" end-border-pos="0.45352941176470585" start-local-pos="339" end-local-pos="346" name-position="11.5,35">
+              <points>
+                <point x="421" y="27" />
+                <point x="230" y="27" />
+              </points>
+            </layout>
+            <relation from="f7f03f165f69427c9d109ad6cb9e91ce" from-iid="17fff51b099044068829db6fd0aed41c" to="6976ecb39f14414fa0363bc1bc6deac4" to-iid="d4c4cc93e4e647a2809f7f26568c4c5f" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="bb09bdf27d8248ccadcbc6e827c06369" iid="c372bf60217648ce9a71764d5f402e5c" creation-date="05/01/2025 14:07:41" order-index="0" type="lifeline">
+            <layout ax="164" ay="1443" awidth="140" aheight="510" x="164" y="1443" width="140" height="519" expanded="164,1443,140,510" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="110f0fbab0be427eb80499eb690cd668" iid="887b930620954917a8c7a6016c5b5d4d" container="bb09bdf27d8248ccadcbc6e827c06369" container-iid="c372bf60217648ce9a71764d5f402e5c" creation-date="05/01/2025 14:07:55" order-index="1" type="entity">
+            <layout ax="224" ay="1520" awidth="20" aheight="397" x="224" y="1520" width="20" height="397" expanded="224,1520,20,397" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="86526668333a450dac538b9b60c81ad3" iid="65bf6e9a2633479db5193f92a1d57821" creation-date="05/01/2025 14:08:03" order-index="2" type="lifeline">
+            <layout ax="361" ay="1443" awidth="140" aheight="510" x="361" y="1443" width="140" height="636" expanded="361,1443,140,510" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="d69efe0d8f5e438c85112ea2ab34dadf" iid="99ed5f7dfe6c49ba9b02de77e19b621c" creation-date="05/01/2025 14:08:18" order-index="3" type="lifeline">
+            <layout ax="612" ay="1443" awidth="140" aheight="500" x="612" y="1443" width="140" height="500" expanded="612,1443,140,500" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="846f15511c99415abce1417421bb7f5c" iid="b438b082d4e8484f93aa229333d3193f" container="d69efe0d8f5e438c85112ea2ab34dadf" container-iid="99ed5f7dfe6c49ba9b02de77e19b621c" creation-date="05/01/2025 14:11:48" order-index="4" type="entity">
+            <layout ax="672" ay="1545" awidth="20" aheight="376" x="672" y="1545" width="20" height="376" expanded="672,1545,20,376" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="6c6961a1ceb744c0954769ff8370338b" iid="27642eab11774cf1b1fdd65ba6a0f4ef" container="86526668333a450dac538b9b60c81ad3" container-iid="65bf6e9a2633479db5193f92a1d57821" creation-date="05/01/2025 14:11:40" order-index="5" type="entity">
+            <layout ax="421" ay="1545" awidth="20" aheight="376" x="421" y="1545" width="20" height="376" expanded="421,1545,20,376" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="0942e326ff6c45f0bd81350c74f10ccc" iid="bc5244b6d6594d5d832d39d710fce48f" creation-date="05/01/2025 14:08:18" order-index="6" type="lifeline">
+            <layout ax="834" ay="1443" awidth="140" aheight="500" x="834" y="1443" width="140" height="500" expanded="834,1443,140,500" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="7f194a94c4bf46a385510aa7e7b11966" iid="0d370951a2d9478a9e24a755d49234bc" container="0942e326ff6c45f0bd81350c74f10ccc" container-iid="bc5244b6d6594d5d832d39d710fce48f" creation-date="05/01/2025 14:11:52" order-index="7" type="entity">
+            <layout ax="894" ay="1545" awidth="20" aheight="349" x="894" y="1545" width="20" height="349" expanded="894,1545,20,349" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="f06cde92a0e048339c1d04d230d97b10" iid="52ce9f35a9244c95bdf89e8f5fe1aa34" creation-date="05/01/2025 14:15:06" order-index="8" type="relation">
+            <layout message-x="323.5" message-y="1589" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="244" y1="1569" x2="421" y2="1569" start-border-pos="0.28085642317380355" end-border-pos="0.9840425531914894" start-local-pos="49" end-local-pos="24" name-position="-8.5,20">
+              <points>
+                <point x="244" y="1569" />
+                <point x="421" y="1569" />
+              </points>
+            </layout>
+            <relation from="110f0fbab0be427eb80499eb690cd668" from-iid="887b930620954917a8c7a6016c5b5d4d" to="6c6961a1ceb744c0954769ff8370338b" to-iid="27642eab11774cf1b1fdd65ba6a0f4ef" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="d75052a5f0b34640b6297d0063403108" iid="55d97cc8670b44e1b8951bb2f217cf50" creation-date="05/01/2025 14:18:45" order-index="9" type="relation">
+            <layout message-x="576.5" message-y="1631.8887" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="441" y1="1597" x2="672" y2="1597" start-border-pos="0.2845744680851064" end-border-pos="0.9654255319148937" start-local-pos="52" end-local-pos="52" name-position="20.5,34.88867">
+              <points>
+                <point x="441" y="1597" />
+                <point x="672" y="1597" />
+              </points>
+            </layout>
+            <relation from="6c6961a1ceb744c0954769ff8370338b" from-iid="27642eab11774cf1b1fdd65ba6a0f4ef" to="846f15511c99415abce1417421bb7f5c" to-iid="b438b082d4e8484f93aa229333d3193f" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="6314005395844e69a4d19f636f230289" iid="889f30c512864d41bbf58a5a7ab06f28" creation-date="05/01/2025 14:20:48" order-index="10" type="relation">
+            <layout message-x="788.5" message-y="1631.8887" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="692" y1="1612" x2="894" y2="1612" start-border-pos="0.2945478723404255" end-border-pos="0.9520057306590258" start-local-pos="67" end-local-pos="67" name-position="-4.5,19.888672">
+              <points>
+                <point x="692" y="1612" />
+                <point x="894" y="1612" />
+              </points>
+            </layout>
+            <relation from="846f15511c99415abce1417421bb7f5c" from-iid="b438b082d4e8484f93aa229333d3193f" to="7f194a94c4bf46a385510aa7e7b11966" to-iid="0d370951a2d9478a9e24a755d49234bc" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="773dc7d11e384b4b94d0047070f9e595" iid="344b31237736455ba9a6170e9478ed80" creation-date="05/01/2025 14:21:27" order-index="11" type="lifeline">
+            <layout ax="1106" ay="1443" awidth="140" aheight="500" x="1106" y="1443" width="140" height="500" expanded="1106,1443,140,500" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="467f56924cf24cbdb45a12e3c78c4af9" iid="3aee6ad5ddc3476c91983e487eeb4431" container="773dc7d11e384b4b94d0047070f9e595" container-iid="344b31237736455ba9a6170e9478ed80" creation-date="05/01/2025 14:22:33" order-index="12" type="entity">
+            <layout ax="1166" ay="1545" awidth="20" aheight="305" x="1166" y="1545" width="20" height="305" expanded="1166,1545,20,305" collapsed="0,0,0,0" container-layout="simple">
+              <container-layout padding="10,10,10,10" />
+            </layout>
+          </item>
+          <item id="5ac8eff26b1a453f9d5921ba7b694ed1" iid="623851345a2042d5bce82cd89f8b38f7" creation-date="05/01/2025 14:22:48" order-index="13" type="relation">
+            <layout message-x="1071" message-y="1687" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="914" y1="1640" x2="1166" y2="1640" start-border-pos="0.3180515759312321" end-border-pos="0.9221311475409836" start-local-pos="95" end-local-pos="95" name-position="31,47">
+              <points>
+                <point x="914" y="1640" />
+                <point x="1166" y="1640" />
+              </points>
+            </layout>
+            <relation from="7f194a94c4bf46a385510aa7e7b11966" from-iid="0d370951a2d9478a9e24a755d49234bc" to="467f56924cf24cbdb45a12e3c78c4af9" to-iid="3aee6ad5ddc3476c91983e487eeb4431" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="8647932c7a7e4522aad38195298d0279" iid="2b0dad469440475b973ada396c34cf3f" creation-date="05/01/2025 14:25:56" order-index="14" type="relation">
+            <layout message-x="1032.5" message-y="1796" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="1166" y1="1768" x2="914" y2="1768" start-border-pos="0.8172131147540984" end-border-pos="0.40974212034383956" start-local-pos="223" end-local-pos="223" name-position="-7.5,28">
+              <points>
+                <point x="1166" y="1768" />
+                <point x="914" y="1768" />
+              </points>
+            </layout>
+            <relation from="467f56924cf24cbdb45a12e3c78c4af9" from-iid="3aee6ad5ddc3476c91983e487eeb4431" to="7f194a94c4bf46a385510aa7e7b11966" to-iid="0d370951a2d9478a9e24a755d49234bc" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="173fab04755e45b880cd695fe447f9b9" iid="ee20472f833c42659b7c31ef997279f8" creation-date="05/01/2025 14:26:39" order-index="15" type="relation">
+            <layout message-x="803" message-y="1841.9131" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="894" y1="1796" x2="692" y2="1796" start-border-pos="0.8202005730659025" end-border-pos="0.4168882978723404" start-local-pos="251" end-local-pos="251" name-position="10,45.913086">
+              <points>
+                <point x="894" y="1796" />
+                <point x="692" y="1796" />
+              </points>
+            </layout>
+            <relation from="7f194a94c4bf46a385510aa7e7b11966" from-iid="0d370951a2d9478a9e24a755d49234bc" to="846f15511c99415abce1417421bb7f5c" to-iid="b438b082d4e8484f93aa229333d3193f" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="b350fc070d6340c6a9d1634427f8fe8a" iid="9c928ef70ef049e8be1eb4262356e229" creation-date="05/01/2025 14:27:27" order-index="16" type="relation">
+            <layout message-x="573.5" message-y="1880" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="672" y1="1834" x2="441" y2="1834" start-border-pos="0.807845744680851" end-border-pos="0.4421542553191489" start-local-pos="289" end-local-pos="289" name-position="17.5,46">
+              <points>
+                <point x="672" y="1834" />
+                <point x="441" y="1834" />
+              </points>
+            </layout>
+            <relation from="846f15511c99415abce1417421bb7f5c" from-iid="b438b082d4e8484f93aa229333d3193f" to="6c6961a1ceb744c0954769ff8370338b" to-iid="27642eab11774cf1b1fdd65ba6a0f4ef" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+          <item id="9621095efb074838ad72962a65e9a089" iid="e11515f4dc24412fa65bd643f05790ee" creation-date="05/01/2025 14:29:14" order-index="17" type="relation">
+            <layout message-x="332.5" message-y="1911" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="421" y1="1867" x2="244" y2="1867" start-border-pos="0.785904255319149" end-border-pos="0.46851385390428213" start-local-pos="322" end-local-pos="347" name-position="0.5,44">
+              <points>
+                <point x="421" y="1867" />
+                <point x="244" y="1867" />
+              </points>
+            </layout>
+            <relation from="6c6961a1ceb744c0954769ff8370338b" from-iid="27642eab11774cf1b1fdd65ba6a0f4ef" to="110f0fbab0be427eb80499eb690cd668" to-iid="887b930620954917a8c7a6016c5b5d4d" />
+            <sequence-action show-sequence-number="false" />
+          </item>
+        </layer>
+      </diagram>
+    </model>
+  </models>
+</sim-project>

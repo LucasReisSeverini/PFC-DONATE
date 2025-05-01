@@ -1,0 +1,56 @@
+.agendamento-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: #fff0f5;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.title {
+  font-size: 36px;
+  color: #e91e63;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin: 10px 0;
+}
+
+mat-radio-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px 0;
+}
+
+mat-radio-button {
+  margin: 5px 0;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #e91e63;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #d81b60;
+}

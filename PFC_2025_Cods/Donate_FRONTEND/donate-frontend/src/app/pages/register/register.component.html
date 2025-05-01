@@ -1,0 +1,79 @@
+<div class="register-container">
+  <h1 class="logo">Donate</h1>
+  <p class="subtitle">Cadastre-se agora mesmo!</p>
+  <p class="description">
+    Quer ser uma doadora ou está precisando de leite materno? Preencha o formulário abaixo 💖
+  </p>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <!-- Nome -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nome completo</mat-label>
+      <input matInput type="text" formControlName="nome" placeholder="Digite seu nome" required />
+    </mat-form-field>
+
+    <!-- Email -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" placeholder="Digite seu email" required />
+    </mat-form-field>
+
+    <!-- Telefone -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Telefone</mat-label>
+      <input matInput type="text" formControlName="telefone" placeholder="Digite seu telefone" required />
+    </mat-form-field>
+
+    <!-- CPF -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>CPF</mat-label>
+      <input matInput type="text" formControlName="cpf" placeholder="Digite seu CPF" required />
+    </mat-form-field>
+
+    <!-- Senha -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Senha</mat-label>
+      <input matInput type="password" formControlName="senha" placeholder="Digite sua senha" required />
+    </mat-form-field>
+
+    <!-- Seleção de perfil -->
+    <mat-radio-group formControlName="perfil">
+      <mat-radio-button value="doadora">Doadora</mat-radio-button>
+      <mat-radio-button value="receptora">Receptora</mat-radio-button>
+      <mat-radio-button value="profissional">Profissional de saúde</mat-radio-button>
+    </mat-radio-group>
+
+
+
+    <!-- Campo de cidade com autocomplete -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Cidade</mat-label>
+      <input
+        type="text"
+        matInput
+        [matAutocomplete]="auto"
+        [formControl]="cidadeControl"
+        placeholder="Digite sua cidade"
+      />
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onCidadeSelecionada($event)">
+        <mat-option *ngFor="let cidade of cidadesFiltradas$ | async" [value]="cidade.nome">
+          {{ cidade.nome }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <!-- escondido, mas com ID real -->
+    <input type="hidden" formControlName="id_cidade" />
+
+    <!-- Latitude e Longitude escondidos -->
+    <input type="hidden" formControlName="latitude" />
+    <input type="hidden" formControlName="longitude" />
+
+    <!-- Botão de cadastro -->
+    <button mat-raised-button color="primary" type="submit" class="full-width">Cadastrar</button>
+  </form>
+
+  <!-- Link para login -->
+
+  <p class="register-prompt">Já tem uma conta? <a href="/login">Entrar</a></p>
+</div>

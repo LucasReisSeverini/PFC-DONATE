@@ -1,0 +1,14 @@
+<div class="login-container">
+  <h1 class="logo">Donate</h1>
+  <h2 class="subtitle">Apoie. Doe. Encontre.</h2>
+
+  <p class="description">Conectando mães doadoras com bancos de leite humano mais próximos de forma simples e segura.</p>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <input formControlName="email" type="email" placeholder="Email" required>
+    <input formControlName="senha" type="password" placeholder="Senha" required>
+    <button type="submit">Entrar</button>
+  </form>
+
+  <p class="register-prompt">Ainda não tem uma conta? <a href="/cadastro">Cadastre-se</a></p>
+</div>

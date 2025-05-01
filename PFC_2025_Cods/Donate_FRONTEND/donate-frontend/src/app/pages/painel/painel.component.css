@@ -1,0 +1,70 @@
+.painel-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+/* Cabeçalho */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #d46a92;
+}
+
+nav button {
+  margin-left: 10px;
+}
+
+/* Seção de informação sobre doação */
+.info-doacao {
+  background-color: #fff3f8;
+  border-left: 4px solid #f06292;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+}
+
+.info-doacao h2 {
+  margin-bottom: 10px;
+  font-size: 22px;
+  color: #d81b60;
+}
+
+/* Seção de localização */
+.localizacao {
+  background-color: #e3f2fd;
+  border-left: 4px solid #42a5f5;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+}
+
+.localizacao h3 {
+  margin-bottom: 8px;
+  color: #1565c0;
+}
+
+/* Botão de doação */
+.acoes {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.acoes button {
+  font-size: 18px;
+  padding: 12px 24px;
+  border-radius: 8px;
+}

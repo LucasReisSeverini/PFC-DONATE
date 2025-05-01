@@ -1,0 +1,31 @@
+<div class="painel-container">
+  <header>
+    <div class="logo">🌸 DoeLeite</div>
+    <nav>
+      <button mat-button [routerLink]="'/perfil'">Meu Perfil</button>
+      <button mat-button (click)="sair()">Sair</button>
+    </nav>
+  </header>
+
+  <section class="info-doacao">
+    <h2>🤱 A importância de doar leite materno</h2>
+    <p>
+      O leite materno salva vidas! Ao doar, você ajuda bebês prematuros e doentes a receberem os nutrientes essenciais para seu desenvolvimento saudável.
+    </p>
+  </section>
+
+  <section class="localizacao">
+    <h3>📍 Encontre o banco de leite mais próximo</h3>
+    <p>Em breve você poderá ver no mapa o local mais próximo para doar.</p>
+    <button mat-stroked-button color="accent" (click)="irParaBancoProximo()">
+      VER BANCO MAIS PRÓXIMO
+    </button>
+  </section>
+
+  <section class="acoes">
+    <button mat-raised-button color="primary" [routerLink]="'/doacao'">
+      FAÇA SUA DOAÇÃO
+    </button>
+
+  </section>
+</div>

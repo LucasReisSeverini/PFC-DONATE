@@ -1,0 +1,50 @@
+<div class="agendamento-container">
+  <h1 class="title">Agendar Doação</h1>
+  <p class="subtitle">Escolha como deseja doar 💖</p>
+
+  <form [formGroup]="agendamentoForm" (ngSubmit)="onSubmit()">
+    <!-- Tipo de agendamento -->
+    <mat-radio-group formControlName="tipoAgendamento" class="full-width">
+      <mat-radio-button value="entrega">Entregar no banco de leite</mat-radio-button>
+      <mat-radio-button value="coleta">Solicitar coleta em casa</mat-radio-button>
+    </mat-radio-group>
+
+    <!-- Quantidade de leite -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Quantidade de leite (ml)</mat-label>
+      <input matInput type="number" formControlName="quantidade" placeholder="Digite a quantidade" required />
+    </mat-form-field>
+
+    <!-- Seleção do banco de leite (se for entrega) -->
+    <mat-form-field *ngIf="agendamentoForm.value.tipoAgendamento === 'entrega'" appearance="fill" class="full-width">
+      <mat-label>Banco de leite</mat-label>
+      <mat-select formControlName="bancoLeite">
+        <mat-option *ngFor="let banco of bancosDeLeite" [value]="banco.id">
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Endereço para coleta (se for coleta em casa) -->
+    <div *ngIf="agendamentoForm.value.tipoAgendamento === 'coleta'">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Endereço</mat-label>
+        <input matInput type="text" formControlName="endereco" placeholder="Digite seu endereço" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Cidade</mat-label>
+        <input matInput type="text" formControlName="cidade" placeholder="Digite sua cidade" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Estado</mat-label>
+        <input matInput type="text" formControlName="estado" placeholder="Digite seu estado" required />
+      </mat-form-field>
+    </div>
+
+    <!-- Botão de envio -->
+    <button mat-raised-button color="primary" type="submit" class="full-width">
+      Agendar Doação
+    </button>
+  </form>
+</div>

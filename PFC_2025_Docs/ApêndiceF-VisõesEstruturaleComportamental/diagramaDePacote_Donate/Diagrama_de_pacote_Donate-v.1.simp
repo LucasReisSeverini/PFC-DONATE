@@ -35,7 +35,7 @@
       </counter>
       <counter>
         <item-type type-id="dependency" type="Dependency" />
-        <value>9</value>
+        <value>11</value>
       </counter>
       <counter>
         <item-type type-id="usage" type="Usage" />
@@ -118,7 +118,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-package" id="p079e0b22ff504264827d9f39ae2321d0_832304216" name="DiagramaDePacote_Donate" order-index="1" uid="" name-style="" auto-routed-paths="false" default-line-style="default">
+      <diagram type="uml-package" id="p079e0b22ff504264827d9f39ae2321d0_832304216" name="DiagramaDePacote_Donate" order-index="1" uid="" name-style="" auto-routed-paths="false" default-line-style="default" view-location="-300,199" zoom="0.8">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -130,7 +130,7 @@
           </authors>
           <description />
           <creation-date>05/01/2025 09:44:05</creation-date>
-          <change-date>05/01/2025 10:12:19</change-date>
+          <change-date>05/01/2025 10:19:47</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
@@ -187,6 +187,14 @@
           <item id="e92101329cf44d2f802dc51b0e0b4e88" cid="PKG008" type="package" name="services" owner="22fe4ae08e744f7f8fc98127d074611b" creator="" creation-date="05/01/2025 09:49:48">
             <owned-items />
           </item>
+          <item id="9e72bb1b34aa4957b8b926314ed5a87d" cid="DEP009" type="dependency" owner="ff02b233e9de49eeae9ce59a043ce94e" creator="" creation-date="05/01/2025 10:19:43" from="39649450bbf84495b2cfade6d5cd1f0a" to="676de9de9e494ce494fc37242d4c85bb" visibility="package">
+            <stereotypes>
+              <stereotype name="access" />
+            </stereotypes>
+            <stereotype-instances>
+              <stereotype id="9e72bb1b34aa4957b8b926314ed5a87d_access_c" type="access" creation-date="05/01/2025 10:19:43" ref="" />
+            </stereotype-instances>
+          </item>
           <item id="1637816d435d419b9902b54fee384925" cid="DEP008" type="dependency" creator="" creation-date="05/01/2025 10:12:19" from="ff02b233e9de49eeae9ce59a043ce94e" to="0855e991877340088ede9a66d6679139" visibility="package">
             <stereotypes>
               <stereotype name="access" />
@@ -213,6 +221,14 @@
             <owned-items />
           </item>
           <item id="3bb87aac0a1b4532986d2419bb7b3548" cid="PKG006" type="package" name="guards" owner="22fe4ae08e744f7f8fc98127d074611b" creator="" creation-date="05/01/2025 09:45:50" />
+          <item id="4fb8535e82f643dbaf2f95023812c53d" cid="DEP010" type="dependency" owner="ff02b233e9de49eeae9ce59a043ce94e" creator="" creation-date="05/01/2025 10:19:47" from="39649450bbf84495b2cfade6d5cd1f0a" to="63196d697ebf47abb18bce1f5558de6a" visibility="package">
+            <stereotypes>
+              <stereotype name="access" />
+            </stereotypes>
+            <stereotype-instances>
+              <stereotype id="4fb8535e82f643dbaf2f95023812c53d_access_c" type="access" creation-date="05/01/2025 10:19:47" ref="" />
+            </stereotype-instances>
+          </item>
           <item id="ecd1ec7947294766b14b8cdd3cbdf5cd" cid="DEP006" type="dependency" owner="ff02b233e9de49eeae9ce59a043ce94e" creator="" creation-date="05/01/2025 10:10:49" from="475ca243218d4e839814f19dc6a1f7fa" to="39649450bbf84495b2cfade6d5cd1f0a" visibility="package">
             <stereotypes>
               <stereotype name="merge" />
@@ -428,28 +444,6 @@
             </layout>
             <relation from="39649450bbf84495b2cfade6d5cd1f0a" from-iid="d817a9ba9ed84cefaa1643d9a5819150" to="4ea6158d8d704bc38a9a02f4444c9b3a" to-iid="b8356d6d6deb474cb51cbc179e1f6ca7" />
           </item>
-          <item id="daac5259a0564ce78b4a6d7bd8a805e7" iid="7ad566d5fb4e4be4a9c1814d4b13cf4c" container="ff02b233e9de49eeae9ce59a043ce94e" container-iid="8c4187bb00eb4e9797b1d151656d3541" creation-date="05/01/2025 10:11:16" order-index="14" type="relation">
-            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" auto-path="" x1="939" y1="748" x2="1018" y2="400" start-border-pos="0.08541666666666667" end-border-pos="0.5198675496688742" start-local-pos="41" end-local-pos="278" name-position="0,20">
-              <points>
-                <point x="939" y="748" />
-                <point x="1070" y="692.8262" />
-                <point x="1068" y="467" />
-                <point x="1018" y="400" />
-              </points>
-            </layout>
-            <relation from="676de9de9e494ce494fc37242d4c85bb" from-iid="edbff5a194e747cd8b8ffc97d4efdfc5" to="39649450bbf84495b2cfade6d5cd1f0a" to-iid="d817a9ba9ed84cefaa1643d9a5819150" />
-          </item>
-          <item id="96928bd315524a9bb084a58e19ebe3e9" iid="475ede7ba3da4b588c1a0e61afe464fa" container="ff02b233e9de49eeae9ce59a043ce94e" container-iid="8c4187bb00eb4e9797b1d151656d3541" creation-date="05/01/2025 10:11:32" order-index="15" type="relation">
-            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" auto-path="" x1="1007" y1="992" x2="1042" y2="389" start-border-pos="0.20649943033854168" end-border-pos="0.4912698412698413" start-local-pos="246" end-local-pos="304" name-position="0,20">
-              <points>
-                <point x="1007" y="992" />
-                <point x="1096" y="969.73926" />
-                <point x="1100" y="457" />
-                <point x="1042" y="389" />
-              </points>
-            </layout>
-            <relation from="475ca243218d4e839814f19dc6a1f7fa" from-iid="ae707e0c2aaa45ed85c698b93cce1f11" to="39649450bbf84495b2cfade6d5cd1f0a" to-iid="d817a9ba9ed84cefaa1643d9a5819150" />
-          </item>
           <item id="01971ff515884a38abf9a31919eb9244" iid="30769648fbe24fad907a1c428c3af569" creation-date="05/01/2025 10:12:02" order-index="16" type="relation">
             <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" auto-path="" x1="500" y1="388" x2="740" y2="389" start-border-pos="0.3099315068493151" end-border-pos="0.7587301587301587" start-local-pos="385" end-local-pos="304" name-position="0,20">
               <points>
@@ -467,6 +461,29 @@
               </points>
             </layout>
             <relation from="ff02b233e9de49eeae9ce59a043ce94e" from-iid="8c4187bb00eb4e9797b1d151656d3541" to="0855e991877340088ede9a66d6679139" to-iid="1d63520d738e443bb5e4243ce624d324" />
+          </item>
+          <item id="9e72bb1b34aa4957b8b926314ed5a87d" iid="90de092c32e547e8a0cc600d8d1c1ece" container="ff02b233e9de49eeae9ce59a043ce94e" container-iid="8c4187bb00eb4e9797b1d151656d3541" creation-date="05/01/2025 10:19:43" order-index="18" type="relation">
+            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" auto-path="" x1="1042" y1="371" x2="1018" y2="817" start-border-pos="0.47698412698412695" end-border-pos="0.39495798319327735" start-local-pos="286" end-local-pos="69" name-position="0,20">
+              <points>
+                <point x="1042" y="371" />
+                <point x="1040" y="376" />
+                <point x="1072" y="446" />
+                <point x="1076" y="816" />
+                <point x="1018" y="817" />
+              </points>
+            </layout>
+            <relation from="39649450bbf84495b2cfade6d5cd1f0a" from-iid="d817a9ba9ed84cefaa1643d9a5819150" to="676de9de9e494ce494fc37242d4c85bb" to-iid="edbff5a194e747cd8b8ffc97d4efdfc5" />
+          </item>
+          <item id="4fb8535e82f643dbaf2f95023812c53d" iid="1b87ba5348ca4b6bb38d6bee1db2f269" container="ff02b233e9de49eeae9ce59a043ce94e" container-iid="8c4187bb00eb4e9797b1d151656d3541" creation-date="05/01/2025 10:19:47" order-index="19" type="relation">
+            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" auto-path="" x1="1042" y1="337" x2="1040" y2="1019" start-border-pos="0.45" end-border-pos="0.25" start-local-pos="252" end-local-pos="-11" name-position="0,20">
+              <points>
+                <point x="1042" y="337" />
+                <point x="1110" y="431" />
+                <point x="1109" y="891" />
+                <point x="1040" y="1019" />
+              </points>
+            </layout>
+            <relation from="39649450bbf84495b2cfade6d5cd1f0a" from-iid="d817a9ba9ed84cefaa1643d9a5819150" to="63196d697ebf47abb18bce1f5558de6a" to-iid="970505ee26f143059e80c993f2598c33" />
           </item>
         </layer>
       </diagram>

@@ -3,49 +3,52 @@ create database donate;
 
 \c donate;
 
-create table cidade (
-    id serial primary key,
-    nome varchar(100) not null,
-    estado varchar(100) not null
+-- Tabela: cidade
+CREATE TABLE cidade (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    estado VARCHAR(100) NOT NULL
 );
 
-create table usuario (
-    id serial primary key,
-    nome varchar(100) not null,
-    email varchar(100) not null unique,
-    telefone varchar(20),
-    cpf varchar(20) not null unique,
-    senha varchar(100) not null,
-    doadora boolean not null default false,
-    receptora boolean not null default false,
-    profissional boolean not null default false,
-    latitude decimal(9,6) not null,
-    longitude decimal(9,6) not null,
-    quantidade_ml decimal(10,2) not null,
-    id_cidade int not null,
-    foreign key (id_cidade) references cidade(id)
+-- Tabela: usuario
+CREATE TABLE usuario (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    telefone VARCHAR(20),
+    cpf VARCHAR(11) NOT NULL,
+    senha VARCHAR(100) NOT NULL,
+    doadora BOOLEAN,
+    receptora BOOLEAN,
+    profissional BOOLEAN,
+    latitude NUMERIC(8,6),
+    longitude NUMERIC(8,6),
+    id_cidade INTEGER NOT NULL,
+    CONSTRAINT fk_usuario_cidade FOREIGN KEY (id_cidade) REFERENCES cidade(id)
 );
 
-create table banco_leite (
-    id serial primary key,
-    nome varchar(100) not null,
-    descricao text not null,
-    telefone varchar(20),
-    email varchar(100),
-    endereco varchar(255) not null,
-    latitude decimal(9,6) not null,
-    longitude decimal(9,6) not null,
-    id_usuario int not null,
-    foreign key (id_usuario) references usuario(id)
+-- Tabela: bancos_de_leite
+CREATE TABLE bancos_de_leite (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(25) NOT NULL,
+    cidade VARCHAR(10) NOT NULL,
+    estado VARCHAR(2) NOT NULL,
+    endereco VARCHAR(255) NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
+    latitude NUMERIC(8,6),
+    longitude NUMERIC(8,6)
 );
 
-create table notificacao (
-    id serial primary key,
-    id_banco_leite int not null,
-    codigo varchar(50) not null,
-    datahora_envio datetime not null default current_timestamp,
-    mensagem varchar(255) not null,
-    foreign key (id_banco_leite) references banco_leite(id)
+
+-- Tabela: doacao
+CREATE TABLE doacao (
+    id SERIAL PRIMARY KEY,
+    id_bancos_de_leite INTEGER NOT NULL,
+    quantidade_ml INTEGER NOT NULL,
+    data_doacao TIMESTAMPTZ NOT NULL,
+    id_usuario INTEGER NOT NULL,
+    CONSTRAINT fk_doacao_banco FOREIGN KEY (id_bancos_de_leite) REFERENCES bancos_de_leite(id),
+    CONSTRAINT fk_doacao_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 );
 
 commit;

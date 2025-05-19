@@ -9,11 +9,10 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatOptionModule } from '@angular/material/core';
 import { Observable, map, startWith } from 'rxjs';
 import { MatRadioModule } from '@angular/material/radio';
+import { CidadeService, Cidade } from '../../services/cidade.service';
 
-interface Cidade {
-  id: number;
-  nome: string;
-}
+
+
 
 @Component({
   selector: 'app-register',
@@ -39,6 +38,13 @@ export class RegisterComponent implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private authService = inject(AuthService);
+  private cidadeService = inject(CidadeService);
+
+
+  // Novos flags de erro que vamos usar para CPF/email e validações de cidade/perfil
+  cpfOuEmailExistenteErro = false;
+  cidadeNaoSelecionadaErro = false;
+  perfilNaoSelecionadoErro = false;
 
   constructor() {
     this.registerForm = this.fb.group({
@@ -47,11 +53,13 @@ export class RegisterComponent implements OnInit {
       telefone: ['', Validators.required],
       cpf: ['', Validators.required],
       senha: ['', Validators.required],
+      confirmarSenha: ['', Validators.required],  // novo campo
       perfil: ['', Validators.required],
       latitude: [null],
       longitude: [null],
-      id_cidade: [null, Validators.required]
-    });
+      // ALTERAÇÃO: id_cidade agora não é obrigatório, pois aceitamos nenhuma selecionada
+      id_cidade: [null]
+    }, { validators: this.senhasIguaisValidator }); // adiciona validador customizado
   }
 
   ngOnInit(): void {
@@ -75,7 +83,6 @@ export class RegisterComponent implements OnInit {
         },
         error => {
           console.warn('Não foi possível obter a localização. Continuando sem latitude/longitude.', error);
-          // Continua sem localização, sem travar o cadastro
         }
       );
     } else {
@@ -84,39 +91,17 @@ export class RegisterComponent implements OnInit {
   }
 
   carregarCidades(): void {
-    this.cidades = [
-      { id: 1, nome: 'Santa Rita do Sapucaí' },
-      { id: 2, nome: 'Belo Horizonte' },
-      { id: 3, nome: 'Uberlândia' },
-      { id: 4, nome: 'Contagem' },
-      { id: 5, nome: 'Juiz de Fora' },
-      { id: 6, nome: 'Betim' },
-      { id: 7, nome: 'Montes Claros' },
-      { id: 8, nome: 'Ribeirão das Neves' },
-      { id: 9, nome: 'Uberaba' },
-      { id: 10, nome: 'Governador Valadares' },
-      { id: 11, nome: 'Ipatinga' },
-      { id: 12, nome: 'Sete Lagoas' },
-      { id: 13, nome: 'Divinópolis' },
-      { id: 14, nome: 'Poços de Caldas' },
-      { id: 15, nome: 'Patos de Minas' },
-      { id: 16, nome: 'Teófilo Otoni' },
-      { id: 17, nome: 'Barbacena' },
-      { id: 18, nome: 'Sabará' },
-      { id: 19, nome: 'Pouso Alegre' },
-      { id: 20, nome: 'Araguari' },
-      { id: 21, nome: 'Passos' },
-      { id: 22, nome: 'Itabira' },
-      { id: 23, nome: 'Varginha' },
-      { id: 24, nome: 'Conselheiro Lafaiete' },
-      { id: 25, nome: 'Lavras' },
-      { id: 26, nome: 'Pará de Minas' },
-      { id: 27, nome: 'Alfenas' },
-      { id: 28, nome: 'Nova Serrana' },
-      { id: 29, nome: 'Ituiutaba' },
-      { id: 30, nome: 'São João del Rei' }
-    ];
+    this.cidadeService.getCidades().subscribe({
+      next: (dados) => {
+        this.cidades = dados;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar cidades', err);
+        alert('Erro ao carregar cidades do servidor.');
+      }
+    });
   }
+
 
   filtrarCidades(value: string): Cidade[] {
     const filtro = value.toLowerCase();
@@ -127,10 +112,38 @@ export class RegisterComponent implements OnInit {
     const cidadeSelecionada = this.cidades.find(c => c.nome === event.option.value);
     if (cidadeSelecionada) {
       this.registerForm.patchValue({ id_cidade: cidadeSelecionada.id });
+      this.cidadeNaoSelecionadaErro = false; // limpa erro ao selecionar cidade
     }
   }
 
+  senhasIguaisValidator(form: FormGroup) {
+    const senha = form.get('senha')?.value;
+    const confirmarSenha = form.get('confirmarSenha')?.value;
+    if (senha !== confirmarSenha) {
+      return { senhasDiferentes: true };
+    }
+    return null;
+  }
+
   onSubmit(): void {
+    // Antes de enviar, resetamos os erros específicos
+    this.cpfOuEmailExistenteErro = false;
+    this.cidadeNaoSelecionadaErro = false;
+    this.perfilNaoSelecionadoErro = false;
+
+    // Validação manual para cidade e perfil
+    if (!this.registerForm.value.perfil) {
+      this.perfilNaoSelecionadoErro = true;
+      alert('Por favor, selecione o tipo de usuário.');
+      return;
+    }
+    // Cidade pode ser opcional, mas se você quer alertar quando não selecionada:
+    if (!this.registerForm.value.id_cidade) {
+      this.cidadeNaoSelecionadaErro = true;
+      alert('Por favor, selecione uma cidade.');
+      return;
+    }
+
     if (this.registerForm.valid) {
       const formData = { ...this.registerForm.value };
 
@@ -140,6 +153,7 @@ export class RegisterComponent implements OnInit {
       formData.profissional = formData.perfil === 'profissional';
 
       delete formData.perfil;
+      delete formData.confirmarSenha; // remove confirmarSenha antes de enviar
 
       console.log('Enviando dados para o backend:', formData);
 
@@ -150,11 +164,23 @@ export class RegisterComponent implements OnInit {
         },
         error: (err) => {
           console.error(err);
-          alert('Erro ao cadastrar. Verifique os dados.');
+
+          // Aqui, para capturar erro específico de CPF ou Email já cadastrado,
+          // assumi que o backend retorna algo no erro, ex: err.error.message
+          if (err.error?.message?.includes('CPF') || err.error?.message?.includes('Email')) {
+            this.cpfOuEmailExistenteErro = true;
+            alert('CPF ou Email já cadastrado.');
+          } else {
+            alert('Erro ao cadastrar. Verifique os dados.');
+          }
         }
       });
     } else {
-      alert('Preencha todos os campos obrigatórios corretamente.');
+      if (this.registerForm.errors?.['senhasDiferentes']) {
+        alert('A senha não coincidem.');
+      } else {
+        alert('Preencha todos os campos obrigatórios corretamente.');
+      }
     }
   }
 }

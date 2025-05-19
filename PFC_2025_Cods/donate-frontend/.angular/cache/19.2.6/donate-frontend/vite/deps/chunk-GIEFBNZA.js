@@ -5,20 +5,20 @@ import {
   isDataSource
 } from "./chunk-RSU5KTGX.js";
 import {
+  BidiModule,
+  Directionality
+} from "./chunk-LKBJE6ML.js";
+import {
   Platform,
   RtlScrollAxisType,
   coerceElement,
   coerceNumberProperty,
   getRtlScrollAxisType,
   supportsScrollBehavior
-} from "./chunk-NE3WKSNS.js";
-import {
-  BidiModule,
-  Directionality
-} from "./chunk-7AHFFEFR.js";
+} from "./chunk-YKYO37WM.js";
 import {
   DOCUMENT
-} from "./chunk-XFLMNMTY.js";
+} from "./chunk-UVLKBSCR.js";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -1667,4 +1667,4 @@ export {
   CdkScrollableModule,
   ScrollingModule
 };
-//# sourceMappingURL=chunk-W5X23NXH.js.map
+//# sourceMappingURL=chunk-GIEFBNZA.js.map

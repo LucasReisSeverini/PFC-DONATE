@@ -1,4 +1,7 @@
 import {
+  BidiModule
+} from "./chunk-LKBJE6ML.js";
+import {
   Platform,
   _getEventTarget,
   _getFocusedElementPierceShadowDom,
@@ -9,13 +12,10 @@ import {
   coerceElement,
   coerceNumberProperty,
   normalizePassiveListenerOptions
-} from "./chunk-NE3WKSNS.js";
-import {
-  BidiModule
-} from "./chunk-7AHFFEFR.js";
+} from "./chunk-YKYO37WM.js";
 import {
   DOCUMENT
-} from "./chunk-XFLMNMTY.js";
+} from "./chunk-UVLKBSCR.js";
 import {
   ANIMATION_MODULE_TYPE,
   APP_ID,
@@ -1235,6 +1235,26 @@ var ActiveDescendantKeyManager = class extends ListKeyManager {
     super.setActiveItem(index);
     if (this.activeItem) {
       this.activeItem.setActiveStyles();
+    }
+  }
+};
+var FocusKeyManager = class extends ListKeyManager {
+  constructor() {
+    super(...arguments);
+    this._origin = "program";
+  }
+  /**
+   * Sets the focus origin that will be passed in to the items for any subsequent `focus` calls.
+   * @param origin Focus origin to be used when focusing items.
+   */
+  setFocusOrigin(origin) {
+    this._origin = origin;
+    return this;
+  }
+  setActiveItem(item) {
+    super.setActiveItem(item);
+    if (this.activeItem) {
+      this.activeItem.focus(this._origin);
     }
   }
 };
@@ -5292,6 +5312,7 @@ export {
   addAriaReferencedId,
   removeAriaReferencedId,
   ActiveDescendantKeyManager,
+  FocusKeyManager,
   CdkTrapFocus,
   LiveAnnouncer,
   FocusMonitor,
@@ -5343,4 +5364,4 @@ export {
   MatRippleLoader,
   _MatInternalFormField
 };
-//# sourceMappingURL=chunk-YGD3G7BS.js.map
+//# sourceMappingURL=chunk-A7QXG64D.js.map

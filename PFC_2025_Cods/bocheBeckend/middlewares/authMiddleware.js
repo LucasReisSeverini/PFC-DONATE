@@ -4,6 +4,8 @@ exports.verificarToken = (req, res, next) => {
 
     console.log("Headers recebidos:", req.headers);
     const authHeader = req.headers["authorization"]; // Pega o header em minúsculo
+    console.log("Middleware verificarToken chamado");
+    console.log("Authorization header:", req.headers["authorization"])
 
     if (!authHeader) {
         return res.status(401).json({ message: "Acesso negado. Nenhum token fornecido." });
@@ -17,6 +19,7 @@ exports.verificarToken = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        console.log("Payload do token:", decoded); // aqui
         req.usuario = decoded;
         next();
     } catch (error) {

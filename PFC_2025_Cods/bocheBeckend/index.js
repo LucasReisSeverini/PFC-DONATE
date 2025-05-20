@@ -13,6 +13,7 @@ const userRoutes = require('./routes/userRoutes');
 const bancoRoutes = require('./routes/banco.routes'); // 🔥 Nova rota dos bancos de leite
 const doacaoRoutes = require('./routes/doacaoRoutes');
 const cidadeRoutes = require('./routes/cidadeRoutes'); // nova rota cidades
+const controleAgendamentoRoutes = require('./routes/controleAgendamentoRoutes');
 
 // Rotas
 app.use('/usuarios', userRoutes);
@@ -20,6 +21,7 @@ app.use('/bancos', bancoRoutes); // 🔥 Nova rota para os bancos de leite
 app.use('/doacao', doacaoRoutes);
 // Rota para cidades
 app.use('/cidades', cidadeRoutes);
+app.use('/controle-agendamento', controleAgendamentoRoutes);
 console.log('doacaoRoutes carregado');
 
 app.use('/bancos-de-leite', bancoRoutes);

@@ -67,11 +67,23 @@ exports.loginUsuario = async (req, res) => {
             await User.atualizarLocalizacao(usuario.id, latitude, longitude);
         }
 
-        const token = jwt.sign(
-            { id: usuario.id, email: usuario.email },
-            process.env.JWT_SECRET || 'chave_secreta_super_segura',
-            { expiresIn: '2h' }
-        );
+//        const token = jwt.sign(
+//            { id: usuario.id, email: usuario.email },
+//            process.env.JWT_SECRET || 'chave_secreta_super_segura',
+//            { expiresIn: '2h' }
+//        );
+          const token = jwt.sign(
+              {
+                  id: usuario.id,
+                  email: usuario.email,
+                  doadora: usuario.doadora,
+                  receptora: usuario.receptora,
+                  profissional_de_saude: usuario.profissional // ajustei o nome para ficar claro
+              },
+              process.env.JWT_SECRET || 'chave_secreta_super_segura',
+              { expiresIn: '2h' }
+          );
+
 
         res.json({ message: "Login realizado com sucesso!", token });
 

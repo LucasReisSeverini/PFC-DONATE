@@ -24,7 +24,7 @@ export class AuthService {
       tap((response: LoginResponse) => {
         if (response?.token) {
           localStorage.setItem('token', response.token);
-          this.router.navigate(['/agendamento']); // Redireciona para agendamento
+          this.router.navigate(['/painel']); // Redireciona para agendamento
         }
       })
     );

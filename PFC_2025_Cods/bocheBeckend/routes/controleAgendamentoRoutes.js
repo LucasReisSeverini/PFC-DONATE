@@ -4,6 +4,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const { autorizarProfissional } = require('../middlewares/perfilMiddleware');
 const agendamentoController = require('../controllers/agendamentoController');
 
+
 // Listar todos os agendamentos (para profissionais)
 router.get('/', authMiddleware.verificarToken, autorizarProfissional, agendamentoController.listarAgendamentos);
 
@@ -15,5 +16,11 @@ router.put('/:id/reagendar', authMiddleware.verificarToken, autorizarProfissiona
 
 // Recusar agendamento
 router.post('/:id/recusar', authMiddleware.verificarToken, autorizarProfissional, agendamentoController.recusarAgendamento);
+
+// Rota para listar agendamentos do usuário logado
+router.get('/meus-agendamentos', authMiddleware.verificarToken, agendamentoController.listarAgendamentosPorUsuario);
+
+// Rota para cancelar agendamento (cancelar = deletar)
+router.delete('/:id/cancelar', authMiddleware.verificarToken, agendamentoController.cancelarAgendamento);
 
 module.exports = router;

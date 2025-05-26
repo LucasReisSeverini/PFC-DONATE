@@ -24,14 +24,14 @@ export class ControleAgendamentoService {
   }
 
   aceitarAgendamento(id: number) {
-    return this.http.put(`${this.apiUrl}/aceitar/${id}`, {}, this.getHeaders());
+    return this.http.post(`${this.apiUrl}/${id}/aceitar`, {}, this.getHeaders()); // de PUT para POST
+  }
+  reagendarAgendamento(id: number, novaData: string) {
+    return this.http.put(`${this.apiUrl}/${id}/reagendar`, { novaData }, this.getHeaders());
   }
 
-  reagendarAgendamento(id: number, novaData: string) {
-    return this.http.put(`${this.apiUrl}/reagendar/${id}`, { novaData }, this.getHeaders());
-  }
 
   recusarAgendamento(id: number) {
-    return this.http.put(`${this.apiUrl}/recusar/${id}`, {}, this.getHeaders());
+    return this.http.post(`${this.apiUrl}/${id}/recusar`, {}, this.getHeaders()); // de PUT para POST
   }
 }

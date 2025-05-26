@@ -19,12 +19,12 @@ const Doacao = {
   },
 
   async atualizarStatus(id, novoStatus) {
-    const query = 'UPDATE doacoes SET status = $1 WHERE id = $2';
+    const query = 'UPDATE doacao SET status = $1 WHERE id = $2';
     await pool.query(query, [novoStatus, id]);
   },
 
   async reagendar(id, novaData) {
-    const query = 'UPDATE doacoes SET data_agendamento = $1, status = $2 WHERE id = $3';
+    const query = 'UPDATE doacao SET data_doacao = $1, status = $2 WHERE id = $3';
     await pool.query(query, [novaData, 'reagendado', id]);
   }
 

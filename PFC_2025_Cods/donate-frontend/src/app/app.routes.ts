@@ -7,7 +7,7 @@ import { BancoProximoComponent } from './pages/banco-proximo/banco-proximo.compo
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { DoacaoComponent } from './pages/doacao/doacao.component';
 import {ControleAgendamentoComponent} from './pages/controle-agendamento/controle-agendamento.component';
-
+import { AgendamentoUsuarioComponent } from './pages/agendamento-usuario/agendamento-usuario.component';
 import { AuthGuard } from './guards/auth.guard'; // ✅ Importa o guard
 
 export const routes: Routes = [
@@ -20,8 +20,9 @@ export const routes: Routes = [
   { path: 'painel', component: PainelComponent, canActivate: [AuthGuard] },
   { path: 'banco-proximo', component: BancoProximoComponent, canActivate: [AuthGuard] },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
-   { path: 'doacao', component: DoacaoComponent, canActivate: [AuthGuard] },
-   { path: 'controle-agendamento', component: ControleAgendamentoComponent, canActivate: [AuthGuard] }
+  { path: 'doacao', component: DoacaoComponent, canActivate: [AuthGuard] },
+  { path: 'controle-agendamento', component: ControleAgendamentoComponent, canActivate: [AuthGuard] },
+  { path: 'meus-agendamentos', component: AgendamentoUsuarioComponent, canActivate: [AuthGuard] }
 
 
 ];

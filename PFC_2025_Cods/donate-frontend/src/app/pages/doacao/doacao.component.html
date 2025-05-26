@@ -26,6 +26,11 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Hora da doação</mat-label>
+      <input matInput type="time" formControlName="hora_doacao" required />
+    </mat-form-field>
+
     <!-- Botão de enviar -->
     <button mat-raised-button color="primary" type="submit" [disabled]="doacaoForm.invalid">
       Agendar

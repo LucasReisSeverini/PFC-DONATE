@@ -39,6 +39,7 @@ export class DoacaoComponent implements OnInit {
       id_bancos_de_leite: [null, Validators.required],
       quantidade_ml: [null, [Validators.required, Validators.min(1)]],
       data_doacao: [null, Validators.required],
+      hora_doacao: ['', Validators.required],  // novo campo hora
     });
 
     this.carregarBancosDeLeite();

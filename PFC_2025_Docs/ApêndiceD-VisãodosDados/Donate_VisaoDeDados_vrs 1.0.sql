@@ -50,4 +50,16 @@ create table doacao (
     constraint fk_doacao_usuario foreign key (id_usuario) references usuario(id)
 );
 
+-- tabela: agendamento
+create table agendamento (
+    id serial primary key,
+    data_hora timestamptz not null,
+    local varchar(255) not null,
+    status varchar(50) not null,
+    id_usuario integer not null,
+    id_bancos_de_leite integer not null,
+    constraint fk_agendamento_usuario foreign key (id_usuario) references usuario(id),
+    constraint fk_agendamento_banco foreign key (id_bancos_de_leite) references bancos_de_leite(id)
+);
+
 commit;

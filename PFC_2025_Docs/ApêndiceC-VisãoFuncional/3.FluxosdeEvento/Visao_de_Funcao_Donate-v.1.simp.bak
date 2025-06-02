@@ -185,7 +185,7 @@
       </use-case>
     </item>
     <item id="ee7b9d32f07344f999c46baef5dd07c1" cid="AC005" type="actor" name="Profissional da saúde" creation-date="05/16/2024 21:55:18" visibility="undefined" />
-    <item id="44f07faeea254137a453451ce41efa30" cid="UC007" type="use-case" name="Banco mais proximo" owner="460480c72bfc46fbab3e932ed809771b" creation-date="05/16/2024 21:56:23" visibility="undefined">
+    <item id="44f07faeea254137a453451ce41efa30" cid="UC007" type="use-case" name="Acessar banco mais proximo" owner="460480c72bfc46fbab3e932ed809771b" creation-date="05/16/2024 21:56:23" visibility="undefined">
       <associated-diagrams>
         <diagram id="p3e63db7a9c034aa08984f54733c29893_402613296" />
       </associated-diagrams>
@@ -1294,7 +1294,7 @@
           <version />
         </meta>
         <abstract-items>
-          <item id="2d06d93df6874e88a9bccc2a01ea1408" cid="UC013" type="use-case" name="meu perfil" owner="460480c72bfc46fbab3e932ed809771b" creation-date="05/23/2025 11:19:38" visibility="undefined">
+          <item id="2d06d93df6874e88a9bccc2a01ea1408" cid="UC013" type="use-case" name="Acessar meu perfil" owner="460480c72bfc46fbab3e932ed809771b" creation-date="05/23/2025 11:19:38" visibility="undefined">
             <use-case>
               <stakeholders />
               <special-requirements />

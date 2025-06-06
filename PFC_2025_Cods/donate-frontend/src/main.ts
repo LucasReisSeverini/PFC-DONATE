@@ -4,14 +4,22 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { routes } from './app/app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { materialImports } from './app/material'; // ✅ Importando os módulos Angular Material
+import { materialImports } from './app/material';
+
+// Importa a classe interceptor
+import { AuthTokenInterceptor } from './app/interceptor/authToken.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(),
     provideRouter(routes),
     provideAnimationsAsync(),
-    ...materialImports, provideAnimationsAsync() // ✅ Adicionando os módulos do Angular Material aqui
-  ]
+    ...materialImports,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthTokenInterceptor,
+      multi: true,
+    }
+  ],
 }).catch((err) => console.error(err));
-

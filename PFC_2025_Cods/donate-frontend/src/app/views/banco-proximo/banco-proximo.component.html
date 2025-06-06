@@ -1,0 +1,43 @@
+<!-- Alerta de erro -->
+<div *ngIf="erro" class="alerta-erro">
+  {{ erro }}
+</div>
+
+<!-- Exibição do banco de leite mais próximo -->
+<div *ngIf="banco" class="banco-container">
+  <h2 class="banco-titulo">
+    Banco de leite mais próximo
+  </h2>
+
+  <div class="banco-info">
+    <p>
+      <strong>Nome:</strong>
+      <span>{{ banco.nome }}</span>
+    </p>
+    <p>
+      <strong>Endereço:</strong>
+      <span>{{ banco.endereco }}</span>
+    </p>
+    <p>
+      <strong>Distância:</strong>
+      <span class="banco-distancia">{{ banco.distancia | number:'1.1-2' }} km</span>
+    </p>
+  </div>
+
+  <!-- Botão para voltar ao painel -->
+  <div class="voltar-container">
+    <button class="btn-voltar" [routerLink]="'/painel'" routerLinkActive="active">Voltar para o painel</button>
+
+  </div>
+
+  <div *ngIf="banco?.latitude && banco?.longitude" style="width: 100%; max-width: 600px; margin: auto;">
+    <app-map
+      [latitude]="banco.latitude ? +banco.latitude : 0"
+      [longitude]="banco.longitude ? +banco.longitude : 0">
+    </app-map>
+  </div>
+
+  <!-- Exibir mapa apenas se banco estiver disponível -->
+
+
+</div>

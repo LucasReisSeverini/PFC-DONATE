@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
-import { PainelComponent } from './pages/painel/painel.component';
-import { BancoProximoComponent } from './pages/banco-proximo/banco-proximo.component';
-import { PerfilComponent } from './pages/perfil/perfil.component';
-import { DoacaoComponent } from './pages/doacao/doacao.component';
-import {ControleAgendamentoComponent} from './pages/controle-agendamento/controle-agendamento.component';
-import { AgendamentoUsuarioComponent } from './pages/agendamento-usuario/agendamento-usuario.component';
+import { LoginComponent } from './views/account/login/login.component';
+import { RegisterComponent } from './views/account/register/register.component';
+import { AgendamentoComponent } from './views/agendamento/agendamento.component';
+import { PainelComponent } from './views/painel/painel.component';
+import { BancoProximoComponent } from './views/banco-proximo/banco-proximo.component';
+import { PerfilComponent } from './views/account/perfil/perfil.component';
+import { DoacaoComponent } from './views/doacao/doacao.component';
+import {ControleAgendamentoComponent} from './views/controle-agendamento/controle-agendamento.component';
+import { AgendamentoUsuarioComponent } from './views/agendamento-usuario/agendamento-usuario.component';
 import { AuthGuard } from './guards/auth.guard'; // ✅ Importa o guard
 
 export const routes: Routes = [

@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { HttpHeaders } from '@angular/common/http'; // <-- Aqui está o HttpHeaders
-
 
 interface LoginResponse {
   token: string;
@@ -14,41 +12,49 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private loginUrl = 'http://localhost:3000/usuarios/login';
-  private registerUrl = 'http://localhost:3000/usuarios/cadastro';
+  private loginUrl = 'http://localhost:8080/auth/login'; // springboot
+  private registerUrl = 'http://localhost:8080/usuarios/cadastro'; // springboot
 
   constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, senha: string, latitude?: number, longitude?: number): Observable<LoginResponse> {
+//     console.log('Tentando login com:', { email, senha, latitude, longitude });
+
     return this.http.post<LoginResponse>(this.loginUrl, { email, senha, latitude, longitude }).pipe(
       tap((response: LoginResponse) => {
+//         console.log('Resposta do login recebida:', response);
+
         if (response?.token) {
           localStorage.setItem('token', response.token);
-          this.router.navigate(['/painel']); // Redireciona para agendamento
+//           console.log('Token salvo no localStorage:', localStorage.getItem('token'));
+          this.router.navigate(['/painel']); // Redireciona para painel
+        } else {
+          console.warn('Token não foi retornado no login!');
         }
       })
     );
   }
 
   register(dados: any): Observable<any> {
+//     console.log('Tentando registro com dados:', dados);
     return this.http.post(this.registerUrl, dados);
   }
 
   getToken() {
-    return localStorage.getItem('token'); // ou sessionStorage, dependendo de onde salvou
+    const token = localStorage.getItem('token');
+//     console.log('getToken() retornou:', token);
+    return token;
   }
 
-getPerfil() {
-  const token = localStorage.getItem('token');
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  return this.http.get<any>('http://localhost:3000/usuarios/perfil/me', { headers });
-}
+  // Aqui SEM o header manual, o interceptor adiciona o token automaticamente
+  getPerfil() {
+    console.log('Requisição getPerfil() chamada');
+    return this.http.get<any>('http://localhost:8080/usuarios/email');
+  }
 
-
+  // Também sem header manual
   atualizarPerfil(dados: any) {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`);
-    return this.http.put('http://localhost:3000/usuarios/perfil/me', dados, { headers });
+    console.log('Requisição atualizarPerfil() chamada com dados:', dados);
+    return this.http.put('http://localhost:3000/usuarios/perfil/me', dados);
   }
 }
-
-

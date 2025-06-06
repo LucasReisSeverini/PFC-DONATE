@@ -1,8 +1,0 @@
-.map-container {
-  width: 100%;  /* O mapa ocupará 100% da largura do contêiner */
-  height: 100px; /* Altura fixa, ajustável conforme necessário */
-  background-color: #f5f5f5; /* Cor de fundo opcional */
-  margin-top: 10px;
-  border-radius: 8px; /* Cantos arredondados, opcional */
-  overflow: hidden; /* Evita que o mapa saia do contêiner */
-}

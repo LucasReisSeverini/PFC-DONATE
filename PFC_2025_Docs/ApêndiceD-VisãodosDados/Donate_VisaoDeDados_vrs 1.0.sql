@@ -3,52 +3,63 @@ create database donate;
 
 \c donate;
 
--- Tabela: cidade
-CREATE TABLE cidade (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    estado VARCHAR(100) NOT NULL
+-- tabela: municipio
+create table municipio (
+    id serial primary key,
+    nome varchar(100) not null,
+    uf varchar(100) not null
 );
 
--- Tabela: usuario
-CREATE TABLE usuario (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    telefone VARCHAR(20),
-    cpf VARCHAR(11) NOT NULL,
-    senha VARCHAR(100) NOT NULL,
-    doadora BOOLEAN,
-    receptora BOOLEAN,
-    profissional BOOLEAN,
-    latitude NUMERIC(8,6),
-    longitude NUMERIC(8,6),
-    id_cidade INTEGER NOT NULL,
-    CONSTRAINT fk_usuario_cidade FOREIGN KEY (id_cidade) REFERENCES cidade(id)
+-- tabela: usuario
+create table usuario (
+    id serial primary key,
+    nome varchar(100) not null,
+    email varchar(100) unique not null,
+    telefone varchar(20),
+    cpf varchar(11) unique not null,
+    senha varchar(100) not null,
+    doadora boolean default false,
+    receptora boolean default false,
+    profissional boolean default false,
+    latitude numeric(8,6),
+    longitude numeric(8,6),
+    id_municipio integer not null,
+    constraint fk_usuario_municipio foreign key (id_municipio) references municipio(id)
 );
 
--- Tabela: bancos_de_leite
-CREATE TABLE bancos_de_leite (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(25) NOT NULL,
-    cidade VARCHAR(10) NOT NULL,
-    estado VARCHAR(2) NOT NULL,
-    endereco VARCHAR(255) NOT NULL,
-    telefone VARCHAR(20) NOT NULL,
-    latitude NUMERIC(8,6),
-    longitude NUMERIC(8,6)
+-- tabela: bancos_de_leite
+create table bancos_de_leite (
+    id serial primary key,
+    nome varchar(100) not null,
+    id_municipio integer not null,
+    endereco varchar(255) not null,
+    telefone varchar(20) not null,
+    latitude numeric(8,6),
+    longitude numeric(8,6),
+    constraint fk_banco_municipio foreign key (id_municipio) references municipio(id)
 );
 
+-- tabela: doacao
+create table doacao (
+    id serial primary key,
+    id_bancos_de_leite integer not null,
+    quantidade_ml integer not null,
+    data_doacao timestamptz not null,
+    id_usuario integer not null,
+    constraint fk_doacao_banco foreign key (id_bancos_de_leite) references bancos_de_leite(id),
+    constraint fk_doacao_usuario foreign key (id_usuario) references usuario(id)
+);
 
--- Tabela: doacao
-CREATE TABLE doacao (
-    id SERIAL PRIMARY KEY,
-    id_bancos_de_leite INTEGER NOT NULL,
-    quantidade_ml INTEGER NOT NULL,
-    data_doacao TIMESTAMPTZ NOT NULL,
-    id_usuario INTEGER NOT NULL,
-    CONSTRAINT fk_doacao_banco FOREIGN KEY (id_bancos_de_leite) REFERENCES bancos_de_leite(id),
-    CONSTRAINT fk_doacao_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+-- tabela: agendamento
+create table agendamento (
+    id serial primary key,
+    data_hora timestamptz not null,
+    local varchar(255) not null,
+    status varchar(50) not null,
+    id_usuario integer not null,
+    id_bancos_de_leite integer not null,
+    constraint fk_agendamento_usuario foreign key (id_usuario) references usuario(id),
+    constraint fk_agendamento_banco foreign key (id_bancos_de_leite) references bancos_de_leite(id)
 );
 
 commit;

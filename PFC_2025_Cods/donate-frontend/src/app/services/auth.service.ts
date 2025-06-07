@@ -18,15 +18,23 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, senha: string, latitude?: number, longitude?: number): Observable<LoginResponse> {
-//     console.log('Tentando login com:', { email, senha, latitude, longitude });
-
     return this.http.post<LoginResponse>(this.loginUrl, { email, senha, latitude, longitude }).pipe(
       tap((response: LoginResponse) => {
-//         console.log('Resposta do login recebida:', response);
-
         if (response?.token) {
           localStorage.setItem('token', response.token);
-//           console.log('Token salvo no localStorage:', localStorage.getItem('token'));
+
+          // Decodifica o token para pegar o id e salvar no localStorage
+          const payloadBase64 = response.token.split('.')[1];
+          const payloadJson = atob(payloadBase64);
+          const payload = JSON.parse(payloadJson);
+
+          if (payload.id) {
+            localStorage.setItem('id', payload.id.toString());
+            console.log('ID salvo no localStorage:', payload.id);
+          } else {
+            console.warn('ID do usuário não está presente no token.');
+          }
+
           this.router.navigate(['/painel']); // Redireciona para painel
         } else {
           console.warn('Token não foi retornado no login!');
@@ -36,25 +44,16 @@ export class AuthService {
   }
 
   register(dados: any): Observable<any> {
-//     console.log('Tentando registro com dados:', dados);
     return this.http.post(this.registerUrl, dados);
   }
 
   getToken() {
-    const token = localStorage.getItem('token');
-//     console.log('getToken() retornou:', token);
-    return token;
+    return localStorage.getItem('token');
   }
 
   // Aqui SEM o header manual, o interceptor adiciona o token automaticamente
   getPerfil() {
     console.log('Requisição getPerfil() chamada');
     return this.http.get<any>('http://localhost:8080/usuarios/email');
-  }
-
-  // Também sem header manual
-  atualizarPerfil(dados: any) {
-    console.log('Requisição atualizarPerfil() chamada com dados:', dados);
-    return this.http.put('http://localhost:3000/usuarios/perfil/me', dados);
   }
 }

@@ -11,8 +11,8 @@ import { BancoProximoDto } from '../../domain/dto/banco-proximo.dto';
   standalone: true,
   imports: [CommonModule, HttpClientModule, MapComponent, RouterModule],
   templateUrl: './banco-proximo.component.html',
-  styleUrls: ['./banco-proximo.component.css'],
-  providers: [BancoService]
+  styleUrls: ['./banco-proximo.component.css']
+  // removi providers: [BancoService]
 })
 export class BancoProximoComponent implements OnInit {
   banco: BancoProximoDto | null = null;

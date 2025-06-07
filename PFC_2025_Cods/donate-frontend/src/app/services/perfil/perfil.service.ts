@@ -35,8 +35,16 @@ getPerfil(): Observable<PerfilDto> {
 
 
   // Também sem header manual
-  atualizarPerfil(dados: any): Observable<any> {
-    console.log('Requisição atualizarPerfil() chamada com dados:', dados);
-    return this.http.put('http://localhost:3000/usuarios/perfil/me', dados);
+  atualizarPerfil(dados: any) {
+    const userId = localStorage.getItem('id');
+    console.log('userId no localStorage:', userId);
+
+    if (!userId) {
+      throw new Error('Usuário não autenticado');
+    }
+
+    return this.http.put(`http://localhost:8080/usuarios/${userId}/perfil`, dados);
   }
+
+
 }

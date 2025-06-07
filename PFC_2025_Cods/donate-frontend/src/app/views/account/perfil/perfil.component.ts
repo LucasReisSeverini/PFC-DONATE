@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { PerfilService } from '../../../services/perfil/perfil.service'; // ajuste o caminho conforme seu projeto
+import { PerfilService } from '../../../services/perfil/perfil.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { PerfilDto } from '../../../domain/dto/perfil.dto';
@@ -25,8 +25,8 @@ export class PerfilComponent implements OnInit {
       nome: [''],
       email: [{ value: '', disabled: true }],
       telefone: [''],
-      senha_antiga: [''],
-      nova_senha: ['']
+      senhaAntiga: [''],
+      novaSenha: ['']
     });
   }
 
@@ -53,18 +53,26 @@ export class PerfilComponent implements OnInit {
     if (this.perfilForm.valid) {
       const dados: PerfilDto = this.perfilForm.getRawValue();
 
-      if (dados.nova_senha && !dados.senha_antiga) {
-        alert('Por favor, forneça sua senha antiga para alterar a senha!');
+      // Verifica se o usuário tentou mudar a senha
+      if (dados.novaSenha && !dados.senhaAntiga) {
+        alert('Por favor, forneça sua senha atual para alterar a senha.');
         return;
       }
 
       this.perfilService.atualizarPerfil(dados).subscribe({
         next: () => {
           alert('Perfil atualizado com sucesso!');
+          // Limpa campos de senha após sucesso
+          this.perfilForm.get('senhaAntiga')?.reset();
+          this.perfilForm.get('novaSenha')?.reset();
         },
         error: (err: any) => {
-          console.error('Erro ao atualizar perfil:', err);
-          alert('Erro ao atualizar perfil!');
+          if (err.status === 403) {
+            alert('Senha atual incorreta. Tente novamente.');
+          } else {
+            console.error('Erro ao atualizar perfil:', err);
+            alert('Erro ao atualizar perfil!');
+          }
         }
       });
     }

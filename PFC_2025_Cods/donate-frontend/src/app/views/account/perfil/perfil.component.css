@@ -16,6 +16,27 @@
   font-weight: bold;
 }
 
+/* Mensagens de erro e sucesso */
+.mensagem {
+  padding: 12px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.erro {
+  background-color: #f8d7da;
+  color: #842029;
+  border: 1px solid #f5c2c7;
+}
+
+.sucesso {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  border: 1px solid #badbcc;
+}
+
 /* Formulário */
 .perfil-form {
   display: flex;

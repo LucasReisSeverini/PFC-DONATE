@@ -18,17 +18,15 @@ export class AgendamentoService {
   }
 
   listarDoUsuario(): Observable<any> {
-    const headers = this.getAuthHeaders();
-    return this.http.get(`${this.apiUrl}/meus-agendamentos`, { headers });
+    return this.http.get(`${this.apiUrl}/meus-agendamentos`);
   }
 
   cancelar(id: number): Observable<any> {
-    const headers = this.getAuthHeaders();
-    return this.http.delete(`${this.apiUrl}/${id}/cancelar`, { headers });
+    return this.http.delete(`${this.apiUrl}/${id}/cancelar`);
   }
 
   reagendar(id: number, novaData: string): Observable<any> {
-    const headers = this.getAuthHeaders();
-    return this.http.put(`${this.apiUrl}/${id}/reagendar`, { novaData }, { headers });
+    return this.http.put(`${this.apiUrl}/${id}/reagendar`, { novaData });
   }
+
 }

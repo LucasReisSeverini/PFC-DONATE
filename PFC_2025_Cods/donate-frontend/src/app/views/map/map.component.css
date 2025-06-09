@@ -1,15 +1,8 @@
-/* map.component.css */
-.map-container {
-  width: 100%;
-  max-width: 400px; /* igual ao tamanho da imagem gerada */
-  margin: auto;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.map-container img {
-  width: 100%;
-  height: auto;
-  display: block;
+#map {
+  width: 100%;        /* largura total do container */
+  max-width: 600px;   /* limite máximo da largura */
+  height: 300px;      /* altura fixa — MUITO importante */
+  margin: 20px auto;  /* centraliza horizontalmente */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }

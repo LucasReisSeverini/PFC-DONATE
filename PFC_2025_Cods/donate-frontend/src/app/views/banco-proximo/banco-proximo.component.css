@@ -115,5 +115,16 @@
   height: 300px;
   margin-top: 1rem;
 }
+.map-wrapper {
+  width: 100%;
+  max-width: 600px;
+  height: 300px;
+  margin: 20px auto;
+  border: 2px solid #e91e63;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
 
 

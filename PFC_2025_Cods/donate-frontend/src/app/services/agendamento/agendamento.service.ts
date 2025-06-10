@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AgendamentoService {
-  private apiUrl = 'http://localhost:3000/meus-agendamentos';
+  private baseUrl = 'http://localhost:8080/doacoes';
 
   constructor(private http: HttpClient) {}
 
@@ -18,15 +18,21 @@ export class AgendamentoService {
   }
 
   listarDoUsuario(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/meus-agendamentos`);
+    const idUsuario = localStorage.getItem('id');
+    return this.http.get(`${this.baseUrl}/usuario/${idUsuario}`, {
+      headers: this.getAuthHeaders()
+    });
   }
 
   cancelar(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}/cancelar`);
+    return this.http.delete(`${this.baseUrl}/${id}`, {
+      headers: this.getAuthHeaders()
+    });
   }
 
   reagendar(id: number, novaData: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}/reagendar`, { novaData });
+    return this.http.put(`${this.baseUrl}/${id}/reagendar`, `"${novaData}"`, {
+      headers: this.getAuthHeaders()
+    });
   }
-
 }

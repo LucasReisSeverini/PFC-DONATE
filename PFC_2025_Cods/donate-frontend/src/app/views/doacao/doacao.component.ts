@@ -72,6 +72,12 @@ export class DoacaoComponent implements OnInit {
       return;
     }
 
+    const userId = localStorage.getItem('id');
+    if (!userId) {
+      alert('Usuário não autenticado.');
+      return;
+    }
+
     const formValue = this.doacaoForm.value;
 
     const dados: DoacaoDto = {
@@ -79,9 +85,10 @@ export class DoacaoComponent implements OnInit {
       quantidade_ml: formValue.quantidade_ml,
       data_doacao: this.formatarData(formValue.data_doacao),
       hora_doacao: formValue.hora_doacao,
+      id_usuario: Number(userId), // adiciona o id do usuário aqui
     };
 
-    this.doacaoService.agendarDoacao(dados, token).subscribe({
+    this.doacaoService.agendarDoacao(dados).subscribe({
       next: () => {
         alert('Doação agendada com sucesso!');
         this.doacaoForm.reset();

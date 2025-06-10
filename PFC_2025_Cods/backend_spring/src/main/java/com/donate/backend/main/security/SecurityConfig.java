@@ -30,6 +30,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/cidades/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/cidades/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/doacoes").permitAll()
 //                        .requestMatchers(HttpMethod.GET, "/bancos/**").permitAll()
 //                        .requestMatchers(HttpMethod.GET, "/usuarios/**").permitAll()
 //                                .requestMatchers(HttpMethod.PUT, "/usuarios/**").permitAll()

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ControleAgendamentoService } from '../../services/agendamento/controle-agendamento.service';
@@ -11,13 +10,12 @@ import { AgendamentoDto } from '../../domain/dto/controle-agendamento.dto';
   standalone: true,
   imports: [
     CommonModule,
-    HttpClientModule,
     RouterModule,
     FormsModule
   ],
   templateUrl: './controle-agendamento.component.html',
-  styleUrls: ['./controle-agendamento.component.css'],
-  providers: [ControleAgendamentoService]
+  styleUrls: ['./controle-agendamento.component.css']
+  // ❌ Removido providers para usar a instância global (interceptada)
 })
 export class ControleAgendamentoComponent implements OnInit {
   agendamentos: AgendamentoDto[] = [];

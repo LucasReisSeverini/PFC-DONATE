@@ -6,16 +6,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DoacaoService {
-  private baseUrl = 'http://localhost:3000';
+  private baseUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) {}
 
   getBancosDeLeite(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/bancos-de-leite`);
+    return this.http.get<any[]>(`${this.baseUrl}/bancos/listar`);
   }
 
-  agendarDoacao(dados: any, token: string): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post(`${this.baseUrl}/doacao/doacoes`, dados, { headers });
+  agendarDoacao(dados: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/doacoes`, dados);
   }
 }
+

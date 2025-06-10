@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { AgendamentoService } from '../../services/agendamento/agendamento.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';  // <-- Importar FormsModule
-import { Router } from '@angular/router'; // Importa Router para navegar
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agendamento-usuario',
   standalone: true,
-  imports: [CommonModule, FormsModule],  // <-- Adicionar FormsModule aqui
+  imports: [CommonModule, FormsModule],
   templateUrl: './agendamento-usuario.component.html',
   styleUrls: ['./agendamento-usuario.component.css']
 })
 export class AgendamentoUsuarioComponent implements OnInit {
 
   agendamentos: any[] = [];
-  novaDataReagendamento: { [id: number]: string } = {};  // Armazena datas do input
+  novaDataReagendamento: { [id: number]: string } = {};
 
   constructor(
     private agendamentoService: AgendamentoService,
-    private router: Router  // Injetar Router para navegar
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -29,8 +29,10 @@ export class AgendamentoUsuarioComponent implements OnInit {
     this.agendamentoService.listarDoUsuario().subscribe({
       next: (res: any[]) => {
         this.agendamentos = res.map(a => ({
-          ...a,
-          data_doacao: a.data_doacao ? new Date(a.data_doacao) : null
+          id: a.id,
+          data_doacao: a.dataDoacao ? new Date(a.dataDoacao) : null,
+          nome_banco_leite: a.bancoDeLeite?.nome || 'Não informado',
+          status: a.status
         }));
       },
       error: (err: any) => console.error('Erro ao carregar agendamentos:', err)
@@ -55,7 +57,7 @@ export class AgendamentoUsuarioComponent implements OnInit {
     this.agendamentoService.reagendar(id, novaData).subscribe({
       next: () => {
         this.carregarAgendamentos();
-        this.novaDataReagendamento[id] = ''; // limpa o input
+        this.novaDataReagendamento[id] = '';
       },
       error: (err: any) => console.error('Erro ao reagendar:', err)
     });

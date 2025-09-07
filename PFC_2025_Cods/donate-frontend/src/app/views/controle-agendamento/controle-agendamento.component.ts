@@ -15,7 +15,7 @@ import { AgendamentoDto } from '../../domain/dto/controle-agendamento.dto';
   ],
   templateUrl: './controle-agendamento.component.html',
   styleUrls: ['./controle-agendamento.component.css']
-  // ❌ Removido providers para usar a instância global (interceptada)
+  // Removido providers para usar a instância global (interceptada)
 })
 export class ControleAgendamentoComponent implements OnInit {
   agendamentos: AgendamentoDto[] = [];
@@ -29,10 +29,26 @@ export class ControleAgendamentoComponent implements OnInit {
 
   carregarAgendamentos() {
     this.controleAgendamentoService.listarAgendamentos().subscribe({
-      next: (res: AgendamentoDto[]) => this.agendamentos = res,
+      next: (res: any[]) => {
+        this.agendamentos = res.map(a => ({
+          id: a.id,
+          tipo: 'entrega', // ou 'retirada' se você tiver essa info
+          bancoDeLeite: a.bancoDeLeite?.id || null,
+          data_agendamento: a.dataDoacao || '', // mapeando do JSON
+          horario: '', // se não tiver hora separada
+          status: a.status,
+          quantidade_ml: a.quantidadeMl,
+          nome_doadora: a.usuario?.doadora ? a.usuario.nome : '',
+          nome_receptora: a.usuario?.receptora ? a.usuario.nome : '',
+          observacoes: ''
+        })) as AgendamentoDto[];
+      },
       error: (err: any) => console.error('Erro ao carregar agendamentos', err)
     });
   }
+
+
+
 
   aceitar(id: number) {
     this.controleAgendamentoService.aceitarAgendamento(id).subscribe(() => this.carregarAgendamentos());

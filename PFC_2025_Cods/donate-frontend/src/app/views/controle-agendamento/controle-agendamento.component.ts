@@ -37,7 +37,7 @@ export class ControleAgendamentoComponent implements OnInit {
         this.agendamentos = res.map(a => ({
           id: a.id,
           tipo: 'entrega',
-          bancoDeLeite: a.bancoDeLeite?.nome || '', // garante string
+          bancoDeLeite: a.bancoDeLeite?.nome || '',
           data_agendamento: a.dataDoacao || '',
           horario: '',
           status: a.status || '',
@@ -53,7 +53,7 @@ export class ControleAgendamentoComponent implements OnInit {
   agendamentosFiltrados(): AgendamentoDto[] {
     return this.agendamentos
       .filter(a => {
-        const bancoNome = String(a.bancoDeLeite || '').toLowerCase(); // força ser string
+        const bancoNome = String(a.bancoDeLeite || '').toLowerCase();
         const nomeDoadora = (a.nome_doadora || '').toLowerCase();
         const status = (a.status || '').toLowerCase();
 
@@ -68,8 +68,6 @@ export class ControleAgendamentoComponent implements OnInit {
       });
   }
 
-
-  // Formatar data para padrão DD/MM/YYYY HH:mm
   formatarData(data: string): string {
     if (!data) return '';
     const d = new Date(data);
@@ -82,23 +80,42 @@ export class ControleAgendamentoComponent implements OnInit {
   }
 
   aceitar(id: number) {
-    this.controleAgendamentoService.aceitarAgendamento(id)
-      .subscribe(() => this.carregarAgendamentos());
+    this.controleAgendamentoService.aceitarAgendamento(id).subscribe({
+      next: () => {
+        const ag = this.agendamentos.find(a => a.id === id);
+        if (ag) ag.status = 'Aceito';
+      },
+      error: (err) => console.error('Erro ao aceitar agendamento', err)
+    });
   }
 
   recusar(id: number) {
-    this.controleAgendamentoService.recusarAgendamento(id)
-      .subscribe(() => this.carregarAgendamentos());
+    this.controleAgendamentoService.recusarAgendamento(id).subscribe({
+      next: () => {
+        const ag = this.agendamentos.find(a => a.id === id);
+        if (ag) ag.status = 'Recusado';
+      },
+      error: (err) => console.error('Erro ao recusar agendamento', err)
+    });
   }
 
   reagendar(id: number) {
     const novaData = this.novaDataReagendamento[id];
-    if (!novaData) return;
+    if (!novaData) {
+      alert('Selecione uma nova data/hora antes de reagendar.');
+      return;
+    }
 
-    this.controleAgendamentoService.reagendarAgendamento(id, novaData)
-      .subscribe(() => {
-        this.carregarAgendamentos();
+    this.controleAgendamentoService.reagendarAgendamento(id, novaData).subscribe({
+      next: () => {
+        const ag = this.agendamentos.find(a => a.id === id);
+        if (ag) {
+          ag.data_agendamento = novaData;
+          ag.status = 'Reagendamento Solicitado';
+        }
         this.novaDataReagendamento[id] = '';
-      });
+      },
+      error: (err) => console.error('Erro ao reagendar agendamento', err)
+    });
   }
 }

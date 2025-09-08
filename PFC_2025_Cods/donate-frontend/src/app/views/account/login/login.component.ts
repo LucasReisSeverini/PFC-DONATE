@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { NgZone } from '@angular/core';
 import { LoginDto } from '../../../domain/dto/login.dto';
 
-
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -38,7 +37,19 @@ export class LoginComponent implements OnInit {
       this.authService.login(loginData.email, loginData.senha).subscribe({
         next: (res: any) => {
           if (res.token) {
+            // Salva o token
             localStorage.setItem('token', res.token);
+
+            // Decodifica o JWT para pegar a role
+            try {
+              const payload = JSON.parse(atob(res.token.split('.')[1]));
+              if (payload.role) {
+                localStorage.setItem('role', payload.role); // Salva a role
+              }
+            } catch (err) {
+              console.error('Erro ao decodificar token:', err);
+            }
+
             alert('Login realizado com sucesso!');
 
             this.ngZone.run(() => {

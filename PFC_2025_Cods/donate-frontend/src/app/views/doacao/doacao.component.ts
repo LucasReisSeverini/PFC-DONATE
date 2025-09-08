@@ -7,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { DoacaoService } from '../../services/agendamento/doacao.service';
+import { BancoService } from '../../services/banco/banco.service';
 import { DoacaoDto } from '../../domain/dto/doacao.dto';
 
 @Component({
@@ -27,6 +28,7 @@ export class DoacaoComponent implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private doacaoService = inject(DoacaoService);
+  private bancoService = inject(BancoService); // ✅ injetado
 
   doacaoForm!: FormGroup;
   bancosDeLeite: any[] = [];
@@ -45,17 +47,52 @@ export class DoacaoComponent implements OnInit {
       quantidade_ml: [null, [Validators.required, Validators.min(1)]],
       data_doacao: [null, Validators.required],
       hora_doacao: ['', Validators.required],
+      status_doacao: ['']
     });
 
     this.carregarBancosDeLeite();
     this.gerarCalendario();
   }
 
+  // ✅ Carrega todos os bancos
   carregarBancosDeLeite(): void {
     this.doacaoService.getBancosDeLeite().subscribe({
       next: (data) => this.bancosDeLeite = data,
       error: (err) => { console.error(err); alert('Erro ao carregar bancos de leite.'); }
     });
+  }
+
+  // ✅ Seleciona banco mais próximo pelo botão
+  usarBancoMaisProximo(): void {
+    if (!navigator.geolocation) {
+      alert('Geolocalização não suportada pelo navegador.');
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude, longitude } = pos.coords;
+
+        this.bancoService.buscarBancoMaisProximo(latitude, longitude).subscribe({
+          next: (banco) => {
+            if (banco) {
+              this.doacaoForm.patchValue({ id_bancos_de_leite: banco.id });
+              alert(`Banco mais próximo selecionado: ${banco.nome}`);
+            } else {
+              alert('Nenhum banco encontrado próximo a você.');
+            }
+          },
+          error: (err) => {
+            console.error(err);
+            alert('Erro ao buscar banco mais próximo.');
+          }
+        });
+      },
+      (err) => {
+        console.error(err);
+        alert('Não foi possível obter sua localização.');
+      }
+    );
   }
 
   gerarCalendario(): void {
@@ -92,7 +129,6 @@ export class DoacaoComponent implements OnInit {
 
   agendarDoacao() {
     if (this.doacaoForm.invalid) {
-      // marca todos os campos como "touched" para exibir mensagens de erro
       this.doacaoForm.markAllAsTouched();
       alert('Preencha todos os campos obrigatórios corretamente.');
       return;

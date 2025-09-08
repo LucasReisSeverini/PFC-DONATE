@@ -5,30 +5,32 @@
     Nenhum agendamento encontrado.
   </div>
 
-  <table *ngIf="agendamentos.length > 0" border="1" cellpadding="10" style="width: 100%; border-collapse: collapse;">
-    <thead>
-    <tr>
-      <th>Data</th>
-      <th>Hora</th>
-      <th>Banco de Leite</th>
-      <th>Status</th>
-      <th>Ações</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let agendamento of agendamentos">
-      <td>{{ agendamento.data_doacao ? (agendamento.data_doacao | date: 'dd/MM/yyyy') : '-' }}</td>
-      <td>{{ agendamento.data_doacao ? (agendamento.data_doacao | date: 'HH:mm') : '-' }}</td>
-      <td>{{ agendamento.nome_banco_leite }}</td>
-      <td>{{ agendamento.status }}</td>
-      <td>
-        <button class="cancelar-btn" (click)="cancelarAgendamento(agendamento.id)">Cancelar</button>
-        <input type="datetime-local" [(ngModel)]="novaDataReagendamento[agendamento.id]" style="margin-left: 8px;"/>
-        <button class="reagendar-btn" (click)="reagendarComInput(agendamento.id)">Reagendar</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <div *ngIf="agendamentos.length > 0" class="tabela-wrapper">
+    <table>
+      <thead>
+      <tr>
+        <th>Data</th>
+        <th>Hora</th>
+        <th>Banco de Leite</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let agendamento of agendamentos">
+        <td data-label="Data">{{ agendamento.data_doacao ? (agendamento.data_doacao | date: 'dd/MM/yyyy') : '-' }}</td>
+        <td data-label="Hora">{{ agendamento.data_doacao ? (agendamento.data_doacao | date: 'HH:mm') : '-' }}</td>
+        <td data-label="Banco de Leite">{{ agendamento.nome_banco_leite }}</td>
+        <td data-label="Status">{{ agendamento.status }}</td>
+        <td data-label="Ações" class="acoes-cell">
+          <button class="cancelar-btn" (click)="cancelarAgendamento(agendamento.id)">Cancelar</button>
+          <input type="datetime-local" [(ngModel)]="novaDataReagendamento[agendamento.id]" />
+          <button class="reagendar-btn" (click)="reagendarComInput(agendamento.id)">Reagendar</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
   <button class="botao-voltar" (click)="voltar()">Voltar</button>
 </div>

@@ -5,12 +5,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { DoacaoService } from '../../services/agendamento/doacao.service';
-
-// Importando o DTO
 import { DoacaoDto } from '../../domain/dto/doacao.dto';
 
 @Component({
@@ -22,9 +18,7 @@ import { DoacaoDto } from '../../domain/dto/doacao.dto';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
+    MatButtonModule
   ],
   templateUrl: './doacao.component.html',
   styleUrls: ['./doacao.component.css'],
@@ -37,6 +31,14 @@ export class DoacaoComponent implements OnInit {
   doacaoForm!: FormGroup;
   bancosDeLeite: any[] = [];
 
+  mostrarCalendario = false;
+  dataSelecionada = '';
+  mesAtual = new Date().getMonth();
+  anoAtual = new Date().getFullYear();
+  diasDoMes: number[] = [];
+  diasDaSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+  meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
   ngOnInit() {
     this.doacaoForm = this.fb.group({
       id_bancos_de_leite: [null, Validators.required],
@@ -46,68 +48,89 @@ export class DoacaoComponent implements OnInit {
     });
 
     this.carregarBancosDeLeite();
+    this.gerarCalendario();
   }
 
   carregarBancosDeLeite(): void {
     this.doacaoService.getBancosDeLeite().subscribe({
-      next: (data) => {
-        this.bancosDeLeite = data;
-      },
-      error: (err) => {
-        console.error('Erro ao buscar bancos de leite:', err);
-        alert('Erro ao carregar bancos de leite.');
-      },
+      next: (data) => this.bancosDeLeite = data,
+      error: (err) => { console.error(err); alert('Erro ao carregar bancos de leite.'); }
     });
   }
 
+  gerarCalendario(): void {
+    const ultimoDia = new Date(this.anoAtual, this.mesAtual + 1, 0).getDate();
+    this.diasDoMes = [];
+    for (let i = 1; i <= ultimoDia; i++) this.diasDoMes.push(i);
+  }
+
+  selecionarData(dia: number): void {
+    this.dataSelecionada = this.formatarDataExibicao(dia, this.mesAtual, this.anoAtual);
+    this.doacaoForm.patchValue({ data_doacao: this.dataSelecionada });
+    this.mostrarCalendario = false;
+  }
+
+  formatarDataExibicao(dia: number, mes: number, ano: number): string {
+    const d = String(dia).padStart(2,'0');
+    const m = String(mes + 1).padStart(2,'0');
+    return `${d}/${m}/${ano}`;
+  }
+
+  mesAnterior(): void {
+    this.mesAtual--;
+    if (this.mesAtual < 0) { this.mesAtual = 11; this.anoAtual--; }
+    this.gerarCalendario();
+  }
+
+  mesSeguinte(): void {
+    this.mesAtual++;
+    if (this.mesAtual > 11) { this.mesAtual = 0; this.anoAtual++; }
+    this.gerarCalendario();
+  }
+
+  toggleCalendario(): void { this.mostrarCalendario = !this.mostrarCalendario; }
+
   agendarDoacao() {
     if (this.doacaoForm.invalid) {
-      alert('Preencha todos os campos corretamente.');
+      // marca todos os campos como "touched" para exibir mensagens de erro
+      this.doacaoForm.markAllAsTouched();
+      alert('Preencha todos os campos obrigatórios corretamente.');
       return;
     }
 
     const token = localStorage.getItem('token');
-    if (!token) {
-      alert('Você precisa estar logado para agendar uma doação.');
-      return;
-    }
-
     const userId = localStorage.getItem('id');
-    if (!userId) {
-      alert('Usuário não autenticado.');
+    if (!token || !userId) {
+      alert('Usuário não autenticado ou token inválido.');
       return;
     }
 
-    const formValue = this.doacaoForm.value;
-
+    const f = this.doacaoForm.value;
     const dados: DoacaoDto = {
-      id_bancos_de_leite: formValue.id_bancos_de_leite,
-      quantidade_ml: formValue.quantidade_ml,
-      data_doacao: this.formatarData(formValue.data_doacao),
-      hora_doacao: formValue.hora_doacao,
-      id_usuario: Number(userId), // adiciona o id do usuário aqui
+      id_bancos_de_leite: f.id_bancos_de_leite,
+      quantidade_ml: f.quantidade_ml,
+      data_doacao: this.formatarDataISO(f.data_doacao),
+      hora_doacao: f.hora_doacao,
+      id_usuario: Number(userId)
     };
 
     this.doacaoService.agendarDoacao(dados).subscribe({
       next: () => {
         alert('Doação agendada com sucesso!');
         this.doacaoForm.reset();
+        this.dataSelecionada = '';
       },
       error: (err) => {
-        console.error('Erro ao agendar doação:', err);
+        console.error(err);
         alert('Erro ao agendar doação.');
-      },
+      }
     });
   }
 
-  private formatarData(data: Date): string {
-    const ano = data.getFullYear();
-    const mes = String(data.getMonth() + 1).padStart(2, '0');
-    const dia = String(data.getDate()).padStart(2, '0');
+  private formatarDataISO(data: string): string {
+    const [dia, mes, ano] = data.split('/');
     return `${ano}-${mes}-${dia}`;
   }
 
-  voltarParaPainel(): void {
-    this.router.navigate(['/painel']);
-  }
+  voltarParaPainel(): void { this.router.navigate(['/painel']); }
 }

@@ -21,7 +21,14 @@ export const routes: Routes = [
   { path: 'banco-proximo', component: BancoProximoComponent, canActivate: [AuthGuard] },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
   { path: 'doacao', component: DoacaoComponent, canActivate: [AuthGuard] },
-  { path: 'controle-agendamento', component: ControleAgendamentoComponent, canActivate: [AuthGuard] },
+  {
+    path: 'controle-agendamento',
+    component: ControleAgendamentoComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['PROFISSIONAL'] }
+  },
+
+
   { path: 'meus-agendamentos', component: AgendamentoUsuarioComponent, canActivate: [AuthGuard] }
 
 

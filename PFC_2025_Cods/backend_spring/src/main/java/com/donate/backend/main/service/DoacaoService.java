@@ -35,6 +35,10 @@ public class DoacaoService {
     public void excluir(Long id) {
         doacaoRepository.deleteById(id);
     }
+    public boolean existeAgendamento(Long idBanco, LocalDateTime dataHora) {
+        return doacaoRepository.existsByBancoDeLeiteIdAndDataDoacao(idBanco, dataHora);
+    }
+
 
     public void atualizarStatus(Long id, String novoStatus) {
         Optional<DoacaoModel> optional = doacaoRepository.findById(id);

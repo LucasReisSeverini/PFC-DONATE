@@ -8,6 +8,7 @@ import com.donate.backend.main.repository.BancoLeiteRepository;
 import com.donate.backend.main.repository.UsuarioRepository;
 import com.donate.backend.main.service.DoacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -53,14 +54,22 @@ public class DoacaoController {
 
     // POST: Criar nova doação
     @PostMapping
-    public ResponseEntity<DoacaoModel> criar(@RequestBody DoacaoDto dto) {
-        DoacaoModel doacao = new DoacaoModel();
-
-        // Monta LocalDateTime juntando data e hora (ex: "2025-06-10T14:30")
+    public ResponseEntity<?> criar(@RequestBody DoacaoDto dto) {
+        // Monta LocalDateTime juntando data e hora
         String dataHoraStr = dto.getData_doacao() + "T" + dto.getHora_doacao();
         LocalDateTime dataHora = LocalDateTime.parse(dataHoraStr);
-        doacao.setDataDoacao(dataHora);
 
+        // Verificação: já existe algum agendamento para o mesmo banco e horário?
+        boolean existe = doacaoService.existeAgendamento(dto.getId_bancos_de_leite(), dataHora);
+        if (existe) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body("Já existe um agendamento para essa data e horário nesse banco de leite.");
+        }
+
+        // Continua criação normalmente
+        DoacaoModel doacao = new DoacaoModel();
+        doacao.setDataDoacao(dataHora);
         doacao.setQuantidadeMl(dto.getQuantidade_ml());
         doacao.setStatus("pendente");
 
@@ -75,6 +84,7 @@ public class DoacaoController {
         DoacaoModel salva = doacaoService.salvar(doacao);
         return ResponseEntity.ok(salva);
     }
+
 
     // PUT: Atualizar status da doação
     @PutMapping("/{id}/status")

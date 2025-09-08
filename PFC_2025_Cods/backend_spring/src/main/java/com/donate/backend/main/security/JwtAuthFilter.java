@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -60,26 +62,18 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = usuarioService.loadUserByUsername(username);
             if (jwtService.tokenValido(token, userDetails.getUsername())) {
+
+                // Extrai a role diretamente do token e transforma em GrantedAuthority
+                String role = jwtService.extrairRole(token);
+                List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_" + role));
+
                 UsernamePasswordAuthenticationToken authToken =
-                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                        new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
 
                 SecurityContextHolder.getContext().setAuthentication(authToken);
-                System.out.println("Usuário autenticado: " + username);
+                System.out.println("Usuário autenticado com role: " + role);
             } else {
                 System.out.println("Token inválido para o usuário: " + username);
-            }
-        } else {
-            System.out.println("Usuário já autenticado ou username nulo.");
-        }
-
-
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = usuarioService.loadUserByUsername(username);
-            if (jwtService.tokenValido(token, userDetails.getUsername())) {
-                UsernamePasswordAuthenticationToken authToken =
-                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-
-                SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
 

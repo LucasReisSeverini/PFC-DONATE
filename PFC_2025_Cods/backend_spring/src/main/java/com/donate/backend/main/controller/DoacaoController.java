@@ -9,6 +9,7 @@ import com.donate.backend.main.repository.UsuarioRepository;
 import com.donate.backend.main.service.DoacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -95,5 +96,22 @@ public class DoacaoController {
         doacaoService.excluir(id);
         return ResponseEntity.noContent().build();
     }
+
+    // POST: Aceitar agendamento
+    @PostMapping("/{id}/aceitar")
+    @PreAuthorize("hasRole('PROFISSIONAL')")
+    public ResponseEntity<Void> aceitar(@PathVariable Long id) {
+        doacaoService.atualizarStatus(id, "Aceito");
+        return ResponseEntity.ok().build();
+    }
+
+    // POST: Recusar agendamento
+    @PostMapping("/{id}/recusar")
+    @PreAuthorize("hasRole('PROFISSIONAL')")
+    public ResponseEntity<Void> recusar(@PathVariable Long id) {
+        doacaoService.atualizarStatus(id, "Recusado");
+        return ResponseEntity.ok().build();
+    }
+
 
 }

@@ -50,7 +50,7 @@ public class DoacaoService {
         if (optional.isPresent()) {
             DoacaoModel doacao = optional.get();
             doacao.setDataDoacao(novaDataHora);
-            doacao.setStatus("reagendado");
+            doacao.setStatus("Reagendamento Solicitado");
             doacaoRepository.save(doacao);
         }
     }

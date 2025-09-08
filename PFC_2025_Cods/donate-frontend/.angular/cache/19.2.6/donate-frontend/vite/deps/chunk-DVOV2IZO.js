@@ -12,7 +12,7 @@ import {
   coerceElement,
   coerceNumberProperty,
   normalizePassiveListenerOptions
-} from "./chunk-U6PL43HK.js";
+} from "./chunk-LXBQZ4I5.js";
 import {
   DOCUMENT
 } from "./chunk-UVLKBSCR.js";
@@ -101,7 +101,6 @@ import {
 } from "./chunk-3OV72XIM.js";
 
 // node_modules/@angular/cdk/fesm2022/keycodes.mjs
-var BACKSPACE = 8;
 var TAB = 9;
 var ENTER = 13;
 var SHIFT = 16;
@@ -5291,15 +5290,10 @@ var _MatInternalFormField = class __MatInternalFormField {
 })();
 
 export {
-  BACKSPACE,
   TAB,
   ENTER,
   ESCAPE,
   SPACE,
-  PAGE_UP,
-  PAGE_DOWN,
-  END,
-  HOME,
   LEFT_ARROW,
   UP_ARROW,
   RIGHT_ARROW,
@@ -5313,11 +5307,8 @@ export {
   removeAriaReferencedId,
   ActiveDescendantKeyManager,
   FocusKeyManager,
-  CdkTrapFocus,
   LiveAnnouncer,
   FocusMonitor,
-  CdkMonitorFocus,
-  A11yModule,
   VERSION2 as VERSION,
   AnimationCurves,
   AnimationDurations,
@@ -5364,4 +5355,4 @@ export {
   MatRippleLoader,
   _MatInternalFormField
 };
-//# sourceMappingURL=chunk-7IQPUREW.js.map
+//# sourceMappingURL=chunk-DVOV2IZO.js.map

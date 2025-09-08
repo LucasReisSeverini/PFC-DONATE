@@ -4,7 +4,7 @@
   <!-- Filtros -->
   <div class="filtros" style="margin-bottom: 16px; display: flex; gap: 12px; flex-wrap: wrap;">
     <input type="text" placeholder="Filtrar por Doadora" [(ngModel)]="filtroDoadora" />
-    <input type="text" placeholder="Filtrar por Receptora" [(ngModel)]="filtroReceptora" />
+    <input type="text" placeholder="Filtrar por Banco de Leite" [(ngModel)]="filtroBanco" />
     <select [(ngModel)]="filtroStatus">
       <option value="">Todos os Status</option>
       <option value="Pendente">Pendente</option>
@@ -25,18 +25,18 @@
       <th>Status</th>
       <th>ML</th>
       <th>Doadora</th>
-      <th>Receptora</th>
+      <th>Banco de Leite</th>
       <th>Ações</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let agendamento of agendamentosFiltrados()">
       <td data-label="ID">{{ agendamento.id }}</td>
-      <td data-label="Data">{{ agendamento.data_agendamento | date: 'short' }}</td>
+      <td data-label="Data">{{ formatarData(agendamento.data_agendamento) }}</td>
       <td data-label="Status">{{ agendamento.status }}</td>
       <td data-label="ML">{{ agendamento.quantidade_ml }} ml</td>
       <td data-label="Doadora">{{ agendamento.nome_doadora }}</td>
-      <td data-label="Receptora">{{ agendamento.nome_receptora }}</td>
+      <td data-label="Banco de Leite">{{ agendamento.bancoDeLeite }}</td>
       <td data-label="Ações">
         <button (click)="aceitar(agendamento.id)">Aceitar</button>
         <button (click)="recusar(agendamento.id)">Recusar</button>

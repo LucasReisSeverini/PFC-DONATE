@@ -19,7 +19,7 @@ export class ControleAgendamentoComponent implements OnInit {
 
   // filtros
   filtroDoadora: string = '';
-  filtroReceptora: string = '';
+  filtroBanco: string = ''; // filtro banco de leite
   filtroStatus: string = '';
 
   // ordenação por data
@@ -37,13 +37,12 @@ export class ControleAgendamentoComponent implements OnInit {
         this.agendamentos = res.map(a => ({
           id: a.id,
           tipo: 'entrega',
-          bancoDeLeite: a.bancoDeLeite?.id || null,
+          bancoDeLeite: a.bancoDeLeite?.nome || '', // garante string
           data_agendamento: a.dataDoacao || '',
           horario: '',
           status: a.status || '',
           quantidade_ml: a.quantidadeMl,
           nome_doadora: a.usuario?.doadora ? a.usuario.nome : '',
-          nome_receptora: a.usuario?.receptora ? a.usuario.nome : '',
           observacoes: ''
         })) as AgendamentoDto[];
       },
@@ -52,21 +51,34 @@ export class ControleAgendamentoComponent implements OnInit {
   }
 
   agendamentosFiltrados(): AgendamentoDto[] {
-    // Aplicar filtros
-    let filtrados = this.agendamentos.filter(a =>
-      (!this.filtroDoadora || a.nome_doadora.toLowerCase().includes(this.filtroDoadora.toLowerCase())) &&
-      (!this.filtroReceptora || a.nome_receptora.toLowerCase().includes(this.filtroReceptora.toLowerCase())) &&
-      (!this.filtroStatus || a.status.toLowerCase() === this.filtroStatus.toLowerCase())
-    );
+    return this.agendamentos
+      .filter(a => {
+        const bancoNome = String(a.bancoDeLeite || '').toLowerCase(); // força ser string
+        const nomeDoadora = (a.nome_doadora || '').toLowerCase();
+        const status = (a.status || '').toLowerCase();
 
-    // Ordenar por data, protegendo contra datas inválidas
-    filtrados.sort((a, b) => {
-      const dataA = new Date(a.data_agendamento).getTime() || 0;
-      const dataB = new Date(b.data_agendamento).getTime() || 0;
-      return this.ordenarData === 'recentes' ? dataB - dataA : dataA - dataB;
-    });
+        return (!this.filtroDoadora || nomeDoadora.includes(this.filtroDoadora.toLowerCase())) &&
+               (!this.filtroBanco || bancoNome.includes(this.filtroBanco.toLowerCase())) &&
+               (!this.filtroStatus || status === this.filtroStatus.toLowerCase());
+      })
+      .sort((a, b) => {
+        const dataA = new Date(a.data_agendamento).getTime() || 0;
+        const dataB = new Date(b.data_agendamento).getTime() || 0;
+        return this.ordenarData === 'recentes' ? dataB - dataA : dataA - dataB;
+      });
+  }
 
-    return filtrados;
+
+  // Formatar data para padrão DD/MM/YYYY HH:mm
+  formatarData(data: string): string {
+    if (!data) return '';
+    const d = new Date(data);
+    const dia = String(d.getDate()).padStart(2, '0');
+    const mes = String(d.getMonth() + 1).padStart(2, '0');
+    const ano = d.getFullYear();
+    const horas = String(d.getHours()).padStart(2, '0');
+    const minutos = String(d.getMinutes()).padStart(2, '0');
+    return `${dia}/${mes}/${ano} ${horas}:${minutos}`;
   }
 
   aceitar(id: number) {

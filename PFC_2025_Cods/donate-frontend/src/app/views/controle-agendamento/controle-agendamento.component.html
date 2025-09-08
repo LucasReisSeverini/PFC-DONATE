@@ -2,7 +2,7 @@
   <h2>Controle de Agendamentos</h2>
 
   <!-- Filtros -->
-  <div class="filtros" style="margin-bottom: 16px; display: flex; gap: 12px; flex-wrap: wrap;">
+  <div class="filtros">
     <input type="text" placeholder="Filtrar por Doadora" [(ngModel)]="filtroDoadora" />
     <input type="text" placeholder="Filtrar por Banco de Leite" [(ngModel)]="filtroBanco" />
     <select [(ngModel)]="filtroStatus">
@@ -10,7 +10,7 @@
       <option value="Pendente">Pendente</option>
       <option value="Aceito">Aceito</option>
       <option value="Recusado">Recusado</option>
-      <option value="Reagendamento Solicitado">Reagendamento Solicitado</option> <!-- NOVO -->
+      <option value="Reagendamento Solicitado">Reagendamento Solicitado</option>
     </select>
     <select [(ngModel)]="ordenarData">
       <option value="recentes">Data: Mais recentes</option>
@@ -18,7 +18,8 @@
     </select>
   </div>
 
-  <table border="1" cellpadding="10">
+  <!-- Tabela de Agendamentos -->
+  <table>
     <thead>
     <tr>
       <th>ID</th>
@@ -38,13 +39,22 @@
       <td data-label="ML">{{ agendamento.quantidade_ml }} ml</td>
       <td data-label="Doadora">{{ agendamento.nome_doadora }}</td>
       <td data-label="Banco de Leite">{{ agendamento.bancoDeLeite }}</td>
-      <td data-label="Ações">
-        <button (click)="aceitar(agendamento.id)">Aceitar</button>
-        <button (click)="recusar(agendamento.id)">Recusar</button>
-        <input type="datetime-local" [(ngModel)]="novaDataReagendamento[agendamento.id]" />
-        <button (click)="reagendar(agendamento.id)">Reagendar</button>
+      <td data-label="Ações" class="acoes-container">
+        <div class="acoes-botoes">
+          <button class="btn-aceitar" (click)="aceitar(agendamento.id)">Aceitar</button>
+          <button class="btn-recusar" (click)="recusar(agendamento.id)">Recusar</button>
+        </div>
+        <div class="reagendamento">
+          <input type="datetime-local" [(ngModel)]="novaDataReagendamento[agendamento.id]" />
+          <button class="btn-reagendar" (click)="reagendar(agendamento.id)">Reagendar</button>
+        </div>
       </td>
     </tr>
     </tbody>
   </table>
+
+  <!-- Botão Voltar no final -->
+  <div style="margin-top: 20px;">
+    <button class="btn-voltar" (click)="voltarHome()">← Voltar</button>
+  </div>
 </div>

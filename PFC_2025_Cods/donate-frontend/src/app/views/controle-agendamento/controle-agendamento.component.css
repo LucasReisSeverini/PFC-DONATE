@@ -8,9 +8,34 @@
   color: #333;
 }
 
+/* Top bar: botão voltar + título */
+.agendamentos-container .top-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+.agendamentos-container .voltar-home {
+  padding: 8px 16px;
+  background-color: #ffca28;
+  color: #3e2723;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.agendamentos-container .voltar-home:hover {
+  background-color: #ffc107;
+  transform: translateY(-2px);
+}
+
+/* Título */
 .agendamentos-container h2 {
   color: #d81b60;
-  margin-bottom: 20px;
+  margin: 0;
   border-bottom: 2px solid #f8bbd0;
   padding-bottom: 10px;
 }
@@ -40,7 +65,7 @@
   box-shadow: 0 0 4px rgba(216, 27, 96, 0.3);
 }
 
-/* Tabela sem linhas, mantendo cores e cards */
+/* Tabela */
 .agendamentos-container table {
   width: 100%;
   border-collapse: collapse;
@@ -65,11 +90,10 @@
 
 .agendamentos-container tbody tr:nth-child(even) {
   background-color: #fdeef4;
-  border-radius: 8px;
 }
 
-/* Botões com cores mantidas */
-.agendamentos-container button {
+/* Botões dentro da tabela */
+.agendamentos-container .acao-btn {
   margin-right: 6px;
   padding: 6px 12px;
   font-size: 14px;
@@ -79,23 +103,23 @@
   transition: background 0.3s, opacity 0.3s;
 }
 
-.agendamentos-container button:hover {
-  opacity: 0.9;
-}
-
-.agendamentos-container button:nth-child(1) {
+.agendamentos-container .acao-btn.aceitar {
   background-color: #c8e6c9; /* verde claro */
   color: #2e7d32;
 }
 
-.agendamentos-container button:nth-child(2) {
+.agendamentos-container .acao-btn.recusar {
   background-color: #ffcdd2; /* vermelho claro */
   color: #c62828;
 }
 
-.agendamentos-container button:nth-child(4) {
+.agendamentos-container .acao-btn.reagendar {
   background-color: #bbdefb; /* azul claro */
   color: #1565c0;
+}
+
+.agendamentos-container .acao-btn:hover {
+  opacity: 0.9;
 }
 
 .agendamentos-container input[type="datetime-local"] {
@@ -105,9 +129,10 @@
   border: 1px solid #ccc;
   border-radius: 6px;
   background-color: #fff;
+  width: 100%;
 }
 
-/* RESPONSIVO PARA CELULAR - CARDS */
+/* RESPONSIVO PARA CELULAR */
 @media screen and (max-width: 768px) {
   .agendamentos-container .filtros {
     flex-direction: column;
@@ -159,7 +184,7 @@
     gap: 8px;
   }
 
-  .agendamentos-container button,
+  .agendamentos-container .acao-btn,
   .agendamentos-container input[type="datetime-local"] {
     width: 100%;
   }

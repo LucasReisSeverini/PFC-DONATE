@@ -2,7 +2,7 @@
   <h2>Meus Agendamentos</h2>
 
   <!-- Filtros -->
-  <div class="filtros" style="margin-bottom: 16px; display: flex; gap: 12px; flex-wrap: wrap;">
+  <div class="filtros">
     <input type="text" placeholder="Filtrar por Banco de Leite" [(ngModel)]="filtroBanco" />
     <select [(ngModel)]="filtroStatus">
       <option value="">Todos os Status</option>
@@ -17,7 +17,8 @@
     </select>
   </div>
 
-  <table border="1" cellpadding="10">
+  <!-- Tabela/Lista de Agendamentos -->
+  <table>
     <thead>
     <tr>
       <th>ID</th>
@@ -37,16 +38,21 @@
       <td data-label="ML">{{ agendamento.quantidade_ml }} ml</td>
       <td data-label="Doadora">{{ agendamento.nome_doadora }}</td>
       <td data-label="Banco de Leite">{{ agendamento.nome_banco_leite }}</td>
-      <td data-label="Ações">
-        <button (click)="cancelarAgendamento(agendamento.id)">Cancelar</button>
-        <input type="datetime-local" [(ngModel)]="novaDataReagendamento[agendamento.id]" />
-        <button (click)="solicitarReagendamento(agendamento.id)">Solicitar Reagendamento</button>
+      <td data-label="Ações" class="acoes-container">
+        <div class="acoes-botoes">
+          <button class="cancelar-btn" (click)="cancelarAgendamento(agendamento.id)">Cancelar</button>
+        </div>
+        <div class="reagendamento">
+          <input type="datetime-local" [(ngModel)]="novaDataReagendamento[agendamento.id]" />
+          <button class="reagendar-btn" (click)="solicitarReagendamento(agendamento.id)">Solicitar Reagendamento</button>
+        </div>
       </td>
     </tr>
     </tbody>
   </table>
 
-  <div style="margin-top: 20px;">
-    <button (click)="voltar()">Voltar</button>
+  <!-- Botão Voltar -->
+  <div>
+    <button class="botao-voltar" (click)="voltar()">Voltar</button>
   </div>
 </div>

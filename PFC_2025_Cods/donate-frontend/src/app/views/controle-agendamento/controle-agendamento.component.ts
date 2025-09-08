@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { ControleAgendamentoService } from '../../services/agendamento/controle-agendamento.service';
 import { AgendamentoDto } from '../../domain/dto/controle-agendamento.dto';
@@ -19,16 +19,24 @@ export class ControleAgendamentoComponent implements OnInit {
 
   // filtros
   filtroDoadora: string = '';
-  filtroBanco: string = ''; // filtro banco de leite
+  filtroBanco: string = '';
   filtroStatus: string = '';
 
   // ordenação por data
   ordenarData: 'recentes' | 'antigas' = 'recentes';
 
-  constructor(private controleAgendamentoService: ControleAgendamentoService) {}
+  constructor(
+    private controleAgendamentoService: ControleAgendamentoService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.carregarAgendamentos();
+  }
+
+  // Navegar de volta ao Painel
+  voltarHome() {
+    this.router.navigate(['/painel']); // Rota ajustada
   }
 
   carregarAgendamentos() {

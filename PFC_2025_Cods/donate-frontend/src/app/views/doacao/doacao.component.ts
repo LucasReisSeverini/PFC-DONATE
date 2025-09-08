@@ -37,8 +37,8 @@ export class DoacaoComponent implements OnInit {
   dataSelecionada = '';
   mesAtual = new Date().getMonth();
   anoAtual = new Date().getFullYear();
-  diasDoMes: number[] = [];
-  diasDaSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+  diasDoMes: (number | null)[] = [];
+  diasDaSemana = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
   meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 
   ngOnInit() {
@@ -95,11 +95,21 @@ export class DoacaoComponent implements OnInit {
 
   gerarCalendario(): void {
     const ultimoDia = new Date(this.anoAtual, this.mesAtual + 1, 0).getDate();
+    let primeiroDiaSemana = new Date(this.anoAtual, this.mesAtual, 1).getDay(); // 0 = domingo
     this.diasDoMes = [];
-    for (let i = 1; i <= ultimoDia; i++) this.diasDoMes.push(i);
+
+    // Ajusta para que o primeiro dia fique no domingo correto
+    for (let i = 0; i < primeiroDiaSemana; i++) {
+      this.diasDoMes.push(null);
+    }
+
+    for (let i = 1; i <= ultimoDia; i++) {
+      this.diasDoMes.push(i);
+    }
   }
 
   selecionarData(dia: number): void {
+    if (!dia) return;
     this.dataSelecionada = this.formatarDataExibicao(dia, this.mesAtual, this.anoAtual);
     this.doacaoForm.patchValue({ data_doacao: this.dataSelecionada });
     this.mostrarCalendario = false;
@@ -157,7 +167,6 @@ export class DoacaoComponent implements OnInit {
       error: (err) => {
         console.error(err);
 
-        // ⚡ Tratamento de conflito de data/banco (HTTP 409 do backend)
         if (err.status === 409) {
           const mensagem = err.error ? err.error : 'Já existe um agendamento para essa data e horário nesse banco de leite.';
           alert(mensagem);

@@ -2,12 +2,13 @@
   <h1>Agendar Doação</h1>
   <form [formGroup]="doacaoForm" (ngSubmit)="agendarDoacao()">
 
-    <!-- Botão destacado, colado abaixo do campo -->
+    <!-- Botão usar banco mais próximo -->
     <div style="margin-top: 4px; display: flex; align-items: center;">
       <button mat-stroked-button color="accent" type="button" (click)="usarBancoMaisProximo()" style="font-weight: bold;">
         📍 Usar banco de leite mais próximo
       </button>
     </div>
+
     <!-- Banco de leite -->
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Banco de leite</mat-label>
@@ -16,15 +17,10 @@
           {{ banco.nome }}
         </mat-option>
       </mat-select>
-
       <mat-error *ngIf="doacaoForm.get('id_bancos_de_leite')?.hasError('required') && doacaoForm.get('id_bancos_de_leite')?.touched">
         Selecione um banco de leite.
       </mat-error>
     </mat-form-field>
-
-
-
-
 
     <!-- Quantidade -->
     <mat-form-field appearance="fill" class="full-width">
@@ -60,17 +56,21 @@
             <span>{{ meses[mesAtual] }} {{ anoAtual }}</span>
             <button type="button" (click)="mesSeguinte()">→</button>
           </div>
+
           <div class="dias-semana">
             <div *ngFor="let dia of diasDaSemana" class="dia-semana">{{ dia }}</div>
           </div>
+
           <div class="dias-mes">
             <div *ngFor="let dia of diasDoMes"
                  class="dia-mes"
-                 [class.selecionado]="dataSelecionada === formatarDataExibicao(dia, mesAtual, anoAtual)"
-                 (click)="selecionarData(dia)">
-              {{ dia }}
+                 [class.selecionado]="dia && dataSelecionada === formatarDataExibicao(dia, mesAtual, anoAtual)"
+                 (click)="dia ? selecionarData(dia) : null">
+              {{ dia || '' }}
             </div>
           </div>
+
+
         </div>
       </div>
 
@@ -85,7 +85,7 @@
     </div>
 
     <!-- Botão de enviar -->
-    <button type="submit">Agendar</button>
+    <button type="submit" mat-raised-button color="primary">Agendar</button>
   </form>
 
   <!-- Botão de voltar -->

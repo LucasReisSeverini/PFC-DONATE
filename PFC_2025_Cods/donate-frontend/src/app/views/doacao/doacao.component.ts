@@ -28,7 +28,7 @@ export class DoacaoComponent implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private doacaoService = inject(DoacaoService);
-  private bancoService = inject(BancoService); // ✅ injetado
+  private bancoService = inject(BancoService);
 
   doacaoForm!: FormGroup;
   bancosDeLeite: any[] = [];
@@ -54,7 +54,6 @@ export class DoacaoComponent implements OnInit {
     this.gerarCalendario();
   }
 
-  // ✅ Carrega todos os bancos
   carregarBancosDeLeite(): void {
     this.doacaoService.getBancosDeLeite().subscribe({
       next: (data) => this.bancosDeLeite = data,
@@ -62,7 +61,6 @@ export class DoacaoComponent implements OnInit {
     });
   }
 
-  // ✅ Seleciona banco mais próximo pelo botão
   usarBancoMaisProximo(): void {
     if (!navigator.geolocation) {
       alert('Geolocalização não suportada pelo navegador.');
@@ -158,7 +156,14 @@ export class DoacaoComponent implements OnInit {
       },
       error: (err) => {
         console.error(err);
-        alert('Erro ao agendar doação.');
+
+        // ⚡ Tratamento de conflito de data/banco (HTTP 409 do backend)
+        if (err.status === 409) {
+          const mensagem = err.error ? err.error : 'Já existe um agendamento para essa data e horário nesse banco de leite.';
+          alert(mensagem);
+        } else {
+          alert('Erro ao agendar doação.');
+        }
       }
     });
   }

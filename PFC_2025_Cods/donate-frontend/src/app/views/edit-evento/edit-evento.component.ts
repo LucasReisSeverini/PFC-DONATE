@@ -68,6 +68,9 @@ export class EditEventoComponent implements OnInit {
       ...this.eventoForm.value
     };
 
+      // 👉 Console log para ver o que está sendo enviado
+      console.log('Objeto enviado para o backend:', eventoAtualizado);
+
     this.eventosService.atualizarEvento(eventoAtualizado).subscribe({
       next: () => {
         alert('Evento atualizado com sucesso!');

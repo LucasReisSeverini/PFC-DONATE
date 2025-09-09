@@ -22,6 +22,16 @@
       <input type="date" formControlName="data" />
     </div>
 
+    <div>
+      <label>Cidade</label>
+      <select formControlName="idCidade">
+        <option [ngValue]="null" disabled>Selecione uma cidade</option>
+        <option *ngFor="let cidade of cidades" [ngValue]="cidade.id">
+          {{ cidade.nome }}
+        </option>
+      </select>
+    </div>
+
     <button type="submit" [disabled]="eventoForm.invalid">Salvar</button>
   </form>
 </div>

@@ -4,7 +4,20 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 
 import { ControleAgendamentoService } from '../../services/agendamento/controle-agendamento.service';
-import { AgendamentoDto } from '../../domain/dto/controle-agendamento.dto';
+
+// Ajustamos o DTO direto aqui para incluir cidade
+export interface AgendamentoDto {
+  id: number;
+  tipo: string;
+  bancoDeLeite: string;
+  cidade?: string; // <-- ADICIONADO
+  data_agendamento: string;
+  horario: string;
+  status: string;
+  quantidade_ml: number;
+  nome_doadora: string;
+  observacoes: string;
+}
 
 @Component({
   selector: 'app-controle-agendamento',
@@ -46,6 +59,7 @@ export class ControleAgendamentoComponent implements OnInit {
           id: a.id,
           tipo: 'entrega',
           bancoDeLeite: a.bancoDeLeite?.nome || '',
+          cidade: a.bancoDeLeite?.cidade?.nome || '', // <-- PEGANDO A CIDADE
           data_agendamento: a.dataDoacao || '',
           horario: '',
           status: a.status || '',

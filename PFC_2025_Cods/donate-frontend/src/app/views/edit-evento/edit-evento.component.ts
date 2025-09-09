@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { EventosService, Evento } from '../../services/eventos/eventos.service';
+import { CidadeService, Cidade } from '../../services/cidade/cidade.service';
 
 @Component({
   selector: 'app-edit-evento',
@@ -14,27 +15,29 @@ import { EventosService, Evento } from '../../services/eventos/eventos.service';
 export class EditEventoComponent implements OnInit {
   eventoForm!: FormGroup;
   eventoId!: number;
+  cidades: Cidade[] = [];
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private eventosService: EventosService
+    private eventosService: EventosService,
+    private cidadeService: CidadeService
   ) {}
 
   ngOnInit(): void {
-    // Pega o ID da rota e converte para número
     this.eventoId = +this.route.snapshot.params['id'];
 
-    // Inicializa o formulário
     this.eventoForm = this.fb.group({
       titulo: ['', Validators.required],
       descricao: ['', Validators.required],
       data: ['', Validators.required],
-      tipo: ['evento', Validators.required] // tipo do evento/notícia
+      tipo: ['evento', Validators.required],
+      idCidade: [null, Validators.required]  // <-- nova propriedade
     });
 
     this.carregarEvento();
+    this.carregarCidades();
   }
 
   carregarEvento() {
@@ -47,6 +50,13 @@ export class EditEventoComponent implements OnInit {
         alert('Não foi possível carregar o evento.');
         this.router.navigate(['/eventos']);
       }
+    });
+  }
+
+  carregarCidades() {
+    this.cidadeService.getCidades().subscribe({
+      next: (res) => (this.cidades = res),
+      error: (err) => console.error('Erro ao carregar cidades:', err)
     });
   }
 
@@ -69,7 +79,8 @@ export class EditEventoComponent implements OnInit {
       }
     });
   }
-    voltarParaGerenciar() {
-      this.router.navigate(['/gerenciar-eventos']);
-    }
+
+  voltarParaGerenciar() {
+    this.router.navigate(['/gerenciar-eventos']);
+  }
 }

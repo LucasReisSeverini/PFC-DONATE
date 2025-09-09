@@ -28,4 +28,23 @@ public class EventoController {
     public EventoModel adicionarEvento(@RequestBody EventoModel evento) {
         return eventoService.salvar(evento);
     }
+
+    // Editar um evento existente
+    @PutMapping("/{id}")
+    public EventoModel atualizarEvento(@PathVariable Long id, @RequestBody EventoModel evento) {
+        return eventoService.atualizar(id, evento);
+    }
+
+    // Excluir um evento/notícia pelo ID
+    @DeleteMapping("/{id}")
+    public void excluirEvento(@PathVariable Long id) {
+        eventoService.excluir(id);
+    }
+
+    // Buscar evento por ID
+    @GetMapping("/{id}")
+    public EventoModel buscarEventoPorId(@PathVariable Long id) {
+        return eventoService.listarPorId(id);
+    }
+
 }

@@ -22,4 +22,27 @@ public class EventoService {
     public EventoModel salvar(EventoModel evento) {
         return eventoRepository.save(evento);
     }
+
+
+    // Atualizar
+    public EventoModel atualizar(Long id, EventoModel evento) {
+        EventoModel existente = eventoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Evento não encontrado"));
+        existente.setTitulo(evento.getTitulo());
+        existente.setDescricao(evento.getDescricao());
+        existente.setData(evento.getData()); // ou outros campos do seu model
+        return eventoRepository.save(existente);
+    }
+
+    // Excluir
+    public void excluir(Long id) {
+        eventoRepository.deleteById(id);
+    }
+
+    public EventoModel listarPorId(Long id) {
+        return eventoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Evento não encontrado"));
+    }
+
+
 }

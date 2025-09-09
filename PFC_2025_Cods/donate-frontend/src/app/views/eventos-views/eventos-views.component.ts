@@ -9,6 +9,21 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { EventosService, Evento } from '../../services/eventos/eventos.service';
 import { CidadeService, Cidade } from '../../services/cidade/cidade.service';
 import { EventoDetalheComponent } from '../evento-detalhe/evento-detalhe.component';
+import { BancoService } from '../../services/banco/banco.service';
+
+// Interface ajustada conforme o backend
+interface Banco {
+  id: number;
+  nome: string;
+  id_cidade: number;
+  latitude?: number;
+  longitude?: number;
+  endereco?: string;
+  cidade?: string;
+  estado?: string;
+  telefone?: string;
+  distancia?: number;
+}
 
 @Component({
   selector: 'app-eventos-views',
@@ -24,6 +39,7 @@ export class EventosViewsComponent implements OnInit {
   constructor(
     private eventosService: EventosService,
     private cidadeService: CidadeService,
+    private bancoService: BancoService,
     private router: Router,
     private dialog: MatDialog
   ) {}
@@ -32,18 +48,17 @@ export class EventosViewsComponent implements OnInit {
     this.carregarCidades();
   }
 
-  // Primeiro carregamos as cidades
   carregarCidades() {
     this.cidadeService.getCidades().subscribe({
       next: (res) => {
         this.cidades = res;
+        console.log('Cidades carregadas:', this.cidades);
         this.carregarEventos();
       },
       error: (err) => console.error('Erro ao carregar cidades:', err)
     });
   }
 
-  // Depois carregamos os eventos e associamos a cidade pelo id
   carregarEventos() {
     this.eventosService.listarEventos().subscribe({
       next: (res) => {
@@ -51,9 +66,62 @@ export class EventosViewsComponent implements OnInit {
           ...e,
           cidadeNome: this.cidades.find(c => c.id === e.idCidade)?.nome
         }));
+        console.log('Eventos carregados:', this.eventos);
       },
       error: (err) => console.error('Erro ao carregar eventos:', err)
     });
+  }
+
+  eventosProximos(): void {
+    if (!navigator.geolocation) {
+      alert('Geolocalização não suportada pelo navegador.');
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude, longitude } = pos.coords;
+        console.log('Localização atual:', { latitude, longitude });
+
+        this.bancoService.buscarBancoMaisProximo(latitude, longitude).subscribe({
+          next: (banco: Banco | null) => {
+            console.log('Banco mais próximo encontrado:', banco);
+            if (banco) {
+              const cidadeId = banco.id_cidade; // corrigido para id_cidade
+              console.log('ID da cidade do banco:', cidadeId);
+
+              this.eventosService.listarEventos().subscribe({
+                next: (res) => {
+                  this.eventos = res
+                    .filter(e => e.idCidade === cidadeId)
+                    .map(e => ({
+                      ...e,
+                      cidadeNome: this.cidades.find(c => c.id === e.idCidade)?.nome
+                    }));
+
+                  console.log('Eventos filtrados pela cidade:', this.eventos);
+
+                  if (this.eventos.length === 0) {
+                    alert('Nenhum evento encontrado próximo à sua localização.');
+                  }
+                },
+                error: (err) => console.error('Erro ao carregar eventos:', err)
+              });
+            } else {
+              alert('Nenhum banco de leite encontrado próximo a você.');
+            }
+          },
+          error: (err) => {
+            console.error('Erro ao buscar banco mais próximo:', err);
+            alert('Erro ao buscar banco mais próximo.');
+          }
+        });
+      },
+      (err) => {
+        console.error('Erro ao obter localização:', err);
+        alert('Não foi possível obter sua localização.');
+      }
+    );
   }
 
   abrirDetalhe(evento: Evento) {

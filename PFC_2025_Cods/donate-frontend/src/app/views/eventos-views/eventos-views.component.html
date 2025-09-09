@@ -6,6 +6,13 @@
     ← Voltar para Home
   </button>
 
+  <!-- Botão Eventos Próximos -->
+  <div style="margin: 10px 0;">
+    <button mat-stroked-button color="accent" (click)="eventosProximos()" style="font-weight: bold;">
+      📍 Eventos próximos
+    </button>
+  </div>
+
   <div class="cards">
     <mat-card
       *ngFor="let evento of eventos"

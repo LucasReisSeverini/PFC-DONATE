@@ -9,6 +9,7 @@ import { DoacaoComponent } from './views/doacao/doacao.component';
 import {ControleAgendamentoComponent} from './views/controle-agendamento/controle-agendamento.component';
 import { AgendamentoUsuarioComponent } from './views/agendamento-usuario/agendamento-usuario.component';
 import { AuthGuard } from './guards/auth.guard'; // ✅ Importa o guard
+import { AdicionarEventoComponent } from './views/adicionar-evento/adicionar-evento.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -29,7 +30,15 @@ export const routes: Routes = [
   },
 
 
-  { path: 'meus-agendamentos', component: AgendamentoUsuarioComponent, canActivate: [AuthGuard] }
+  { path: 'meus-agendamentos', component: AgendamentoUsuarioComponent, canActivate: [AuthGuard] },
+
+  {
+    path: 'adicionar-evento',
+    component: AdicionarEventoComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['PROFISSIONAL'] } // apenas profissionais
+  }
+
 
 
 ];

@@ -6,10 +6,13 @@ import { PainelComponent } from './views/painel/painel.component';
 import { BancoProximoComponent } from './views/banco-proximo/banco-proximo.component';
 import { PerfilComponent } from './views/account/perfil/perfil.component';
 import { DoacaoComponent } from './views/doacao/doacao.component';
-import {ControleAgendamentoComponent} from './views/controle-agendamento/controle-agendamento.component';
+import { ControleAgendamentoComponent } from './views/controle-agendamento/controle-agendamento.component';
 import { AgendamentoUsuarioComponent } from './views/agendamento-usuario/agendamento-usuario.component';
-import { AuthGuard } from './guards/auth.guard'; // ✅ Importa o guard
+import { AuthGuard } from './guards/auth.guard';
 import { AdicionarEventoComponent } from './views/adicionar-evento/adicionar-evento.component';
+import { EventosViewsComponent } from './views/eventos-views/eventos-views.component'; // ✅ Import do novo componente
+import { GerenciarEventosComponent } from './views/gerenciar-eventos/gerenciar-eventos.component';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -28,17 +31,22 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     data: { allowedRoles: ['PROFISSIONAL'] }
   },
-
-
   { path: 'meus-agendamentos', component: AgendamentoUsuarioComponent, canActivate: [AuthGuard] },
-
   {
     path: 'adicionar-evento',
     component: AdicionarEventoComponent,
     canActivate: [AuthGuard],
     data: { allowedRoles: ['PROFISSIONAL'] } // apenas profissionais
+  },
+
+  // ✅ Rota pública para eventos/notícias
+  { path: 'eventos', component: EventosViewsComponent },
+
+  {
+    path: 'gerenciar-eventos',
+    component: GerenciarEventosComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['PROFISSIONAL'] }
   }
-
-
 
 ];

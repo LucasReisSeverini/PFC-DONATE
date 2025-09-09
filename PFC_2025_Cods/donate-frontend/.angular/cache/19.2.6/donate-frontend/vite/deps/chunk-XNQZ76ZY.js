@@ -278,8 +278,9 @@ export {
   _isTestEnvironment,
   coerceBooleanProperty,
   coerceNumberProperty,
+  _isNumberValue,
   coerceArray,
   coerceCssPixelValue,
   coerceElement
 };
-//# sourceMappingURL=chunk-53FX2E6Z.js.map
+//# sourceMappingURL=chunk-XNQZ76ZY.js.map

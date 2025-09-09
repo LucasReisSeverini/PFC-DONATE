@@ -15,17 +15,27 @@ export interface Evento {
 })
 export class EventosService {
 
-  private apiUrl = 'http://localhost:8080/eventos'; // Endpoint do backend
+  private baseUrl = 'http://localhost:8080/eventos';
 
   constructor(private http: HttpClient) { }
 
   // Listar todos os eventos/notícias
   listarEventos(): Observable<Evento[]> {
-    return this.http.get<Evento[]>(this.apiUrl);
+    return this.http.get<Evento[]>(`${this.baseUrl}`);
   }
 
   // Adicionar um novo evento/notícia
   adicionarEvento(evento: Evento): Observable<Evento> {
-    return this.http.post<Evento>(this.apiUrl, evento);
+    return this.http.post<Evento>(`${this.baseUrl}`, evento);
+  }
+
+  // Excluir evento/notícia
+  excluirEvento(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+
+  // Atualizar evento/notícia
+  atualizarEvento(evento: Evento): Observable<Evento> {
+    return this.http.put<Evento>(`${this.baseUrl}/${evento.id}`, evento);
   }
 }

@@ -1,0 +1,100 @@
+/* Container geral do formulário */
+.edit-evento-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #e3f2fd; /* azul claro, seguindo padrão eventos */
+  border-left: 4px solid #42a5f5; /* azul médio */
+  border-radius: 8px;
+}
+
+/* Título */
+.edit-evento-container h2 {
+  font-size: 24px;
+  color: #1565c0; /* azul escuro */
+  margin-bottom: 15px;
+}
+
+/* Botão voltar */
+.btn-voltar {
+  align-self: flex-start;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.6rem 1.5rem;
+  color: #1565c0;
+  background-color: #fff;
+  border: 1px solid #42a5f5;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-voltar:hover {
+  background-color: #42a5f5;
+  color: #fff;
+}
+
+/* Formulário */
+.edit-evento-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cada campo do formulário */
+.edit-evento-container form div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+/* Labels */
+.edit-evento-container label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #1565c0; /* azul escuro */
+}
+
+/* Inputs e textarea */
+.edit-evento-container input,
+.edit-evento-container textarea {
+  padding: 10px;
+  border: 1px solid #b0bec5; /* cinza claro */
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+/* Textarea maior */
+.edit-evento-container textarea {
+  min-height: 100px;
+}
+
+/* Botão salvar */
+.edit-evento-container button[type="submit"] {
+  align-self: flex-start;
+  margin-top: 15px;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.8rem 2rem;
+  color: #fff;
+  background-color: #42a5f5; /* azul médio */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-evento-container button[type="submit"]:disabled {
+  background-color: #90caf9; /* azul claro para disabled */
+  cursor: not-allowed;
+}
+
+.edit-evento-container button[type="submit"]:hover:not(:disabled) {
+  background-color: #1565c0; /* azul escuro no hover */
+}

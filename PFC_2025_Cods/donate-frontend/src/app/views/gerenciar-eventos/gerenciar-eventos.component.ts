@@ -37,7 +37,6 @@ export class GerenciarEventosComponent implements OnInit {
     this.router.navigate(['editar-evento', evento.id]);
   }
 
-
   excluirEvento(evento: Evento) {
     if (evento.id && confirm('Deseja realmente excluir este evento?')) {
       this.eventosService.excluirEvento(evento.id).subscribe({
@@ -45,5 +44,10 @@ export class GerenciarEventosComponent implements OnInit {
         error: (err) => console.error('Erro ao excluir evento:', err)
       });
     }
+  }
+
+  // Novo método para voltar à rota painel
+  voltarParaPainel() {
+    this.router.navigate(['/painel']);
   }
 }

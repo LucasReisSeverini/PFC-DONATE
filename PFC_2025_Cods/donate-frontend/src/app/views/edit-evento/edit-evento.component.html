@@ -1,5 +1,11 @@
 <div class="edit-evento-container">
   <h2>Editar Evento</h2>
+
+  <!-- Botão voltar -->
+  <button type="button" class="btn-voltar" (click)="voltarParaGerenciar()">
+    ← Voltar
+  </button>
+
   <form [formGroup]="eventoForm" (ngSubmit)="salvar()">
     <div>
       <label>Título</label>

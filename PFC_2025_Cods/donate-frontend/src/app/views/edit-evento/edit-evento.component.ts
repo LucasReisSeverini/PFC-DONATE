@@ -69,4 +69,7 @@ export class EditEventoComponent implements OnInit {
       }
     });
   }
+    voltarParaGerenciar() {
+      this.router.navigate(['/gerenciar-eventos']);
+    }
 }

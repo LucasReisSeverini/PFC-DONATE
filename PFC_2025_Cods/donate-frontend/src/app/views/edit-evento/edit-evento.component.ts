@@ -74,7 +74,7 @@ export class EditEventoComponent implements OnInit {
     this.eventosService.atualizarEvento(eventoAtualizado).subscribe({
       next: () => {
         alert('Evento atualizado com sucesso!');
-        this.router.navigate(['/eventos']);
+        this.router.navigate(['/gerenciar-eventos']);
       },
       error: (err) => {
         console.error('Erro ao atualizar evento:', err);

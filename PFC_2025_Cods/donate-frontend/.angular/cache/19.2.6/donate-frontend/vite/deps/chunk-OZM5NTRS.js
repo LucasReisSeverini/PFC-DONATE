@@ -1,7 +1,4 @@
 import {
-  BidiModule
-} from "./chunk-LKBJE6ML.js";
-import {
   Platform,
   _getEventTarget,
   _getFocusedElementPierceShadowDom,
@@ -12,7 +9,10 @@ import {
   coerceElement,
   coerceNumberProperty,
   normalizePassiveListenerOptions
-} from "./chunk-LXBQZ4I5.js";
+} from "./chunk-53FX2E6Z.js";
+import {
+  BidiModule
+} from "./chunk-LKBJE6ML.js";
 import {
   DOCUMENT
 } from "./chunk-UVLKBSCR.js";
@@ -5307,6 +5307,8 @@ export {
   removeAriaReferencedId,
   ActiveDescendantKeyManager,
   FocusKeyManager,
+  isFakeMousedownFromScreenReader,
+  isFakeTouchstartFromScreenReader,
   LiveAnnouncer,
   FocusMonitor,
   VERSION2 as VERSION,
@@ -5355,4 +5357,4 @@ export {
   MatRippleLoader,
   _MatInternalFormField
 };
-//# sourceMappingURL=chunk-DVOV2IZO.js.map
+//# sourceMappingURL=chunk-OZM5NTRS.js.map

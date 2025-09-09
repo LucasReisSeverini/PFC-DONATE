@@ -5,15 +5,24 @@
       <button mat-button [routerLink]="'/perfil'">Meu Perfil</button>
       <button mat-button [routerLink]="'/meus-agendamentos'">Meus Agendamentos</button>
 
-      <!-- Botão visível apenas para profissionais de saúde -->
-      <button mat-button *ngIf="roleUsuario === 'PROFISSIONAL'" [routerLink]="'/controle-agendamento'">
-        Controle de Agendamento
+      <mat-menu #areaProfMenu="matMenu">
+        <button mat-menu-item [routerLink]="'/controle-agendamento'">
+          Controle de Agendamentos
+        </button>
+        <button mat-menu-item [routerLink]="'/gerenciar-noticias'">
+          Gerenciar Notícias
+        </button>
+      </mat-menu>
+
+      <button mat-button *ngIf="roleUsuario === 'PROFISSIONAL'" [matMenuTriggerFor]="areaProfMenu">
+        Área Profissional
       </button>
 
       <button mat-button (click)="sair()">Sair</button>
     </nav>
   </header>
 
+  <!-- Info doação -->
   <section class="info-doacao">
     <h2>🤱 A importância de doar leite materno</h2>
     <p>
@@ -21,6 +30,7 @@
     </p>
   </section>
 
+  <!-- Localização -->
   <section class="localizacao">
     <h3>📍 Encontre o banco de leite mais próximo</h3>
     <p>Em breve você poderá ver no mapa o local mais próximo para doar.</p>
@@ -29,18 +39,27 @@
     </button>
   </section>
 
+  <!-- Faça sua doação -->
   <section class="faca-sua-doacao">
     <h3>🎁 Faça sua doação de leite materno</h3>
     <p>
       Seu gesto pode transformar vidas. Clique no botão abaixo para iniciar o processo de doação e contribuir com a saúde de muitos bebês que precisam.
     </p>
-    <div style="text-align: center; margin-top: 1rem;">
-      <button mat-raised-button color="primary" [routerLink]="'/doacao'" style="padding: 1rem 3rem; font-weight: 600; font-size: 1.1rem;">
-        FAÇA SUA DOAÇÃO
-      </button>
-    </div>
+    <button mat-raised-button color="primary" [routerLink]="'/doacao'" style="padding: 1rem 3rem; font-weight: 600; font-size: 1.1rem;">
+      FAÇA SUA DOAÇÃO
+    </button>
   </section>
 
+  <!-- Eventos & Novidades -->
+  <section class="eventos-novidades">
+    <h3>📢 Eventos & Novidades</h3>
+    <p>Fique por dentro das ações, campanhas e novidades relacionadas à doação de leite materno.</p>
+    <button mat-stroked-button color="primary" [routerLink]="'/eventos'">
+      VER EVENTOS
+    </button>
+  </section>
+
+  <!-- Conteúdos educativos -->
   <section class="conteudos-educativos">
     <mat-accordion>
       <mat-expansion-panel>

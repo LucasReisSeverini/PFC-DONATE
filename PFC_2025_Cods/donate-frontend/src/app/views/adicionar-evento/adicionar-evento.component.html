@@ -26,6 +26,15 @@
       </mat-select>
     </mat-form-field>
 
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Cidade</mat-label>
+      <mat-select formControlName="idCidade" required>
+        <mat-option *ngFor="let cidade of cidades" [value]="cidade.id">
+          {{ cidade.nome }} - {{ cidade.estado }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <div class="botoes-container">
       <button mat-stroked-button color="accent" type="button" (click)="voltar()">← Voltar</button>
       <button mat-raised-button color="primary" type="submit">Salvar</button>

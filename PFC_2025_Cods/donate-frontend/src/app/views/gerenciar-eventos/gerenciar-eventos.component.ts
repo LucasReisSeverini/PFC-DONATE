@@ -34,9 +34,9 @@ export class GerenciarEventosComponent implements OnInit {
   }
 
   editarEvento(evento: Evento) {
-    // Navega para a tela de adicionar evento passando o ID para edição
-    this.router.navigate(['/adicionar-evento'], { state: { evento } });
+    this.router.navigate(['editar-evento', evento.id]);
   }
+
 
   excluirEvento(evento: Evento) {
     if (evento.id && confirm('Deseja realmente excluir este evento?')) {

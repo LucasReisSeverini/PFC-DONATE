@@ -1,0 +1,21 @@
+<div class="edit-evento-container">
+  <h2>Editar Evento</h2>
+  <form [formGroup]="eventoForm" (ngSubmit)="salvar()">
+    <div>
+      <label>Título</label>
+      <input formControlName="titulo" />
+    </div>
+
+    <div>
+      <label>Descrição</label>
+      <textarea formControlName="descricao"></textarea>
+    </div>
+
+    <div>
+      <label>Data</label>
+      <input type="date" formControlName="data" />
+    </div>
+
+    <button type="submit" [disabled]="eventoForm.invalid">Salvar</button>
+  </form>
+</div>

@@ -38,4 +38,10 @@ export class EventosService {
   atualizarEvento(evento: Evento): Observable<Evento> {
     return this.http.put<Evento>(`${this.baseUrl}/${evento.id}`, evento);
   }
+
+  // Buscar evento/notícia por ID
+  buscarEventoPorId(id: number): Observable<Evento> {
+    return this.http.get<Evento>(`${this.baseUrl}/${id}`);
+  }
+
 }

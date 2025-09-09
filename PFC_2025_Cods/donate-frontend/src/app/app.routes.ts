@@ -10,9 +10,9 @@ import { ControleAgendamentoComponent } from './views/controle-agendamento/contr
 import { AgendamentoUsuarioComponent } from './views/agendamento-usuario/agendamento-usuario.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdicionarEventoComponent } from './views/adicionar-evento/adicionar-evento.component';
-import { EventosViewsComponent } from './views/eventos-views/eventos-views.component'; // ✅ Import do novo componente
+import { EventosViewsComponent } from './views/eventos-views/eventos-views.component';
 import { GerenciarEventosComponent } from './views/gerenciar-eventos/gerenciar-eventos.component';
-
+import { EditEventoComponent } from './views/edit-evento/edit-evento.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -36,17 +36,21 @@ export const routes: Routes = [
     path: 'adicionar-evento',
     component: AdicionarEventoComponent,
     canActivate: [AuthGuard],
-    data: { allowedRoles: ['PROFISSIONAL'] } // apenas profissionais
+    data: { allowedRoles: ['PROFISSIONAL'] }
   },
-
-  // ✅ Rota pública para eventos/notícias
-  { path: 'eventos', component: EventosViewsComponent },
-
   {
     path: 'gerenciar-eventos',
     component: GerenciarEventosComponent,
     canActivate: [AuthGuard],
     data: { allowedRoles: ['PROFISSIONAL'] }
-  }
+  },
+  {
+    path: 'editar-evento/:id',
+    component: EditEventoComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['PROFISSIONAL'] }
+  },
 
+  // Rota pública
+  { path: 'eventos', component: EventosViewsComponent }
 ];

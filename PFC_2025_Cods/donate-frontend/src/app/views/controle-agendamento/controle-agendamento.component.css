@@ -40,7 +40,7 @@
   padding-bottom: 10px;
 }
 
-/* Filtros */
+/* Filtros principais */
 .agendamentos-container .filtros {
   display: flex;
   flex-wrap: wrap;
@@ -63,6 +63,48 @@
   outline: none;
   border-color: #d81b60;
   box-shadow: 0 0 4px rgba(216, 27, 96, 0.3);
+}
+
+/* Botões adicionais de filtros */
+.agendamentos-container .filtros-avancados {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.agendamentos-container .filtros-avancados button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s, opacity 0.3s;
+}
+
+/* Botão Agendamentos Próximos */
+.agendamentos-container .filtros-avancados .btn-proximos {
+  background-color: #4fc3f7; /* azul claro */
+  color: #01579b;
+}
+
+.agendamentos-container .filtros-avancados .btn-proximos:hover {
+  background-color: #29b6f6;
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* Botão Mostrar Todos */
+.agendamentos-container .filtros-avancados .btn-todos {
+  background-color: #f48fb1; /* rosa claro */
+  color: #880e4f;
+}
+
+.agendamentos-container .filtros-avancados .btn-todos:hover {
+  background-color: #f06292;
+  transform: translateY(-2px);
+  opacity: 0.9;
 }
 
 /* Tabela */
@@ -134,12 +176,14 @@
 
 /* RESPONSIVO PARA CELULAR */
 @media screen and (max-width: 768px) {
-  .agendamentos-container .filtros {
+  .agendamentos-container .filtros,
+  .agendamentos-container .filtros-avancados {
     flex-direction: column;
   }
 
   .agendamentos-container .filtros input,
-  .agendamentos-container .filtros select {
+  .agendamentos-container .filtros select,
+  .agendamentos-container .filtros-avancados button {
     width: 100%;
   }
 

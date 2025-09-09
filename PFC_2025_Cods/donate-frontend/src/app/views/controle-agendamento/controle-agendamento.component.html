@@ -1,8 +1,14 @@
 <div class="agendamentos-container">
   <h2>Controle de Agendamentos</h2>
-  <!-- Botão Voltar no final -->
-  <div style="margin-top: 20px;">
-    <button class="btn-voltar" (click)="voltarHome()">← Voltar</button>
+
+  <!-- Botões de banco próximo / todos -->
+  <div style="margin-bottom: 20px;">
+    <button class="btn-proximos" (click)="agendamentosProximos()" style="font-weight: bold;">
+      📍 Agendamentos próximos
+    </button>
+    <button class="btn-todos" (click)="mostrarTodosAgendamentos()" style="margin-left: 8px;">
+      Mostrar todos
+    </button>
   </div>
 
   <!-- Filtros -->
@@ -57,5 +63,8 @@
     </tbody>
   </table>
 
-
+  <!-- Botão Voltar -->
+  <div style="margin-top: 20px;">
+    <button class="btn-voltar" (click)="voltarHome()">← Voltar</button>
+  </div>
 </div>

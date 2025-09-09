@@ -8,6 +8,7 @@ export interface Evento {
   descricao: string;
   data: string;
   tipo: 'evento' | 'noticia';
+  cidadeNome?: string; // <-- Adiciona a cidade opcional
 }
 
 @Component({

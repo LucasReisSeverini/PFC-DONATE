@@ -47,14 +47,19 @@ export class EventosViewsComponent implements OnInit {
 
   abrirDetalhe(evento: Evento) {
     this.dialog.open(EventoDetalheComponent, {
-      width: '90vw',   // largura do modal
-      height: '90vh',  // altura do modal
+      width: '90vw',
+      height: '90vh',
       maxWidth: '100vw',
       maxHeight: '100vh',
-      panelClass: 'custom-dialog-container', // classe customizada para ajustes de CSS
+      panelClass: 'full-screen-dialog', // <- mudou aqui
       data: evento
     });
   }
+  voltarPainel() {
+    this.router.navigate(['/painel']);
+  }
+
+
 
 
 }

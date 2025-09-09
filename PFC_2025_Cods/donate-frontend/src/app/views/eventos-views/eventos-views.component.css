@@ -8,7 +8,6 @@ h2 {
   text-align: center;
   color: #1565c0;
   margin-bottom: 20px;
-  font-size: 1.8rem;
 }
 
 button {
@@ -20,69 +19,47 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: center; /* centraliza os cards na tela */
+  justify-content: flex-start;
 }
 
-/* Card base */
 .card-evento {
-  flex: 1 1 280px; /* flexível e responsivo */
-  max-width: 320px;
+  flex: 1 1 300px;
   border-left: 4px solid #42a5f5;
   border-radius: 8px;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 10px;
 }
 
 .card-evento:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Cores diferentes para tipo de evento */
 .card-evento.evento {
-  background-color: #e3f2fd; /* azul clarinho */
+  background-color: #e3f2fd;
 }
 
 .card-evento.noticia {
-  background-color: #fff3e0; /* laranja clarinho */
-  border-left-color: #ffb74d; /* laranja */
+  background-color: #fff3e0;
+  border-left-color: #ffb74d;
 }
 
-/* Títulos e subtítulos */
 mat-card-title {
   font-weight: 600;
-  font-size: 1.1rem;
-  margin-bottom: 5px;
 }
 
 mat-card-subtitle {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #555;
-  margin-bottom: 10px;
+}
+.full-screen-dialog .mat-dialog-container {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
 }
 
-/* Limita o texto do card e adiciona "..." */
-.card-evento p {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3; /* mostra no máximo 3 linhas */
-  -webkit-box-orient: vertical;
-  line-height: 1.4rem;
-}
 
-/* Responsividade geral */
-@media (max-width: 600px) {
-  .cards {
-    flex-direction: column;
-    align-items: center;
-  }
 
-  .card-evento {
-    max-width: 90%;
-  }
-}

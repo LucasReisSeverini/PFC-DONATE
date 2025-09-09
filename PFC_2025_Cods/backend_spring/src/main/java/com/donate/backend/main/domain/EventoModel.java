@@ -19,6 +19,9 @@ public class EventoModel {
 
     private String tipo; // "evento" ou "noticia"
 
+    @Column(name = "id_cidade")
+    private Long idCidade; // <-- novo campo
+
     // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -34,4 +37,7 @@ public class EventoModel {
 
     public String getTipo() { return tipo; }
     public void setTipo(String tipo) { this.tipo = tipo; }
+
+    public Long getIdCidade() { return idCidade; }
+    public void setIdCidade(Long idCidade) { this.idCidade = idCidade; }
 }

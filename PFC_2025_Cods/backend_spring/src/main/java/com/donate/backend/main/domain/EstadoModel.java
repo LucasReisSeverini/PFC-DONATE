@@ -3,21 +3,17 @@ package com.donate.backend.main.domain;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "cidade")
-public class CidadeModel {
+@Table(name = "estado")
+public class EstadoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
+    private String sigla;
 
-    // Relacionamento com Estado (muitas cidades podem pertencer a um estado)
-    @ManyToOne
-    @JoinColumn(name = "id_estado", nullable = false) // coluna que referencia a tabela estado
-    private EstadoModel estado;
-
-    public CidadeModel() {}
+    public EstadoModel() {}
 
     public Long getId() {
         return id;
@@ -35,11 +31,11 @@ public class CidadeModel {
         this.nome = nome;
     }
 
-    public EstadoModel getEstado() {
-        return estado;
+    public String getSigla() {
+        return sigla;
     }
 
-    public void setEstado(EstadoModel estado) {
-        this.estado = estado;
+    public void setSigla(String sigla) {
+        this.sigla = sigla;
     }
 }

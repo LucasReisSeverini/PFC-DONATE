@@ -7,22 +7,22 @@
   </button>
 
   <form [formGroup]="eventoForm" (ngSubmit)="salvar()">
-    <div>
+    <div class="full-width">
       <label>Título</label>
       <input formControlName="titulo" />
     </div>
 
-    <div>
+    <div class="full-width">
       <label>Descrição</label>
       <textarea formControlName="descricao"></textarea>
     </div>
 
-    <div>
+    <div class="full-width">
       <label>Data</label>
       <input type="date" formControlName="data" />
     </div>
 
-    <div>
+    <div class="full-width">
       <label>Cidade</label>
       <select formControlName="idCidade">
         <option [ngValue]="null" disabled>Selecione uma cidade</option>
@@ -32,6 +32,8 @@
       </select>
     </div>
 
-    <button type="submit" [disabled]="eventoForm.invalid">Salvar</button>
+    <div class="botoes-container">
+      <button type="submit" [disabled]="eventoForm.invalid">Salvar</button>
+    </div>
   </form>
 </div>

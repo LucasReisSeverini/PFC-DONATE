@@ -5,15 +5,19 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
-import { EventosService, Evento } from '../../services/eventos/eventos.service';
+import { EventosService } from '../../services/eventos/eventos.service';
 import { CidadeService } from '../../services/cidade/cidade.service';
 import { CommonModule } from '@angular/common';
 
-// interface local para incluir 'estado'
+// Interface local para cidades com estado
 interface CidadeComEstado {
   id: number;
   nome: string;
-  estado: string;
+  estado: {
+    id: number;
+    nome: string;
+    sigla: string;
+  };
 }
 
 @Component({
@@ -45,7 +49,7 @@ export class AdicionarEventoComponent implements OnInit {
       descricao: ['', Validators.required],
       data: ['', Validators.required],
       tipo: ['evento', Validators.required],
-      idCidade: [null, Validators.required]
+      idCidade: [null, Validators.required] // mantemos idCidade para envio
     });
   }
 
@@ -55,7 +59,18 @@ export class AdicionarEventoComponent implements OnInit {
 
   carregarCidades() {
     this.cidadeService.getCidades().subscribe({
-      next: (res: any[]) => this.cidades = res,
+      next: (res: any[]) => {
+        // mapeia para garantir que estado está definido e tem sigla
+        this.cidades = res.map(c => ({
+          id: c.id,
+          nome: c.nome,
+          estado: {
+            id: c.estado?.id ?? 0,
+            nome: c.estado?.nome ?? '',
+            sigla: c.estado?.sigla ?? ''
+          }
+        }));
+      },
       error: (err: any) => console.error('Erro ao carregar cidades', err)
     });
   }
@@ -64,16 +79,16 @@ export class AdicionarEventoComponent implements OnInit {
     if (this.eventoForm.valid) {
       const formValue = this.eventoForm.value;
 
-      // garante envio do idCidade como number
+      // Prepara objeto para enviar ao backend
       const novoEvento = {
         titulo: formValue.titulo,
         descricao: formValue.descricao,
         data: formValue.data,
         tipo: formValue.tipo,
-        idCidade: Number(formValue.idCidade)
+        idCidade: Number(formValue.idCidade) // envia apenas o id da cidade
       };
 
-      console.log('Objeto enviado para o backend:', novoEvento); // <-- log para depuração
+      console.log('Objeto enviado para o backend:', novoEvento);
 
       this.eventosService.adicionarEvento(novoEvento as any).subscribe({
         next: (res: any) => {
@@ -90,8 +105,6 @@ export class AdicionarEventoComponent implements OnInit {
       alert('Preencha todos os campos corretamente.');
     }
   }
-
-
 
   voltar() {
     this.router.navigate(['/painel']);

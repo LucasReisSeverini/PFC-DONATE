@@ -10,7 +10,16 @@ import { MatOptionModule } from '@angular/material/core';
 import { Observable, map, startWith } from 'rxjs';
 import { MatRadioModule } from '@angular/material/radio';
 import { CidadeService, Cidade } from '../../../services/cidade/cidade.service';
-import { RegisterDto } from '../../../domain/dto/register.dto'; //DTO importado
+import { RegisterDto } from '../../../domain/dto/register.dto';
+
+// Interface para cidades com estado
+interface CidadeComEstado extends Cidade {
+  estado: {
+    id: number;
+    nome: string;
+    sigla: string;
+  };
+}
 
 @Component({
   selector: 'app-register',
@@ -30,15 +39,14 @@ import { RegisterDto } from '../../../domain/dto/register.dto'; //DTO importado
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   cidadeControl = new FormControl('');
-  cidades: Cidade[] = [];
-  cidadesFiltradas$: Observable<Cidade[]> = new Observable();
+  cidades: CidadeComEstado[] = [];
+  cidadesFiltradas$: Observable<CidadeComEstado[]> = new Observable();
 
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private authService = inject(AuthService);
   private cidadeService = inject(CidadeService);
 
-  // Flags de erro para CPF/email e validações de cidade/perfil
   cpfOuEmailExistenteErro = false;
   cidadeNaoSelecionadaErro = false;
   perfilNaoSelecionadoErro = false;
@@ -50,11 +58,11 @@ export class RegisterComponent implements OnInit {
       telefone: ['', Validators.required],
       cpf: ['', Validators.required],
       senha: ['', Validators.required],
-      confirmarSenha: ['', Validators.required],  // Campo para confirmar senha
+      confirmarSenha: ['', Validators.required],
       perfil: ['', Validators.required],
       latitude: [null],
       longitude: [null],
-      id_cidade: [null]  // Opcional
+      id_cidade: [null]
     }, { validators: this.senhasIguaisValidator });
   }
 
@@ -71,25 +79,20 @@ export class RegisterComponent implements OnInit {
   getLocation(): void {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        position => {
-          this.registerForm.patchValue({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          });
-        },
-        error => {
-          console.warn('Não foi possível obter a localização. Continuando sem latitude/longitude.', error);
-        }
+        pos => this.registerForm.patchValue({ latitude: pos.coords.latitude, longitude: pos.coords.longitude }),
+        err => console.warn('Não foi possível obter a localização.', err)
       );
-    } else {
-      console.warn('Geolocalização não suportada pelo navegador. Continuando sem latitude/longitude.');
     }
   }
 
   carregarCidades(): void {
     this.cidadeService.getCidades().subscribe({
-      next: (dados: Cidade[]) => {
-        this.cidades = dados;
+      next: (dados: any[]) => {
+        // Mapeia para incluir o estado, caso venha apenas o id_estado
+        this.cidades = dados.map(c => ({
+          ...c,
+          estado: c.estado ?? { id: 0, nome: '', sigla: '' }
+        }));
       },
       error: (err) => {
         console.error('Erro ao carregar cidades', err);
@@ -98,16 +101,16 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  filtrarCidades(value: string): Cidade[] {
+  filtrarCidades(value: string): CidadeComEstado[] {
     const filtro = value.toLowerCase();
-    return this.cidades.filter(cidade => cidade.nome.toLowerCase().includes(filtro));
+    return this.cidades.filter(c => c.nome.toLowerCase().includes(filtro));
   }
 
   onCidadeSelecionada(event: any): void {
     const cidadeSelecionada = this.cidades.find(c => c.nome === event.option.value);
     if (cidadeSelecionada) {
       this.registerForm.patchValue({ id_cidade: cidadeSelecionada.id });
-      this.cidadeNaoSelecionadaErro = false; // limpa erro ao selecionar cidade
+      this.cidadeNaoSelecionadaErro = false;
     }
   }
 
@@ -118,63 +121,53 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // Reseta flags de erro
     this.cpfOuEmailExistenteErro = false;
     this.cidadeNaoSelecionadaErro = false;
     this.perfilNaoSelecionadoErro = false;
 
-    // Validação manual para perfil e cidade
     if (!this.registerForm.value.perfil) {
       this.perfilNaoSelecionadoErro = true;
-      alert('Por favor, selecione o tipo de usuário.');
+      alert('Selecione o tipo de usuário.');
       return;
     }
     if (!this.registerForm.value.id_cidade) {
       this.cidadeNaoSelecionadaErro = true;
-      alert('Por favor, selecione uma cidade.');
+      alert('Selecione uma cidade.');
       return;
     }
 
     if (this.registerForm.valid) {
-      // Monta o DTO para enviar
-      const formValue = this.registerForm.value;
-      const formData: RegisterDto = {
-        nome: formValue.nome,
-        email: formValue.email,
-        telefone: formValue.telefone,
-        cpf: formValue.cpf,
-        senha: formValue.senha,
-        latitude: formValue.latitude,
-        longitude: formValue.longitude,
-        id_cidade: formValue.id_cidade,
-        doadora: formValue.perfil === 'doadora',
-        receptora: formValue.perfil === 'receptora',
-        profissional: formValue.perfil === 'profissional'
+      const f = this.registerForm.value;
+      const dto: RegisterDto = {
+        nome: f.nome,
+        email: f.email,
+        telefone: f.telefone,
+        cpf: f.cpf,
+        senha: f.senha,
+        latitude: f.latitude,
+        longitude: f.longitude,
+        id_cidade: f.id_cidade,
+        doadora: f.perfil === 'doadora',
+        receptora: f.perfil === 'receptora',
+        profissional: f.perfil === 'profissional'
       };
 
-      console.log('Enviando dados para o backend:', formData);
-
-      this.authService.register(formData).subscribe({
+      this.authService.register(dto).subscribe({
         next: () => {
           alert('Cadastro realizado com sucesso!');
           this.router.navigate(['/login']);
         },
-        error: (err) => {
+        error: err => {
           console.error(err);
           if (err.error?.message?.includes('CPF') || err.error?.message?.includes('Email')) {
             this.cpfOuEmailExistenteErro = true;
             alert('CPF ou Email já cadastrado.');
-          } else {
-            alert('Erro ao cadastrar. Verifique os dados.');
-          }
+          } else alert('Erro ao cadastrar.');
         }
       });
     } else {
-      if (this.registerForm.errors?.['senhasDiferentes']) {
-        alert('A senha não coincidem.');
-      } else {
-        alert('Preencha todos os campos obrigatórios corretamente.');
-      }
+      if (this.registerForm.errors?.['senhasDiferentes']) alert('As senhas não coincidem.');
+      else alert('Preencha todos os campos corretamente.');
     }
   }
 }

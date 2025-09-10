@@ -3,7 +3,7 @@ import {
 } from "./chunk-MPB3ORKB.js";
 import {
   DOCUMENT
-} from "./chunk-X3YKHOXU.js";
+} from "./chunk-2LEFET66.js";
 import {
   ANIMATION_MODULE_TYPE,
   Inject,
@@ -15,7 +15,7 @@ import {
   setClassMetadata,
   ɵɵdefineInjectable,
   ɵɵinject
-} from "./chunk-JTGVJCBQ.js";
+} from "./chunk-EAEESVTE.js";
 
 // node_modules/@angular/animations/fesm2022/animations.mjs
 var AnimationBuilder = class _AnimationBuilder {
@@ -190,4 +190,4 @@ function isAnimationRenderer(renderer) {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-GH6LMFOX.js.map
+//# sourceMappingURL=chunk-KCWHSIEW.js.map

@@ -30,7 +30,7 @@
       <mat-label>Cidade</mat-label>
       <mat-select formControlName="idCidade" required>
         <mat-option *ngFor="let cidade of cidades" [value]="cidade.id">
-          {{ cidade.nome }} - {{ cidade.estado }}
+          {{ cidade.nome }} - {{ cidade.estado.sigla }}
         </mat-option>
       </mat-select>
     </mat-form-field>

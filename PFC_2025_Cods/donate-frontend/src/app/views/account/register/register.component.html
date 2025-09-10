@@ -57,6 +57,7 @@
 
 
     <!-- Campo de cidade com autocomplete -->
+    <!-- Campo de cidade com autocomplete -->
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Cidade</mat-label>
       <input
@@ -68,10 +69,11 @@
       />
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onCidadeSelecionada($event)">
         <mat-option *ngFor="let cidade of cidadesFiltradas$ | async" [value]="cidade.nome">
-          {{ cidade.nome }}
+          {{ cidade.nome }} - {{ cidade.estado.sigla }}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
+
 
     <!-- escondido, mas com ID real -->
     <input type="hidden" formControlName="id_cidade" />

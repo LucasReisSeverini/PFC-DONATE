@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +35,6 @@ public class DoacaoController {
     @GetMapping
     public List<DoacaoModel> buscarTodas() {
         return doacaoService.buscarTodos();
-
     }
 
     // GET: Buscar doações por id do usuário
@@ -73,6 +71,11 @@ public class DoacaoController {
         doacao.setQuantidadeMl(dto.getQuantidade_ml());
         doacao.setStatus("pendente");
 
+        // 🔹 Setando endereço informado pela doadora
+        doacao.setRua(dto.getRua());
+        doacao.setNumero(dto.getNumero());
+        doacao.setBairro(dto.getBairro());
+
         BancoLeiteModel banco = bancoLeiteRepository.findById(dto.getId_bancos_de_leite())
                 .orElseThrow(() -> new RuntimeException("Banco de leite não encontrado"));
         doacao.setBancoDeLeite(banco);
@@ -85,11 +88,10 @@ public class DoacaoController {
         return ResponseEntity.ok(salva);
     }
 
-
     // PUT: Atualizar status da doação
     @PutMapping("/{id}/status")
     public ResponseEntity<Void> atualizarStatus(@PathVariable Long id, @RequestBody String novoStatus) {
-        doacaoService.atualizarStatus(id, novoStatus.replace("\"", "")); // remove aspas do JSON
+        doacaoService.atualizarStatus(id, novoStatus.replace("\"", ""));
         return ResponseEntity.ok().build();
     }
 
@@ -122,6 +124,4 @@ public class DoacaoController {
         doacaoService.atualizarStatus(id, "Recusado");
         return ResponseEntity.ok().build();
     }
-
-
 }

@@ -12,12 +12,19 @@ public class DoacaoModel {
     private Long id;
 
     @Column(name = "data_doacao")
-    private LocalDateTime dataDoacao; // ← AJUSTADO PARA ACEITAR DATA E HORA
+    private LocalDateTime dataDoacao; // ← data e hora da doação
 
     private String status;
 
     @Column(name = "quantidade_ml")
     private Integer quantidadeMl;
+
+    // 🔹 Novos campos de endereço da doadora no momento da doação
+    private String rua;
+
+    private String numero;
+
+    private String bairro;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
@@ -28,7 +35,6 @@ public class DoacaoModel {
     private BancoLeiteModel bancoDeLeite;
 
     // Getters e setters
-
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -40,6 +46,15 @@ public class DoacaoModel {
 
     public Integer getQuantidadeMl() { return quantidadeMl; }
     public void setQuantidadeMl(Integer quantidadeMl) { this.quantidadeMl = quantidadeMl; }
+
+    public String getRua() { return rua; }
+    public void setRua(String rua) { this.rua = rua; }
+
+    public String getNumero() { return numero; }
+    public void setNumero(String numero) { this.numero = numero; }
+
+    public String getBairro() { return bairro; }
+    public void setBairro(String bairro) { this.bairro = bairro; }
 
     public UsuarioModel getUsuario() { return usuario; }
     public void setUsuario(UsuarioModel usuario) { this.usuario = usuario; }

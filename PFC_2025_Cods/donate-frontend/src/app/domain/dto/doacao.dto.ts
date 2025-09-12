@@ -3,5 +3,8 @@ export interface DoacaoDto {
   quantidade_ml: number;
   data_doacao: string;
   hora_doacao: string;
-  id_usuario: number;  // novo campo obrigatório para enviar o id
+  id_usuario: number;  // obrigatório
+  rua: string;          // novo
+  numero: string;       // novo
+  bairro: string;       // novo
 }

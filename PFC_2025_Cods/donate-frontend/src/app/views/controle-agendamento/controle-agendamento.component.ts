@@ -15,6 +15,11 @@ export interface AgendamentoDto {
   quantidade_ml: number;
   nome_doadora: string;
   observacoes: string;
+
+  // Campos de endereço vindo da tabela doacao
+  rua?: string;
+  numero?: string;
+  bairro?: string;
 }
 
 @Component({
@@ -54,13 +59,17 @@ export class ControleAgendamentoComponent implements OnInit {
         this.agendamentos = res.map(a => ({
           id: a.id,
           tipo: 'entrega',
-          bancoDeLeite: a.bancoDeLeite?.nome || '',
+          bancoDeLeite: a.bancoDeLeite?.nome || '-',
           data_agendamento: a.dataDoacao || '',
           horario: '',
-          status: a.status || '',
-          quantidade_ml: a.quantidadeMl,
-          nome_doadora: a.usuario?.doadora ? a.usuario.nome : '',
-          observacoes: ''
+          status: a.status || 'Pendente',
+          quantidade_ml: a.quantidadeMl || 0,
+          nome_doadora: a.usuario?.doadora ? a.usuario.nome : '-',
+          observacoes: a.observacoes || '',
+          // ENDEREÇO VINDO DO AGENDAMENTO (tabela doacao)
+          rua: a.rua || '-',
+          numero: a.numero || '-',
+          bairro: a.bairro || '-'
         })) as AgendamentoDto[];
         this.agendamentosOriginais = [...this.agendamentos];
       },
@@ -137,7 +146,6 @@ export class ControleAgendamentoComponent implements OnInit {
     });
   }
 
-  // NOVO: Filtrar agendamentos do banco mais próximo
   agendamentosProximos(): void {
     if (!navigator.geolocation) {
       alert('Geolocalização não suportada pelo navegador.');

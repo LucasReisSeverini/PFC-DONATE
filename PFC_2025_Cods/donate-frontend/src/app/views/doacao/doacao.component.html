@@ -34,6 +34,34 @@
       </mat-error>
     </mat-form-field>
 
+    <!-- Rua -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Rua</mat-label>
+      <input matInput type="text" formControlName="rua" placeholder="Digite a rua" />
+      <mat-error *ngIf="doacaoForm.get('rua')?.hasError('required') && doacaoForm.get('rua')?.touched">
+        Informe a rua.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Número e Bairro lado a lado -->
+    <div class="endereco-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Número</mat-label>
+        <input matInput type="text" formControlName="numero" placeholder="Digite o número" />
+        <mat-error *ngIf="doacaoForm.get('numero')?.hasError('required') && doacaoForm.get('numero')?.touched">
+          Informe o número.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Bairro</mat-label>
+        <input matInput type="text" formControlName="bairro" placeholder="Digite o bairro" />
+        <mat-error *ngIf="doacaoForm.get('bairro')?.hasError('required') && doacaoForm.get('bairro')?.touched">
+          Informe o bairro.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
     <!-- Data e Hora -->
     <div class="data-horario">
       <!-- Calendário -->
@@ -69,8 +97,6 @@
               {{ dia || '' }}
             </div>
           </div>
-
-
         </div>
       </div>
 

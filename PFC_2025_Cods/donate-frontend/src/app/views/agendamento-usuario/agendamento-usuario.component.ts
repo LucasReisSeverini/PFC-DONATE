@@ -42,6 +42,9 @@ export class AgendamentoUsuarioComponent implements OnInit {
           status: a.status || 'Não informado',
           quantidade_ml: a.quantidadeMl || 0,
           nome_doadora: a.usuario?.doadora ? a.usuario.nome : 'Não informado',
+          rua: a.rua || 'Não informado',
+          numero: a.numero || 'Não informado',
+          bairro: a.bairro || 'Não informado',
         }));
       },
       error: (err: any) => console.error('Erro ao carregar agendamentos:', err)
@@ -96,7 +99,7 @@ export class AgendamentoUsuarioComponent implements OnInit {
         const agendamento = this.agendamentos.find(a => a.id === id);
         if (agendamento) {
           agendamento.data_doacao = new Date(novaData);
-          agendamento.status = 'Reagendamento Solicitado'; // atualiza o status
+          agendamento.status = 'Reagendamento Solicitado';
         }
         this.novaDataReagendamento[id] = '';
       },

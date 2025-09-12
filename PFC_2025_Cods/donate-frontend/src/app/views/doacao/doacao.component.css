@@ -1,8 +1,8 @@
 /* Container geral */
 .doacao-container {
   max-width: 480px;
-  margin: 60px auto;
-  padding: 30px;
+  margin: 40px auto;
+  padding: 30px 20px;
   background-color: #fff0f5;
   border-radius: 20px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
@@ -12,7 +12,7 @@
 .doacao-container h1 {
   font-size: 28px;
   color: #e91e63;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   text-align: center;
   font-weight: bold;
 }
@@ -68,7 +68,7 @@ button[type="submit"]:hover {
   background-color: #d81b60;
 }
 
-/* Calendário manual */
+/* Data e horário */
 .data-horario {
   display: flex;
   gap: 16px;
@@ -87,9 +87,10 @@ button[type="submit"]:hover {
   top: 55px;
   left: 0;
   background: #fff;
-  border: 1px solid #ccc; /* borda suave */
+  border: 1px solid #ccc;
   z-index: 10;
-  width: 300px;
+  width: 100%;
+  max-width: 320px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.25);
   padding: 12px;
   border-radius: 12px;
@@ -170,4 +171,32 @@ button[type="submit"]:hover {
 
 .calendario-container mat-form-field button:hover {
   background-color: #d81b60;
+}
+
+/* Endereço: Número e Bairro lado a lado */
+.endereco-container {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.endereco-container mat-form-field {
+  flex: 1;
+}
+
+/* Responsividade */
+@media (max-width: 500px) {
+  .doacao-container {
+    margin: 20px;
+    padding: 20px 15px;
+  }
+
+  .data-horario, .endereco-container {
+    flex-direction: column;
+  }
+
+  .calendario {
+    max-width: 100%;
+  }
 }

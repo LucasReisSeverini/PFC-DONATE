@@ -3,16 +3,11 @@
 
   <!-- Botão Voltar + Botões de banco próximo / todos -->
   <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
-    <button class="btn-voltar" (click)="voltarHome()">
-      ← Voltar
-    </button>
+    <button class="btn-voltar" (click)="voltarHome()">← Voltar</button>
     <button class="btn-proximos" (click)="agendamentosProximos()" style="font-weight: bold;">
       📍 Agendamentos próximos
     </button>
-    <button class="btn-todos" (click)="mostrarTodosAgendamentos()">
-      Mostrar todos
-    </button>
-
+    <button class="btn-todos" (click)="mostrarTodosAgendamentos()">Mostrar todos</button>
   </div>
 
   <!-- Filtros -->
@@ -42,6 +37,9 @@
       <th>ML</th>
       <th>Doadora</th>
       <th>Banco de Leite</th>
+      <th>Rua</th>
+      <th>Número</th>
+      <th>Bairro</th>
       <th>Ações</th>
     </tr>
     </thead>
@@ -53,6 +51,9 @@
       <td data-label="ML">{{ agendamento.quantidade_ml }} ml</td>
       <td data-label="Doadora">{{ agendamento.nome_doadora }}</td>
       <td data-label="Banco de Leite">{{ agendamento.bancoDeLeite }}</td>
+      <td data-label="Rua">{{ agendamento.rua || '-' }}</td>
+      <td data-label="Número">{{ agendamento.numero || '-' }}</td>
+      <td data-label="Bairro">{{ agendamento.bairro || '-' }}</td>
       <td data-label="Ações" class="acoes-container">
         <div class="acoes-botoes">
           <button class="btn-aceitar" (click)="aceitar(agendamento.id)">Aceitar</button>

@@ -47,6 +47,9 @@ export class DoacaoComponent implements OnInit {
       quantidade_ml: [null, [Validators.required, Validators.min(1)]],
       data_doacao: [null, Validators.required],
       hora_doacao: ['', Validators.required],
+      rua: ['', Validators.required],       // novo
+      numero: ['', Validators.required],    // novo
+      bairro: ['', Validators.required],    // novo
       status_doacao: ['']
     });
 
@@ -95,10 +98,9 @@ export class DoacaoComponent implements OnInit {
 
   gerarCalendario(): void {
     const ultimoDia = new Date(this.anoAtual, this.mesAtual + 1, 0).getDate();
-    let primeiroDiaSemana = new Date(this.anoAtual, this.mesAtual, 1).getDay(); // 0 = domingo
+    let primeiroDiaSemana = new Date(this.anoAtual, this.mesAtual, 1).getDay();
     this.diasDoMes = [];
 
-    // Ajusta para que o primeiro dia fique no domingo correto
     for (let i = 0; i < primeiroDiaSemana; i++) {
       this.diasDoMes.push(null);
     }
@@ -155,7 +157,10 @@ export class DoacaoComponent implements OnInit {
       quantidade_ml: f.quantidade_ml,
       data_doacao: this.formatarDataISO(f.data_doacao),
       hora_doacao: f.hora_doacao,
-      id_usuario: Number(userId)
+      id_usuario: Number(userId),
+      rua: f.rua,       // novo
+      numero: f.numero, // novo
+      bairro: f.bairro  // novo
     };
 
     this.doacaoService.agendarDoacao(dados).subscribe({

@@ -1,6 +1,5 @@
 package com.donate.backend.main.controller;
 
-import com.donate.backend.main.domain.CidadeModel;
 import com.donate.backend.main.domain.UsuarioModel;
 import com.donate.backend.main.dto.AtualizarLocalizacaoDto;
 import com.donate.backend.main.dto.AtualizarPerfilDto;
@@ -45,7 +44,7 @@ public class UsuarioController {
 
     @PostMapping("cadastro")
     public ResponseEntity<UsuarioModel> salvar(@RequestBody UsuarioDto usuarioDto) {
-        CidadeModel cidade = cidadeService.buscarPorId(usuarioDto.getIdCidade())
+        cidadeService.buscarPorId(usuarioDto.getIdCidade())
                 .orElseThrow(() -> new RuntimeException("Cidade não encontrada"));
 
         UsuarioModel usuario = new UsuarioModel();
@@ -59,7 +58,7 @@ public class UsuarioController {
         usuario.setProfissional(usuarioDto.getProfissional());
         usuario.setLatitude(usuarioDto.getLatitude());
         usuario.setLongitude(usuarioDto.getLongitude());
-        usuario.setCidade(cidade); // aqui você liga o ID com o objeto CidadeModel
+        usuario.setIdCidade(usuarioDto.getIdCidade());
 
         UsuarioModel novoUsuario = usuarioService.salvar(usuario);
         return ResponseEntity.ok(novoUsuario);

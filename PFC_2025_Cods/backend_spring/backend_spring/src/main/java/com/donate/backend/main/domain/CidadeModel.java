@@ -1,17 +1,11 @@
 package com.donate.backend.main.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "cidade")
+/**
+ * Modelo simples para representar uma cidade sem dependências de JPA,
+ * permitindo acesso a dados via JDBC.
+ */
 public class CidadeModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;

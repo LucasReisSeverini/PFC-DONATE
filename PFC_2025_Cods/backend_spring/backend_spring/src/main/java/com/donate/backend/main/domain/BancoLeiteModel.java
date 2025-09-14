@@ -1,13 +1,10 @@
 package com.donate.backend.main.domain;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "bancos_de_leite")
+/**
+ * Modelo de Banco de Leite sem anotações JPA para uso com JDBC.
+ */
 public class BancoLeiteModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
@@ -16,7 +13,6 @@ public class BancoLeiteModel {
     private Double latitude;
     private Double longitude;
 
-    @Column(name = "id_cidade")
     private Long idCidade;
 
     // Getters e setters

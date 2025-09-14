@@ -1,13 +1,11 @@
 package com.donate.backend.main.domain;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "usuario")
+/**
+ * Representa um usuário do sistema sem dependências de JPA para que o
+ * projeto utilize acesso a dados baseado em JDBC.
+ */
 public class UsuarioModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
@@ -23,9 +21,7 @@ public class UsuarioModel {
     private Double latitude;
     private Double longitude;
 
-    @ManyToOne
-    @JoinColumn(name = "id_cidade", nullable = false)
-    private CidadeModel cidade;
+    private Long idCidade;
 
     // Getters e Setters
 
@@ -117,16 +113,11 @@ public class UsuarioModel {
         this.longitude = longitude;
     }
 
-    public CidadeModel getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(CidadeModel cidade) {
-        this.cidade = cidade;
-    }
-
-    // Método utilitário para pegar só o ID da cidade, se precisar
     public Long getIdCidade() {
-        return cidade != null ? cidade.getId() : null;
+        return idCidade;
+    }
+
+    public void setIdCidade(Long idCidade) {
+        this.idCidade = idCidade;
     }
 }

@@ -42,6 +42,6 @@ public class AuthenticationController {
         // Gera token JWT
         String jwt = jwtService.gerarToken(usuario);
 
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 }

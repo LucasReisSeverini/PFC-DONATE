@@ -1,7 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, FormControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+  FormControl
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -29,6 +35,7 @@ export interface MunicipioComUF {
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterModule,              // ✅ necessário para usar routerLink
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
@@ -54,18 +61,21 @@ export class RegisterComponent implements OnInit {
   perfilNaoSelecionadoErro = false;
 
   constructor() {
-    this.registerForm = this.fb.group({
-      nome: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      telefone: ['', Validators.required],
-      cpf: ['', Validators.required],
-      senha: ['', Validators.required],
-      confirmarSenha: ['', Validators.required],
-      perfil: ['', Validators.required],
-      latitude: [null],
-      longitude: [null],
-      id_municipio: [null, Validators.required]
-    }, { validators: this.senhasIguaisValidator });
+    this.registerForm = this.fb.group(
+      {
+        nome: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        telefone: ['', Validators.required],
+        cpf: ['', Validators.required],
+        senha: ['', Validators.required],
+        confirmarSenha: ['', Validators.required],
+        perfil: ['', Validators.required],
+        latitude: [null],
+        longitude: [null],
+        id_municipio: [null, Validators.required]
+      },
+      { validators: this.senhasIguaisValidator }
+    );
   }
 
   ngOnInit(): void {
@@ -81,7 +91,11 @@ export class RegisterComponent implements OnInit {
   getLocation(): void {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        pos => this.registerForm.patchValue({ latitude: pos.coords.latitude, longitude: pos.coords.longitude }),
+        pos =>
+          this.registerForm.patchValue({
+            latitude: pos.coords.latitude,
+            longitude: pos.coords.longitude
+          }),
         err => console.warn('Não foi possível obter a localização.', err)
       );
     }
@@ -99,14 +113,17 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-
   filtrarMunicipios(value: string): MunicipioComUF[] {
     const filtro = value.toLowerCase();
-    return this.municipios.filter(m => m.nome.toLowerCase().includes(filtro));
+    return this.municipios.filter(m =>
+      m.nome.toLowerCase().includes(filtro)
+    );
   }
 
   onMunicipioSelecionado(event: any): void {
-    const municipioSelecionado = this.municipios.find(m => m.nome === event.option.value);
+    const municipioSelecionado = this.municipios.find(
+      m => m.nome === event.option.value
+    );
     if (municipioSelecionado) {
       this.registerForm.patchValue({ id_municipio: municipioSelecionado.id });
       this.municipioNaoSelecionadoErro = false;
@@ -153,17 +170,24 @@ export class RegisterComponent implements OnInit {
       };
 
       this.authService.register(dto).subscribe({
-        next: () => { alert('Cadastro realizado com sucesso!'); this.router.navigate(['/login']); },
+        next: () => {
+          alert('Cadastro realizado com sucesso!');
+          this.router.navigate(['/login']);
+        },
         error: err => {
           console.error(err);
-          if (err.error?.message?.includes('CPF') || err.error?.message?.includes('Email')) {
+          if (
+            err.error?.message?.includes('CPF') ||
+            err.error?.message?.includes('Email')
+          ) {
             this.cpfOuEmailExistenteErro = true;
             alert('CPF ou Email já cadastrado.');
           } else alert('Erro ao cadastrar.');
         }
       });
     } else {
-      if (this.registerForm.errors?.['senhasDiferentes']) alert('As senhas não coincidem.');
+      if (this.registerForm.errors?.['senhasDiferentes'])
+        alert('As senhas não coincidem.');
       else alert('Preencha todos os campos corretamente.');
     }
   }

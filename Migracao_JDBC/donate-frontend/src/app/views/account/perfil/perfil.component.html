@@ -1,0 +1,38 @@
+<div class="perfil-container">
+  <h2>Meu Perfil</h2>
+
+  <!-- Mostrar nome do usuário -->
+  <div class="bem-vindo">
+    <p><strong>Bem-vindo(a), {{ perfilForm.get('nome')?.value }}</strong></p>
+  </div>
+
+  <form [formGroup]="perfilForm" (ngSubmit)="salvarAlteracoes()" class="perfil-form">
+    <div class="form-group">
+      <label for="nome">Nome:</label>
+      <input id="nome" type="text" formControlName="nome" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input id="email" type="email" formControlName="email" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="telefone">Telefone:</label>
+      <input id="telefone" type="text" formControlName="telefone" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="senhaAntiga">Senha atual:</label>
+      <input id="senhaAntiga" type="password" formControlName="senhaAntiga" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="novaSenha">Nova senha:</label>
+      <input id="novaSenha" type="password" formControlName="novaSenha" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn-salvar">Salvar Alterações</button>
+    <button type="button" class="btn-sair" (click)="irParaPainel()">Sair</button>
+  </form>
+</div>

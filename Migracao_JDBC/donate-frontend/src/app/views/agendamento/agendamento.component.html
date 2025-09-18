@@ -1,0 +1,98 @@
+<div class="agendamento-container">
+  <h1 class="title">Agendar Doação</h1>
+  <p class="subtitle">Escolha como deseja doar 💖</p>
+
+  <form [formGroup]="agendamentoForm" (ngSubmit)="onSubmit()">
+
+    <!-- Tipo -->
+    <mat-radio-group formControlName="tipo" class="full-width">
+      <mat-radio-button value="entrega">Entregar no banco de leite</mat-radio-button>
+      <mat-radio-button value="coleta">Solicitar coleta em casa</mat-radio-button>
+    </mat-radio-group>
+
+    <!-- Banco de leite -->
+    <mat-form-field *ngIf="agendamentoForm.value.tipo === 'entrega'" appearance="fill" class="full-width">
+      <mat-label>Banco de leite</mat-label>
+      <mat-select formControlName="bancoDeLeite">
+        <mat-option *ngFor="let banco of bancosDeLeite" [value]="banco.id">
+          {{ banco.nome }} - {{ banco.cidade }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Quantidade -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Quantidade de leite (ml)</mat-label>
+      <input matInput type="number" formControlName="quantidade" placeholder="Digite a quantidade" required />
+    </mat-form-field>
+
+    <!-- Endereço -->
+    <div *ngIf="agendamentoForm.value.tipo === 'coleta'">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Endereço</mat-label>
+        <input matInput type="text" formControlName="endereco" placeholder="Digite seu endereço" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Cidade</mat-label>
+        <input matInput type="text" formControlName="cidade" placeholder="Digite sua cidade" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Estado</mat-label>
+        <input matInput type="text" formControlName="estado" placeholder="Digite seu estado" required />
+      </mat-form-field>
+    </div>
+
+    <!-- Data e horário -->
+    <div class="data-horario">
+      <div class="calendario-container">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Data da doação</mat-label>
+          <input matInput type="text" formControlName="data" [value]="dataSelecionada" readonly
+                 (click)="toggleCalendario()" placeholder="DD/MM/AAAA" required>
+          <button matSuffix type="button" (click)="toggleCalendario()">📅</button>
+        </mat-form-field>
+
+        <div class="calendario" *ngIf="mostrarCalendario">
+          <div class="calendario-header">
+            <button type="button" (click)="mesAnterior()">←</button>
+            <span class="mes-ano">{{ meses[mesAtual] }} {{ anoAtual }}</span>
+            <button type="button" (click)="mesSeguinte()">→</button>
+          </div>
+
+          <div class="dias-semana">
+            <div *ngFor="let dia of diasDaSemana" class="dia-semana">{{ dia }}</div>
+          </div>
+
+          <div class="dias-mes">
+            <div *ngFor="let dia of diasDoMes" class="dia-mes"
+                 [class.selecionado]="dataSelecionada.includes('/' + (mesAtual + 1).toString().padStart(2, '0') + '/' + anoAtual) && dataSelecionada.startsWith(dia.toString().padStart(2, '0'))"
+                 (click)="selecionarData(dia)">
+              {{ dia }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Horário</mat-label>
+        <input matInput type="time" formControlName="horario" required />
+      </mat-form-field>
+    </div>
+
+    <!-- Observações -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Observações</mat-label>
+      <textarea matInput formControlName="observacoes" placeholder="Digite algo se necessário"></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" class="full-width">
+      Agendar Doação
+    </button>
+  </form>
+
+  <button mat-button color="basic" class="voltar-button" routerLink="/painel">
+    Voltar para o Painel
+  </button>
+</div>

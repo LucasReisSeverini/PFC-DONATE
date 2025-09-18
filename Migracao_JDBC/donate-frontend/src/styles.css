@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.custom-dialog-container .mat-dialog-container {
+  padding: 20px !important;
+  width: 90vw !important;
+  height: 90vh !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  overflow-y: auto !important;
+}
+
+.evento-detalhe-container p {
+  white-space: normal; /* permite quebra de linha */
+  word-wrap: break-word; /* quebra palavras grandes */
+  line-height: 1.5rem;
+}
+

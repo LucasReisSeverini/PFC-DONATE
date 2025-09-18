@@ -1,0 +1,39 @@
+<div class="edit-evento-container">
+  <h2>Editar Evento</h2>
+
+  <!-- Botão voltar -->
+  <button type="button" class="btn-voltar" (click)="voltarParaGerenciar()">
+    ← Voltar
+  </button>
+
+  <form [formGroup]="eventoForm" (ngSubmit)="salvar()">
+    <div class="full-width">
+      <label>Título</label>
+      <input formControlName="titulo" />
+    </div>
+
+    <div class="full-width">
+      <label>Descrição</label>
+      <textarea formControlName="descricao"></textarea>
+    </div>
+
+    <div class="full-width">
+      <label>Data</label>
+      <input type="date" formControlName="data" />
+    </div>
+
+    <div class="full-width">
+      <label>Município</label>
+      <select formControlName="id_municipio">
+        <option [ngValue]="null" disabled>Selecione um município</option>
+        <option *ngFor="let municipio of municipios" [ngValue]="municipio.id">
+          {{ municipio.nome }} - {{ municipio.unidadeFederativa.sigla }}
+        </option>
+      </select>
+    </div>
+
+    <div class="botoes-container">
+      <button type="submit" [disabled]="eventoForm.invalid">Salvar</button>
+    </div>
+  </form>
+</div>

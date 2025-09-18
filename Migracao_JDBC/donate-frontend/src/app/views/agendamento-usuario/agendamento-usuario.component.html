@@ -1,0 +1,64 @@
+<div class="agendamentos-container">
+  <h2>Meus Agendamentos</h2>
+
+  <!-- Filtros -->
+  <div class="filtros">
+    <input type="text" placeholder="Filtrar por Banco de Leite" [(ngModel)]="filtroBanco" />
+    <select [(ngModel)]="filtroStatus">
+      <option value="">Todos os Status</option>
+      <option value="pendente">Pendente</option>
+      <option value="aceito">Aceito</option>
+      <option value="recusado">Recusado</option>
+      <option value="reagendamento solicitado">Reagendamento Solicitado</option>
+    </select>
+    <select [(ngModel)]="ordenarData">
+      <option value="recentes">Data: Mais recentes</option>
+      <option value="antigas">Data: Mais antigas</option>
+    </select>
+  </div>
+
+  <!-- Tabela/Lista de Agendamentos -->
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Data</th>
+      <th>Status</th>
+      <th>ML</th>
+      <th>Doadora</th>
+      <th>Banco de Leite</th>
+      <th>Rua</th>
+      <th>Número</th>
+      <th>Bairro</th>
+      <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let agendamento of agendamentosFiltrados()">
+      <td data-label="ID">{{ agendamento.id }}</td>
+      <td data-label="Data">{{ formatarData(agendamento.data_doacao) }}</td>
+      <td data-label="Status">{{ agendamento.status }}</td>
+      <td data-label="ML">{{ agendamento.quantidade_ml }} ml</td>
+      <td data-label="Doadora">{{ agendamento.nome_doadora }}</td>
+      <td data-label="Banco de Leite">{{ agendamento.nome_banco_leite }}</td>
+      <td data-label="Rua">{{ agendamento.rua }}</td>
+      <td data-label="Número">{{ agendamento.numero }}</td>
+      <td data-label="Bairro">{{ agendamento.bairro }}</td>
+      <td data-label="Ações" class="acoes-container">
+        <div class="acoes-botoes">
+          <button class="cancelar-btn" (click)="cancelarAgendamento(agendamento.id)">Cancelar</button>
+        </div>
+        <div class="reagendamento">
+          <input type="datetime-local" [(ngModel)]="novaDataReagendamento[agendamento.id]" />
+          <button class="reagendar-btn" (click)="solicitarReagendamento(agendamento.id)">Solicitar Reagendamento</button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Botão Voltar -->
+  <div>
+    <button class="botao-voltar" (click)="voltar()">Voltar</button>
+  </div>
+</div>

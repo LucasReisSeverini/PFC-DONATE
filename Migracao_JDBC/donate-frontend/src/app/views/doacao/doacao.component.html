@@ -1,0 +1,123 @@
+<div class="doacao-container">
+  <h1>Agendar Doação</h1>
+  <form [formGroup]="doacaoForm" (ngSubmit)="agendarDoacao()">
+
+    <!-- Botão usar banco mais próximo -->
+    <div style="margin-top: 4px; display: flex; align-items: center;">
+      <button mat-stroked-button color="accent" type="button" (click)="usarBancoMaisProximo()" style="font-weight: bold;">
+        📍 Usar banco de leite mais próximo
+      </button>
+    </div>
+
+    <!-- Banco de leite -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Banco de leite</mat-label>
+      <mat-select formControlName="id_bancos_de_leite">
+        <mat-option *ngFor="let banco of bancosDeLeite" [value]="banco.id">
+          {{ banco.nome }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="doacaoForm.get('id_bancos_de_leite')?.hasError('required') && doacaoForm.get('id_bancos_de_leite')?.touched">
+        Selecione um banco de leite.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Quantidade -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Quantidade (ml)</mat-label>
+      <input matInput type="number" formControlName="quantidade_ml" placeholder="Ex: 250" />
+      <mat-error *ngIf="doacaoForm.get('quantidade_ml')?.hasError('required') && doacaoForm.get('quantidade_ml')?.touched">
+        Informe a quantidade.
+      </mat-error>
+      <mat-error *ngIf="doacaoForm.get('quantidade_ml')?.hasError('min') && doacaoForm.get('quantidade_ml')?.touched">
+        A quantidade deve ser maior que zero.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Rua -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Rua</mat-label>
+      <input matInput type="text" formControlName="rua" placeholder="Digite a rua" />
+      <mat-error *ngIf="doacaoForm.get('rua')?.hasError('required') && doacaoForm.get('rua')?.touched">
+        Informe a rua.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Número e Bairro lado a lado -->
+    <div class="endereco-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Número</mat-label>
+        <input matInput type="text" formControlName="numero" placeholder="Digite o número" />
+        <mat-error *ngIf="doacaoForm.get('numero')?.hasError('required') && doacaoForm.get('numero')?.touched">
+          Informe o número.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Bairro</mat-label>
+        <input matInput type="text" formControlName="bairro" placeholder="Digite o bairro" />
+        <mat-error *ngIf="doacaoForm.get('bairro')?.hasError('required') && doacaoForm.get('bairro')?.touched">
+          Informe o bairro.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Data e Hora -->
+    <div class="data-horario">
+      <!-- Calendário -->
+      <div class="calendario-container">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Data da doação</mat-label>
+          <input matInput type="text" readonly
+                 [value]="dataSelecionada"
+                 (click)="toggleCalendario()"
+                 placeholder="DD/MM/AAAA">
+          <button matSuffix type="button" (click)="toggleCalendario()">📅</button>
+          <mat-error *ngIf="doacaoForm.get('data_doacao')?.hasError('required') && doacaoForm.get('data_doacao')?.touched">
+            Selecione uma data.
+          </mat-error>
+        </mat-form-field>
+
+        <div class="calendario" *ngIf="mostrarCalendario">
+          <div class="calendario-header">
+            <button type="button" (click)="mesAnterior()">←</button>
+            <span>{{ meses[mesAtual] }} {{ anoAtual }}</span>
+            <button type="button" (click)="mesSeguinte()">→</button>
+          </div>
+
+          <div class="dias-semana">
+            <div *ngFor="let dia of diasDaSemana" class="dia-semana">{{ dia }}</div>
+          </div>
+
+          <div class="dias-mes">
+            <div *ngFor="let dia of diasDoMes"
+                 class="dia-mes"
+                 [class.selecionado]="dia && dataSelecionada === formatarDataExibicao(dia, mesAtual, anoAtual)"
+                 (click)="dia ? selecionarData(dia) : null">
+              {{ dia || '' }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hora -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Hora da doação</mat-label>
+        <input matInput type="time" formControlName="hora_doacao" />
+        <mat-error *ngIf="doacaoForm.get('hora_doacao')?.hasError('required') && doacaoForm.get('hora_doacao')?.touched">
+          Informe a hora da doação.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Botão de enviar -->
+    <button type="submit" mat-raised-button color="primary">Agendar</button>
+  </form>
+
+  <!-- Botão de voltar -->
+  <div class="back-button">
+    <button mat-stroked-button color="accent" (click)="voltarParaPainel()">
+      ← Voltar para o Painel
+    </button>
+  </div>
+</div>

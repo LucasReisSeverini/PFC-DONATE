@@ -1,0 +1,11 @@
+<div class="evento-detalhe-container">
+  <h2>{{ evento.titulo }}</h2>
+
+  <p><strong>Data:</strong> {{ evento.data | date:'dd/MM/yyyy' }}</p>
+  <p><strong>Tipo:</strong> {{ evento.tipo | titlecase }}</p>
+  <p *ngIf="evento.cidadeNome"><strong>Cidade:</strong> {{ evento.cidadeNome }}</p>
+
+  <p>{{ evento.descricao }}</p>
+
+  <button mat-raised-button color="primary" (click)="fechar()">Fechar</button>
+</div>

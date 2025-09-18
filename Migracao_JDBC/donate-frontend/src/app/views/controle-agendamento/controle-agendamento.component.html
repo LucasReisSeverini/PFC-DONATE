@@ -1,0 +1,70 @@
+<div class="agendamentos-container">
+  <h2>Controle de Agendamentos</h2>
+
+  <!-- Botão Voltar + Botões de banco próximo / todos -->
+  <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+    <button class="btn-voltar" (click)="voltarHome()">← Voltar</button>
+    <button class="btn-proximos" (click)="agendamentosProximos()" style="font-weight: bold;">
+      📍 Agendamentos próximos
+    </button>
+    <button class="btn-todos" (click)="mostrarTodosAgendamentos()">Mostrar todos</button>
+  </div>
+
+  <!-- Filtros -->
+  <div class="filtros">
+    <input type="text" placeholder="Filtrar por Doadora" [(ngModel)]="filtroDoadora" />
+    <input type="text" placeholder="Filtrar por Banco de Leite" [(ngModel)]="filtroBanco" />
+    <select [(ngModel)]="filtroStatus">
+      <option value="">Todos os Status</option>
+      <option value="Pendente">Pendente</option>
+      <option value="Aceito">Aceito</option>
+      <option value="Recusado">Recusado</option>
+      <option value="Reagendamento Solicitado">Reagendamento Solicitado</option>
+    </select>
+    <select [(ngModel)]="ordenarData">
+      <option value="recentes">Data: Mais recentes</option>
+      <option value="antigas">Data: Mais antigas</option>
+    </select>
+  </div>
+
+  <!-- Tabela de Agendamentos -->
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Data</th>
+      <th>Status</th>
+      <th>ML</th>
+      <th>Doadora</th>
+      <th>Banco de Leite</th>
+      <th>Rua</th>
+      <th>Número</th>
+      <th>Bairro</th>
+      <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let agendamento of agendamentosFiltrados()">
+      <td data-label="ID">{{ agendamento.id }}</td>
+      <td data-label="Data">{{ formatarData(agendamento.data_agendamento) }}</td>
+      <td data-label="Status">{{ agendamento.status }}</td>
+      <td data-label="ML">{{ agendamento.quantidade_ml }} ml</td>
+      <td data-label="Doadora">{{ agendamento.nome_doadora }}</td>
+      <td data-label="Banco de Leite">{{ agendamento.bancoDeLeite }}</td>
+      <td data-label="Rua">{{ agendamento.rua || '-' }}</td>
+      <td data-label="Número">{{ agendamento.numero || '-' }}</td>
+      <td data-label="Bairro">{{ agendamento.bairro || '-' }}</td>
+      <td data-label="Ações" class="acoes-container">
+        <div class="acoes-botoes">
+          <button class="btn-aceitar" (click)="aceitar(agendamento.id)">Aceitar</button>
+          <button class="btn-recusar" (click)="recusar(agendamento.id)">Recusar</button>
+        </div>
+        <div class="reagendamento">
+          <input type="datetime-local" [(ngModel)]="novaDataReagendamento[agendamento.id]" />
+          <button class="btn-reagendar" (click)="reagendar(agendamento.id)">Reagendar</button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

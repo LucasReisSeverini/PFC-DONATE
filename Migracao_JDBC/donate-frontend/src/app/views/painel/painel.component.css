@@ -1,0 +1,115 @@
+/* Container geral */
+.painel-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+/* Cabeçalho */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #d46a92;
+}
+
+nav button {
+  margin-left: 10px;
+}
+
+/* Seções gerais */
+section {
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  text-align: left; /* Todos os botões ficam no canto esquerdo */
+}
+
+/* Info doação */
+.info-doacao {
+  background-color: #fff3f8;
+  border-left: 4px solid #f06292;
+}
+
+.info-doacao h2 {
+  margin-bottom: 10px;
+  font-size: 22px;
+  color: #d81b60;
+}
+
+/* Localização */
+.localizacao {
+  background-color: #e3f2fd;
+  border-left: 4px solid #42a5f5;
+}
+
+.localizacao h3 {
+  margin-bottom: 8px;
+  color: #1565c0;
+}
+
+/* Faça sua doação */
+.faca-sua-doacao {
+  background-color: #fce4ec;
+  border-left: 4px solid #ec407a;
+}
+
+.faca-sua-doacao h3 {
+  margin-bottom: 10px;
+  font-size: 22px;
+  color: #c2185b;
+}
+
+/* Eventos e Novidades (azul igual "Ver banco próximo") */
+.eventos-novidades {
+  background-color: #e3f2fd; /* azul claro */
+  border-left: 4px solid #42a5f5; /* azul médio */
+}
+
+.eventos-novidades h3 {
+  margin-bottom: 10px;
+  font-size: 22px;
+  color: #1565c0; /* azul escuro */
+}
+
+/* Conteúdos Educativos */
+.conteudos-educativos {
+  background-color: #fff0f6; /* rosa clarinho */
+  border-left: 4px solid #d81b60; /* rosa forte */
+}
+
+.conteudos-educativos h2 {
+  color: #ad1457;
+  margin-bottom: 15px;
+  font-size: 22px;
+  font-weight: 600;
+  border-bottom: 2px solid #ad1457;
+  padding-bottom: 6px;
+}
+
+.conteudos-educativos p,
+.conteudos-educativos ul {
+  color: #4a4a4a;
+}
+
+/* Botões gerais */
+button.mat-button,
+button.mat-stroked-button,
+button.mat-raised-button {
+  margin-top: 15px;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.8rem 2rem;
+}

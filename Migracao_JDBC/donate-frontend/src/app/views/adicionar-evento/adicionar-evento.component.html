@@ -1,0 +1,43 @@
+<div class="adicionar-evento-container">
+  <h2>📢 Adicionar Evento/Notícia</h2>
+
+  <form [formGroup]="eventoForm" (ngSubmit)="salvarEvento()">
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="titulo" placeholder="Digite o título" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Descrição</mat-label>
+      <textarea matInput formControlName="descricao" rows="5" placeholder="Digite a descrição" required></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Data</mat-label>
+      <input matInput type="date" formControlName="data" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Tipo</mat-label>
+      <mat-select formControlName="tipo" required>
+        <mat-option value="evento">Evento</mat-option>
+        <mat-option value="noticia">Notícia</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Município</mat-label>
+      <mat-select formControlName="id_municipio" required>
+        <mat-option *ngFor="let municipio of municipios" [value]="municipio.id">
+          {{ municipio.nome }} - {{ municipio.unidadeFederativa.sigla }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="botoes-container">
+      <button mat-stroked-button color="accent" type="button" (click)="voltar()">← Voltar</button>
+      <button mat-raised-button color="primary" type="submit">Salvar</button>
+    </div>
+  </form>
+</div>

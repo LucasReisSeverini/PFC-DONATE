@@ -1,0 +1,8 @@
+#map {
+  width: 100%;        /* largura total do container */
+  max-width: 600px;   /* limite máximo da largura */
+  height: 300px;      /* altura fixa — MUITO importante */
+  margin: 20px auto;  /* centraliza horizontalmente */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}

@@ -1,0 +1,119 @@
+<div class="painel-container">
+  <header>
+    <div class="logo">🌸 Donate</div>
+    <nav>
+      <button mat-button [routerLink]="'/perfil'">Meu Perfil</button>
+      <button mat-button [routerLink]="'/meus-agendamentos'">Meus Agendamentos</button>
+
+      <mat-menu #areaProfMenu="matMenu">
+        <button mat-menu-item [routerLink]="'/controle-agendamento'">
+          Controle de Agendamentos
+        </button>
+        <button mat-menu-item [routerLink]="'/gerenciar-eventos'">
+          Gerenciar Notícias
+        </button>
+      </mat-menu>
+
+      <button mat-button *ngIf="roleUsuario === 'PROFISSIONAL'" [matMenuTriggerFor]="areaProfMenu">
+        Área Profissional
+      </button>
+
+      <button mat-button (click)="sair()">Sair</button>
+    </nav>
+  </header>
+
+  <!-- Info doação -->
+  <section class="info-doacao">
+    <h2>🤱 A importância de doar leite materno</h2>
+    <p>
+      O leite materno salva vidas! Ao doar, você ajuda bebês prematuros e doentes a receberem os nutrientes essenciais para seu desenvolvimento saudável.
+    </p>
+  </section>
+
+  <!-- Localização -->
+  <section class="localizacao">
+    <h3>📍 Encontre o banco de leite mais próximo</h3>
+    <p>Em breve você poderá ver no mapa o local mais próximo para doar.</p>
+    <button mat-stroked-button color="accent" (click)="irParaBancoProximo()">
+      VER BANCO MAIS PRÓXIMO
+    </button>
+  </section>
+
+  <!-- Faça sua doação -->
+  <section class="faca-sua-doacao">
+    <h3>🎁 Faça sua doação de leite materno</h3>
+    <p>
+      Seu gesto pode transformar vidas. Clique no botão abaixo para iniciar o processo de doação e contribuir com a saúde de muitos bebês que precisam.
+    </p>
+    <button mat-raised-button color="primary" [routerLink]="'/doacao'" style="padding: 1rem 3rem; font-weight: 600; font-size: 1.1rem;">
+      FAÇA SUA DOAÇÃO
+    </button>
+  </section>
+
+  <!-- Eventos & Novidades -->
+  <section class="eventos-novidades">
+    <h3>📢 Eventos & Novidades</h3>
+    <p>Fique por dentro das ações, campanhas e novidades relacionadas à doação de leite materno.</p>
+    <button mat-stroked-button color="primary" [routerLink]="'/eventos'">
+      VER EVENTOS
+    </button>
+  </section>
+
+  <!-- Conteúdos educativos -->
+  <section class="conteudos-educativos">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            💡 Técnicas de Coleta e Armazenamento do Leite Materno
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p><strong>Coleta correta do leite materno:</strong></p>
+        <ul>
+          <li>Lave bem as mãos antes de iniciar a coleta.</li>
+          <li>Utilize recipientes esterilizados e próprios para armazenamento.</li>
+          <li>Se usar bomba tira-leite, higienize bem as partes antes e depois do uso.</li>
+          <li>Antes de retirar o leite, massageie suavemente os seios para estimular o fluxo.</li>
+        </ul>
+        <p><strong>Armazenamento seguro:</strong></p>
+        <ul>
+          <li>Armazene o leite em pequenos volumes (60 a 120 ml) para facilitar o descongelamento.</li>
+          <li>Utilize etiquetas com data e hora da coleta para controle.</li>
+          <li>Leite fresco pode ser mantido na geladeira por até 24 horas.</li>
+          <li>Para armazenamento prolongado, congele o leite em freezer a -18°C, podendo durar até 15 dias.</li>
+          <li>Descongele o leite no refrigerador ou em banho-maria, nunca no micro-ondas.</li>
+        </ul>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            👩‍⚕️ Cuidados com a Saúde da Mulher e da Criança
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p><strong>Para as mães:</strong></p>
+        <ul>
+          <li>Mantenha uma alimentação equilibrada e hidratação adequada.</li>
+          <li>Descanse sempre que possível para garantir boa produção de leite.</li>
+          <li>Evite o uso de medicamentos sem orientação médica.</li>
+          <li>Procure apoio e orientação de profissionais de saúde para amamentação.</li>
+        </ul>
+        <p><strong>Para o bebê:</strong></p>
+        <ul>
+          <li>A amamentação exclusiva até os 6 meses é fundamental para o desenvolvimento saudável.</li>
+          <li>Ofereça o leite materno com calma e em ambiente tranquilo.</li>
+          <li>Observe sinais de alergia ou desconforto e procure ajuda médica se necessário.</li>
+        </ul>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            📢 Incentivo e Conscientização
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>Doar leite materno é um gesto de amor e solidariedade que pode salvar vidas. Compartilhe essas informações, incentive outras mães e ajude a ampliar essa rede de apoio tão importante.</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+</div>

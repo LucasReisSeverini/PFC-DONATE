@@ -1,0 +1,39 @@
+<div class="eventos-container">
+  <h2>📢 Eventos & Novidades</h2>
+
+  <!-- Botão Voltar -->
+  <button mat-raised-button color="primary" (click)="voltarPainel()">
+    ← Voltar para Home
+  </button>
+
+  <!-- Botão Eventos Próximos -->
+  <div style="margin: 10px 0;">
+    <button mat-stroked-button color="accent" (click)="eventosProximos()" style="font-weight: bold;">
+      📍 Eventos próximos
+    </button>
+  </div>
+
+  <div class="cards">
+    <mat-card
+      *ngFor="let evento of eventos"0
+      class="card-evento"
+      [ngClass]="evento.tipo"
+      (click)="abrirDetalhe(evento)">
+
+      <mat-card-header>
+        <mat-card-title>{{ evento.titulo }}</mat-card-title>
+        <mat-card-subtitle>
+          {{ evento.data | date:'dd/MM/yyyy' }} - {{ evento.tipo | titlecase }}
+          <span *ngIf="evento.municipioNome"> - {{ evento.municipioNome }}</span>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>
+          {{ evento.descricao | slice:0:100 }}
+          {{ evento.descricao.length > 100 ? '...' : '' }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

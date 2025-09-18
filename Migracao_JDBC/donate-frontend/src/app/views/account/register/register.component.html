@@ -1,0 +1,93 @@
+<div class="register-container">
+  <h1 class="logo">Donate</h1>
+  <p class="subtitle">Cadastre-se agora mesmo!</p>
+  <p class="description">
+    Quer ser uma doadora ou está precisando de leite materno? Preencha o formulário abaixo 💖
+  </p>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <!-- Nome -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nome completo</mat-label>
+      <input matInput formControlName="nome" placeholder="Digite seu nome" required />
+      <mat-error *ngIf="registerForm.get('nome')?.hasError('required')">O nome é obrigatório.</mat-error>
+    </mat-form-field>
+
+    <!-- Email -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Digite seu email" required />
+      <mat-error *ngIf="registerForm.get('email')?.hasError('required')">O email é obrigatório.</mat-error>
+      <mat-error *ngIf="registerForm.get('email')?.hasError('email')">Email inválido.</mat-error>
+    </mat-form-field>
+
+    <!-- Telefone -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Telefone</mat-label>
+      <input matInput formControlName="telefone" placeholder="Digite seu telefone" required />
+      <mat-error *ngIf="registerForm.get('telefone')?.hasError('required')">Telefone obrigatório.</mat-error>
+    </mat-form-field>
+
+    <!-- CPF -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>CPF</mat-label>
+      <input matInput formControlName="cpf" placeholder="Digite seu CPF" required />
+      <mat-error *ngIf="registerForm.get('cpf')?.hasError('required')">CPF obrigatório.</mat-error>
+    </mat-form-field>
+
+    <!-- Senha -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Senha</mat-label>
+      <input matInput type="password" formControlName="senha" placeholder="Digite sua senha" required />
+      <mat-error *ngIf="registerForm.get('senha')?.hasError('required')">Senha obrigatória.</mat-error>
+    </mat-form-field>
+
+    <!-- Repetir Senha -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Repetir senha</mat-label>
+      <input matInput type="password" formControlName="confirmarSenha" placeholder="Digite novamente sua senha" required />
+      <mat-error *ngIf="registerForm.hasError('senhasDiferentes') && registerForm.get('confirmarSenha')?.touched">
+        As senhas não coincidem.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Seleção de perfil -->
+    <mat-radio-group formControlName="perfil">
+      <mat-radio-button value="doadora">Doadora</mat-radio-button>
+      <mat-radio-button value="receptora">Receptora</mat-radio-button>
+      <mat-radio-button value="profissional">Profissional de saúde</mat-radio-button>
+    </mat-radio-group>
+    <div *ngIf="perfilNaoSelecionadoErro" class="error-text">Selecione o tipo de usuário.</div>
+
+    <!-- Campo de município com autocomplete -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Município</mat-label>
+      <input
+        type="text"
+        matInput
+        [matAutocomplete]="auto"
+        [formControl]="municipioControl"
+        placeholder="Digite seu município"
+      />
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onMunicipioSelecionado($event)">
+        <mat-option *ngFor="let municipio of municipiosFiltrados$ | async" [value]="municipio.nome">
+          {{ municipio.nome }} - {{ municipio.unidadeFederativa.sigla }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="municipioNaoSelecionadoErro">Selecione um município válido.</mat-error>
+    </mat-form-field>
+
+    <!-- escondido, mas com ID real -->
+    <input type="hidden" formControlName="id_municipio" />
+
+    <!-- Latitude e Longitude escondidos -->
+    <input type="hidden" formControlName="latitude" />
+    <input type="hidden" formControlName="longitude" />
+
+    <!-- Botão de cadastro -->
+    <button mat-raised-button color="primary" type="submit" class="full-width">Cadastrar</button>
+  </form>
+
+  <!-- Link para login -->
+  <p class="register-prompt">Já tem uma conta? <a routerLink="/login">Entrar</a></p>
+</div>

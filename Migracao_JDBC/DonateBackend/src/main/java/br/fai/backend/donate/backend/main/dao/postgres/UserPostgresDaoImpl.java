@@ -77,26 +77,26 @@ public class UserPostgresDaoImpl implements UserDao {
 
     @Override
     public void remove(int id) {
-        String sql = "DELETE FROM usuario_model WHERE id = ?";
+        String sql = "DELETE FROM usuario WHERE id = ?";
         jdbcTemplate.update(sql, id);
     }
 
     @Override
     public UsuarioModel readByID(int id) {
-        String sql = "SELECT * FROM usuario_model WHERE id = ?";
+        String sql = "SELECT * FROM usuario WHERE id = ?";
         List<UsuarioModel> result = jdbcTemplate.query(sql, rowMapper, id);
         return result.isEmpty() ? null : result.get(0);
     }
 
     @Override
     public List<UsuarioModel> readAll() {
-        String sql = "SELECT * FROM usuario_model";
+        String sql = "SELECT * FROM usuario";
         return jdbcTemplate.query(sql, rowMapper);
     }
 
     @Override
     public void updateInformation(int id, UsuarioModel entity) {
-        String sql = "UPDATE usuario_model SET nome = ?, telefone = ?, email = ?, cpf = ?, doadora = ?, receptora = ?, profissional = ?, admin = ?, latitude = ?, longitude = ? WHERE id = ?";
+        String sql = "UPDATE usuario SET nome = ?, telefone = ?, email = ?, cpf = ?, doadora = ?, receptora = ?, profissional = ?, admin = ?, latitude = ?, longitude = ? WHERE id = ?";
         jdbcTemplate.update(sql,
                 entity.getNome(),
                 entity.getTelefone(),
@@ -113,14 +113,14 @@ public class UserPostgresDaoImpl implements UserDao {
 
     @Override
     public UsuarioModel readByEmail(String email) {
-        String sql = "SELECT * FROM usuario_model WHERE email = ?";
+        String sql = "SELECT * FROM usuario WHERE email = ?";
         List<UsuarioModel> result = jdbcTemplate.query(sql, rowMapper, email);
         return result.isEmpty() ? null : result.get(0);
     }
 
     @Override
     public boolean updatePassword(int id, String newPassword) {
-        String sql = "UPDATE usuario_model SET senha = ? WHERE id = ?";
+        String sql = "UPDATE usuario SET senha = ? WHERE id = ?";
         return jdbcTemplate.update(sql, newPassword, id) > 0;
     }
 }

@@ -63,10 +63,17 @@ public class UserRestController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping("/email/{email}")
-    public ResponseEntity<UsuarioModel> getEntityByEmail(@PathVariable final String email){
-        UsuarioModel user = userService.findByEmail(email);
-        return ResponseEntity.ok(user);
+//    @GetMapping("/email/{email}")
+//    public ResponseEntity<UsuarioModel> getEntityByEmail(@PathVariable final String email){
+//        UsuarioModel user = userService.findByEmail(email);
+//        return ResponseEntity.ok(user);
+//    }
+
+    @GetMapping("/email")
+    public ResponseEntity<UsuarioModel> buscarPorEmail(@RequestParam String email) {
+        return userService.buscarPorEmail(email)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping()

@@ -1,67 +1,47 @@
 package br.fai.backend.donate.backend.main.security;
 
-
 import br.fai.backend.donate.backend.main.domain.UsuarioModel;
 import br.fai.backend.donate.backend.main.service.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/auth") // endpoint base: /auth/login
+@RequestMapping("/auth") // endpoint base: /auth
 public class AuthenticationController {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private UserServiceImpl usuarioService;
 
     @Autowired
     private JwtService jwtService;
 
     @Autowired
-    private UserServiceImpl usuarioService;
+    private PasswordEncoder passwordEncoder; // ✅ necessário para matches()
 
-//    @PostMapping("/login")
-//    public ResponseEntity<?> login(@RequestBody AuthenticationRequest request) {
-//
-//        authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(
-//                        request.getUsername(),
-//                        request.getPassword()
-//                )
-//        );
-//
-//        UserDetails userDetails = usuarioService.loadUserByUsername(request.getUsername());
-//        String jwt = jwtService.gerarToken(userDetails.getUsername());
-//
-//        return ResponseEntity.ok(new AuthenticationResponse(jwt));
-//    } correto com apenas e-mail no token
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest request) {
 
-        // Autentica com Spring Security
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getSenha()
-                )
-        );
-
-        // Busca o usuário completo para gerar o token
+        // Busca usuário pelo email
         Optional<UsuarioModel> optionalUsuario = usuarioService.buscarPorEmail(request.getEmail());
         if (optionalUsuario.isEmpty()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário não encontrado");
         }
 
         UsuarioModel usuario = optionalUsuario.get();
+
+        // Valida senha com PasswordEncoder
+        if (!passwordEncoder.matches(request.getSenha(), usuario.getSenha())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Senha incorreta");
+        }
+
+        // Gera token JWT
         String jwt = jwtService.gerarToken(usuario);
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
-
 }

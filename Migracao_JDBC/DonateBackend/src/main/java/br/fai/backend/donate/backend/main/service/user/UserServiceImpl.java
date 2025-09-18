@@ -6,6 +6,7 @@ import br.fai.backend.donate.backend.main.port.service.user.UserService;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,39 +16,34 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
+        this.passwordEncoder = passwordEncoder;
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Busca o usuário pelo email
         UsuarioModel usuario = findByEmail(username);
 
         if (usuario == null) {
             throw new UsernameNotFoundException("Usuário não encontrado: " + username);
         }
 
-        // Aqui você pode mapear as roles como authorities
-        // Exemplo simples: cria authorities baseado nos booleanos
         var authorities = new java.util.ArrayList<String>();
         if (Boolean.TRUE.equals(usuario.getDoadora())) authorities.add("DOADORA");
         if (Boolean.TRUE.equals(usuario.getReceptora())) authorities.add("RECEPTORA");
         if (Boolean.TRUE.equals(usuario.getProfissional())) authorities.add("PROFISSIONAL");
 
-
-        // Converte para GrantedAuthority
         var grantedAuthorities = authorities.stream()
                 .map(role -> new org.springframework.security.core.authority.SimpleGrantedAuthority(role))
                 .toList();
 
-        // Retorna UserDetails do Spring Security
         return new User(
-                usuario.getEmail(),    // username
-                usuario.getSenha(),    // password
-                grantedAuthorities     // roles/authorities
+                usuario.getEmail(),
+                usuario.getSenha(),
+                grantedAuthorities
         );
     }
 
@@ -61,16 +57,15 @@ public class UserServiceImpl implements UserService {
             return 0;
         }
 
-        // Se nenhuma flag foi informada, define doadora como padrão
         if (entity.getDoadora() == null && entity.getReceptora() == null && entity.getProfissional() == null) {
             entity.setDoadora(true);
         }
-
-        // Define flags que estiverem null como false
         if (entity.getDoadora() == null) entity.setDoadora(false);
         if (entity.getReceptora() == null) entity.setReceptora(false);
         if (entity.getProfissional() == null) entity.setProfissional(false);
 
+        // Criptografa a senha antes de salvar
+        entity.setSenha(passwordEncoder.encode(entity.getSenha()));
 
         return userDao.add(entity);
     }
@@ -99,11 +94,16 @@ public class UserServiceImpl implements UserService {
         UsuarioModel existente = findById(id);
         if (existente == null) return;
 
-        // Mantém os valores existentes se não forem atualizados
         if (entity.getDoadora() == null) entity.setDoadora(existente.getDoadora());
         if (entity.getReceptora() == null) entity.setReceptora(existente.getReceptora());
         if (entity.getProfissional() == null) entity.setProfissional(existente.getProfissional());
 
+        // Se a senha for atualizada, criptografa
+        if (entity.getSenha() != null && !entity.getSenha().isEmpty()) {
+            entity.setSenha(passwordEncoder.encode(entity.getSenha()));
+        } else {
+            entity.setSenha(existente.getSenha());
+        }
 
         userDao.updateInformation(id, entity);
     }
@@ -116,15 +116,19 @@ public class UserServiceImpl implements UserService {
         UsuarioModel user = findById(id);
         if (user == null) return false;
 
-        if (!user.getSenha().equals(oldPassword)) return false;
+        // Verifica a senha antiga usando encoder
+        if (!passwordEncoder.matches(oldPassword, user.getSenha())) return false;
 
-        return userDao.updatePassword(id, newPassword);
+        String senhaCriptografada = passwordEncoder.encode(newPassword);
+        return userDao.updatePassword(id, senhaCriptografada);
     }
 
     @Override
     public boolean recoveryPassword(int id, String newPassword) {
         if (id <= 0 || newPassword == null || newPassword.isEmpty()) return false;
-        return userDao.updatePassword(id, newPassword);
+
+        String senhaCriptografada = passwordEncoder.encode(newPassword);
+        return userDao.updatePassword(id, senhaCriptografada);
     }
 
     // =================== Consulta ===================
@@ -134,7 +138,6 @@ public class UserServiceImpl implements UserService {
         return userDao.readByEmail(email);
     }
 
-    // =================== Autenticação ===================
     @Override
     public UsuarioModel authentication(String email, String password) {
         if (email == null || password == null) return null;
@@ -142,7 +145,8 @@ public class UserServiceImpl implements UserService {
         UsuarioModel user = findByEmail(email);
         if (user == null) return null;
 
-        if (!password.equals(user.getSenha())) return null;
+        // Valida senha usando PasswordEncoder
+        if (!passwordEncoder.matches(password, user.getSenha())) return null;
 
         return user;
     }
@@ -152,8 +156,7 @@ public class UserServiceImpl implements UserService {
             return Optional.empty();
         }
 
-        UsuarioModel usuario = userDao.readByEmail(email); // supondo que você já tenha esse método no DAO
+        UsuarioModel usuario = userDao.readByEmail(email);
         return Optional.ofNullable(usuario);
     }
-
 }

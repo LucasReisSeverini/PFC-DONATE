@@ -4,12 +4,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import br.fai.backend.donate.backend.main.domain.DoacaoModel;
+import br.fai.backend.donate.backend.main.dto.DoacaoListDTO;
 
 public interface DoacaoDao {
 
     int salvar(DoacaoModel doacao);
 
-    List<DoacaoModel> listarTodas();
+    List<DoacaoListDTO> listarTodas();
+    Optional<DoacaoListDTO> buscarPorIdDTO(Long id); // novo método
 
     Optional<DoacaoModel> buscarPorId(Long id);
 
@@ -19,5 +21,5 @@ public interface DoacaoDao {
 
     boolean existeAgendamento(Long idBanco, LocalDateTime dataHora);
 
-    List<DoacaoModel> buscarPorUsuarioId(Long idUsuario);
+    List<DoacaoListDTO> buscarPorUsuarioId(Long idUsuario);
 }

@@ -1,6 +1,7 @@
 package br.fai.backend.donate.backend.main.service.doacao;
 
 import br.fai.backend.donate.backend.main.domain.DoacaoModel;
+import br.fai.backend.donate.backend.main.dto.DoacaoListDTO;
 import br.fai.backend.donate.backend.main.port.dao.doacao.DoacaoDao;
 import br.fai.backend.donate.backend.main.port.service.doacao.DoacaoService;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class DoacaoServiceImpl implements DoacaoService {
     }
 
     @Override
-    public List<DoacaoModel> buscarTodos() {
+    public List<DoacaoListDTO> buscarTodos() {
         return doacaoDao.listarTodas();
     }
 
@@ -72,7 +73,12 @@ public class DoacaoServiceImpl implements DoacaoService {
     }
 
     @Override
-    public List<DoacaoModel> buscarPorUsuarioId(Long idUsuario) {
+    public List<DoacaoListDTO> buscarPorUsuarioId(Long idUsuario) {
         return doacaoDao.buscarPorUsuarioId(idUsuario);
+    }
+
+    @Override
+    public Optional<DoacaoListDTO> buscarPorIdDTO(Long id) {
+        return doacaoDao.buscarPorIdDTO(id); // <<< IMPLEMENTAÇÃO CORRETA
     }
 }

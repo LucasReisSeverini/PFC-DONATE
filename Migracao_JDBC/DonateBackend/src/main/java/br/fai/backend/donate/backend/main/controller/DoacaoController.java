@@ -2,6 +2,7 @@ package br.fai.backend.donate.backend.main.controller;
 
 import br.fai.backend.donate.backend.main.domain.DoacaoModel;
 import br.fai.backend.donate.backend.main.dto.DoacaoDto;
+import br.fai.backend.donate.backend.main.dto.DoacaoListDTO;
 import br.fai.backend.donate.backend.main.port.dao.doacao.DoacaoDao;
 import br.fai.backend.donate.backend.main.port.dao.bancoLeite.BancoLeiteDao;
 import br.fai.backend.donate.backend.main.port.dao.user.UserDao;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-
 @RestController
 @RequestMapping("/doacoes")
 @CrossOrigin(origins = "*")
@@ -31,23 +31,23 @@ public class DoacaoController {
     }
 
     @GetMapping
-    public List<DoacaoModel> buscarTodas() {
+    public List<DoacaoListDTO> buscarTodas() {
         return doacaoService.buscarTodos();
     }
 
     @GetMapping("/usuario/{idUsuario}")
-    public List<DoacaoModel> buscarPorUsuario(@PathVariable Long idUsuario) {
+    public List<DoacaoListDTO> buscarPorUsuario(@PathVariable Long idUsuario) {
         return doacaoService.buscarPorUsuarioId(idUsuario);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DoacaoModel> buscarPorId(@PathVariable Long id) {
-        Optional<DoacaoModel> doacao = doacaoService.buscarPorId(id);
-        return doacao.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<DoacaoListDTO> buscarPorId(@PathVariable Long id) {
+        Optional<DoacaoListDTO> doacaoDTO = doacaoService.buscarPorIdDTO(id);
+        return doacaoDTO.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<?> criar(@RequestBody DoacaoDto dto) {
+    public ResponseEntity<DoacaoListDTO> criar(@RequestBody DoacaoDto dto) {
         String dataHoraStr = dto.getData_doacao() + "T" + dto.getHora_doacao();
         LocalDateTime dataHora = LocalDateTime.parse(dataHoraStr);
 
@@ -55,27 +55,25 @@ public class DoacaoController {
         if (existe) {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
-                    .body("Já existe um agendamento para essa data e horário nesse banco de leite.");
+                    .body(null); // ou mensagem de conflito, mas retornando DTO nulo
         }
 
         DoacaoModel doacao = new DoacaoModel();
         doacao.setDataDoacao(dataHora);
         doacao.setQuantidadeMl(dto.getQuantidade_ml());
         doacao.setStatus("pendente");
-
-        // Endereço
         doacao.setRua(dto.getRua());
         doacao.setNumero(dto.getNumero());
         doacao.setBairro(dto.getBairro());
-
-        // IDs de referência
         doacao.setBancoDeLeiteId(dto.getId_bancos_de_leite());
         doacao.setUsuarioId(dto.getId_usuario());
 
         int idSalvo = doacaoService.salvar(doacao);
         doacao.setId((long) idSalvo);
 
-        return ResponseEntity.ok(doacao);
+        // Retornar DTO com nomes preenchidos
+        Optional<DoacaoListDTO> dtoSalvo = doacaoService.buscarPorIdDTO(doacao.getId());
+        return dtoSalvo.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}/status")

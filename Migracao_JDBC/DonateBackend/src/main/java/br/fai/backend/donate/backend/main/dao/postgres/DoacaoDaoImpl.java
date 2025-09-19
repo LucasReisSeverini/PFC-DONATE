@@ -1,6 +1,7 @@
 package br.fai.backend.donate.backend.main.dao.postgres;
 
 import br.fai.backend.donate.backend.main.domain.DoacaoModel;
+import br.fai.backend.donate.backend.main.dto.DoacaoListDTO;
 import br.fai.backend.donate.backend.main.port.dao.doacao.DoacaoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -55,27 +56,76 @@ public class DoacaoDaoImpl implements DoacaoDao {
         }
     }
 
+    // Listagem completa usando DTO
     @Override
-    public List<DoacaoModel> listarTodas() {
-        String sql = "SELECT * FROM doacao";
-        List<DoacaoModel> doacoes = new ArrayList<>();
+    public List<DoacaoListDTO> listarTodas() {
+        String sql = """
+            SELECT d.id, d.data_doacao, d.status, d.quantidade_ml, d.rua, d.numero, d.bairro,
+                   u.nome AS nome_usuario,
+                   b.nome AS nome_banco
+            FROM doacao d
+            JOIN usuario u ON d.id_usuario = u.id
+            JOIN bancos_de_leite b ON d.id_bancos_de_leite = b.id
+        """;
 
+        List<DoacaoListDTO> doacoes = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                DoacaoModel doacao = new DoacaoModel();
-                doacao.setId(rs.getLong("id"));
-                doacao.setDataDoacao(rs.getTimestamp("data_doacao").toLocalDateTime());
-                doacao.setStatus(rs.getString("status"));
-                doacao.setQuantidadeMl(rs.getInt("quantidade_ml"));
-                doacao.setRua(rs.getString("rua"));
-                doacao.setNumero(rs.getString("numero"));
-                doacao.setBairro(rs.getString("bairro"));
-                doacao.setUsuarioId(rs.getLong("id_usuario"));
-                doacao.setBancoDeLeiteId(rs.getLong("id_bancos_de_leite"));
+                DoacaoListDTO dto = new DoacaoListDTO();
+                dto.setId(rs.getLong("id"));
+                dto.setDataDoacao(rs.getTimestamp("data_doacao").toLocalDateTime());
+                dto.setStatus(rs.getString("status"));
+                dto.setQuantidadeMl(rs.getInt("quantidade_ml"));
+                dto.setRua(rs.getString("rua"));
+                dto.setNumero(rs.getString("numero"));
+                dto.setBairro(rs.getString("bairro"));
+                dto.setNomeUsuario(rs.getString("nome_usuario"));
+                dto.setNomeBanco(rs.getString("nome_banco"));
 
-                doacoes.add(doacao);
+                doacoes.add(dto);
+            }
+
+            return doacoes;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // Listagem por usuário usando DTO
+    @Override
+    public List<DoacaoListDTO> buscarPorUsuarioId(Long idUsuario) {
+        String sql = """
+            SELECT d.id, d.data_doacao, d.status, d.quantidade_ml, d.rua, d.numero, d.bairro,
+                   u.nome AS nome_usuario,
+                   b.nome AS nome_banco
+            FROM doacao d
+            JOIN usuario u ON d.id_usuario = u.id
+            JOIN bancos_de_leite b ON d.id_bancos_de_leite = b.id
+            WHERE d.id_usuario = ?
+        """;
+
+        List<DoacaoListDTO> doacoes = new ArrayList<>();
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setLong(1, idUsuario);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    DoacaoListDTO dto = new DoacaoListDTO();
+                    dto.setId(rs.getLong("id"));
+                    dto.setDataDoacao(rs.getTimestamp("data_doacao").toLocalDateTime());
+                    dto.setStatus(rs.getString("status"));
+                    dto.setQuantidadeMl(rs.getInt("quantidade_ml"));
+                    dto.setRua(rs.getString("rua"));
+                    dto.setNumero(rs.getString("numero"));
+                    dto.setBairro(rs.getString("bairro"));
+                    dto.setNomeUsuario(rs.getString("nome_usuario"));
+                    dto.setNomeBanco(rs.getString("nome_banco"));
+
+                    doacoes.add(dto);
+                }
             }
 
             return doacoes;
@@ -151,37 +201,6 @@ public class DoacaoDaoImpl implements DoacaoDao {
     }
 
     @Override
-    public List<DoacaoModel> buscarPorUsuarioId(Long idUsuario) {
-        String sql = "SELECT * FROM doacao WHERE id_usuario = ?";
-        List<DoacaoModel> doacoes = new ArrayList<>();
-
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setLong(1, idUsuario);
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    DoacaoModel doacao = new DoacaoModel();
-                    doacao.setId(rs.getLong("id"));
-                    doacao.setDataDoacao(rs.getTimestamp("data_doacao").toLocalDateTime());
-                    doacao.setStatus(rs.getString("status"));
-                    doacao.setQuantidadeMl(rs.getInt("quantidade_ml"));
-                    doacao.setRua(rs.getString("rua"));
-                    doacao.setNumero(rs.getString("numero"));
-                    doacao.setBairro(rs.getString("bairro"));
-                    doacao.setUsuarioId(rs.getLong("id_usuario"));
-                    doacao.setBancoDeLeiteId(rs.getLong("id_bancos_de_leite"));
-
-                    doacoes.add(doacao);
-                }
-            }
-
-            return doacoes;
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
     public boolean existeAgendamento(Long idBanco, LocalDateTime dataHora) {
         String sql = "SELECT COUNT(*) FROM doacao WHERE id_bancos_de_leite = ? AND data_doacao = ?";
 
@@ -197,4 +216,43 @@ public class DoacaoDaoImpl implements DoacaoDao {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public Optional<DoacaoListDTO> buscarPorIdDTO(Long id) {
+        String sql = """
+        SELECT d.id, d.data_doacao, d.status, d.quantidade_ml, d.rua, d.numero, d.bairro,
+               u.nome AS nome_usuario,
+               b.nome AS nome_banco
+        FROM doacao d
+        JOIN usuario u ON d.id_usuario = u.id
+        JOIN bancos_de_leite b ON d.id_bancos_de_leite = b.id
+        WHERE d.id = ?
+    """;
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setLong(1, id);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    DoacaoListDTO dto = new DoacaoListDTO();
+                    dto.setId(rs.getLong("id"));
+                    dto.setDataDoacao(rs.getTimestamp("data_doacao").toLocalDateTime());
+                    dto.setStatus(rs.getString("status"));
+                    dto.setQuantidadeMl(rs.getInt("quantidade_ml"));
+                    dto.setRua(rs.getString("rua"));
+                    dto.setNumero(rs.getString("numero"));
+                    dto.setBairro(rs.getString("bairro"));
+                    dto.setNomeUsuario(rs.getString("nome_usuario"));
+                    dto.setNomeBanco(rs.getString("nome_banco"));
+                    return Optional.of(dto);
+                }
+            }
+
+            return Optional.empty();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

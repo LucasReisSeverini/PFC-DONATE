@@ -59,12 +59,12 @@ export class ControleAgendamentoComponent implements OnInit {
         this.agendamentos = res.map(a => ({
           id: a.id,
           tipo: 'entrega',
-          bancoDeLeite: a.bancoDeLeite?.nome || '-',
+          bancoDeLeite: a.nomeBanco || '-', // nomeBanco direto do DTO
           data_agendamento: a.dataDoacao || '',
           horario: '',
           status: a.status || 'Pendente',
           quantidade_ml: a.quantidadeMl || 0,
-          nome_doadora: a.usuario?.doadora ? a.usuario.nome : '-',
+          nome_doadora: a.nomeUsuario || '-', // nomeUsuario direto do DTO
           observacoes: a.observacoes || '',
           // ENDEREÇO VINDO DO AGENDAMENTO (tabela doacao)
           rua: a.rua || '-',
@@ -76,6 +76,7 @@ export class ControleAgendamentoComponent implements OnInit {
       error: (err: any) => console.error('Erro ao carregar agendamentos', err)
     });
   }
+
 
   agendamentosFiltrados(): AgendamentoDto[] {
     return this.agendamentos

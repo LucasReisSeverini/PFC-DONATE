@@ -38,10 +38,10 @@ export class AgendamentoUsuarioComponent implements OnInit {
         this.agendamentos = res.map(a => ({
           id: a.id,
           data_doacao: a.dataDoacao ? new Date(a.dataDoacao) : null,
-          nome_banco_leite: a.bancoDeLeite?.nome || 'Não informado',
+          nome_banco_leite: a.nomeBanco || 'Não informado', // nomeBanco direto do DTO
           status: a.status || 'Não informado',
           quantidade_ml: a.quantidadeMl || 0,
-          nome_doadora: a.usuario?.doadora ? a.usuario.nome : 'Não informado',
+          nome_doadora: a.nomeUsuario || 'Não informado', // nomeUsuario direto do DTO
           rua: a.rua || 'Não informado',
           numero: a.numero || 'Não informado',
           bairro: a.bairro || 'Não informado',
@@ -50,6 +50,7 @@ export class AgendamentoUsuarioComponent implements OnInit {
       error: (err: any) => console.error('Erro ao carregar agendamentos:', err)
     });
   }
+
 
   agendamentosFiltrados(): any[] {
     return this.agendamentos

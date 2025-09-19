@@ -2,127 +2,208 @@ package br.fai.backend.donate.backend.main.dao.postgres;
 
 import br.fai.backend.donate.backend.main.domain.UsuarioModel;
 import br.fai.backend.donate.backend.main.port.dao.user.UserDao;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class UserPostgresDaoImpl implements UserDao {
 
-    private final JdbcTemplate jdbcTemplate;
+    private final Connection connection;
 
-    public UserPostgresDaoImpl(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    @Autowired
+    public UserPostgresDaoImpl(DataSource dataSource) throws SQLException {
+        this.connection = dataSource.getConnection();
     }
-
-    private final RowMapper<UsuarioModel> rowMapper = new RowMapper<UsuarioModel>() {
-        @Override
-        public UsuarioModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-            UsuarioModel usuario = new UsuarioModel();
-            usuario.setId(rs.getInt("id"));
-            usuario.setNome(rs.getString("nome"));
-            usuario.setTelefone(rs.getString("telefone"));
-            usuario.setSenha(rs.getString("senha"));
-            usuario.setEmail(rs.getString("email"));
-            usuario.setCpf(rs.getString("cpf"));
-            usuario.setDoadora(rs.getBoolean("doadora"));
-            usuario.setReceptora(rs.getBoolean("receptora"));
-            usuario.setProfissional(rs.getBoolean("profissional"));
-            usuario.setLatitude(rs.getObject("latitude") != null ? rs.getDouble("latitude") : null);
-            usuario.setLongitude(rs.getObject("longitude") != null ? rs.getDouble("longitude") : null);
-            return usuario;
-        }
-    };
-
 
     @Override
     public int add(UsuarioModel entity) {
-
-        // Define padrão caso todas sejam null ou false
         if ((entity.getDoadora() == null || !entity.getDoadora())
                 && (entity.getReceptora() == null || !entity.getReceptora())
                 && (entity.getProfissional() == null || !entity.getProfissional())) {
-            entity.setDoadora(true); // padrão como doadora
+            entity.setDoadora(true);
         }
 
-        String sql = "INSERT INTO usuario " +
-                "(nome, telefone, senha, email, cpf, doadora, receptora, profissional, latitude, longitude, id_municipio) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id;";
+        String sql = "INSERT INTO usuario (nome, telefone, senha, email, cpf, doadora, receptora, profissional, latitude, longitude, id_municipio) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        return jdbcTemplate.queryForObject(
-                sql,
-                Integer.class,
-                entity.getNome(),
-                entity.getTelefone(),
-                entity.getSenha(),
-                entity.getEmail(),
-                entity.getCpf(),
-                entity.getDoadora(),
-                entity.getReceptora(),
-                entity.getProfissional(),
-                entity.getLatitude(),
-                entity.getLongitude(),
-                entity.getIdMunicipio()
-        );
+        try {
+            connection.setAutoCommit(false);
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+                ps.setString(1, entity.getNome());
+                ps.setString(2, entity.getTelefone());
+                ps.setString(3, entity.getSenha());
+                ps.setString(4, entity.getEmail());
+                ps.setString(5, entity.getCpf());
+                ps.setBoolean(6, entity.getDoadora());
+                ps.setBoolean(7, entity.getReceptora());
+                ps.setBoolean(8, entity.getProfissional());
+
+                if (entity.getLatitude() != null) ps.setDouble(9, entity.getLatitude());
+                else ps.setNull(9, Types.DOUBLE);
+
+                if (entity.getLongitude() != null) ps.setDouble(10, entity.getLongitude());
+                else ps.setNull(10, Types.DOUBLE);
+
+                ps.setInt(11, entity.getIdMunicipio());
+
+                ps.executeUpdate();
+
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        entity.setId(rs.getInt(1));
+                    }
+                }
+            }
+
+            connection.commit();
+            return entity.getId();
+
+        } catch (SQLException e) {
+            try { connection.rollback(); } catch (SQLException ex) { throw new RuntimeException(ex); }
+            throw new RuntimeException(e);
+        }
     }
-
-
-
-
 
     @Override
     public void remove(int id) {
         String sql = "DELETE FROM usuario WHERE id = ?";
-        jdbcTemplate.update(sql, id);
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public UsuarioModel readByID(int id) {
         String sql = "SELECT * FROM usuario WHERE id = ?";
-        List<UsuarioModel> result = jdbcTemplate.query(sql, rowMapper, id);
-        return result.isEmpty() ? null : result.get(0);
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    UsuarioModel usuario = new UsuarioModel();
+                    usuario.setId(rs.getInt("id"));
+                    usuario.setNome(rs.getString("nome"));
+                    usuario.setTelefone(rs.getString("telefone"));
+                    usuario.setSenha(rs.getString("senha"));
+                    usuario.setEmail(rs.getString("email"));
+                    usuario.setCpf(rs.getString("cpf"));
+                    usuario.setDoadora(rs.getBoolean("doadora"));
+                    usuario.setReceptora(rs.getBoolean("receptora"));
+                    usuario.setProfissional(rs.getBoolean("profissional"));
+                    usuario.setLatitude(rs.getObject("latitude") != null ? rs.getDouble("latitude") : null);
+                    usuario.setLongitude(rs.getObject("longitude") != null ? rs.getDouble("longitude") : null);
+                    usuario.setIdMunicipio(rs.getInt("id_municipio"));
+                    return usuario;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
     }
 
     @Override
     public List<UsuarioModel> readAll() {
         String sql = "SELECT * FROM usuario";
-        return jdbcTemplate.query(sql, rowMapper);
+        List<UsuarioModel> usuarios = new ArrayList<>();
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                UsuarioModel usuario = new UsuarioModel();
+                usuario.setId(rs.getInt("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setTelefone(rs.getString("telefone"));
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setCpf(rs.getString("cpf"));
+                usuario.setDoadora(rs.getBoolean("doadora"));
+                usuario.setReceptora(rs.getBoolean("receptora"));
+                usuario.setProfissional(rs.getBoolean("profissional"));
+                usuario.setLatitude(rs.getObject("latitude") != null ? rs.getDouble("latitude") : null);
+                usuario.setLongitude(rs.getObject("longitude") != null ? rs.getDouble("longitude") : null);
+                usuario.setIdMunicipio(rs.getInt("id_municipio"));
+
+                usuarios.add(usuario);
+            }
+            return usuarios;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void updateInformation(int id, UsuarioModel entity) {
         String sql = "UPDATE usuario SET nome = ?, telefone = ?, email = ?, cpf = ?, doadora = ?, receptora = ?, profissional = ?, latitude = ?, longitude = ? WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, entity.getNome());
+            ps.setString(2, entity.getTelefone());
+            ps.setString(3, entity.getEmail());
+            ps.setString(4, entity.getCpf());
+            ps.setBoolean(5, entity.getDoadora());
+            ps.setBoolean(6, entity.getReceptora());
+            ps.setBoolean(7, entity.getProfissional());
 
-        jdbcTemplate.update(sql,
-                entity.getNome(),
-                entity.getTelefone(),
-                entity.getEmail(),
-                entity.getCpf(),
-                entity.getDoadora(),
-                entity.getReceptora(),
-                entity.getProfissional(),
-                entity.getLatitude(),
-                entity.getLongitude(),
-                id
-        );
+            if (entity.getLatitude() != null) ps.setDouble(8, entity.getLatitude());
+            else ps.setNull(8, Types.DOUBLE);
+
+            if (entity.getLongitude() != null) ps.setDouble(9, entity.getLongitude());
+            else ps.setNull(9, Types.DOUBLE);
+
+            ps.setInt(10, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
-
 
     @Override
     public UsuarioModel readByEmail(String email) {
         String sql = "SELECT * FROM usuario WHERE email = ?";
-        List<UsuarioModel> result = jdbcTemplate.query(sql, rowMapper, email);
-        return result.isEmpty() ? null : result.get(0);
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    UsuarioModel usuario = new UsuarioModel();
+                    usuario.setId(rs.getInt("id"));
+                    usuario.setNome(rs.getString("nome"));
+                    usuario.setTelefone(rs.getString("telefone"));
+                    usuario.setSenha(rs.getString("senha"));
+                    usuario.setEmail(rs.getString("email"));
+                    usuario.setCpf(rs.getString("cpf"));
+                    usuario.setDoadora(rs.getBoolean("doadora"));
+                    usuario.setReceptora(rs.getBoolean("receptora"));
+                    usuario.setProfissional(rs.getBoolean("profissional"));
+                    usuario.setLatitude(rs.getObject("latitude") != null ? rs.getDouble("latitude") : null);
+                    usuario.setLongitude(rs.getObject("longitude") != null ? rs.getDouble("longitude") : null);
+                    usuario.setIdMunicipio(rs.getInt("id_municipio"));
+                    return usuario;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
     }
 
     @Override
     public boolean updatePassword(int id, String newPassword) {
         String sql = "UPDATE usuario SET senha = ? WHERE id = ?";
-        return jdbcTemplate.update(sql, newPassword, id) > 0;
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, newPassword);
+            ps.setInt(2, id);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

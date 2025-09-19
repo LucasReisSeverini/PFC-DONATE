@@ -8,9 +8,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DoacaoDto {
-    private String data_doacao;  // ex: "2025-06-10"
-    private String hora_doacao;  // ex: "14:30"
+    private String data_doacao;      // ex: "2025-06-10"
+    private String hora_doacao;      // ex: "14:30"
     private Integer quantidade_ml;
     private Long id_bancos_de_leite;
     private Long id_usuario;
+
+    // Campos de endereço da doadora
+    private String rua;
+    private String numero;
+    private String bairro;
 }

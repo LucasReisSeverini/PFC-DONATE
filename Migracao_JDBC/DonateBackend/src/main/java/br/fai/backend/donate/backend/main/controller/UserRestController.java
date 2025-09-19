@@ -2,6 +2,7 @@ package br.fai.backend.donate.backend.main.controller;
 
 import br.fai.backend.donate.backend.main.domain.MunicipioModel;
 import br.fai.backend.donate.backend.main.domain.UsuarioModel;
+import br.fai.backend.donate.backend.main.dto.AtualizarPerfilDto;
 import br.fai.backend.donate.backend.main.dto.UpdatePasswordDto;
 import br.fai.backend.donate.backend.main.port.service.municipio.MunicipioService;
 import br.fai.backend.donate.backend.main.port.service.user.UserService;
@@ -101,4 +102,16 @@ public class UserRestController {
         boolean response = userService.updatePassword(data.getId(), data.getOldPassword(), data.getNewPassword());
         return response ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
+
+    @PutMapping("/{id}/perfil")
+    public ResponseEntity<Void> atualizarPerfil(
+            @PathVariable int id,
+            @RequestBody AtualizarPerfilDto dto) {
+
+        boolean atualizado = userService.atualizarPerfil(id, dto);
+
+        return atualizado ? ResponseEntity.noContent().build() : ResponseEntity.badRequest().build();
+    }
+
+
 }

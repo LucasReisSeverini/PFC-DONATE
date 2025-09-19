@@ -1,13 +1,14 @@
 package br.fai.backend.donate.backend.main.service.bancoLeite;
 
 import br.fai.backend.donate.backend.main.domain.BancoLeiteModel;
+import br.fai.backend.donate.backend.main.dto.BancoLeiteDto;
 import br.fai.backend.donate.backend.main.port.dao.bancoLeite.BancoLeiteDao;
 import br.fai.backend.donate.backend.main.port.service.bancoLeiteService.BancoLeiteService;
+import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+@Service
 public class BancoLeiteServiceImpl implements BancoLeiteService {
 
     private final BancoLeiteDao bancoLeiteDao;
@@ -42,15 +43,14 @@ public class BancoLeiteServiceImpl implements BancoLeiteService {
     }
 
     @Override
-    public Map<String, Object> buscarBancoMaisProximo(double latitude, double longitude) {
+    public BancoLeiteDto buscarBancoMaisProximo(double latitude, double longitude) {
         List<BancoLeiteModel> bancos = bancoLeiteDao.readAll();
         BancoLeiteModel maisProximo = null;
         double menorDistancia = Double.MAX_VALUE;
 
         for (BancoLeiteModel banco : bancos) {
             if (banco.getLatitude() != null && banco.getLongitude() != null) {
-                double dist = Math.pow(banco.getLatitude() - latitude, 2) +
-                        Math.pow(banco.getLongitude() - longitude, 2);
+                double dist = distanciaHaversine(latitude, longitude, banco.getLatitude(), banco.getLongitude());
                 if (dist < menorDistancia) {
                     menorDistancia = dist;
                     maisProximo = banco;
@@ -58,14 +58,28 @@ public class BancoLeiteServiceImpl implements BancoLeiteService {
             }
         }
 
-        if (maisProximo == null) return new HashMap<>();
-        Map<String, Object> map = new HashMap<>();
-        map.put("id", maisProximo.getId());
-        map.put("nome", maisProximo.getNome());
-        map.put("endereco", maisProximo.getEndereco());
-        map.put("telefone", maisProximo.getTelefone());
-        map.put("latitude", maisProximo.getLatitude());
-        map.put("longitude", maisProximo.getLongitude());
-        return map;
+        if (maisProximo == null) return null;
+
+        return new BancoLeiteDto(
+                maisProximo.getId(),
+                maisProximo.getNome(),
+                maisProximo.getEndereco(),
+                maisProximo.getTelefone(),
+                maisProximo.getLatitude(),
+                maisProximo.getLongitude(),
+                menorDistancia // distância incluída no DTO
+        );
+    }
+
+    // Calcula distância em km entre duas coordenadas
+    private double distanciaHaversine(double lat1, double lon1, double lat2, double lon2) {
+        final int R = 6371; // raio da Terra em km
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLon = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c;
     }
 }

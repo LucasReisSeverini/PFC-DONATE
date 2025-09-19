@@ -1,5 +1,6 @@
 package br.fai.backend.donate.backend.main.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,10 +10,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BancoLeiteModel {
 
-    private int id;          // agora é int
+    private Long id;
     private String nome;
     private String endereco;
     private String telefone;
     private Double latitude;
     private Double longitude;
+
+    @JsonProperty("id_municipio")
+    private Integer idMunicipio;
 }

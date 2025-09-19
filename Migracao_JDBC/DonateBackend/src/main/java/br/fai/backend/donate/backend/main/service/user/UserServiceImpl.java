@@ -1,6 +1,7 @@
 package br.fai.backend.donate.backend.main.service.user;
 
 import br.fai.backend.donate.backend.main.domain.UsuarioModel;
+import br.fai.backend.donate.backend.main.dto.AtualizarPerfilDto;
 import br.fai.backend.donate.backend.main.port.dao.user.UserDao;
 import br.fai.backend.donate.backend.main.port.service.user.UserService;
 import org.springframework.security.core.userdetails.User;
@@ -64,7 +65,6 @@ public class UserServiceImpl implements UserService {
         if (entity.getReceptora() == null) entity.setReceptora(false);
         if (entity.getProfissional() == null) entity.setProfissional(false);
 
-        // Criptografa a senha antes de salvar
         entity.setSenha(passwordEncoder.encode(entity.getSenha()));
 
         return userDao.add(entity);
@@ -98,7 +98,6 @@ public class UserServiceImpl implements UserService {
         if (entity.getReceptora() == null) entity.setReceptora(existente.getReceptora());
         if (entity.getProfissional() == null) entity.setProfissional(existente.getProfissional());
 
-        // Se a senha for atualizada, criptografa
         if (entity.getSenha() != null && !entity.getSenha().isEmpty()) {
             entity.setSenha(passwordEncoder.encode(entity.getSenha()));
         } else {
@@ -116,7 +115,6 @@ public class UserServiceImpl implements UserService {
         UsuarioModel user = findById(id);
         if (user == null) return false;
 
-        // Verifica a senha antiga usando encoder
         if (!passwordEncoder.matches(oldPassword, user.getSenha())) return false;
 
         String senhaCriptografada = passwordEncoder.encode(newPassword);
@@ -145,18 +143,45 @@ public class UserServiceImpl implements UserService {
         UsuarioModel user = findByEmail(email);
         if (user == null) return null;
 
-        // Valida senha usando PasswordEncoder
         if (!passwordEncoder.matches(password, user.getSenha())) return null;
 
         return user;
     }
 
+    @Override
     public Optional<UsuarioModel> buscarPorEmail(String email) {
-        if (email == null || email.isEmpty()) {
-            return Optional.empty();
-        }
-
+        if (email == null || email.isEmpty()) return Optional.empty();
         UsuarioModel usuario = userDao.readByEmail(email);
         return Optional.ofNullable(usuario);
     }
+
+    // =================== Atualizar Perfil via DTO ===================
+    @Override
+    public boolean atualizarPerfil(int id, AtualizarPerfilDto dto) {
+        if (id <= 0 || dto == null) return false;
+
+        UsuarioModel existente = findById(id);
+        if (existente == null) return false;
+
+        // Atualiza nome e telefone
+        existente.setNome(dto.getNome() != null ? dto.getNome() : existente.getNome());
+        existente.setTelefone(dto.getTelefone() != null ? dto.getTelefone() : existente.getTelefone());
+
+        // Atualiza senha se houver nova senha
+        if (dto.getNovaSenha() != null && !dto.getNovaSenha().isEmpty()) {
+            // senha antiga é obrigatória
+            if (dto.getSenhaAntiga() == null || dto.getSenhaAntiga().isEmpty()) {
+                return false;
+            }
+            // valida senha antiga
+            if (!passwordEncoder.matches(dto.getSenhaAntiga(), existente.getSenha())) {
+                return false;
+            }
+            existente.setSenha(passwordEncoder.encode(dto.getNovaSenha()));
+        }
+
+        userDao.updateInformation(id, existente);
+        return true;
+    }
+
 }

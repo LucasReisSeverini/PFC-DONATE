@@ -1,8 +1,8 @@
 package br.fai.backend.donate.backend.main.port.service.bancoLeiteService;
 
 import br.fai.backend.donate.backend.main.domain.BancoLeiteModel;
+import br.fai.backend.donate.backend.main.dto.BancoLeiteDto;
 import java.util.List;
-import java.util.Map;
 
 public interface BancoLeiteService {
 
@@ -11,5 +11,7 @@ public interface BancoLeiteService {
     void update(int id, BancoLeiteModel entity);
     BancoLeiteModel findById(int id);
     List<BancoLeiteModel> findAll();
-    Map<String, Object> buscarBancoMaisProximo(double latitude, double longitude);
+
+    // Alterado para retornar DTO
+    BancoLeiteDto buscarBancoMaisProximo(double latitude, double longitude);
 }

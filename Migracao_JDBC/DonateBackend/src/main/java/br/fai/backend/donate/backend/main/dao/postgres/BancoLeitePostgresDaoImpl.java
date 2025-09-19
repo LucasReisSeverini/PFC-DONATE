@@ -2,118 +2,80 @@ package br.fai.backend.donate.backend.main.dao.postgres;
 
 import br.fai.backend.donate.backend.main.domain.BancoLeiteModel;
 import br.fai.backend.donate.backend.main.port.dao.bancoLeite.BancoLeiteDao;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
-
-import java.sql.*;
-import java.util.ArrayList;
+import javax.sql.DataSource;
 import java.util.List;
 
+@Repository
 public class BancoLeitePostgresDaoImpl implements BancoLeiteDao {
 
-    private final Connection connection;
+    private final JdbcTemplate jdbcTemplate;
 
-    public BancoLeitePostgresDaoImpl(Connection connection) {
-        this.connection = connection;
+    public BancoLeitePostgresDaoImpl(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
+
+    private final RowMapper<BancoLeiteModel> rowMapper = (rs, rowNum) -> {
+        BancoLeiteModel banco = new BancoLeiteModel();
+        banco.setId(rs.getLong("id"));
+        banco.setNome(rs.getString("nome"));
+        banco.setEndereco(rs.getString("endereco"));
+        banco.setTelefone(rs.getString("telefone"));
+        banco.setLatitude(rs.getObject("latitude") != null ? rs.getDouble("latitude") : null);
+        banco.setLongitude(rs.getObject("longitude") != null ? rs.getDouble("longitude") : null);
+        banco.setIdMunicipio(rs.getInt("id_municipio"));
+        return banco;
+    };
 
     @Override
     public int add(BancoLeiteModel entity) {
-        String sql = "INSERT INTO banco_leite_model (nome, endereco, telefone, latitude, longitude) " +
-                "VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-            ps.setString(1, entity.getNome());
-            ps.setString(2, entity.getEndereco());
-            ps.setString(3, entity.getTelefone());
-            if (entity.getLatitude() != null) {
-                ps.setDouble(4, entity.getLatitude());
-            } else {
-                ps.setNull(4, Types.DOUBLE);
-            }
-            if (entity.getLongitude() != null) {
-                ps.setDouble(5, entity.getLongitude());
-            } else {
-                ps.setNull(5, Types.DOUBLE);
-            }
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                int id = rs.getInt(1);
-                return id;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return 0;
+        String sql = "INSERT INTO bancos_de_leite (nome, endereco, telefone, latitude, longitude, id_municipio) " +
+                "VALUES (?, ?, ?, ?, ?, ?) RETURNING id";
+        return jdbcTemplate.queryForObject(
+                sql,
+                Integer.class,
+                entity.getNome(),
+                entity.getEndereco(),
+                entity.getTelefone(),
+                entity.getLatitude(),
+                entity.getLongitude(),
+                entity.getIdMunicipio()
+        );
     }
 
     @Override
     public void remove(int id) {
-        String sql = "DELETE FROM banco_leite_model WHERE id = ?";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setInt(1, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        String sql = "DELETE FROM bancos_de_leite WHERE id = ?";
+        jdbcTemplate.update(sql, id);
     }
 
     @Override
     public BancoLeiteModel readByID(int id) {
-        String sql = "SELECT * FROM banco_leite_model WHERE id = ?";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return new BancoLeiteModel(
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("endereco"),
-                        rs.getString("telefone"),
-                        rs.getDouble("latitude"),
-                        rs.getDouble("longitude")
-                );
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
+        String sql = "SELECT * FROM bancos_de_leite WHERE id = ?";
+        List<BancoLeiteModel> result = jdbcTemplate.query(sql, rowMapper, id);
+        return result.isEmpty() ? null : result.get(0);
     }
 
     @Override
     public List<BancoLeiteModel> readAll() {
-        List<BancoLeiteModel> bancos = new ArrayList<>();
-        String sql = "SELECT * FROM banco_leite_model";
-        try (PreparedStatement ps = connection.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                bancos.add(new BancoLeiteModel(
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("endereco"),
-                        rs.getString("telefone"),
-                        rs.getDouble("latitude"),
-                        rs.getDouble("longitude")
-                ));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return bancos;
+        String sql = "SELECT * FROM bancos_de_leite";
+        return jdbcTemplate.query(sql, rowMapper);
     }
 
     @Override
     public void updateInformation(int id, BancoLeiteModel entity) {
-        String sql = "UPDATE banco_leite_model SET nome=?, endereco=?, telefone=?, latitude=?, longitude=? WHERE id=?";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, entity.getNome());
-            ps.setString(2, entity.getEndereco());
-            ps.setString(3, entity.getTelefone());
-            if (entity.getLatitude() != null) ps.setDouble(4, entity.getLatitude()); else ps.setNull(4, Types.DOUBLE);
-            if (entity.getLongitude() != null) ps.setDouble(5, entity.getLongitude()); else ps.setNull(5, Types.DOUBLE);
-            ps.setInt(6, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        String sql = "UPDATE bancos_de_leite SET nome=?, endereco=?, telefone=?, latitude=?, longitude=?, id_municipio=? WHERE id=?";
+        jdbcTemplate.update(sql,
+                entity.getNome(),
+                entity.getEndereco(),
+                entity.getTelefone(),
+                entity.getLatitude(),
+                entity.getLongitude(),
+                entity.getIdMunicipio(),
+                id
+        );
     }
 }

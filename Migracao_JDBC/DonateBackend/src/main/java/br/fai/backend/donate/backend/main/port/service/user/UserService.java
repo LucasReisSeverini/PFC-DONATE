@@ -1,6 +1,7 @@
 package br.fai.backend.donate.backend.main.port.service.user;
 
 import br.fai.backend.donate.backend.main.domain.UsuarioModel;
+import br.fai.backend.donate.backend.main.dto.AtualizarPerfilDto;
 import br.fai.backend.donate.backend.main.port.dao.crud.CrudDao;
 import br.fai.backend.donate.backend.main.port.dao.user.ReadByEmailDao;
 import br.fai.backend.donate.backend.main.port.dao.user.UpdatePasswordDao;
@@ -16,4 +17,6 @@ public interface UserService extends CrudService<UsuarioModel>, UpdatePasswordSe
         , AuthenticationService, RecoveryPasswordService {
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
     Optional<UsuarioModel> buscarPorEmail(String email);
+
+    boolean atualizarPerfil(int id, AtualizarPerfilDto dto);
 }

@@ -96,7 +96,8 @@ public class UserPostgresDaoImpl implements UserDao {
 
     @Override
     public void updateInformation(int id, UsuarioModel entity) {
-        String sql = "UPDATE usuario SET nome = ?, telefone = ?, email = ?, cpf = ?, doadora = ?, receptora = ?, profissional = ?, admin = ?, latitude = ?, longitude = ? WHERE id = ?";
+        String sql = "UPDATE usuario SET nome = ?, telefone = ?, email = ?, cpf = ?, doadora = ?, receptora = ?, profissional = ?, latitude = ?, longitude = ? WHERE id = ?";
+
         jdbcTemplate.update(sql,
                 entity.getNome(),
                 entity.getTelefone(),
@@ -110,6 +111,7 @@ public class UserPostgresDaoImpl implements UserDao {
                 id
         );
     }
+
 
     @Override
     public UsuarioModel readByEmail(String email) {

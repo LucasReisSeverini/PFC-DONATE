@@ -24,7 +24,7 @@ header {
 }
 
 .logo {
-  font-family: 'Quicksand', sans-serif; /* fonte aconchegante */
+  font-family: 'Quicksand', sans-serif;
   font-weight: 700;
   font-size: 32px;
   color: #d46a92;
@@ -37,6 +37,7 @@ nav {
   display: flex;
   gap: 12px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 nav button {
@@ -63,6 +64,7 @@ nav button:hover {
   border-radius: 16px;
   margin-bottom: 32px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+  gap: 20px;
 }
 
 .hero-text h1 {
@@ -85,6 +87,9 @@ nav button:hover {
 .hero-image img {
   max-width: 300px;
   border-radius: 12px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 /* CARDS */
@@ -104,6 +109,12 @@ nav button:hover {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
 }
 
 .card h3 {
@@ -122,6 +133,13 @@ nav button:hover {
 .card button {
   align-self: flex-start;
   font-weight: 600;
+  border-radius: 24px;
+  padding: 8px 16px;
+  transition: background 0.3s;
+}
+
+.card button:hover {
+  opacity: 0.9;
 }
 
 /* Accordion */
@@ -134,9 +152,77 @@ nav button:hover {
   margin-bottom: 16px;
 }
 
-/* Responsivo */
-@media (max-width: 900px) {
-  .hero { flex-direction: column; text-align: center; gap: 24px; }
-  .hero-image img { max-width: 250px; }
-  .cards { flex-direction: column; }
+/* RESPONSIVO */
+@media (max-width: 1024px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 24px;
+  }
+
+  .hero-image img {
+    max-width: 250px;
+  }
+
+  .cards {
+    flex-direction: column;
+  }
+
+  nav {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 24px 16px;
+  }
+
+  .hero-text h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+  }
+
+  .cards {
+    gap: 16px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .painel-container {
+    padding: 16px;
+  }
+
+  .hero-text h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-text p {
+    font-size: 0.95rem;
+  }
+
+  .hero-text button {
+    width: 100%;
+    padding: 12px 0;
+  }
+
+  .cards {
+    gap: 12px;
+  }
+
+  .card {
+    padding: 12px;
+  }
+
+  nav button {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
 }

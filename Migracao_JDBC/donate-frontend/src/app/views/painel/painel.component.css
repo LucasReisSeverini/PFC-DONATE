@@ -1,115 +1,142 @@
-/* Container geral */
+/* Import das fontes */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Quicksand:wght@500;700&display=swap');
+
 .painel-container {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  max-width: 900px;
+  font-family: 'Inter', sans-serif;
+  max-width: 1200px;
   margin: 0 auto;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 24px;
   color: #333;
+  line-height: 1.6;
 }
 
-/* Cabeçalho */
+/* HEADER */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
+  padding: 16px 0;
+  border-bottom: 2px solid #f1f1f1;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
 }
 
 .logo {
-  font-size: 28px;
-  font-weight: bold;
+  font-family: 'Quicksand', sans-serif; /* fonte aconchegante */
+  font-weight: 700;
+  font-size: 32px;
   color: #d46a92;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+nav {
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
 nav button {
-  margin-left: 10px;
+  border-radius: 30px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
 }
 
-/* Seções gerais */
-section {
-  padding: 20px;
-  margin-bottom: 25px;
-  border-radius: 8px;
-  text-align: left; /* Todos os botões ficam no canto esquerdo */
+nav button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-/* Info doação */
-.info-doacao {
-  background-color: #fff3f8;
-  border-left: 4px solid #f06292;
+/* HERO */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fce4ec;
+  padding: 40px 24px;
+  border-radius: 16px;
+  margin-bottom: 32px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
 }
 
-.info-doacao h2 {
-  margin-bottom: 10px;
-  font-size: 22px;
-  color: #d81b60;
-}
-
-/* Localização */
-.localizacao {
-  background-color: #e3f2fd;
-  border-left: 4px solid #42a5f5;
-}
-
-.localizacao h3 {
-  margin-bottom: 8px;
-  color: #1565c0;
-}
-
-/* Faça sua doação */
-.faca-sua-doacao {
-  background-color: #fce4ec;
-  border-left: 4px solid #ec407a;
-}
-
-.faca-sua-doacao h3 {
-  margin-bottom: 10px;
-  font-size: 22px;
+.hero-text h1 {
+  font-size: 2rem;
   color: #c2185b;
+  margin-bottom: 16px;
 }
 
-/* Eventos e Novidades (azul igual "Ver banco próximo") */
-.eventos-novidades {
-  background-color: #e3f2fd; /* azul claro */
-  border-left: 4px solid #42a5f5; /* azul médio */
+.hero-text p {
+  font-size: 1.1rem;
+  margin-bottom: 24px;
 }
 
-.eventos-novidades h3 {
-  margin-bottom: 10px;
-  font-size: 22px;
-  color: #1565c0; /* azul escuro */
-}
-
-/* Conteúdos Educativos */
-.conteudos-educativos {
-  background-color: #fff0f6; /* rosa clarinho */
-  border-left: 4px solid #d81b60; /* rosa forte */
-}
-
-.conteudos-educativos h2 {
-  color: #ad1457;
-  margin-bottom: 15px;
-  font-size: 22px;
-  font-weight: 600;
-  border-bottom: 2px solid #ad1457;
-  padding-bottom: 6px;
-}
-
-.conteudos-educativos p,
-.conteudos-educativos ul {
-  color: #4a4a4a;
-}
-
-/* Botões gerais */
-button.mat-button,
-button.mat-stroked-button,
-button.mat-raised-button {
-  margin-top: 15px;
-  font-weight: 600;
+.hero-text button {
   font-size: 1rem;
-  padding: 0.8rem 2rem;
+  padding: 1rem 2.8rem;
+  border-radius: 30px;
+}
+
+.hero-image img {
+  max-width: 300px;
+  border-radius: 12px;
+}
+
+/* CARDS */
+.cards {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.card {
+  flex: 1 1 300px;
+  background: #fff;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card h3 {
+  font-size: 1.3rem;
+  color: #d81b60;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.card button {
+  align-self: flex-start;
+  font-weight: 600;
+}
+
+/* Accordion */
+.conteudos-educativos h2 {
+  font-size: 1.6rem;
+  color: #ad1457;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .hero { flex-direction: column; text-align: center; gap: 24px; }
+  .hero-image img { max-width: 250px; }
+  .cards { flex-direction: column; }
 }

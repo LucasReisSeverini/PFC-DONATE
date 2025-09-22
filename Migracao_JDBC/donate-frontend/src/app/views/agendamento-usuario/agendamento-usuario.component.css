@@ -1,43 +1,24 @@
 .agendamentos-container {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 25px;
   max-width: 1000px;
   margin: 0 auto;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
-}
-
-/* Top bar: botão voltar + título */
-.agendamentos-container .top-bar {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  gap: 16px;
-}
-
-.agendamentos-container .voltar-home {
-  padding: 8px 16px;
-  background-color: #ffca28;
-  color: #3e2723;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s, transform 0.2s;
-}
-
-.agendamentos-container .voltar-home:hover {
-  background-color: #ffc107;
-  transform: translateY(-2px);
+  background: linear-gradient(145deg, #fff0f5, #ffe6f0);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
 
 /* Título */
 .agendamentos-container h2 {
   color: #d81b60;
-  margin: 0;
+  margin: 0 0 20px 0;
   border-bottom: 2px solid #f8bbd0;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
+  font-weight: 700;
+  font-size: 24px;
 }
 
 /* Filtros */
@@ -45,94 +26,144 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .agendamentos-container .filtros input,
 .agendamentos-container .filtros select {
-  padding: 8px 12px;
+  padding: 10px 14px;
   font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: 1px solid #d81b60;
+  border-radius: 8px;
   background-color: #fff;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: all 0.3s ease;
 }
 
 .agendamentos-container .filtros input:focus,
 .agendamentos-container .filtros select:focus {
   outline: none;
-  border-color: #d81b60;
-  box-shadow: 0 0 4px rgba(216, 27, 96, 0.3);
+  border-color: #880e4f;
+  box-shadow: 0 0 6px rgba(216,27,96,0.2);
 }
 
 /* Tabela */
 .agendamentos-container table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #fff0f6;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  background-color: #fff0f6;
 }
 
 .agendamentos-container th,
 .agendamentos-container td {
   padding: 12px 16px;
   text-align: left;
-  border: none;
 }
 
 .agendamentos-container thead {
   background-color: #f8bbd0;
   color: #880e4f;
+  font-weight: 600;
 }
 
 .agendamentos-container tbody tr:nth-child(even) {
   background-color: #fdeef4;
 }
 
+.agendamentos-container tbody tr {
+  transition: background 0.2s, transform 0.2s;
+}
+
+.agendamentos-container tbody tr:hover {
+  background-color: #ffd1e0;
+  transform: translateY(-1px);
+}
+
 /* Botões dentro da tabela */
-.agendamentos-container .acao-btn {
-  margin-right: 6px;
+.agendamentos-container .acao-btn,
+.agendamentos-container .cancelar-btn,
+.agendamentos-container .reagendar-btn {
   padding: 6px 12px;
-  font-size: 14px;
+  font-size: 13px;
+  border-radius: 8px;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.3s, opacity 0.3s;
+  transition: all 0.3s ease;
+  font-weight: 500;
 }
 
-.agendamentos-container .acao-btn.aceitar {
-  background-color: #c8e6c9; /* verde claro */
-  color: #2e7d32;
-}
-
-.agendamentos-container .acao-btn.recusar {
-  background-color: #ffcdd2; /* vermelho claro */
+/* Cores dos botões */
+.agendamentos-container .cancelar-btn {
+  background-color: #ffcdd2;
   color: #c62828;
 }
 
-.agendamentos-container .acao-btn.reagendar {
-  background-color: #bbdefb; /* azul claro */
+.agendamentos-container .reagendar-btn {
+  background-color: #bbdefb;
   color: #1565c0;
 }
 
-.agendamentos-container .acao-btn:hover {
+.agendamentos-container .acao-btn:hover,
+.agendamentos-container .cancelar-btn:hover,
+.agendamentos-container .reagendar-btn:hover {
   opacity: 0.9;
+  transform: translateY(-1px);
 }
 
+/* Inputs de reagendamento */
 .agendamentos-container input[type="datetime-local"] {
-  padding: 6px;
+  padding: 6px 10px;
   margin: 6px 0;
   font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: 1px solid #d81b60;
+  border-radius: 8px;
   background-color: #fff;
   width: 100%;
 }
 
-/* RESPONSIVO PARA CELULAR */
+/* Container de ações */
+.agendamentos-container .acoes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.agendamentos-container .acoes-botoes {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.agendamentos-container .reagendamento {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Botão Voltar */
+.agendamentos-container .botao-voltar {
+  padding: 12px 20px;
+  background-color: #e91e63;
+  color: #fff;
+  border: none;
+  border-radius: 22px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 18px rgba(233,30,99,0.25);
+}
+
+.agendamentos-container .botao-voltar:hover {
+  background-color: #d81b60;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(216,27,96,0.3);
+}
+
+/* RESPONSIVO */
 @media screen and (max-width: 768px) {
   .agendamentos-container .filtros {
     flex-direction: column;
@@ -145,6 +176,8 @@
 
   .agendamentos-container table {
     display: block;
+    overflow-x: auto;
+    border-radius: 12px;
   }
 
   .agendamentos-container thead {
@@ -162,8 +195,8 @@
     flex-direction: column;
     background-color: #fdeef4;
     padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   }
 
   .agendamentos-container td {
@@ -174,9 +207,9 @@
 
   .agendamentos-container td::before {
     content: attr(data-label);
-    font-weight: bold;
+    font-weight: 600;
     color: #880e4f;
-    margin-right: 5px;
+    margin-right: 6px;
   }
 
   .agendamentos-container td:last-child {
@@ -190,7 +223,7 @@
   }
 }
 
-/* Scroll horizontal em tablets pequenos */
+/* Scroll horizontal em tablets */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   .agendamentos-container table {
     display: block;

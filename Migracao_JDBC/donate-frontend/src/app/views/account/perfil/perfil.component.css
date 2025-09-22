@@ -1,19 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Quicksand:wght@500;700&display=swap');
+
+/* Container */
 .perfil-container {
   max-width: 420px;
   margin: 60px auto;
-  padding: 30px;
-  background-color: #fff0f5;
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  padding: 35px 30px;
+  background: linear-gradient(145deg, #fff0f5, #ffe6f0);
+  border-radius: 25px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
   text-align: center;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
+/* Bem-vindo */
 .bem-vindo {
   font-size: 18px;
   color: #444;
   margin-bottom: 20px;
   font-weight: bold;
+}
+
+/* Formulário */
+.perfil-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+/* Form-group */
+.form-group label {
+  display: block;
+  text-align: left;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #555;
+}
+
+.form-control {
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #d46a92;
+  box-shadow: 0 3px 12px rgba(212,106,146,0.2);
+  outline: none;
+}
+
+/* Botão Salvar Alterações */
+.btn-salvar {
+  width: 100%;
+  padding: 14px;
+  background-color: #e91e63;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 18px rgba(233,30,99,0.25);
+}
+
+.btn-salvar:hover {
+  background-color: #d81b60;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(216,27,96,0.3);
+}
+
+/* Botão Sair Premium */
+.btn-sair {
+  width: 100%;
+  padding: 14px;
+  background-color: transparent;
+  color: #e91e63;
+  border: 2px solid #e91e63;
+  border-radius: 25px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(233,30,99,0.15);
+}
+
+.btn-sair:hover {
+  background-color: #e91e63;
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(233,30,99,0.3);
 }
 
 /* Mensagens de erro e sucesso */
@@ -37,61 +119,19 @@
   border: 1px solid #badbcc;
 }
 
-/* Formulário */
-.perfil-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-top: 20px;
-}
+/* Responsivo */
+@media (max-width: 480px) {
+  .perfil-container {
+    padding: 28px 20px;
+  }
 
-/* Estilo dos inputs */
-.form-control {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  width: 100%;
-  box-sizing: border-box;
-}
+  .form-control {
+    padding: 10px;
+    font-size: 13px;
+  }
 
-.form-group label {
-  display: block;
-  text-align: left;
-  margin-bottom: 6px;
-  font-size: 14px;
-  color: #555;
-}
-
-/* Botão de salvar */
-.btn-salvar {
-  width: 100%;
-  padding: 12px;
-  background-color: #e91e63;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 16px;
-  transition: background 0.3s;
-}
-
-.btn-salvar:hover {
-  background-color: #d81b60;
-}
-
-/* Botão de sair */
-.btn-sair {
-  margin-top: 20px;
-  display: inline-block;
-  font-size: 14px;
-  color: #e91e63;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.btn-sair:hover {
-  text-decoration: underline;
+  .btn-salvar, .btn-sair {
+    padding: 12px;
+    font-size: 14px;
+  }
 }

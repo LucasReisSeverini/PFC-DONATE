@@ -5,48 +5,39 @@
   </div>
 
   <p class="subtitle">Cadastre-se agora!</p>
-  <p class="description">
-    Seja uma doadora ou encontre leite materno. Preencha o formulário abaixo 💖
-  </p>
+  <p class="description">Seja uma doadora ou encontre leite materno. Preencha o formulário abaixo 💖</p>
 
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <!-- Nome -->
     <div class="input-group">
       <input matInput formControlName="nome" placeholder="Nome completo" />
       <span class="material-icons input-icon">person</span>
     </div>
 
-    <!-- Email -->
     <div class="input-group">
-      <input matInput formControlName="email" type="email" placeholder="Email" />
+      <input matInput type="email" formControlName="email" placeholder="Email" />
       <span class="material-icons input-icon">email</span>
     </div>
 
-    <!-- Telefone -->
     <div class="input-group">
       <input matInput formControlName="telefone" placeholder="Telefone" />
       <span class="material-icons input-icon">phone</span>
     </div>
 
-    <!-- CPF -->
     <div class="input-group">
       <input matInput formControlName="cpf" placeholder="CPF" />
       <span class="material-icons input-icon">badge</span>
     </div>
 
-    <!-- Senha -->
     <div class="input-group">
       <input matInput type="password" formControlName="senha" placeholder="Senha" />
       <span class="material-icons input-icon">lock</span>
     </div>
 
-    <!-- Confirmar Senha -->
     <div class="input-group">
       <input matInput type="password" formControlName="confirmarSenha" placeholder="Repetir senha" />
       <span class="material-icons input-icon">lock</span>
     </div>
 
-    <!-- Perfil -->
     <div class="perfil-group">
       <label>Tipo de usuário:</label>
       <mat-radio-group formControlName="perfil" class="radio-group">
@@ -56,15 +47,8 @@
       </mat-radio-group>
     </div>
 
-    <!-- Município com autocomplete -->
     <div class="input-group">
-      <input
-        type="text"
-        matInput
-        [matAutocomplete]="auto"
-        [formControl]="municipioControl"
-        placeholder="Município"
-      />
+      <input matInput [matAutocomplete]="auto" [formControl]="municipioControl" placeholder="Município" />
       <span class="material-icons input-icon">place</span>
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onMunicipioSelecionado($event)">
         <mat-option *ngFor="let municipio of municipiosFiltrados$ | async" [value]="municipio.nome">
@@ -73,18 +57,15 @@
       </mat-autocomplete>
     </div>
 
-    <!-- Hidden fields -->
     <input type="hidden" formControlName="id_municipio" />
     <input type="hidden" formControlName="latitude" />
     <input type="hidden" formControlName="longitude" />
 
-    <!-- Política de uso -->
     <p class="policy-text">
-    Ao se cadastrar, você concorda com as políticas de uso de dados pessoais.
+      Ao se cadastrar, você concorda com as políticas de uso de dados pessoais.
     </p>
 
-    <!-- Botão de cadastro -->
-    <button mat-raised-button color="primary" type="submit">Cadastrar</button>
+    <button type="submit">Cadastrar</button>
   </form>
 
   <p class="register-prompt">Já tem uma conta? <a routerLink="/login">Entrar</a></p>

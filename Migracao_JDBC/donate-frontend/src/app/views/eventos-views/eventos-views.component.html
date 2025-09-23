@@ -8,6 +8,12 @@
 
   <!-- Filtros -->
   <div class="filtros" style="margin: 10px 0; display: flex; gap: 10px;">
+    <!-- Filtro UF -->
+    <select [(ngModel)]="filtroUF" (change)="onUFChange()">
+      <option [ngValue]="null">Todas as UFs</option>
+      <option *ngFor="let uf of ufs" [ngValue]="uf.id">{{ uf.nome }}</option>
+    </select>
+
     <!-- Filtro Município -->
     <select [(ngModel)]="filtroMunicipio" (change)="aplicarFiltros()">
       <option [ngValue]="null">Todos os municípios</option>

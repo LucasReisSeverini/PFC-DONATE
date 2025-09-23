@@ -1,0 +1,36 @@
+<div class="login-container">
+  <div class="logo-container">
+    <div class="logo-icon">🔒</div>
+    <div class="logo">Donate</div>
+  </div>
+
+  <div class="subtitle">Recuperar Senha</div>
+  <div class="description">
+    Informe seu e-mail e enviaremos um código de verificação para redefinir sua senha.
+  </div>
+
+  <!-- Etapa 1: enviar email -->
+  <form *ngIf="!codigoEnviado" (ngSubmit)="enviarCodigo()">
+    <div class="input-group">
+      <input type="email" placeholder="Seu e-mail" [(ngModel)]="email" name="email" required />
+      <span class="input-icon">📧</span>
+    </div>
+    <button type="submit">Enviar Código</button>
+  </form>
+
+  <!-- Etapa 2: inserir código e nova senha -->
+  <form *ngIf="codigoEnviado" (ngSubmit)="resetarSenha()">
+    <div class="input-group">
+      <input type="text" placeholder="Código recebido" [(ngModel)]="codigo" name="codigo" required />
+    </div>
+    <div class="input-group">
+      <input type="password" placeholder="Nova senha" [(ngModel)]="novaSenha" name="novaSenha" required />
+    </div>
+    <button type="submit">Redefinir Senha</button>
+  </form>
+
+  <div *ngIf="mensagem" class="description">{{ mensagem }}</div>
+
+  <!-- Botão Voltar -->
+  <button class="back-button" (click)="voltarLogin()">Voltar</button>
+</div>

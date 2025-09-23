@@ -23,7 +23,15 @@
     <button type="submit">Entrar</button>
   </form>
 
-  <p class="register-prompt">
-    Ainda não tem uma conta? <a href="/cadastro">Cadastre-se</a>
-  </p>
+  <!-- Links de cadastro e recuperar senha alinhados -->
+  <div class="register-recover-links">
+    <p class="register-prompt">
+      Ainda não tem uma conta?
+      <a (click)="irParaCadastro()">Cadastre-se</a>
+    </p>
+    <p class="register-prompt">
+      <a (click)="irParaRecuperarSenha()">Recuperar senha</a>
+    </p>
+  </div>
+
 </div>

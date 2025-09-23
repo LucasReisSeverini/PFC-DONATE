@@ -37,14 +37,12 @@ export class LoginComponent implements OnInit {
       this.authService.login(loginData.email, loginData.senha).subscribe({
         next: (res: any) => {
           if (res.token) {
-            // Salva o token
             localStorage.setItem('token', res.token);
 
-            // Decodifica o JWT para pegar a role
             try {
               const payload = JSON.parse(atob(res.token.split('.')[1]));
               if (payload.role) {
-                localStorage.setItem('role', payload.role); // Salva a role
+                localStorage.setItem('role', payload.role);
               }
             } catch (err) {
               console.error('Erro ao decodificar token:', err);
@@ -65,5 +63,14 @@ export class LoginComponent implements OnInit {
         }
       });
     }
+  }
+
+  // Métodos para navegação confiável
+  irParaCadastro() {
+    this.router.navigate(['/cadastro']);
+  }
+
+  irParaRecuperarSenha() {
+    this.router.navigate(['/recuperar-senha']);
   }
 }

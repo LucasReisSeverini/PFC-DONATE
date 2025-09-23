@@ -6,19 +6,6 @@
 *::after {
   box-sizing: border-box;
 }
-/* Garante que todos os links tenham cursor de pointer */
-.register-recover-links a {
-  color: #007bff; /* cor azul padrão de link */
-  text-decoration: none; /* tira o sublinhado, se quiser */
-  cursor: pointer; /* mãozinha ao passar por cima */
-  transition: color 0.2s;
-}
-
-.register-recover-links a:hover {
-  color: #0056b3; /* muda a cor ao passar o mouse */
-  text-decoration: underline; /* opcional */
-}
-
 
 /* Container geral */
 .login-container {

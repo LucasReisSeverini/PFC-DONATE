@@ -13,11 +13,14 @@ import { AdicionarEventoComponent } from './views/adicionar-evento/adicionar-eve
 import { EventosViewsComponent } from './views/eventos-views/eventos-views.component';
 import { GerenciarEventosComponent } from './views/gerenciar-eventos/gerenciar-eventos.component';
 import { EditEventoComponent } from './views/edit-evento/edit-evento.component';
+import { RecuperarSenhaComponent } from './views/account/recuperar-senha/recuperar-senha.component';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'cadastro', component: RegisterComponent },
+  { path: 'recuperar-senha', component: RecuperarSenhaComponent }, // <-- aqui
 
   // Rotas protegidas
   { path: 'agendamento', component: AgendamentoComponent, canActivate: [AuthGuard] },
@@ -53,4 +56,5 @@ export const routes: Routes = [
 
   // Rota pública
   { path: 'eventos', component: EventosViewsComponent }
+
 ];

@@ -1,13 +1,27 @@
 /* Import das fontes */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Quicksand:wght@500;700&display=swap');
 
+/* Reset e prevenção de overflow horizontal */
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* evita scroll horizontal */
+}
+
 .painel-container {
   font-family: 'Inter', sans-serif;
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding: 24px;
   color: #333;
   line-height: 1.6;
+  background-color: #fff;
 }
 
 /* HEADER */
@@ -93,9 +107,8 @@ nav button:hover {
 }
 
 .hero-image img {
-  max-width: 300px;
+  max-width: 100%;
   border-radius: 12px;
-  width: 100%;
   height: auto;
 }
 
@@ -105,10 +118,12 @@ nav button:hover {
   gap: 24px;
   flex-wrap: wrap;
   margin-bottom: 32px;
+  width: 100%;
 }
 
 .card {
   flex: 1 1 300px;
+  min-width: 280px;
   background: #e3f2fd; /* azul claro */
   padding: 24px;
   border-radius: 16px;
@@ -144,6 +159,7 @@ nav button:hover {
 /* CONTEÚDOS EDUCATIVOS */
 .conteudos-educativos {
   margin-top: 40px;
+  width: 100%;
 }
 
 .conteudos-educativos h2 {
@@ -157,15 +173,16 @@ nav button:hover {
 
 /* Painéis estilo card azul */
 .conteudos-educativos .mat-expansion-panel {
-  background: #e3f2fd !important; /* mesmo azul dos cards */
+  background: #e3f2fd !important;
   border-radius: 12px !important;
   margin-bottom: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+  width: 100%;
 }
 
 .conteudos-educativos .mat-expansion-panel-header {
   font-weight: 600;
-  color: #1565c0 !important; /* azul forte */
+  color: #1565c0 !important;
   font-size: 1.1rem;
 }
 
@@ -180,7 +197,13 @@ nav button:hover {
   color: #444;
 }
 
-/* RESPONSIVO */
+/* RESPONSIVO DETALHADO */
+@media (max-width: 1200px) {
+  .hero { flex-direction: column; text-align: center; }
+  .hero-text { text-align: center; }
+  .hero-image img { margin: 0 auto; }
+}
+
 @media (max-width: 900px) {
   /* Header empilha os itens */
   header {
@@ -203,9 +226,21 @@ nav button:hover {
     gap: 24px; 
   }
   .hero-text { text-align: center; }
-  .hero-image img { max-width: 250px; margin: 0 auto; }
 
-  /* Cards em coluna */
-  .cards { flex-direction: column; }
-  .card { width: 100%; }
+  /* Cards e accordion em coluna */
+  .cards { flex-direction: column; width: 100%; }
+  .card { width: 100%; min-width: 100%; }
+
+  .conteudos-educativos .mat-expansion-panel { width: 100%; }
+}
+
+@media (max-width: 600px) {
+  .painel-container { padding: 16px; }
+  .hero-text h1 { font-size: 1.6rem; }
+  .hero-text p { font-size: 1rem; }
+  nav button { font-size: 0.9rem; padding: 6px 12px; }
+  .card h3 { font-size: 1.1rem; }
+  .card p { font-size: 0.95rem; }
+  .conteudos-educativos h2 { font-size: 1.3rem; }
+  .conteudos-educativos .mat-expansion-panel-header { font-size: 1rem; }
 }

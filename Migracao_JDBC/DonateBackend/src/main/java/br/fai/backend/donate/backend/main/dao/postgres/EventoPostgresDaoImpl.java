@@ -33,7 +33,7 @@ public class EventoPostgresDaoImpl implements EventoDao {
                 ps.setString(3, entity.getData());
                 ps.setString(4, entity.getTipo());
 
-                if (entity.getIdCidade() != null) ps.setLong(5, entity.getIdCidade());
+                if (entity.getIdMunicipio() != null) ps.setLong(5, entity.getIdMunicipio());
                 else ps.setNull(5, Types.BIGINT);
 
                 ps.executeUpdate();
@@ -107,7 +107,7 @@ public class EventoPostgresDaoImpl implements EventoDao {
             ps.setString(3, entity.getData());
             ps.setString(4, entity.getTipo());
 
-            if (entity.getIdCidade() != null) ps.setLong(5, entity.getIdCidade());
+            if (entity.getIdMunicipio() != null) ps.setLong(5, entity.getIdMunicipio());
             else ps.setNull(5, Types.BIGINT);
 
             ps.setInt(6, id);
@@ -125,7 +125,7 @@ public class EventoPostgresDaoImpl implements EventoDao {
         evento.setDescricao(rs.getString("descricao"));
         evento.setData(rs.getString("data"));
         evento.setTipo(rs.getString("tipo"));
-        evento.setIdCidade(rs.getObject("id_municipio") != null ? rs.getLong("id_municipio") : null);
+        evento.setIdMunicipio(rs.getObject("id_municipio") != null ? rs.getInt("id_municipio") : null);
         return evento;
     }
 }

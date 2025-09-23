@@ -4,15 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data                   // gera getters, setters, toString, equals e hashCode
+@NoArgsConstructor      // gera construtor vazio
+@AllArgsConstructor     // gera construtor com todos os campos
 public class EventoModel {
 
-    private int id;
+    private Long id;
     private String titulo;
     private String descricao;
-    private String data;  // pode ser LocalDate/LocalDateTime se quiser
-    private String tipo;
-    private MunicipioModel cidade; // FK cidade
+    private String data;   // pode ser String ou LocalDate dependendo do banco
+    private String tipo;   // "evento" ou "noticia"
+    private Long idCidade; // referência para cidade
 }

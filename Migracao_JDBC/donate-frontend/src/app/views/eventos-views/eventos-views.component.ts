@@ -5,13 +5,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 import { EventosService, Evento } from '../../services/eventos/eventos.service';
 import { MunicipioService, Municipio } from '../../services/municipio/municipio.service';
 import { EventoDetalheComponent } from '../evento-detalhe/evento-detalhe.component';
 import { BancoService } from '../../services/banco/banco.service';
 
-// Interface ajustada conforme o backend
 interface Banco {
   id: number;
   nome: string;
@@ -30,11 +30,18 @@ interface Banco {
   templateUrl: './eventos-views.component.html',
   styleUrls: ['./eventos-views.component.css'],
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatDialogModule]
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatDialogModule, FormsModule]
 })
 export class EventosViewsComponent implements OnInit {
   eventos: (Evento & { municipioNome?: string })[] = [];
+  eventosFiltrados: (Evento & { municipioNome?: string })[] = [];
   municipios: Municipio[] = [];
+  municipiosFull: Municipio[] = []; // todos os municípios
+  ufs: { id: number; nome: string }[] = [];
+
+  filtroUF: number | null = null;
+  filtroMunicipio: number | null = null;
+  filtroTipo: string = 'Todos';
 
   constructor(
     private eventosService: EventosService,
@@ -51,8 +58,18 @@ export class EventosViewsComponent implements OnInit {
   carregarMunicipios() {
     this.municipioService.getMunicipios().subscribe({
       next: (res: Municipio[]) => {
-        this.municipios = res;
-        console.log('Municípios carregados:', this.municipios);
+        this.municipiosFull = res;
+        this.municipios = [...res];
+
+        // Extrai UFs únicas a partir do objeto unidadeFederativa de cada município
+        const ufsMap = new Map<number, { id: number; nome: string }>();
+        res.forEach(m => {
+          if (m.unidadeFederativa && !ufsMap.has(m.unidadeFederativa.id)) {
+            ufsMap.set(m.unidadeFederativa.id, m.unidadeFederativa);
+          }
+        });
+        this.ufs = Array.from(ufsMap.values());
+
         this.carregarEventos();
       },
       error: (err: any) => console.error('Erro ao carregar municípios:', err)
@@ -64,11 +81,34 @@ export class EventosViewsComponent implements OnInit {
       next: (res: Evento[]) => {
         this.eventos = res.map(e => ({
           ...e,
-          municipioNome: this.municipios.find(m => m.id === e.id_municipio)?.nome
+          municipioNome: this.municipiosFull.find(m => m.id === e.id_municipio)?.nome
         }));
-        console.log('Eventos carregados:', this.eventos);
+        this.aplicarFiltros();
       },
       error: (err: any) => console.error('Erro ao carregar eventos:', err)
+    });
+  }
+
+  // Quando UF muda, filtra municípios
+  onUFChange() {
+    if (this.filtroUF) {
+      this.municipios = this.municipiosFull.filter(
+        m => m.unidadeFederativa?.id === this.filtroUF
+      );
+    } else {
+      this.municipios = [...this.municipiosFull]; // restaura todos
+    }
+    this.filtroMunicipio = null;
+    this.aplicarFiltros();
+  }
+
+  aplicarFiltros() {
+    this.eventosFiltrados = this.eventos.filter(e => {
+      const municipioOk = this.filtroMunicipio ? e.id_municipio === this.filtroMunicipio : true;
+      const tipoOk = this.filtroTipo.toLowerCase() === 'todos'
+        ? true
+        : e.tipo?.toLowerCase() === this.filtroTipo.toLowerCase();
+      return municipioOk && tipoOk;
     });
   }
 
@@ -81,32 +121,16 @@ export class EventosViewsComponent implements OnInit {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const { latitude, longitude } = pos.coords;
-        console.log('Localização atual:', { latitude, longitude });
-
         this.bancoService.buscarBancoMaisProximo(latitude, longitude).subscribe({
           next: (banco: Banco | null) => {
-            console.log('Banco mais próximo encontrado:', banco);
             if (banco) {
-              const municipioId = banco.id_municipio;
-              console.log('ID do município do banco:', municipioId);
+              this.filtroUF = null;
+              this.filtroMunicipio = banco.id_municipio;
+              this.aplicarFiltros();
 
-              this.eventosService.listarEventos().subscribe({
-                next: (res: Evento[]) => {
-                  this.eventos = res
-                    .filter(e => e.id_municipio === municipioId)
-                    .map(e => ({
-                      ...e,
-                      municipioNome: this.municipios.find(m => m.id === e.id_municipio)?.nome
-                    }));
-
-                  console.log('Eventos filtrados pelo município:', this.eventos);
-
-                  if (this.eventos.length === 0) {
-                    alert('Nenhum evento encontrado próximo à sua localização.');
-                  }
-                },
-                error: (err: any) => console.error('Erro ao carregar eventos:', err)
-              });
+              if (this.eventosFiltrados.length === 0) {
+                alert('Nenhum evento encontrado próximo à sua localização.');
+              }
             } else {
               alert('Nenhum banco de leite encontrado próximo a você.');
             }

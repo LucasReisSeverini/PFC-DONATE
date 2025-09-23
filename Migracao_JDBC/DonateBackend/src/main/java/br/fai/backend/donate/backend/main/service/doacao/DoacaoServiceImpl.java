@@ -3,10 +3,15 @@ package br.fai.backend.donate.backend.main.service.doacao;
 import br.fai.backend.donate.backend.main.domain.DoacaoModel;
 import br.fai.backend.donate.backend.main.dto.DoacaoListDTO;
 import br.fai.backend.donate.backend.main.port.dao.doacao.DoacaoDao;
+import br.fai.backend.donate.backend.main.port.dao.user.UserDao;
 import br.fai.backend.donate.backend.main.port.service.doacao.DoacaoService;
+import br.fai.backend.donate.backend.main.port.service.email.EmailService;
+import br.fai.backend.donate.backend.main.domain.UsuarioModel;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,9 +19,13 @@ import java.util.Optional;
 public class DoacaoServiceImpl implements DoacaoService {
 
     private final DoacaoDao doacaoDao;
+    private final UserDao usuarioDao;
+    private final EmailService emailService;
 
-    public DoacaoServiceImpl(DoacaoDao doacaoDao) {
+    public DoacaoServiceImpl(DoacaoDao doacaoDao, UserDao usuarioDao, EmailService emailService) {
         this.doacaoDao = doacaoDao;
+        this.usuarioDao = usuarioDao;
+        this.emailService = emailService;
     }
 
     @Override
@@ -50,7 +59,12 @@ public class DoacaoServiceImpl implements DoacaoService {
         if (optional.isPresent()) {
             DoacaoModel doacao = optional.get();
             doacao.setStatus(novoStatus);
-            return doacaoDao.atualizar(doacao);
+            int result = doacaoDao.atualizar(doacao);
+
+            // Enviar notificação por e-mail ao usuário
+            notificarUsuario(doacao, novoStatus);
+
+            return result;
         }
         return 0;
     }
@@ -62,7 +76,13 @@ public class DoacaoServiceImpl implements DoacaoService {
             DoacaoModel doacao = optional.get();
             doacao.setDataDoacao(novaDataHora);
             doacao.setStatus("Reagendamento Solicitado");
-            return doacaoDao.atualizar(doacao);
+            int result = doacaoDao.atualizar(doacao);
+
+            // Notificar usuário sobre reagendamento
+            String mensagem = "Seu agendamento foi reagendado para: " + novaDataHora;
+            notificarUsuario(doacao, mensagem);
+
+            return result;
         }
         return 0;
     }
@@ -79,6 +99,55 @@ public class DoacaoServiceImpl implements DoacaoService {
 
     @Override
     public Optional<DoacaoListDTO> buscarPorIdDTO(Long id) {
-        return doacaoDao.buscarPorIdDTO(id); // <<< IMPLEMENTAÇÃO CORRETA
+        return doacaoDao.buscarPorIdDTO(id);
     }
+
+    // ==========================
+    // MÉTODOS PRIVADOS
+    // ==========================
+    // ==========================
+// MÉTODOS PRIVADOS
+// ==========================
+    private void notificarUsuario(DoacaoModel doacao, String statusOuMensagem) {
+        // Buscar usuário pelo idUsuario da doação
+        UsuarioModel usuario = usuarioDao.readByID(doacao.getUsuarioId().intValue());
+        if (usuario == null || usuario.getEmail() == null || usuario.getEmail().isEmpty()) {
+            // Não tem usuário ou e-mail válido
+            return;
+        }
+
+        String status;
+        switch (statusOuMensagem.toLowerCase()) {
+            case "aceita":
+            case "aceito":
+                status = "aceito";
+                break;
+            case "recusada":
+            case "recusado":
+                status = "recusado";
+                break;
+            case "reagendamento solicitado":
+            case "reagendado":
+                status = "reagendado";
+                break;
+            default:
+                status = "atualizado"; // caso genérico
+                break;
+        }
+
+        // Extrai data e hora do agendamento
+        LocalDate data = doacao.getDataDoacao().toLocalDate();
+        LocalTime horario = doacao.getDataDoacao().toLocalTime();
+
+        // Chama o método de envio de e-mail HTML/formal
+        emailService.enviarEmailAgendamento(
+                usuario.getEmail(),
+                usuario.getNome(),
+                status,
+                data,
+                horario
+        );
+    }
+
+
 }

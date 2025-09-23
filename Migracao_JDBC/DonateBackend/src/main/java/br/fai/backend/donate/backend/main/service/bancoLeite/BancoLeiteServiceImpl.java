@@ -50,7 +50,7 @@ public class BancoLeiteServiceImpl implements BancoLeiteService {
 
         for (BancoLeiteModel banco : bancos) {
             if (banco.getLatitude() != null && banco.getLongitude() != null) {
-                double dist = distanciaHaversine(latitude, longitude, banco.getLatitude(), banco.getLongitude());
+                double dist = calcularDistancia(latitude, longitude, banco.getLatitude(), banco.getLongitude());
                 if (dist < menorDistancia) {
                     menorDistancia = dist;
                     maisProximo = banco;
@@ -60,6 +60,7 @@ public class BancoLeiteServiceImpl implements BancoLeiteService {
 
         if (maisProximo == null) return null;
 
+        // Retorna DTO com distância e id_municipio
         return new BancoLeiteDto(
                 maisProximo.getId(),
                 maisProximo.getNome(),
@@ -67,13 +68,14 @@ public class BancoLeiteServiceImpl implements BancoLeiteService {
                 maisProximo.getTelefone(),
                 maisProximo.getLatitude(),
                 maisProximo.getLongitude(),
-                menorDistancia // distância incluída no DTO
+                menorDistancia,
+                maisProximo.getIdMunicipio()  // garante que é Long
         );
     }
 
-    // Calcula distância em km entre duas coordenadas
-    private double distanciaHaversine(double lat1, double lon1, double lat2, double lon2) {
-        final int R = 6371; // raio da Terra em km
+    // Calcula distância em km entre duas coordenadas usando Haversine
+    private double calcularDistancia(double lat1, double lon1, double lat2, double lon2) {
+        final int R = 6371; // Raio da Terra em km
         double dLat = Math.toRadians(lat2 - lat1);
         double dLon = Math.toRadians(lon2 - lon1);
         double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +

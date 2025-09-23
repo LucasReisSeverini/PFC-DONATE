@@ -1,13 +1,27 @@
 /* Import das fontes */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Quicksand:wght@500;700&display=swap');
 
+/* Reset e prevenção de overflow horizontal */
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* evita scroll horizontal */
+}
+
 .painel-container {
   font-family: 'Inter', sans-serif;
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding: 24px;
   color: #333;
   line-height: 1.6;
+  background-color: #fff;
 }
 
 /* HEADER */
@@ -21,6 +35,7 @@ header {
   top: 0;
   background: #fff;
   z-index: 10;
+  flex-wrap: wrap;
 }
 
 .logo {
@@ -47,6 +62,7 @@ nav button {
   align-items: center;
   gap: 6px;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 nav button:hover {
@@ -64,7 +80,13 @@ nav button:hover {
   border-radius: 16px;
   margin-bottom: 32px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+  flex-wrap: wrap;
   gap: 20px;
+}
+
+.hero-text {
+  flex: 1 1 300px;
+  min-width: 250px;
 }
 
 .hero-text h1 {
@@ -85,11 +107,9 @@ nav button:hover {
 }
 
 .hero-image img {
-  max-width: 300px;
+  max-width: 100%;
   border-radius: 12px;
-  width: 100%;
   height: auto;
-  object-fit: cover;
 }
 
 /* CARDS */
@@ -98,28 +118,29 @@ nav button:hover {
   gap: 24px;
   flex-wrap: wrap;
   margin-bottom: 32px;
+  width: 100%;
 }
 
 .card {
   flex: 1 1 300px;
-  background: #fff;
+  min-width: 280px;
+  background: #e3f2fd; /* azul claro */
   padding: 24px;
   border-radius: 16px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.05);
   display: flex;
   flex-direction: column;
   gap: 12px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
 }
 
 .card h3 {
   font-size: 1.3rem;
-  color: #d81b60;
+  color: #1565c0; /* azul mais forte */
   display: flex;
   align-items: center;
   gap: 6px;
@@ -127,102 +148,99 @@ nav button:hover {
 
 .card p {
   font-size: 1rem;
-  color: #555;
+  color: #444;
 }
 
 .card button {
   align-self: flex-start;
   font-weight: 600;
-  border-radius: 24px;
-  padding: 8px 16px;
-  transition: background 0.3s;
 }
 
-.card button:hover {
-  opacity: 0.9;
+/* CONTEÚDOS EDUCATIVOS */
+.conteudos-educativos {
+  margin-top: 40px;
+  width: 100%;
 }
 
-/* Accordion */
 .conteudos-educativos h2 {
   font-size: 1.6rem;
-  color: #ad1457;
+  color: #1565c0;
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 16px;
 }
 
-/* RESPONSIVO */
-@media (max-width: 1024px) {
-  .hero {
-    flex-direction: column;
-    text-align: center;
-    gap: 24px;
-  }
-
-  .hero-image img {
-    max-width: 250px;
-  }
-
-  .cards {
-    flex-direction: column;
-  }
-
-  nav {
-    justify-content: center;
-  }
+/* Painéis estilo card azul */
+.conteudos-educativos .mat-expansion-panel {
+  background: #e3f2fd !important;
+  border-radius: 12px !important;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+  width: 100%;
 }
 
-@media (max-width: 768px) {
-  .hero {
-    padding: 24px 16px;
-  }
-
-  .hero-text h1 {
-    font-size: 1.8rem;
-  }
-
-  .hero-text p {
-    font-size: 1rem;
-  }
-
-  .cards {
-    gap: 16px;
-  }
-
-  .card {
-    padding: 16px;
-  }
+.conteudos-educativos .mat-expansion-panel-header {
+  font-weight: 600;
+  color: #1565c0 !important;
+  font-size: 1.1rem;
 }
 
-@media (max-width: 480px) {
-  .painel-container {
-    padding: 16px;
-  }
+.conteudos-educativos ul {
+  padding-left: 20px;
+  margin: 12px 0;
+}
 
-  .hero-text h1 {
-    font-size: 1.5rem;
-  }
+.conteudos-educativos li {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #444;
+}
 
-  .hero-text p {
-    font-size: 0.95rem;
-  }
+/* RESPONSIVO DETALHADO */
+@media (max-width: 1200px) {
+  .hero { flex-direction: column; text-align: center; }
+  .hero-text { text-align: center; }
+  .hero-image img { margin: 0 auto; }
+}
 
-  .hero-text button {
-    width: 100%;
-    padding: 12px 0;
-  }
-
-  .cards {
+@media (max-width: 900px) {
+  /* Header empilha os itens */
+  header {
+    flex-direction: column;
+    align-items: flex-start;
     gap: 12px;
   }
 
-  .card {
-    padding: 12px;
+  nav {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+    flex-wrap: wrap;
   }
 
-  nav button {
-    font-size: 12px;
-    padding: 6px 10px;
+  /* Hero centralizado */
+  .hero { 
+    flex-direction: column; 
+    text-align: center; 
+    gap: 24px; 
   }
+  .hero-text { text-align: center; }
+
+  /* Cards e accordion em coluna */
+  .cards { flex-direction: column; width: 100%; }
+  .card { width: 100%; min-width: 100%; }
+
+  .conteudos-educativos .mat-expansion-panel { width: 100%; }
+}
+
+@media (max-width: 600px) {
+  .painel-container { padding: 16px; }
+  .hero-text h1 { font-size: 1.6rem; }
+  .hero-text p { font-size: 1rem; }
+  nav button { font-size: 0.9rem; padding: 6px 12px; }
+  .card h3 { font-size: 1.1rem; }
+  .card p { font-size: 0.95rem; }
+  .conteudos-educativos h2 { font-size: 1.3rem; }
+  .conteudos-educativos .mat-expansion-panel-header { font-size: 1rem; }
 }

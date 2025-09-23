@@ -1,75 +1,162 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { Router, RouterModule } from '@angular/router';
+import { Observable, map, startWith } from 'rxjs';
+import { AuthService } from '../../../services/auth.service';
+import { MunicipioService } from '../../../services/municipio/municipio.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatOptionModule } from '@angular/material/core';
+import { MatRadioModule } from '@angular/material/radio';
+import { RegisterDto } from '../../../domain/dto/register.dto';
 
+export interface MunicipioComUF {
+  id: number;
+  nome: string;
+  unidadeFederativa: {
+    id: number;
+    nome: string;
+    sigla: string;
+  };
+}
 
 @Component({
-    selector: 'app-register',
-    imports: [CommonModule, ReactiveFormsModule],
-    templateUrl: './register.component.html',
-    styleUrls: ['./register.component.css']
+  selector: 'app-register',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatOptionModule,
+    MatRadioModule
+  ],
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
+  municipioControl = new FormControl('');
+  municipios: MunicipioComUF[] = [];
+  municipiosFiltrados$: Observable<MunicipioComUF[]> = new Observable();
 
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private authService = inject(AuthService);
+  private municipioService = inject(MunicipioService);
 
   constructor() {
-    this.registerForm = this.fb.group({
-      nome: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      telefone: ['', Validators.required],
-      cpf: ['', Validators.required],
-      senha: ['', Validators.required],
-      perfil: ['', Validators.required], // ✅ somente esse para o perfil
-      latitude: [null],
-      longitude: [null],
-      id_cidade: [null]
-    });
-
-
+    this.registerForm = this.fb.group(
+      {
+        nome: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        telefone: ['', Validators.required],
+        cpf: ['', Validators.required],
+        senha: ['', Validators.required],
+        confirmarSenha: ['', Validators.required],
+        perfil: ['', Validators.required],
+        latitude: [null],
+        longitude: [null],
+        id_municipio: [null, Validators.required]
+      },
+      { validators: this.senhasIguaisValidator }
+    );
   }
 
   ngOnInit(): void {
-    this.getGeolocation();
+    this.getLocation();
+    this.carregarMunicipios();
+
+    this.municipiosFiltrados$ = this.municipioControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this.filtrarMunicipios(value || ''))
+    );
   }
 
-  getGeolocation(): void {
+  getLocation(): void {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        pos =>
           this.registerForm.patchValue({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          });
-        },
-        (error) => {
-          console.warn('Erro ao obter localização:', error);
-        }
+            latitude: pos.coords.latitude,
+            longitude: pos.coords.longitude
+          }),
+        err => console.warn('Não foi possível obter a localização.', err)
       );
-    } else {
-      console.warn('Geolocalização não suportada no navegador');
     }
   }
 
-  onSubmit(): void {
-    if (this.registerForm.valid) {
-      const dados = this.registerForm.value;
+  carregarMunicipios(): void {
+    this.municipioService.getMunicipios().subscribe({
+      next: (dados: MunicipioComUF[]) => this.municipios = dados,
+      error: err => console.error('Erro ao carregar municípios', err)
+    });
+  }
 
-      this.authService.register(dados).subscribe({
+  filtrarMunicipios(value: string): MunicipioComUF[] {
+    const filtro = value.toLowerCase();
+    return this.municipios.filter(m => m.nome.toLowerCase().includes(filtro));
+  }
+
+  onMunicipioSelecionado(event: any): void {
+    const municipioSelecionado = this.municipios.find(m => m.nome === event.option.value);
+    if (municipioSelecionado) {
+      this.registerForm.patchValue({ id_municipio: municipioSelecionado.id });
+    }
+  }
+
+  senhasIguaisValidator(form: FormGroup) {
+    const senha = form.get('senha')?.value;
+    const confirmarSenha = form.get('confirmarSenha')?.value;
+    return senha !== confirmarSenha ? { senhasDiferentes: true } : null;
+  }
+
+  onSubmit(): void {
+    if (!this.registerForm.value.perfil) {
+      alert('Selecione o tipo de usuário.');
+      return;
+    }
+
+    if (!this.registerForm.value.id_municipio) {
+      alert('Selecione um município.');
+      return;
+    }
+
+    if (this.registerForm.valid) {
+      const f = this.registerForm.value;
+      const dto: RegisterDto = {
+        nome: f.nome,
+        email: f.email,
+        telefone: f.telefone,
+        cpf: f.cpf,
+        senha: f.senha,
+        latitude: f.latitude,
+        longitude: f.longitude,
+        id_municipio: f.id_municipio,
+        doadora: f.perfil === 'doadora',
+        receptora: f.perfil === 'receptora',
+        profissional: f.perfil === 'profissional'
+      };
+
+      this.authService.register(dto).subscribe({
         next: () => {
           alert('Cadastro realizado com sucesso!');
           this.router.navigate(['/login']);
         },
-        error: (err) => {
+        error: err => {
           console.error(err);
-          alert('Erro ao cadastrar. Verifique os dados.');
+          alert('Erro ao cadastrar.');
         }
       });
+    } else {
+      if (this.registerForm.errors?.['senhasDiferentes'])
+        alert('As senhas não coincidem.');
+      else
+        alert('Preencha todos os campos corretamente.');
     }
   }
 }

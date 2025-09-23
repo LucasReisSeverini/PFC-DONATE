@@ -18,5 +18,5 @@ public class BancoLeiteModel {
     private Double longitude;
 
     @JsonProperty("id_municipio")
-    private Integer idMunicipio;
+    private Long idMunicipio;
 }

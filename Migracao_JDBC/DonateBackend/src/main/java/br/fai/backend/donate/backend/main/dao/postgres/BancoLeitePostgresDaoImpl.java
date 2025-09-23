@@ -37,7 +37,7 @@ public class BancoLeitePostgresDaoImpl implements BancoLeiteDao {
                 if (entity.getLongitude() != null) ps.setDouble(5, entity.getLongitude());
                 else ps.setNull(5, Types.DOUBLE);
 
-                ps.setInt(6, entity.getIdMunicipio());
+                ps.setLong(6, entity.getIdMunicipio());
 
                 ps.executeUpdate();
 
@@ -81,7 +81,7 @@ public class BancoLeitePostgresDaoImpl implements BancoLeiteDao {
                     banco.setTelefone(rs.getString("telefone"));
                     banco.setLatitude(rs.getObject("latitude") != null ? rs.getDouble("latitude") : null);
                     banco.setLongitude(rs.getObject("longitude") != null ? rs.getDouble("longitude") : null);
-                    banco.setIdMunicipio(rs.getInt("id_municipio"));
+                    banco.setIdMunicipio(rs.getLong("id_municipio"));
                     return banco;
                 }
             }
@@ -106,7 +106,7 @@ public class BancoLeitePostgresDaoImpl implements BancoLeiteDao {
                 banco.setTelefone(rs.getString("telefone"));
                 banco.setLatitude(rs.getObject("latitude") != null ? rs.getDouble("latitude") : null);
                 banco.setLongitude(rs.getObject("longitude") != null ? rs.getDouble("longitude") : null);
-                banco.setIdMunicipio(rs.getInt("id_municipio"));
+                banco.setIdMunicipio(rs.getLong("id_municipio"));
                 bancos.add(banco);
             }
 
@@ -131,7 +131,7 @@ public class BancoLeitePostgresDaoImpl implements BancoLeiteDao {
             if (entity.getLongitude() != null) ps.setDouble(5, entity.getLongitude());
             else ps.setNull(5, Types.DOUBLE);
 
-            ps.setInt(6, entity.getIdMunicipio());
+            ps.setLong(6, entity.getIdMunicipio());
             ps.setInt(7, id);
 
             ps.executeUpdate();

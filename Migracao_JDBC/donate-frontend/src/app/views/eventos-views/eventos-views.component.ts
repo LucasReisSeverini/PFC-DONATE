@@ -5,13 +5,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms'; // <--- IMPORTADO FormsModule
 
 import { EventosService, Evento } from '../../services/eventos/eventos.service';
 import { MunicipioService, Municipio } from '../../services/municipio/municipio.service';
 import { EventoDetalheComponent } from '../evento-detalhe/evento-detalhe.component';
 import { BancoService } from '../../services/banco/banco.service';
 
-// Interface ajustada conforme o backend
 interface Banco {
   id: number;
   nome: string;
@@ -30,11 +30,16 @@ interface Banco {
   templateUrl: './eventos-views.component.html',
   styleUrls: ['./eventos-views.component.css'],
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatDialogModule]
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatDialogModule, FormsModule] // FormsModule adicionado
 })
 export class EventosViewsComponent implements OnInit {
   eventos: (Evento & { municipioNome?: string })[] = [];
+  eventosFiltrados: (Evento & { municipioNome?: string })[] = [];
   municipios: Municipio[] = [];
+
+  // Filtros
+  filtroMunicipio: number | null = null;
+  filtroTipo: string = 'Todos';
 
   constructor(
     private eventosService: EventosService,
@@ -52,7 +57,6 @@ export class EventosViewsComponent implements OnInit {
     this.municipioService.getMunicipios().subscribe({
       next: (res: Municipio[]) => {
         this.municipios = res;
-        console.log('Municípios carregados:', this.municipios);
         this.carregarEventos();
       },
       error: (err: any) => console.error('Erro ao carregar municípios:', err)
@@ -66,11 +70,27 @@ export class EventosViewsComponent implements OnInit {
           ...e,
           municipioNome: this.municipios.find(m => m.id === e.id_municipio)?.nome
         }));
-        console.log('Eventos carregados:', this.eventos);
+        this.aplicarFiltros();
       },
       error: (err: any) => console.error('Erro ao carregar eventos:', err)
     });
   }
+
+  aplicarFiltros() {
+    this.eventosFiltrados = this.eventos.filter(e => {
+      // Filtra por município
+      const municipioOk = this.filtroMunicipio ? e.id_municipio === this.filtroMunicipio : true;
+
+      // Filtra por tipo ignorando case e tratando "Todos"
+      const tipoOk =
+        this.filtroTipo.toLowerCase() === 'todos'
+          ? true
+          : e.tipo?.toLowerCase() === this.filtroTipo.toLowerCase();
+
+      return municipioOk && tipoOk;
+    });
+  }
+
 
   eventosProximos(): void {
     if (!navigator.geolocation) {
@@ -81,32 +101,15 @@ export class EventosViewsComponent implements OnInit {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const { latitude, longitude } = pos.coords;
-        console.log('Localização atual:', { latitude, longitude });
 
         this.bancoService.buscarBancoMaisProximo(latitude, longitude).subscribe({
           next: (banco: Banco | null) => {
-            console.log('Banco mais próximo encontrado:', banco);
             if (banco) {
-              const municipioId = banco.id_municipio;
-              console.log('ID do município do banco:', municipioId);
-
-              this.eventosService.listarEventos().subscribe({
-                next: (res: Evento[]) => {
-                  this.eventos = res
-                    .filter(e => e.id_municipio === municipioId)
-                    .map(e => ({
-                      ...e,
-                      municipioNome: this.municipios.find(m => m.id === e.id_municipio)?.nome
-                    }));
-
-                  console.log('Eventos filtrados pelo município:', this.eventos);
-
-                  if (this.eventos.length === 0) {
-                    alert('Nenhum evento encontrado próximo à sua localização.');
-                  }
-                },
-                error: (err: any) => console.error('Erro ao carregar eventos:', err)
-              });
+              this.filtroMunicipio = banco.id_municipio;
+              this.aplicarFiltros();
+              if (this.eventosFiltrados.length === 0) {
+                alert('Nenhum evento encontrado próximo à sua localização.');
+              }
             } else {
               alert('Nenhum banco de leite encontrado próximo a você.');
             }

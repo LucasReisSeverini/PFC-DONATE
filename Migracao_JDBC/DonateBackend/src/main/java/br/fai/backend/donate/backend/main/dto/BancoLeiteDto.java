@@ -8,11 +8,13 @@ public class BancoLeiteDto {
     private String telefone;
     private Double latitude;
     private Double longitude;
-    private Double distancia; // nova propriedade
+    private Double distancia; // existente
+    private Long id_municipio; // novo campo
 
     public BancoLeiteDto() {}
 
-    public BancoLeiteDto(Long id, String nome, String endereco, String telefone, Double latitude, Double longitude, Double distancia) {
+    public BancoLeiteDto(Long id, String nome, String endereco, String telefone,
+                         Double latitude, Double longitude, Double distancia, Long id_municipio) {
         this.id = id;
         this.nome = nome;
         this.endereco = endereco;
@@ -20,6 +22,7 @@ public class BancoLeiteDto {
         this.latitude = latitude;
         this.longitude = longitude;
         this.distancia = distancia;
+        this.id_municipio = id_municipio;
     }
 
     // Getters e Setters
@@ -43,4 +46,7 @@ public class BancoLeiteDto {
 
     public Double getDistancia() { return distancia; }
     public void setDistancia(Double distancia) { this.distancia = distancia; }
+
+    public Long getId_municipio() { return id_municipio; }
+    public void setId_municipio(Long id_municipio) { this.id_municipio = id_municipio; }
 }

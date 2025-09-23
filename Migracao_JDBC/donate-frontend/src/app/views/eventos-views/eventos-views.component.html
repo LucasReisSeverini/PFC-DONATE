@@ -6,6 +6,22 @@
     ← Voltar para Home
   </button>
 
+  <!-- Filtros -->
+  <div class="filtros" style="margin: 10px 0; display: flex; gap: 10px;">
+    <!-- Filtro Município -->
+    <select [(ngModel)]="filtroMunicipio" (change)="aplicarFiltros()">
+      <option [ngValue]="null">Todos os municípios</option>
+      <option *ngFor="let m of municipios" [ngValue]="m.id">{{ m.nome }}</option>
+    </select>
+
+    <!-- Filtro Tipo -->
+    <select [(ngModel)]="filtroTipo" (change)="aplicarFiltros()">
+      <option value="Todos">Todos</option>
+      <option value="evento">Evento</option>
+      <option value="noticia">Notícia</option>
+    </select>
+  </div>
+
   <!-- Botão Eventos Próximos -->
   <div style="margin: 10px 0;">
     <button mat-stroked-button color="accent" (click)="eventosProximos()" style="font-weight: bold;">
@@ -13,9 +29,10 @@
     </button>
   </div>
 
+  <!-- Cards de eventos -->
   <div class="cards">
     <mat-card
-      *ngFor="let evento of eventos"
+      *ngFor="let evento of eventosFiltrados"
       class="card-evento"
       [ngClass]="evento.tipo"
       (click)="abrirDetalhe(evento)">

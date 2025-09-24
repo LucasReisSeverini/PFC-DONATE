@@ -41,12 +41,12 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Rua -->
+    <!-- Logradouro -->
     <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Rua</mat-label>
-      <input matInput type="text" formControlName="rua" placeholder="Digite a rua" />
+      <mat-label>Logradouro</mat-label>
+      <input matInput type="text" formControlName="rua" placeholder="Digite o logradouro" />
       <mat-error *ngIf="doacaoForm.get('rua')?.hasError('required') && doacaoForm.get('rua')?.touched">
-        Informe a rua.
+        Informe o Logradouro.
       </mat-error>
     </mat-form-field>
 

@@ -1,4 +1,5 @@
 <app-headear></app-headear>
+
 <div class="wrapper">
   <div class="register-container">
     <div class="logo-container">
@@ -12,38 +13,55 @@
     </p>
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <!-- Mensagem de erro em destaque -->
+      <!-- Mensagem de erro -->
       <div *ngIf="mensagemErro" class="alert-error">
         <span class="material-icons">error_outline</span>
         {{ mensagemErro }}
       </div>
 
-      <!-- Campos de entrada -->
+      <!-- Nome -->
       <div class="input-group" [ngClass]="{'error': registerForm.get('nome')?.invalid && registerForm.get('nome')?.touched}">
         <input matInput formControlName="nome" placeholder="Nome completo" />
         <span class="material-icons input-icon">person</span>
       </div>
 
+      <!-- Email -->
       <div class="input-group" [ngClass]="{'error': registerForm.get('email')?.invalid && registerForm.get('email')?.touched}">
         <input matInput type="email" formControlName="email" placeholder="Email" />
         <span class="material-icons input-icon">email</span>
       </div>
 
+      <!-- Telefone -->
       <div class="input-group" [ngClass]="{'error': registerForm.get('telefone')?.invalid && registerForm.get('telefone')?.touched}">
-        <input matInput formControlName="telefone" placeholder="Telefone" />
+        <input
+          matInput
+          formControlName="telefone"
+          placeholder="Telefone (99) 99999-9999"
+          (input)="formatTelefone()"
+          maxlength="15"
+        />
         <span class="material-icons input-icon">phone</span>
       </div>
 
+      <!-- CPF -->
       <div class="input-group" [ngClass]="{'error': registerForm.get('cpf')?.invalid && registerForm.get('cpf')?.touched}">
-        <input matInput formControlName="cpf" placeholder="CPF" />
+        <input
+          matInput
+          formControlName="cpf"
+          placeholder="CPF 000.000.000-00"
+          (input)="formatCpf()"
+          maxlength="14"
+        />
         <span class="material-icons input-icon">badge</span>
       </div>
 
+      <!-- Senha -->
       <div class="input-group" [ngClass]="{'error': registerForm.get('senha')?.invalid && registerForm.get('senha')?.touched}">
         <input matInput type="password" formControlName="senha" placeholder="Senha" />
         <span class="material-icons input-icon">lock</span>
       </div>
 
+      <!-- Confirmar Senha -->
       <div class="input-group" [ngClass]="{'error': registerForm.get('confirmarSenha')?.invalid && registerForm.get('confirmarSenha')?.touched}">
         <input matInput type="password" formControlName="confirmarSenha" placeholder="Repetir senha" />
         <span class="material-icons input-icon">lock</span>
@@ -75,7 +93,7 @@
       <input type="hidden" formControlName="latitude" />
       <input type="hidden" formControlName="longitude" />
 
-      <!-- Checkbox de política usando Reactive Forms -->
+      <!-- Política de Privacidade -->
       <div class="policy-group" [ngClass]="{'error': politicaControl.invalid && submitAttempted}">
         <mat-checkbox [formControl]="politicaControl">
           Li e aceito a <a routerLink="/politica-de-privacidade" target="_blank">política de uso de dados pessoais</a>.

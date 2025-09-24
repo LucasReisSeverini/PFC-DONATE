@@ -70,8 +70,8 @@ export class RegisterComponent implements OnInit {
       {
         nome: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        telefone: ['', Validators.required],
-        cpf: ['', Validators.required],
+        telefone: ['', [Validators.required, Validators.minLength(14)]], // máscara (xx) xxxxx-xxxx
+        cpf: ['', [Validators.required, Validators.minLength(14)]], // máscara xxx.xxx.xxx-xx
         senha: ['', Validators.required],
         confirmarSenha: ['', Validators.required],
         perfil: ['', Validators.required],
@@ -137,13 +137,62 @@ export class RegisterComponent implements OnInit {
     return senha !== confirmarSenha ? { senhasDiferentes: true } : null;
   }
 
+  formatTelefone(): void {
+    let tel: string = this.registerForm.get('telefone')?.value || '';
+    tel = tel.replace(/\D/g, '').slice(0, 11);
+
+    if (tel.length === 0) {
+      this.registerForm.get('telefone')?.setValue('', { emitEvent: false });
+      return;
+    }
+
+    if (tel.length <= 2) {
+      tel = `(${tel}`;
+    } else if (tel.length <= 7) {
+      tel = `(${tel.slice(0, 2)}) ${tel.slice(2)}`;
+    } else {
+      tel = `(${tel.slice(0, 2)}) ${tel.slice(2, 7)}-${tel.slice(7)}`;
+    }
+
+    this.registerForm.get('telefone')?.setValue(tel, { emitEvent: false });
+  }
+
+  formatCpf(): void {
+    let cpf: string = this.registerForm.get('cpf')?.value || '';
+    cpf = cpf.replace(/\D/g, '').slice(0, 11);
+
+    if (cpf.length === 0) {
+      this.registerForm.get('cpf')?.setValue('', { emitEvent: false });
+      return;
+    }
+
+    if (cpf.length <= 3) {
+      cpf = cpf;
+    } else if (cpf.length <= 6) {
+      cpf = `${cpf.slice(0, 3)}.${cpf.slice(3)}`;
+    } else if (cpf.length <= 9) {
+      cpf = `${cpf.slice(0, 3)}.${cpf.slice(3, 6)}.${cpf.slice(6)}`;
+    } else {
+      cpf = `${cpf.slice(0, 3)}.${cpf.slice(3, 6)}.${cpf.slice(6, 9)}-${cpf.slice(9)}`;
+    }
+
+    this.registerForm.get('cpf')?.setValue(cpf, { emitEvent: false });
+  }
+
+  getCpfForBackend(): string {
+    return (this.registerForm.get('cpf')?.value || '').replace(/\D/g, '');
+  }
+
+  getTelefoneForBackend(): string {
+    return (this.registerForm.get('telefone')?.value || '').replace(/\D/g, '');
+  }
+
   onSubmit(): void {
     this.submitAttempted = true;
     this.mensagemErro = '';
     this.municipioNaoSelecionadoErro = false;
     this.perfilNaoSelecionadoErro = false;
 
-    // Validação do checkbox de política
     if (this.politicaControl.invalid) {
       this.mensagemErro = 'Você deve aceitar a política de uso de dados pessoais para se cadastrar.';
       return;
@@ -161,9 +210,16 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    if (!this.registerForm.valid) {
+    const telefoneValido = this.registerForm.get('telefone')?.value?.replace(/\D/g, '').length === 11;
+    const cpfValido = this.registerForm.get('cpf')?.value?.replace(/\D/g, '').length === 11;
+
+    if (!this.registerForm.valid || !telefoneValido || !cpfValido) {
       if (this.registerForm.errors?.['senhasDiferentes']) {
         this.mensagemErro = 'As senhas não coincidem.';
+      } else if (!telefoneValido) {
+        this.mensagemErro = 'Telefone inválido.';
+      } else if (!cpfValido) {
+        this.mensagemErro = 'CPF inválido.';
       } else {
         this.mensagemErro = 'Preencha todos os campos obrigatórios corretamente.';
       }
@@ -174,8 +230,8 @@ export class RegisterComponent implements OnInit {
     const dto: RegisterDto = {
       nome: f.nome,
       email: f.email,
-      telefone: f.telefone,
-      cpf: f.cpf,
+      telefone: this.getTelefoneForBackend(),
+      cpf: this.getCpfForBackend(),
       senha: f.senha,
       latitude: f.latitude,
       longitude: f.longitude,

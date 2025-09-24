@@ -5,4 +5,6 @@ import br.fai.backend.donate.backend.main.port.dao.crud.CrudDao;
 
 public interface UserDao extends CrudDao<UsuarioModel>, ReadByEmailDao, UpdatePasswordDao {
     int add(UsuarioModel entity);
+    UsuarioModel findByCpf(String cpf);
+    UsuarioModel readByCpf(String cpf);
 }

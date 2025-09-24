@@ -22,6 +22,16 @@ public class UserPostgresDaoImpl implements UserDao {
 
     @Override
     public int add(UsuarioModel entity) {
+        // Verifica duplicidade de email
+        if (readByEmail(entity.getEmail()) != null) {
+            throw new RuntimeException("Email já cadastrado");
+        }
+
+        // Verifica duplicidade de CPF
+        if (readByCpf(entity.getCpf()) != null) {
+            throw new RuntimeException("CPF já cadastrado");
+        }
+
         if ((entity.getDoadora() == null || !entity.getDoadora())
                 && (entity.getReceptora() == null || !entity.getReceptora())
                 && (entity.getProfissional() == null || !entity.getProfissional())) {
@@ -68,6 +78,41 @@ public class UserPostgresDaoImpl implements UserDao {
             try { connection.rollback(); } catch (SQLException ex) { throw new RuntimeException(ex); }
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public UsuarioModel findByCpf(String cpf) {
+        return null;
+    }
+
+
+    @Override
+    public UsuarioModel readByCpf(String cpf) {
+        String sql = "SELECT * FROM usuario WHERE cpf = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, cpf);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    UsuarioModel usuario = new UsuarioModel();
+                    usuario.setId(rs.getInt("id"));
+                    usuario.setNome(rs.getString("nome"));
+                    usuario.setTelefone(rs.getString("telefone"));
+                    usuario.setSenha(rs.getString("senha"));
+                    usuario.setEmail(rs.getString("email"));
+                    usuario.setCpf(rs.getString("cpf"));
+                    usuario.setDoadora(rs.getBoolean("doadora"));
+                    usuario.setReceptora(rs.getBoolean("receptora"));
+                    usuario.setProfissional(rs.getBoolean("profissional"));
+                    usuario.setLatitude(rs.getObject("latitude") != null ? rs.getDouble("latitude") : null);
+                    usuario.setLongitude(rs.getObject("longitude") != null ? rs.getDouble("longitude") : null);
+                    usuario.setIdMunicipio(rs.getInt("id_municipio"));
+                    return usuario;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
     }
 
     @Override

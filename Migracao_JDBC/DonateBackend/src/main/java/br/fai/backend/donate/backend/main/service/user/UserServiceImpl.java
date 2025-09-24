@@ -184,4 +184,9 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    @Override
+    public Optional<UsuarioModel> buscarPorCpf(String cpf) {
+        return Optional.ofNullable(userDao.findByCpf(cpf));
+    }
+
 }

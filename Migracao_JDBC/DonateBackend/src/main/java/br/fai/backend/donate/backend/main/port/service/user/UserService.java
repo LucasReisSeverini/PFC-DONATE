@@ -19,4 +19,5 @@ public interface UserService extends CrudService<UsuarioModel>, UpdatePasswordSe
     Optional<UsuarioModel> buscarPorEmail(String email);
 
     boolean atualizarPerfil(int id, AtualizarPerfilDto dto);
+    Optional<UsuarioModel> buscarPorCpf(String cpf);
 }

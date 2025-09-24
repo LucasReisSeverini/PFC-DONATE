@@ -7,40 +7,50 @@
     </div>
 
     <p class="subtitle">Cadastre-se agora!</p>
-    <p class="description">Seja uma doadora ou encontre leite materno. Preencha o formulário abaixo 💖</p>
+    <p class="description">
+      Seja uma doadora ou encontre leite materno. Preencha o formulário abaixo 💖
+    </p>
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <div class="input-group">
+      <!-- Mensagem de erro em destaque -->
+      <div *ngIf="mensagemErro" class="alert-error">
+        <span class="material-icons">error_outline</span>
+        {{ mensagemErro }}
+      </div>
+
+      <!-- Campos de entrada -->
+      <div class="input-group" [ngClass]="{'error': registerForm.get('nome')?.invalid && registerForm.get('nome')?.touched}">
         <input matInput formControlName="nome" placeholder="Nome completo" />
         <span class="material-icons input-icon">person</span>
       </div>
 
-      <div class="input-group">
+      <div class="input-group" [ngClass]="{'error': registerForm.get('email')?.invalid && registerForm.get('email')?.touched}">
         <input matInput type="email" formControlName="email" placeholder="Email" />
         <span class="material-icons input-icon">email</span>
       </div>
 
-      <div class="input-group">
+      <div class="input-group" [ngClass]="{'error': registerForm.get('telefone')?.invalid && registerForm.get('telefone')?.touched}">
         <input matInput formControlName="telefone" placeholder="Telefone" />
         <span class="material-icons input-icon">phone</span>
       </div>
 
-      <div class="input-group">
+      <div class="input-group" [ngClass]="{'error': registerForm.get('cpf')?.invalid && registerForm.get('cpf')?.touched}">
         <input matInput formControlName="cpf" placeholder="CPF" />
         <span class="material-icons input-icon">badge</span>
       </div>
 
-      <div class="input-group">
+      <div class="input-group" [ngClass]="{'error': registerForm.get('senha')?.invalid && registerForm.get('senha')?.touched}">
         <input matInput type="password" formControlName="senha" placeholder="Senha" />
         <span class="material-icons input-icon">lock</span>
       </div>
 
-      <div class="input-group">
+      <div class="input-group" [ngClass]="{'error': registerForm.get('confirmarSenha')?.invalid && registerForm.get('confirmarSenha')?.touched}">
         <input matInput type="password" formControlName="confirmarSenha" placeholder="Repetir senha" />
         <span class="material-icons input-icon">lock</span>
       </div>
 
-      <div class="perfil-group">
+      <!-- Tipo de usuário -->
+      <div class="perfil-group" [ngClass]="{'error': perfilNaoSelecionadoErro}">
         <label>Tipo de usuário:</label>
         <mat-radio-group formControlName="perfil" class="radio-group">
           <mat-radio-button value="doadora">Doadora</mat-radio-button>
@@ -49,7 +59,8 @@
         </mat-radio-group>
       </div>
 
-      <div class="input-group">
+      <!-- Município -->
+      <div class="input-group" [ngClass]="{'error': municipioNaoSelecionadoErro}">
         <input matInput [matAutocomplete]="auto" [formControl]="municipioControl" placeholder="Município" />
         <span class="material-icons input-icon">place</span>
         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onMunicipioSelecionado($event)">
@@ -59,6 +70,7 @@
         </mat-autocomplete>
       </div>
 
+      <!-- Campos ocultos -->
       <input type="hidden" formControlName="id_municipio" />
       <input type="hidden" formControlName="latitude" />
       <input type="hidden" formControlName="longitude" />
@@ -70,6 +82,8 @@
       <button type="submit">Cadastrar</button>
     </form>
 
-    <p class="register-prompt">Já tem uma conta? <a routerLink="/login">Entrar</a></p>
+    <p class="register-prompt">
+      Já tem uma conta? <a routerLink="/login">Entrar</a>
+    </p>
   </div>
 </div>

@@ -35,7 +35,7 @@ export interface MunicipioComUF {
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule,              // ✅ necessário para usar routerLink
+    RouterModule,
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
@@ -51,13 +51,13 @@ export class RegisterComponent implements OnInit {
   municipioControl = new FormControl('');
   municipios: MunicipioComUF[] = [];
   municipiosFiltrados$: Observable<MunicipioComUF[]> = new Observable();
+  mensagemErro: string = '';
 
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private authService = inject(AuthService);
   private municipioService = inject(MunicipioService);
 
-  cpfOuEmailExistenteErro = false;
   municipioNaoSelecionadoErro = false;
   perfilNaoSelecionadoErro = false;
 
@@ -104,21 +104,17 @@ export class RegisterComponent implements OnInit {
 
   carregarMunicipios(): void {
     this.municipioService.getMunicipios().subscribe({
-      next: (dados: MunicipioComUF[]) => {
-        this.municipios = dados; // Já está no formato correto
-      },
-      error: (err: any) => {
+      next: (dados: MunicipioComUF[]) => (this.municipios = dados),
+      error: err => {
         console.error('Erro ao carregar municípios', err);
-        alert('Erro ao carregar municípios do servidor.');
+        this.mensagemErro = 'Erro ao carregar municípios do servidor.';
       }
     });
   }
 
   filtrarMunicipios(value: string): MunicipioComUF[] {
     const filtro = value.toLowerCase();
-    return this.municipios.filter(m =>
-      m.nome.toLowerCase().includes(filtro)
-    );
+    return this.municipios.filter(m => m.nome.toLowerCase().includes(filtro));
   }
 
   onMunicipioSelecionado(event: any): void {
@@ -138,58 +134,60 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.cpfOuEmailExistenteErro = false;
+    this.mensagemErro = '';
     this.municipioNaoSelecionadoErro = false;
     this.perfilNaoSelecionadoErro = false;
 
     if (!this.registerForm.value.perfil) {
       this.perfilNaoSelecionadoErro = true;
-      alert('Selecione o tipo de usuário.');
+      this.mensagemErro = 'Selecione o tipo de usuário.';
       return;
     }
 
     if (!this.registerForm.value.id_municipio) {
       this.municipioNaoSelecionadoErro = true;
-      alert('Selecione um município.');
+      this.mensagemErro = 'Selecione um município válido.';
       return;
     }
 
-    if (this.registerForm.valid) {
-      const f = this.registerForm.value;
-      const dto: RegisterDto = {
-        nome: f.nome,
-        email: f.email,
-        telefone: f.telefone,
-        cpf: f.cpf,
-        senha: f.senha,
-        latitude: f.latitude,
-        longitude: f.longitude,
-        id_municipio: f.id_municipio,
-        doadora: f.perfil === 'doadora',
-        receptora: f.perfil === 'receptora',
-        profissional: f.perfil === 'profissional'
-      };
-
-      this.authService.register(dto).subscribe({
-        next: () => {
-          alert('Cadastro realizado com sucesso!');
-          this.router.navigate(['/login']);
-        },
-        error: err => {
-          console.error(err);
-          if (
-            err.error?.message?.includes('CPF') ||
-            err.error?.message?.includes('Email')
-          ) {
-            this.cpfOuEmailExistenteErro = true;
-            alert('CPF ou Email já cadastrado.');
-          } else alert('Erro ao cadastrar.');
-        }
-      });
-    } else {
-      if (this.registerForm.errors?.['senhasDiferentes'])
-        alert('As senhas não coincidem.');
-      else alert('Preencha todos os campos corretamente.');
+    if (!this.registerForm.valid) {
+      if (this.registerForm.errors?.['senhasDiferentes']) {
+        this.mensagemErro = 'As senhas não coincidem.';
+      } else {
+        this.mensagemErro = 'Preencha todos os campos obrigatórios corretamente.';
+      }
+      return;
     }
+
+    const f = this.registerForm.value;
+    const dto: RegisterDto = {
+      nome: f.nome,
+      email: f.email,
+      telefone: f.telefone,
+      cpf: f.cpf,
+      senha: f.senha,
+      latitude: f.latitude,
+      longitude: f.longitude,
+      id_municipio: f.id_municipio,
+      doadora: f.perfil === 'doadora',
+      receptora: f.perfil === 'receptora',
+      profissional: f.perfil === 'profissional'
+    };
+
+    this.authService.register(dto).subscribe({
+      next: () => {
+        alert('Cadastro realizado com sucesso!');
+        this.router.navigate(['/login']);
+      },
+      error: err => {
+        console.error(err);
+        // Corrigido: mostra exatamente a mensagem do backend
+        if (err.status === 409 && typeof err.error === 'string') {
+          this.mensagemErro = err.error;
+        } else {
+          this.mensagemErro = 'Erro ao cadastrar. Tente novamente.';
+        }
+      }
+    });
   }
 }

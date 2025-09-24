@@ -26,7 +26,21 @@ public class UserRestController {
     }
 
     @PostMapping("/cadastro")
-    public ResponseEntity<UsuarioModel> salvar(@RequestBody UsuarioModel usuarioDto) {
+    public ResponseEntity<?> salvar(@RequestBody UsuarioModel usuarioDto) {
+        // Verifica se o email já existe
+        if (userService.buscarPorEmail(usuarioDto.getEmail()).isPresent()) {
+            return ResponseEntity
+                    .status(409)
+                    .body("Email já cadastrado");
+        }
+
+        // Verifica se o CPF já existe
+        if (userService.buscarPorCpf(usuarioDto.getCpf()).isPresent()) {
+            return ResponseEntity
+                    .status(409)
+                    .body("CPF já cadastrado");
+        }
+
         // Busca o município pelo ID enviado no DTO
         MunicipioModel municipio = municipioService.findById(usuarioDto.getIdMunicipio())
                 .orElseThrow(() -> new RuntimeException("Município não encontrado"));
@@ -40,16 +54,16 @@ public class UserRestController {
         usuario.setDoadora(usuarioDto.getDoadora());
         usuario.setReceptora(usuarioDto.getReceptora());
         usuario.setProfissional(usuarioDto.getProfissional());
-        // usuario.setAdmin(usuarioDto.getAdmin()); // remova se não existir no banco
         usuario.setLatitude(usuarioDto.getLatitude());
         usuario.setLongitude(usuarioDto.getLongitude());
-        usuario.setIdMunicipio(municipio.getId()); // associa pelo ID
+        usuario.setIdMunicipio(municipio.getId());
 
         int novoId = userService.create(usuario);
         usuario.setId(novoId);
 
         return ResponseEntity.ok(usuario);
     }
+
 
 
     @GetMapping()

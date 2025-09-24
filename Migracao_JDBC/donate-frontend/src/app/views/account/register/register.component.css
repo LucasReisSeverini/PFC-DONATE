@@ -7,13 +7,31 @@ body {
   background: linear-gradient(145deg, #fff0f5, #ffe6f0);
   font-family: 'Inter', sans-serif;
 }
+/* Mensagem de erro estilo alerta */
+.alert-error {
+  display: flex;
+  align-items: center;
+  background-color: #f8d7da; /* vermelho claro */
+  color: #721c24; /* vermelho escuro */
+  border: 1px solid #f5c6cb;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  gap: 6px;
+}
+
+.alert-error .material-icons {
+  font-size: 18px;
+}
+
 
 /* Wrapper para centralizar o container */
 .wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* garante que ocupe toda a tela */
+  min-height: 100vh;
   padding: 20px;
 }
 
@@ -22,7 +40,7 @@ body {
   width: 100%;
   max-width: 450px;
   padding: 35px 30px;
-  background-color: #fce4ec; /* rosa clarinho */
+  background-color: #fce4ec;
   border-radius: 25px;
   box-shadow: 0 10px 28px rgba(0,0,0,0.08);
   text-align: center;
@@ -103,6 +121,23 @@ body {
   transform: translateY(-50%);
   color: #d46a92;
   font-size: 20px;
+}
+
+/* Borda vermelha em campos com erro */
+.input-group.error input,
+.perfil-group.error mat-radio-group,
+.input-group.error input[matInput] {
+  border: 1px solid #f44336 !important;
+  box-shadow: 0 3px 12px rgba(244,67,54,0.2);
+}
+
+/* Mensagem de erro */
+.error-message {
+  color: #f44336;
+  font-weight: 600;
+  font-size: 13px;
+  margin: 8px 0;
+  text-align: center;
 }
 
 /* Tipo de usuário */

@@ -15,17 +15,22 @@ import { GerenciarEventosComponent } from './views/gerenciar-eventos/gerenciar-e
 import { EditEventoComponent } from './views/edit-evento/edit-evento.component';
 import { RecuperarSenhaComponent } from './views/account/recuperar-senha/recuperar-senha.component';
 
-
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  // rota padrão
+  { path: '', redirectTo: 'painel', pathMatch: 'full' },
+
+  // rotas públicas
   { path: 'login', component: LoginComponent },
   { path: 'cadastro', component: RegisterComponent },
-  { path: 'recuperar-senha', component: RecuperarSenhaComponent }, // <-- aqui
+  { path: 'recuperar-senha', component: RecuperarSenhaComponent },
+  { path: 'eventos', component: EventosViewsComponent },
+  { path: 'banco-proximo', component: BancoProximoComponent },
 
-  // Rotas protegidas
+  // painel (mostra conteúdo dependendo se usuário está logado)
+  { path: 'painel', component: PainelComponent },
+
+  // rotas protegidas
   { path: 'agendamento', component: AgendamentoComponent, canActivate: [AuthGuard] },
-  { path: 'painel', component: PainelComponent, canActivate: [AuthGuard] },
-  { path: 'banco-proximo', component: BancoProximoComponent, canActivate: [AuthGuard] },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
   { path: 'doacao', component: DoacaoComponent, canActivate: [AuthGuard] },
   {
@@ -52,9 +57,5 @@ export const routes: Routes = [
     component: EditEventoComponent,
     canActivate: [AuthGuard],
     data: { allowedRoles: ['PROFISSIONAL'] }
-  },
-
-  // Rota pública
-  { path: 'eventos', component: EventosViewsComponent }
-
+  }
 ];

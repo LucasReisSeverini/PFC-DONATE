@@ -15,7 +15,7 @@ import { HeadearComponent } from '../headear/headear.component';
     MatButtonModule,
     MatExpansionModule,
     MatMenuModule,
-    HeadearComponent // ✅ necessário para reconhecer <app-headear>
+    HeadearComponent
   ],
   templateUrl: './painel.component.html',
   styleUrls: ['./painel.component.css']
@@ -26,18 +26,34 @@ export class PainelComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    // Recupera a role do usuário armazenada no localStorage
+    // Recupera a role do usuário
     this.roleUsuario = localStorage.getItem('role');
   }
 
-  irParaAgendamento() {
-    this.router.navigate(['/agendamento']);
+  /** Navega para Doação ou Controle de Agendamentos conforme role */
+  irParaDoacaoOuControle() {
+    if (this.roleUsuario === 'PROFISSIONAL') {
+      this.router.navigate(['/controle-agendamento']);
+    } else {
+      this.router.navigate(['/doacao']);
+    }
   }
 
+  /** Navega para Banco de Leite mais próximo */
   irParaBancoProximo() {
     this.router.navigate(['/banco-proximo']);
   }
 
+  /** Navega para Eventos ou Gerenciamento de Eventos conforme role */
+  irParaEventosOuGerenciar() {
+    if (this.roleUsuario === 'PROFISSIONAL') {
+      this.router.navigate(['/gerenciar-eventos']);
+    } else {
+      this.router.navigate(['/eventos']);
+    }
+  }
+
+  /** Realiza logout */
   sair() {
     localStorage.removeItem('token');
     localStorage.removeItem('role');

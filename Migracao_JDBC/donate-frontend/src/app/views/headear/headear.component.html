@@ -1,19 +1,48 @@
 <!-- HEADER -->
 <header>
-  <div class="logo"><span class="material-icons">local_hospital</span> Donate</div>
+  <div class="logo">
+    <span class="material-icons">local_hospital</span> Donate
+  </div>
+
   <nav>
-    <button mat-button [routerLink]="'/perfil'"><span class="material-icons">person</span> Meu Perfil</button>
-    <button mat-button [routerLink]="'/meus-agendamentos'"><span class="material-icons">event</span> Meus Agendamentos</button>
+    <!-- Se logado -->
+    <ng-container *ngIf="isLoggedIn; else guestMenu">
+      <button mat-button [routerLink]="'/perfil'">
+        <span class="material-icons">person</span> Meu Perfil
+      </button>
 
-    <mat-menu #areaProfMenu="matMenu">
-      <button mat-menu-item [routerLink]="'/controle-agendamento'"><span class="material-icons">calendar_today</span> Controle de Agendamentos</button>
-      <button mat-menu-item [routerLink]="'/gerenciar-eventos'"><span class="material-icons">newspaper</span> Gerenciar Notícias</button>
-    </mat-menu>
+      <!-- Botão dinâmico de agendamentos -->
+      <button mat-button [routerLink]="roleUsuario==='PROFISSIONAL' ? '/controle-agendamento' : '/meus-agendamentos'">
+        <span class="material-icons">event</span>
+        {{ roleUsuario==='PROFISSIONAL' ? 'Controle de Agendamentos' : 'Meus Agendamentos' }}
+      </button>
 
-    <button mat-button *ngIf="roleUsuario==='PROFISSIONAL'" [matMenuTriggerFor]="areaProfMenu">
-      <span class="material-icons">workspace_premium</span> Área Profissional
-    </button>
+      <mat-menu #areaProfMenu="matMenu">
+        <button mat-menu-item [routerLink]="'/controle-agendamento'">
+          <span class="material-icons">calendar_today</span> Controle de Agendamentos
+        </button>
+        <button mat-menu-item [routerLink]="'/gerenciar-eventos'">
+          <span class="material-icons">newspaper</span> Gerenciar Notícias
+        </button>
+      </mat-menu>
 
-    <button mat-raised-button color="warn" (click)="sair()"><span class="material-icons">logout</span> Sair</button>
+      <button mat-button *ngIf="roleUsuario==='PROFISSIONAL'" [matMenuTriggerFor]="areaProfMenu">
+        <span class="material-icons">workspace_premium</span> Área Profissional
+      </button>
+
+      <button mat-raised-button color="warn" (click)="sair()">
+        <span class="material-icons">logout</span> Sair
+      </button>
+    </ng-container>
+
+    <!-- Se NÃO logado -->
+    <ng-template #guestMenu>
+      <button mat-button [routerLink]="'/login'">
+        <span class="material-icons">login</span> Login
+      </button>
+      <button mat-button [routerLink]="'/cadastro'">
+        <span class="material-icons">person_add</span> Cadastro
+      </button>
+    </ng-template>
   </nav>
 </header>

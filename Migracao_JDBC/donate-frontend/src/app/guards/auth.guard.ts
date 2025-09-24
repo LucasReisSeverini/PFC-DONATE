@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -7,16 +7,22 @@ import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
 export class AuthGuard implements CanActivate {
   constructor(private router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot): boolean {
-    const token = localStorage.getItem('token'); // verifica login
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    const token = localStorage.getItem('token');
 
+    // 🔓 libera acesso para rotas públicas
+    const publicRoutes = ['/painel', '/eventos', '/banco-proximo', '/login', '/cadastro', '/recuperar-senha'];
+    if (publicRoutes.includes(state.url)) {
+      return true;
+    }
+
+    // 🔒 rotas protegidas: exige token
     if (!token) {
-      // não logado
       this.router.navigate(['/login']);
       return false;
     }
 
-    // decodifica o token JWT
+    // valida token e extrai role
     let userRole = '';
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
@@ -27,14 +33,14 @@ export class AuthGuard implements CanActivate {
       return false;
     }
 
-    // checa se a rota exige roles específicas
+    // checa roles exigidas
     const allowedRoles = route.data['allowedRoles'] as string[];
     if (allowedRoles && !allowedRoles.includes(userRole)) {
       alert('Você não tem permissão para acessar esta página.');
-      this.router.navigate(['/painel']); // redireciona para tela segura
+      this.router.navigate(['/painel']);
       return false;
     }
 
-    return true; // logado e com role permitido
+    return true; // tudo ok
   }
 }

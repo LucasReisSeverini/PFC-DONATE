@@ -1,16 +1,14 @@
 <app-headear></app-headear>
 <div class="painel-container">
 
-  <!-- HEADER -->
-
-
   <!-- HERO SECTION -->
   <section class="hero">
     <div class="hero-text">
       <h1>🤱 Doe Leite Materno e Salve Vidas</h1>
       <p>Seu gesto transforma a vida de bebês prematuros e doentes. Contribua agora!</p>
-      <button mat-raised-button color="accent" [routerLink]="'/doacao'">
-        <span class="material-icons">volunteer_activism</span> FAÇA SUA DOAÇÃO
+      <button mat-raised-button color="accent" (click)="irParaDoacaoOuControle()">
+        <span class="material-icons">volunteer_activism</span>
+        {{ roleUsuario === 'PROFISSIONAL' ? 'CONTROLE DE AGENDAMENTOS' : 'FAÇA SUA DOAÇÃO' }}
       </button>
     </div>
   </section>
@@ -34,10 +32,15 @@
 
     <div class="card eventos-novidades">
       <span class="material-icons">campaign</span>
-      <h3>Eventos & Novidades</h3>
-      <p>Fique atualizado sobre ações, campanhas e novidades da doação de leite materno.</p>
-      <button mat-raised-button color="primary" [routerLink]="'/eventos'">
-        <span class="material-icons">event_note</span> VER EVENTOS
+      <h3>{{ roleUsuario === 'PROFISSIONAL' ? 'Gerenciar Eventos' : 'Eventos & Novidades' }}</h3>
+      <p>
+        {{ roleUsuario === 'PROFISSIONAL'
+        ? 'Gerencie eventos e campanhas da sua instituição.'
+        : 'Fique atualizado sobre ações, campanhas e novidades da doação de leite materno.' }}
+      </p>
+      <button mat-raised-button color="primary" (click)="irParaEventosOuGerenciar()">
+        <span class="material-icons">event_note</span>
+        {{ roleUsuario === 'PROFISSIONAL' ? 'GERENCIAR EVENTOS' : 'VER EVENTOS' }}
       </button>
     </div>
   </section>

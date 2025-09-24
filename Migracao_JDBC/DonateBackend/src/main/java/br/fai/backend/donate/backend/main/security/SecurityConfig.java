@@ -35,6 +35,8 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.POST, "/recuperar-senha/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/municipio/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/doacoes").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/bancos/**").permitAll()       // ✅ permite banco-proximo
+                                .requestMatchers(HttpMethod.GET, "/eventos/**").permitAll()
 //                        .requestMatchers(HttpMethod.GET, "/bancos/**").permitAll()
 //                        .requestMatchers(HttpMethod.GET, "/usuarios/**").permitAll()
 //                                .requestMatchers(HttpMethod.PUT, "/usuarios/**").permitAll()

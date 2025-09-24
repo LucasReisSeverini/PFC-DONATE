@@ -188,31 +188,50 @@ public class UserPostgresDaoImpl implements UserDao {
         }
     }
 
-    @Override
     public void updateInformation(int id, UsuarioModel entity) {
-        String sql = "UPDATE usuario SET nome = ?, telefone = ?, senha = COALESCE(?, senha), email = ?, cpf = ?, doadora = ?, receptora = ?, profissional = ?, latitude = ?, longitude = ? WHERE id = ?";
+        String sql = "UPDATE usuario SET " +
+                "nome = COALESCE(?, nome), " +
+                "telefone = COALESCE(?, telefone), " +
+                "senha = COALESCE(?, senha), " +
+                "email = COALESCE(?, email), " +
+                "cpf = COALESCE(?, cpf), " +
+                "doadora = COALESCE(?, doadora), " +
+                "receptora = COALESCE(?, receptora), " +
+                "profissional = COALESCE(?, profissional), " +
+                "latitude = COALESCE(?, latitude), " +
+                "longitude = COALESCE(?, longitude) " +
+                "WHERE id = ?";
+
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            // Campos de texto
             ps.setString(1, entity.getNome());
             ps.setString(2, entity.getTelefone());
-            ps.setString(3, entity.getSenha()); // se null, COALESCE mantém a senha antiga
+            ps.setString(3, entity.getSenha());
             ps.setString(4, entity.getEmail());
             ps.setString(5, entity.getCpf());
+
+            // Campos booleanos
             ps.setBoolean(6, entity.getDoadora());
             ps.setBoolean(7, entity.getReceptora());
             ps.setBoolean(8, entity.getProfissional());
 
+            // Campos numéricos (latitude e longitude)
             if (entity.getLatitude() != null) ps.setDouble(9, entity.getLatitude());
             else ps.setNull(9, Types.DOUBLE);
 
             if (entity.getLongitude() != null) ps.setDouble(10, entity.getLongitude());
             else ps.setNull(10, Types.DOUBLE);
 
+            // ID
             ps.setInt(11, id);
-            ps.executeUpdate();
+
+            int rowsUpdated = ps.executeUpdate();
+            System.out.println("Linhas atualizadas: " + rowsUpdated); // para depuração
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
 
 
 

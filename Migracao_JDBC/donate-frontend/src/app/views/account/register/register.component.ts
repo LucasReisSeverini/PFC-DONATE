@@ -70,8 +70,8 @@ export class RegisterComponent implements OnInit {
       {
         nome: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        telefone: ['', [Validators.required, Validators.minLength(14)]], // máscara (xx) xxxxx-xxxx
-        cpf: ['', [Validators.required, Validators.minLength(14)]], // máscara xxx.xxx.xxx-xx
+        telefone: ['', [Validators.required, Validators.minLength(14)]],
+        cpf: ['', [Validators.required, Validators.minLength(14)]],
         senha: ['', Validators.required],
         confirmarSenha: ['', Validators.required],
         perfil: ['', Validators.required],
@@ -91,6 +91,19 @@ export class RegisterComponent implements OnInit {
       startWith(''),
       map(value => this.filtrarMunicipios(value || ''))
     );
+
+    // Impede espaços nos campos de senha
+    this.registerForm.get('senha')?.valueChanges.subscribe(val => {
+      if (val?.includes(' ')) {
+        this.registerForm.get('senha')?.setValue(val.replace(/\s/g, ''), { emitEvent: false });
+      }
+    });
+
+    this.registerForm.get('confirmarSenha')?.valueChanges.subscribe(val => {
+      if (val?.includes(' ')) {
+        this.registerForm.get('confirmarSenha')?.setValue(val.replace(/\s/g, ''), { emitEvent: false });
+      }
+    });
   }
 
   getLocation(): void {

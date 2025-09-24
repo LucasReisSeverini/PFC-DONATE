@@ -36,6 +36,19 @@ export class PerfilComponent implements OnInit {
 
     // Aplica máscara no telefone enquanto digita
     this.perfilForm.get('telefone')?.valueChanges.subscribe(() => this.formatTelefone());
+
+    // Impede espaços nos campos de senha
+    this.perfilForm.get('senhaAntiga')?.valueChanges.subscribe(val => {
+      if (val?.includes(' ')) {
+        this.perfilForm.get('senhaAntiga')?.setValue(val.replace(/\s/g, ''), { emitEvent: false });
+      }
+    });
+
+    this.perfilForm.get('novaSenha')?.valueChanges.subscribe(val => {
+      if (val?.includes(' ')) {
+        this.perfilForm.get('novaSenha')?.setValue(val.replace(/\s/g, ''), { emitEvent: false });
+      }
+    });
   }
 
   carregarDadosUsuario(): void {

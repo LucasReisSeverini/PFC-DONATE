@@ -32,7 +32,14 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Impede espaços na senha enquanto digita
+    this.loginForm.get('senha')?.valueChanges.subscribe(val => {
+      if (val?.includes(' ')) {
+        this.loginForm.get('senha')?.setValue(val.replace(/\s/g, ''), { emitEvent: false });
+      }
+    });
+  }
 
   onSubmit(): void {
     if (this.loginForm.valid) {

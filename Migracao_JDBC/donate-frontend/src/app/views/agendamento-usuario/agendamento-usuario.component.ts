@@ -40,7 +40,7 @@ export class AgendamentoUsuarioComponent implements OnInit {
           id: a.id,
           data_doacao: a.dataDoacao ? new Date(a.dataDoacao) : null,
           nome_banco_leite: a.nomeBanco || 'Não informado',
-          status: (a.status || 'pendente').toLowerCase(), // normaliza para minúsculas
+          status: (a.status || 'pendente').toLowerCase(),
           quantidade_ml: a.quantidadeMl || 0,
           nome_doadora: a.nomeUsuario || 'Não informado',
           rua: a.rua || 'Não informado',
@@ -58,7 +58,6 @@ export class AgendamentoUsuarioComponent implements OnInit {
         const banco = (a.nome_banco_leite || '').toLowerCase();
         const statusFiltro = (this.filtroStatus || '').toLowerCase();
         const statusAgendamento = (a.status || '').toLowerCase();
-
         return (!this.filtroBanco || banco.includes(this.filtroBanco.toLowerCase())) &&
                (!statusFiltro || statusAgendamento === statusFiltro);
       })
@@ -80,10 +79,24 @@ export class AgendamentoUsuarioComponent implements OnInit {
   }
 
   cancelarAgendamento(id: number): void {
-    if (confirm('Deseja realmente cancelar este agendamento?')) {
+    if (confirm('Deseja realmente excluir este agendamento?')) {
       this.agendamentoService.cancelar(id).subscribe({
         next: () => this.carregarAgendamentos(),
-        error: (err: any) => console.error('Erro ao cancelar:', err)
+        error: (err: any) => console.error('Erro ao excluir:', err)
+      });
+    }
+  }
+
+  recusarReagendamento(id: number): void {
+    if (confirm('Deseja recusar este reagendamento solicitado pelo banco?')) {
+      this.agendamentoService.recusarAgendamento(id).subscribe({
+        next: () => {
+          const agendamento = this.agendamentos.find(a => a.id === id);
+          if (agendamento) {
+            agendamento.status = 'recusado'; // apenas muda o status
+          }
+        },
+        error: (err: any) => console.error('Erro ao recusar:', err)
       });
     }
   }
@@ -100,7 +113,7 @@ export class AgendamentoUsuarioComponent implements OnInit {
         const agendamento = this.agendamentos.find(a => a.id === id);
         if (agendamento) {
           agendamento.data_doacao = new Date(novaData);
-          agendamento.status = 'reagendamento solicitado'; // minúsculas
+          agendamento.status = 'reagendamento solicitado';
         }
         this.novaDataReagendamento[id] = '';
       },

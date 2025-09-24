@@ -3,7 +3,6 @@
 
   <h2>Meus Agendamentos</h2>
 
-  <!-- Botão Voltar no topo -->
   <div class="voltar-container">
     <button class="btn-voltar" (click)="voltar()">← Voltar</button>
   </div>
@@ -24,7 +23,6 @@
     </select>
   </div>
 
-  <!-- Cards -->
   <div class="cards">
     <div class="card-agendamento" *ngFor="let agendamento of agendamentosFiltrados()"
          [ngClass]="{
@@ -41,10 +39,19 @@
       <p><strong>ML:</strong> {{ agendamento.quantidade_ml }} ml</p>
       <p><strong>Endereço:</strong> {{ agendamento.rua || '-' }}, {{ agendamento.numero || '-' }}, {{ agendamento.bairro || '-' }}</p>
 
-      <!-- Ações -->
       <div class="acoes-card">
-        <button class="acao-btn cancelar" (click)="cancelarAgendamento(agendamento.id)">Cancelar</button>
-        <div class="reagendamento-card">
+        <!-- Sempre pode excluir -->
+        <button class="acao-btn cancelar" (click)="cancelarAgendamento(agendamento.id)">Excluir</button>
+
+        <!-- Só mostra recusar se for reagendamento solicitado pelo admin -->
+        <button *ngIf="agendamento.status === 'reagendamento solicitado'"
+                class="acao-btn recusar"
+                (click)="recusarReagendamento(agendamento.id)">
+          Recusar Reagendamento
+        </button>
+
+        <!-- Solicitar reagendamento -->
+        <div class="reagendamento-card" *ngIf="agendamento.status !== 'reagendamento solicitado'">
           <input type="datetime-local" [(ngModel)]="novaDataReagendamento[agendamento.id]" />
           <button class="acao-btn reagendar" (click)="solicitarReagendamento(agendamento.id)">Solicitar Reagendamento</button>
         </div>

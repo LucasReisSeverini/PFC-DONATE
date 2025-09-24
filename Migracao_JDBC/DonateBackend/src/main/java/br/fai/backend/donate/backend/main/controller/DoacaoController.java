@@ -102,9 +102,10 @@ public class DoacaoController {
     }
 
     @PostMapping("/{id}/recusar")
-    @PreAuthorize("hasRole('PROFISSIONAL')")
+    @PreAuthorize("hasRole('PROFISSIONAL') or hasRole('DOADORA')")
     public ResponseEntity<Void> recusar(@PathVariable Long id) {
         doacaoService.atualizarStatus(id, "Recusado");
         return ResponseEntity.ok().build();
     }
+
 }

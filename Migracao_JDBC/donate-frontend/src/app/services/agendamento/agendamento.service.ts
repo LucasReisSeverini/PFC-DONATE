@@ -35,4 +35,8 @@ export class AgendamentoService {
       headers: this.getAuthHeaders()
     });
   }
+
+  recusarAgendamento(id: number): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/${id}/recusar`, {}, { headers: this.getAuthHeaders() });
+  }
 }

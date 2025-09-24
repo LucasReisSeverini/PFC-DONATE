@@ -13,14 +13,24 @@
     </p>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <!-- Email -->
       <div class="input-group">
-        <input formControlName="email" type="email" placeholder="Email" required>
+        <input formControlName="email" type="email" placeholder="Email" required />
         <span class="material-icons input-icon">email</span>
       </div>
 
-      <div class="input-group">
-        <input formControlName="senha" type="password" placeholder="Senha" required>
-        <span class="material-icons input-icon">lock</span>
+      <!-- Senha com cadeado à esquerda e olhinho à direita -->
+      <div class="input-group password-group">
+        <input
+          [type]="mostrarSenha ? 'text' : 'password'"
+          formControlName="senha"
+          placeholder="Senha"
+          required
+        />
+        <span class="material-icons lock-icon">lock</span>
+        <span class="material-icons eye-icon" (click)="toggleSenha()">
+          {{ mostrarSenha ? 'visibility_off' : 'visibility' }}
+        </span>
       </div>
 
       <button type="submit">Entrar</button>

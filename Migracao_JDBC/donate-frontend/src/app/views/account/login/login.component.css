@@ -9,18 +9,18 @@
   padding: 0;
 }
 
-/* BODY COM FUNDO ROSA */
+/* BODY */
 body {
   font-family: 'Inter', sans-serif;
   background: linear-gradient(145deg, #fff0f5, #ffe6f0);
 }
 
-/* WRAPPER QUE GARANTE CENTRALIZAÇÃO, DESCONTO DO HEADER */
+/* WRAPPER */
 .page-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 80px); /* ajusta altura descontando o header */
+  min-height: calc(100vh - 80px);
   padding: 20px;
 }
 
@@ -83,7 +83,7 @@ body {
 
 .input-group input {
   width: 100%;
-  padding: 14px 45px 14px 15px;
+  padding: 14px 45px 14px 45px; /* espaço para ícones à esquerda e direita */
   border-radius: 12px;
   border: 1px solid #ddd;
   font-size: 14px;
@@ -97,13 +97,30 @@ body {
   box-shadow: 0 4px 12px rgba(212,106,146,0.2);
 }
 
-.input-icon {
+/* ÍCONES */
+.input-icon, .lock-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  color: #d46a92;
+  left: 15px;
+}
+
+.eye-icon {
   position: absolute;
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: #d46a92;
   font-size: 22px;
+  color: #d46a92;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.eye-icon:hover {
+  color: #e91e63;
 }
 
 /* BOTÃO */
@@ -128,7 +145,7 @@ button:hover {
   box-shadow: 0 8px 22px rgba(216,27,96,0.3);
 }
 
-/* LINKS DE CADASTRO E RECUPERAR SENHA */
+/* LINKS */
 .register-recover-links {
   margin-top: 18px;
 }
@@ -161,7 +178,7 @@ button:hover {
   }
 
   .input-group input {
-    padding: 12px 38px 12px 12px;
+    padding: 12px 38px 12px 38px;
     font-size: 13px;
   }
 

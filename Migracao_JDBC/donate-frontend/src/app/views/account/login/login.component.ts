@@ -6,15 +6,19 @@ import { CommonModule } from '@angular/common';
 import { NgZone } from '@angular/core';
 import { LoginDto } from '../../../domain/dto/login.dto';
 import { HeadearComponent } from '../../headear/headear.component';
+
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,HeadearComponent],
+  imports: [CommonModule, ReactiveFormsModule, HeadearComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+
+  // Controle do “olhinho” de senha
+  mostrarSenha: boolean = false;
 
   private authService = inject(AuthService);
   private fb = inject(FormBuilder);
@@ -63,6 +67,11 @@ export class LoginComponent implements OnInit {
         }
       });
     }
+  }
+
+  // Alterna entre mostrar e ocultar a senha
+  toggleSenha(): void {
+    this.mostrarSenha = !this.mostrarSenha;
   }
 
   // Métodos para navegação confiável

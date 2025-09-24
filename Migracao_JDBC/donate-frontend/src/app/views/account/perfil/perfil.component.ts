@@ -6,10 +6,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { PerfilDto } from '../../../domain/dto/perfil.dto';
 import { HeadearComponent } from '../../headear/headear.component';
+
 @Component({
   selector: 'app-perfil',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule,HeadearComponent],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule, HeadearComponent],
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
@@ -32,6 +33,9 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregarDadosUsuario();
+
+    // Aplica máscara no telefone enquanto digita
+    this.perfilForm.get('telefone')?.valueChanges.subscribe(() => this.formatTelefone());
   }
 
   carregarDadosUsuario(): void {
@@ -49,13 +53,34 @@ export class PerfilComponent implements OnInit {
     });
   }
 
+  formatTelefone(): void {
+    let tel: string = this.perfilForm.get('telefone')?.value || '';
+    tel = tel.replace(/\D/g, '').slice(0, 11);
+
+    if (tel.length === 0) {
+      this.perfilForm.get('telefone')?.setValue('', { emitEvent: false });
+      return;
+    }
+
+    if (tel.length <= 2) {
+      tel = `(${tel}`;
+    } else if (tel.length <= 7) {
+      tel = `(${tel.slice(0, 2)}) ${tel.slice(2)}`;
+    } else {
+      tel = `(${tel.slice(0, 2)}) ${tel.slice(2, 7)}-${tel.slice(7)}`;
+    }
+
+    this.perfilForm.get('telefone')?.setValue(tel, { emitEvent: false });
+  }
+
   salvarAlteracoes(): void {
     if (this.perfilForm.valid) {
       const dados: PerfilDto = this.perfilForm.getRawValue();
 
-      // Verifica se o usuário tentou mudar a senha
-      if (dados.novaSenha && !dados.senhaAntiga) {
-        alert('Por favor, forneça sua senha atual para alterar a senha.');
+      // Validação do telefone antes de enviar
+      const telefoneValido = dados.telefone?.replace(/\D/g, '').length === 11;
+      if (!telefoneValido) {
+        alert('Telefone inválido.');
         return;
       }
 
@@ -67,8 +92,9 @@ export class PerfilComponent implements OnInit {
           this.perfilForm.get('novaSenha')?.reset();
         },
         error: (err: any) => {
-          if (err.status === 403) {
-            alert('Senha atual incorreta. Tente novamente.');
+          if (err.error) {
+            // Mostra a mensagem enviada pelo backend
+            alert(err.error);
           } else {
             console.error('Erro ao atualizar perfil:', err);
             alert('Erro ao atualizar perfil!');

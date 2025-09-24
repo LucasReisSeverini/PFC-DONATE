@@ -118,13 +118,23 @@ public class UserRestController {
     }
 
     @PutMapping("/{id}/perfil")
-    public ResponseEntity<Void> atualizarPerfil(
+    public ResponseEntity<String> atualizarPerfil(
             @PathVariable int id,
             @RequestBody AtualizarPerfilDto dto) {
 
-        boolean atualizado = userService.atualizarPerfil(id, dto);
-
-        return atualizado ? ResponseEntity.noContent().build() : ResponseEntity.badRequest().build();
+        try {
+            boolean atualizado = userService.atualizarPerfil(id, dto);
+            if (atualizado) {
+                return ResponseEntity.noContent().build();
+            } else {
+                return ResponseEntity.badRequest().body("Erro ao atualizar perfil");
+            }
+        } catch (IllegalArgumentException e) {
+            // Retorna mensagem da exceção para o front
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Erro interno do servidor");
+        }
     }
 
 

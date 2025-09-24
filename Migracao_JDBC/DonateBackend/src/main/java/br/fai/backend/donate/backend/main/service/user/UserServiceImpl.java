@@ -169,13 +169,11 @@ public class UserServiceImpl implements UserService {
 
         // Atualiza senha se houver nova senha
         if (dto.getNovaSenha() != null && !dto.getNovaSenha().isEmpty()) {
-            // senha antiga é obrigatória
             if (dto.getSenhaAntiga() == null || dto.getSenhaAntiga().isEmpty()) {
-                return false;
+                throw new IllegalArgumentException("Senha atual é obrigatória para alterar a senha");
             }
-            // valida senha antiga
             if (!passwordEncoder.matches(dto.getSenhaAntiga(), existente.getSenha())) {
-                return false;
+                throw new IllegalArgumentException("Senha atual incorreta");
             }
             existente.setSenha(passwordEncoder.encode(dto.getNovaSenha()));
         }
@@ -183,6 +181,7 @@ public class UserServiceImpl implements UserService {
         userDao.updateInformation(id, existente);
         return true;
     }
+
 
     @Override
     public Optional<UsuarioModel> buscarPorCpf(String cpf) {

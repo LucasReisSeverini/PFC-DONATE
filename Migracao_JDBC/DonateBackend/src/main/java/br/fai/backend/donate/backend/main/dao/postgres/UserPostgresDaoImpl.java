@@ -80,10 +80,12 @@ public class UserPostgresDaoImpl implements UserDao {
         }
     }
 
+
     @Override
     public UsuarioModel findByCpf(String cpf) {
-        return null;
+        return readByCpf(cpf); // reaproveita o método já implementado
     }
+
 
 
     @Override
@@ -188,28 +190,31 @@ public class UserPostgresDaoImpl implements UserDao {
 
     @Override
     public void updateInformation(int id, UsuarioModel entity) {
-        String sql = "UPDATE usuario SET nome = ?, telefone = ?, email = ?, cpf = ?, doadora = ?, receptora = ?, profissional = ?, latitude = ?, longitude = ? WHERE id = ?";
+        String sql = "UPDATE usuario SET nome = ?, telefone = ?, senha = COALESCE(?, senha), email = ?, cpf = ?, doadora = ?, receptora = ?, profissional = ?, latitude = ?, longitude = ? WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, entity.getNome());
             ps.setString(2, entity.getTelefone());
-            ps.setString(3, entity.getEmail());
-            ps.setString(4, entity.getCpf());
-            ps.setBoolean(5, entity.getDoadora());
-            ps.setBoolean(6, entity.getReceptora());
-            ps.setBoolean(7, entity.getProfissional());
+            ps.setString(3, entity.getSenha()); // se null, COALESCE mantém a senha antiga
+            ps.setString(4, entity.getEmail());
+            ps.setString(5, entity.getCpf());
+            ps.setBoolean(6, entity.getDoadora());
+            ps.setBoolean(7, entity.getReceptora());
+            ps.setBoolean(8, entity.getProfissional());
 
-            if (entity.getLatitude() != null) ps.setDouble(8, entity.getLatitude());
-            else ps.setNull(8, Types.DOUBLE);
-
-            if (entity.getLongitude() != null) ps.setDouble(9, entity.getLongitude());
+            if (entity.getLatitude() != null) ps.setDouble(9, entity.getLatitude());
             else ps.setNull(9, Types.DOUBLE);
 
-            ps.setInt(10, id);
+            if (entity.getLongitude() != null) ps.setDouble(10, entity.getLongitude());
+            else ps.setNull(10, Types.DOUBLE);
+
+            ps.setInt(11, id);
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
+
 
     @Override
     public UsuarioModel readByEmail(String email) {

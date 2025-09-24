@@ -1,37 +1,39 @@
-<div class="login-container">
-  <div class="logo-container">
-    <span class="material-icons logo-icon">local_hospital</span>
-    <h1 class="logo">Donate</h1>
-  </div>
-  <h2 class="subtitle">Apoie. Doe. Encontre.</h2>
+<app-headear></app-headear>
 
-  <p class="description">
-    Conectando mães doadoras com bancos de leite humano mais próximos de forma simples e segura.
-  </p>
-
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="input-group">
-      <input formControlName="email" type="email" placeholder="Email" required>
-      <span class="material-icons input-icon">email</span>
+<div class="page-wrapper">
+  <div class="login-container">
+    <div class="logo-container">
+      <span class="material-icons logo-icon">local_hospital</span>
+      <h1 class="logo">Donate</h1>
     </div>
+    <h2 class="subtitle">Apoie. Doe. Encontre.</h2>
 
-    <div class="input-group">
-      <input formControlName="senha" type="password" placeholder="Senha" required>
-      <span class="material-icons input-icon">lock</span>
+    <p class="description">
+      Conectando mães doadoras com bancos de leite humano mais próximos de forma simples e segura.
+    </p>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <input formControlName="email" type="email" placeholder="Email" required>
+        <span class="material-icons input-icon">email</span>
+      </div>
+
+      <div class="input-group">
+        <input formControlName="senha" type="password" placeholder="Senha" required>
+        <span class="material-icons input-icon">lock</span>
+      </div>
+
+      <button type="submit">Entrar</button>
+    </form>
+
+    <div class="register-recover-links">
+      <p class="register-prompt">
+        Ainda não tem uma conta?
+        <a (click)="irParaCadastro()">Cadastre-se</a>
+      </p>
+      <p class="register-prompt">
+        <a (click)="irParaRecuperarSenha()">Recuperar senha</a>
+      </p>
     </div>
-
-    <button type="submit">Entrar</button>
-  </form>
-
-  <!-- Links de cadastro e recuperar senha alinhados -->
-  <div class="register-recover-links">
-    <p class="register-prompt">
-      Ainda não tem uma conta?
-      <a (click)="irParaCadastro()">Cadastre-se</a>
-    </p>
-    <p class="register-prompt">
-      <a (click)="irParaRecuperarSenha()">Recuperar senha</a>
-    </p>
   </div>
-
 </div>

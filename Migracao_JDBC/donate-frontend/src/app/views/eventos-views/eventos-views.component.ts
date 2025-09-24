@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
-
+import { HeadearComponent } from '../headear/headear.component';
 import { EventosService, Evento } from '../../services/eventos/eventos.service';
 import { MunicipioService, Municipio } from '../../services/municipio/municipio.service';
 import { EventoDetalheComponent } from '../evento-detalhe/evento-detalhe.component';
@@ -30,7 +30,7 @@ interface Banco {
   templateUrl: './eventos-views.component.html',
   styleUrls: ['./eventos-views.component.css'],
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatDialogModule, FormsModule]
+  imports: [CommonModule, HeadearComponent, MatCardModule, MatButtonModule, MatDialogModule, FormsModule]
 })
 export class EventosViewsComponent implements OnInit {
   eventos: (Evento & { municipioNome?: string })[] = [];

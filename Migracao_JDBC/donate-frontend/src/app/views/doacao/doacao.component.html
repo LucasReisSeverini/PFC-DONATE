@@ -1,13 +1,20 @@
+<app-headear></app-headear>
+
 <div class="doacao-container">
+
+  <!-- Botão voltar no topo -->
+  <button type="button" class="btn-voltar" (click)="voltarParaPainel()">
+    ← Voltar
+  </button>
+
   <h1>Agendar Doação</h1>
+
   <form [formGroup]="doacaoForm" (ngSubmit)="agendarDoacao()">
 
     <!-- Botão usar banco mais próximo -->
-    <div style="margin-top: 4px; display: flex; align-items: center;">
-      <button mat-stroked-button color="accent" type="button" (click)="usarBancoMaisProximo()" style="font-weight: bold;">
-        📍 Usar banco de leite mais próximo
-      </button>
-    </div>
+    <button type="button" class="btn-accent" (click)="usarBancoMaisProximo()">
+      📍 Usar banco de leite mais próximo
+    </button>
 
     <!-- Banco de leite -->
     <mat-form-field appearance="fill" class="full-width">
@@ -111,13 +118,6 @@
     </div>
 
     <!-- Botão de enviar -->
-    <button type="submit" mat-raised-button color="primary">Agendar</button>
+    <button type="submit" class="btn-submit">Agendar</button>
   </form>
-
-  <!-- Botão de voltar -->
-  <div class="back-button">
-    <button mat-stroked-button color="accent" (click)="voltarParaPainel()">
-      ← Voltar para o Painel
-    </button>
-  </div>
 </div>

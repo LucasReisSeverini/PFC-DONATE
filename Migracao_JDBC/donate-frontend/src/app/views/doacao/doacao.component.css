@@ -1,23 +1,84 @@
-/* Container geral */
+/* ========================= */
+/* Container geral           */
+/* ========================= */
+
 .doacao-container {
-  max-width: 480px;
-  margin: 40px auto;
-  padding: 30px 20px;
-  background-color: #fff0f5;
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', sans-serif;
+  max-width: 900px; /* igual ao exemplo */
+  margin: 0 auto 30px auto;
+  padding: 20px;
+  background-color: #fce4ec; /* rosa clarinho */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
 }
 
+/* ========================= */
+/* Título                    */
+/* ========================= */
 .doacao-container h1 {
-  font-size: 28px;
-  color: #e91e63;
-  margin-bottom: 25px;
-  text-align: center;
-  font-weight: bold;
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #c2185b; /* rosa forte */
+  text-align: left;
 }
 
-/* Campos do formulário */
+/* ========================= */
+/* Botões                     */
+/* ========================= */
+.btn-voltar {
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.4rem 1rem;
+  color: #c2185b;
+  background-color: #fff;
+  border: 1px solid #ec407a;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-voltar:hover {
+  background-color: #ec407a;
+  color: #fff;
+}
+
+.btn-accent {
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.5rem 1.2rem;
+  color: #fff;
+  background-color: #ec407a;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-accent:hover {
+  background-color: #c2185b;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+  background-color: #e91e63;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-submit:hover {
+  background-color: #d81b60;
+}
+
+/* ========================= */
+/* Campos do formulário       */
+/* ========================= */
 mat-form-field.full-width {
   width: 100%;
   margin-bottom: 16px;
@@ -32,43 +93,8 @@ input, mat-select {
   font-size: 14px;
 }
 
-/* Botão de envio */
-button[type="submit"] {
-  width: 100%;
-  padding: 12px;
-  background-color: #e91e63;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  margin-top: 10px;
-}
-
-button[type="submit"]:hover {
-  background-color: #d81b60;
-}
-
-/* Botão de voltar */
-.back-button button {
-  width: 100%;
-  padding: 12px;
-  background-color: #e91e63;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: background 0.3s ease;
-}
-
-.back-button button:hover {
-  background-color: #d81b60;
-}
-
-/* Data e horário */
+/* Endereço e data/hora lado a lado */
+.endereco-container,
 .data-horario {
   display: flex;
   gap: 16px;
@@ -76,12 +102,17 @@ button[type="submit"]:hover {
   margin-bottom: 16px;
 }
 
+.endereco-container mat-form-field,
+.data-horario mat-form-field {
+  flex: 1;
+}
+
+/* Calendário */
 .calendario-container {
   position: relative;
   width: 100%;
 }
 
-/* Calendário */
 .calendario {
   position: absolute;
   top: 55px;
@@ -93,11 +124,10 @@ button[type="submit"]:hover {
   max-width: 320px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.25);
   padding: 12px;
-  border-radius: 12px;
+  border-radius: 8px;
   transition: all 0.3s ease;
 }
 
-/* Cabeçalho do calendário */
 .calendario-header {
   display: flex;
   justify-content: space-between;
@@ -112,7 +142,7 @@ button[type="submit"]:hover {
   color: #fff;
   border: none;
   padding: 6px 10px;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
   transition: background 0.3s;
@@ -122,7 +152,6 @@ button[type="submit"]:hover {
   background-color: #d81b60;
 }
 
-/* Dias da semana */
 .dias-semana {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -132,7 +161,6 @@ button[type="submit"]:hover {
   color: #555;
 }
 
-/* Dias do mês */
 .dias-mes {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -158,33 +186,6 @@ button[type="submit"]:hover {
   font-weight: bold;
 }
 
-/* Botão do ícone do calendário */
-.calendario-container mat-form-field button {
-  background-color: #e91e63;
-  color: #fff;
-  border-radius: 8px;
-  border: none;
-  padding: 6px 8px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.calendario-container mat-form-field button:hover {
-  background-color: #d81b60;
-}
-
-/* Endereço: Número e Bairro lado a lado */
-.endereco-container {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
-}
-
-.endereco-container mat-form-field {
-  flex: 1;
-}
-
 /* Responsividade */
 @media (max-width: 500px) {
   .doacao-container {
@@ -192,7 +193,8 @@ button[type="submit"]:hover {
     padding: 20px 15px;
   }
 
-  .data-horario, .endereco-container {
+  .data-horario,
+  .endereco-container {
     flex-direction: column;
   }
 

@@ -5,11 +5,11 @@ import { PerfilService } from '../../../services/perfil/perfil.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { PerfilDto } from '../../../domain/dto/perfil.dto';
-
+import { HeadearComponent } from '../../headear/headear.component';
 @Component({
   selector: 'app-perfil',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule,HeadearComponent],
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })

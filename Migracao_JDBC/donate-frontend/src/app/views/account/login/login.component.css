@@ -1,45 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Quicksand:wght@500;700&display=swap');
 
-/* Ajuste global para evitar ultrapassar container */
+/* RESET GLOBAL */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-}
-/* Garante que todos os links tenham cursor de pointer */
-.register-recover-links a {
-  color: #007bff; /* cor azul padrão de link */
-  text-decoration: none; /* tira o sublinhado, se quiser */
-  cursor: pointer; /* mãozinha ao passar por cima */
-  transition: color 0.2s;
+  margin: 0;
+  padding: 0;
 }
 
-.register-recover-links a:hover {
-  color: #0056b3; /* muda a cor ao passar o mouse */
-  text-decoration: underline; /* opcional */
-}
-
-
-/* Container geral */
-.login-container {
-  max-width: 420px;
-  width: 100%;
-  margin: 80px auto;
-  padding: 40px 30px;
-  background: linear-gradient(145deg, #fff0f5, #ffe6f0);
-  border-radius: 30px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-  text-align: center;
+/* BODY COM FUNDO ROSA */
+body {
   font-family: 'Inter', sans-serif;
+  background: linear-gradient(145deg, #fff0f5, #ffe6f0);
 }
 
-/* Logo */
+/* WRAPPER QUE GARANTE CENTRALIZAÇÃO, DESCONTO DO HEADER */
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px); /* ajusta altura descontando o header */
+  padding: 20px;
+}
+
+/* CONTAINER LOGIN */
+.login-container {
+  width: 100%;
+  max-width: 450px;
+  padding: 40px 35px;
+  background-color: #fce4ec;
+  border-radius: 25px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+/* LOGO */
 .logo-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 15px;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .logo-icon {
@@ -53,45 +55,46 @@
 
 .logo {
   font-family: 'Quicksand', sans-serif;
-  font-size: 36px;
+  font-size: 32px;
   color: #e91e63;
   font-weight: 700;
 }
 
+/* SUBTÍTULO E DESCRIÇÃO */
 .subtitle {
   font-size: 18px;
-  color: #555;
-  margin-bottom: 18px;
+  color: #444;
+  margin-bottom: 10px;
   font-weight: 500;
 }
 
 .description {
   font-size: 14px;
-  color: #777;
-  margin-bottom: 30px;
+  color: #666;
+  margin-bottom: 25px;
   line-height: 1.5;
 }
 
-/* Inputs com ícone */
+/* INPUTS */
 .input-group {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .input-group input {
   width: 100%;
-  max-width: 100%;
   padding: 14px 45px 14px 15px;
   border-radius: 12px;
   border: 1px solid #ddd;
   font-size: 14px;
   outline: none;
   transition: all 0.3s ease;
+  background-color: #fff;
 }
 
 .input-group input:focus {
   border-color: #d46a92;
-  box-shadow: 0 4px 12px rgba(212, 106, 146, 0.2);
+  box-shadow: 0 4px 12px rgba(212,106,146,0.2);
 }
 
 .input-icon {
@@ -103,7 +106,7 @@
   font-size: 22px;
 }
 
-/* Botão de login */
+/* BOTÃO */
 button {
   width: 100%;
   padding: 14px;
@@ -114,42 +117,42 @@ button {
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 12px;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 18px rgba(233,30,99,0.3);
+  box-shadow: 0 6px 18px rgba(233,30,99,0.25);
 }
 
 button:hover {
   background-color: #d81b60;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(216,27,96,0.35);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(216,27,96,0.3);
 }
 
-/* Prompt de cadastro */
-.register-prompt {
-  margin-top: 20px;
-  font-size: 13px;
-  color: #555;
+/* LINKS DE CADASTRO E RECUPERAR SENHA */
+.register-recover-links {
+  margin-top: 18px;
 }
 
-.register-prompt a {
+.register-recover-links a {
   color: #e91e63;
   text-decoration: none;
   font-weight: 500;
+  cursor: pointer;
 }
 
-.register-prompt a:hover {
+.register-recover-links a:hover {
   text-decoration: underline;
 }
 
-/* Responsivo */
+/* RESPONSIVO */
 @media (max-width: 480px) {
   .login-container {
-    padding: 30px 20px;
+    max-width: 95%;
+    padding: 28px 20px;
   }
 
   .logo {
-    font-size: 30px;
+    font-size: 26px;
   }
 
   .logo-icon {
@@ -158,10 +161,12 @@ button:hover {
   }
 
   .input-group input {
-    padding: 12px 40px 12px 12px;
+    padding: 12px 38px 12px 12px;
+    font-size: 13px;
   }
 
   button {
     padding: 12px;
+    font-size: 15px;
   }
 }

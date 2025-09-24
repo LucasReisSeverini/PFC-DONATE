@@ -1,5 +1,4 @@
 /* Import das fontes */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Quicksand:wght@500;700&display=swap');
 
 /* Reset e prevenção de overflow horizontal */
 * {
@@ -220,10 +219,10 @@ nav button:hover {
   }
 
   /* Hero centralizado */
-  .hero { 
-    flex-direction: column; 
-    text-align: center; 
-    gap: 24px; 
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 24px;
   }
   .hero-text { text-align: center; }
 

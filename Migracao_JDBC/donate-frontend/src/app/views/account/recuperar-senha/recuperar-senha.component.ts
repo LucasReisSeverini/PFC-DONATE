@@ -4,11 +4,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RecuperarSenhaService } from '../../../services/recuperar-senha/recuperar-senha.service';
-
+import { HeadearComponent } from '../../headear/headear.component';
 @Component({
   selector: 'app-recuperar-senha',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, FormsModule],
+  imports: [CommonModule, HttpClientModule, FormsModule, HeadearComponent],
   templateUrl: './recuperar-senha.component.html',
   styleUrls: ['./recuperar-senha.component.css']
 })

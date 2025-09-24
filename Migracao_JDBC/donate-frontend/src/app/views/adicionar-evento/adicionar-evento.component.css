@@ -3,7 +3,6 @@
   margin: 0 auto 30px auto;
   padding: 25px;
   background-color: #fce4ec; /* rosa clarinho */
-  border-left: 4px solid #ec407a; /* borda rosa forte */
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
@@ -12,12 +11,35 @@
   margin-bottom: 25px;
   color: #c2185b; /* rosa forte */
   font-size: 24px;
+  border-bottom: 2px solid #f8bbd0;
+  padding-bottom: 8px;
 }
 
 .full-width {
   width: 100%;
   margin-bottom: 20px;
 }
+.voltar-container {
+  margin-bottom: 20px;
+}
+
+.btn-voltar {
+  background-color: #fff;       /* fundo branco */
+  color: #c2185b;               /* texto rosa */
+  border: 1px solid #ec407a;    /* borda rosa forte */
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn-voltar:hover {
+  background-color: #ec407a;    /* hover rosa forte */
+  color: #fff;                  /* texto branco */
+  transform: translateY(-2px);
+}
+
 
 .botoes-container {
   display: flex;
@@ -32,4 +54,27 @@
   font-size: 1rem;
   border-radius: 8px;
   text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.botoes-container button[mat-stroked-button] {
+  background-color: #fff;
+  color: #c2185b;
+  border: 1px solid #ec407a;
+}
+
+.botoes-container button[mat-stroked-button]:hover {
+  background-color: #ec407a;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.botoes-container button[mat-raised-button] {
+  background-color: #1565c0;
+  color: #fff;
+}
+
+.botoes-container button[mat-raised-button]:hover {
+  opacity: 0.9;
 }

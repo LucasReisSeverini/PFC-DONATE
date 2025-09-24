@@ -2,25 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
-import { HeadearComponent } from '../headear/headear.component';
 
 @Component({
-  selector: 'app-painel',
+  selector: 'app-headear',
   standalone: true,
   imports: [
     CommonModule,
     RouterModule,
     MatButtonModule,
-    MatExpansionModule,
-    MatMenuModule,
-    HeadearComponent // ✅ necessário para reconhecer <app-headear>
+    MatMenuModule
   ],
-  templateUrl: './painel.component.html',
-  styleUrls: ['./painel.component.css']
+  templateUrl: './headear.component.html',
+  styleUrls: ['./headear.component.css']
 })
-export class PainelComponent implements OnInit {
+export class HeadearComponent implements OnInit {
   roleUsuario: string | null = null;
 
   constructor(private router: Router) {}
@@ -28,14 +24,6 @@ export class PainelComponent implements OnInit {
   ngOnInit() {
     // Recupera a role do usuário armazenada no localStorage
     this.roleUsuario = localStorage.getItem('role');
-  }
-
-  irParaAgendamento() {
-    this.router.navigate(['/agendamento']);
-  }
-
-  irParaBancoProximo() {
-    this.router.navigate(['/banco-proximo']);
   }
 
   sair() {

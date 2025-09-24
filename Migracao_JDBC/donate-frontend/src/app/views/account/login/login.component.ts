@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgZone } from '@angular/core';
 import { LoginDto } from '../../../domain/dto/login.dto';
-
+import { HeadearComponent } from '../../headear/headear.component';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,HeadearComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })

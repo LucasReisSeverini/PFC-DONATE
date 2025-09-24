@@ -4,13 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { EventosService, Evento } from '../../services/eventos/eventos.service';
 import { MunicipioService, Municipio } from '../../services/municipio/municipio.service';
-
+import { HeadearComponent } from '../headear/headear.component';
 @Component({
   selector: 'app-edit-evento',
   templateUrl: './edit-evento.component.html',
   styleUrls: ['./edit-evento.component.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule,HeadearComponent, ReactiveFormsModule]
 })
 export class EditEventoComponent implements OnInit {
   eventoForm!: FormGroup;

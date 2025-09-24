@@ -17,8 +17,8 @@ import { Observable, map, startWith } from 'rxjs';
 import { MatRadioModule } from '@angular/material/radio';
 import { MunicipioService } from '../../../services/municipio/municipio.service';
 import { RegisterDto } from '../../../domain/dto/register.dto';
+import { HeadearComponent } from '../../headear/headear.component';
 
-// Interface compatível com o backend
 export interface MunicipioComUF {
   id: number;
   nome: string;
@@ -40,7 +40,8 @@ export interface MunicipioComUF {
     MatInputModule,
     MatAutocompleteModule,
     MatOptionModule,
-    MatRadioModule
+    MatRadioModule,
+    HeadearComponent
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']

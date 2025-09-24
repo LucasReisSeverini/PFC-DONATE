@@ -3,11 +3,12 @@ import { AgendamentoService } from '../../services/agendamento/agendamento.servi
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HeadearComponent } from '../headear/headear.component';
 
 @Component({
   selector: 'app-agendamento-usuario',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HeadearComponent],
   templateUrl: './agendamento-usuario.component.html',
   styleUrls: ['./agendamento-usuario.component.css']
 })
@@ -38,10 +39,10 @@ export class AgendamentoUsuarioComponent implements OnInit {
         this.agendamentos = res.map(a => ({
           id: a.id,
           data_doacao: a.dataDoacao ? new Date(a.dataDoacao) : null,
-          nome_banco_leite: a.nomeBanco || 'Não informado', // nomeBanco direto do DTO
-          status: a.status || 'Não informado',
+          nome_banco_leite: a.nomeBanco || 'Não informado',
+          status: (a.status || 'pendente').toLowerCase(), // normaliza para minúsculas
           quantidade_ml: a.quantidadeMl || 0,
-          nome_doadora: a.nomeUsuario || 'Não informado', // nomeUsuario direto do DTO
+          nome_doadora: a.nomeUsuario || 'Não informado',
           rua: a.rua || 'Não informado',
           numero: a.numero || 'Não informado',
           bairro: a.bairro || 'Não informado',
@@ -50,7 +51,6 @@ export class AgendamentoUsuarioComponent implements OnInit {
       error: (err: any) => console.error('Erro ao carregar agendamentos:', err)
     });
   }
-
 
   agendamentosFiltrados(): any[] {
     return this.agendamentos
@@ -100,7 +100,7 @@ export class AgendamentoUsuarioComponent implements OnInit {
         const agendamento = this.agendamentos.find(a => a.id === id);
         if (agendamento) {
           agendamento.data_doacao = new Date(novaData);
-          agendamento.status = 'Reagendamento Solicitado';
+          agendamento.status = 'reagendamento solicitado'; // minúsculas
         }
         this.novaDataReagendamento[id] = '';
       },

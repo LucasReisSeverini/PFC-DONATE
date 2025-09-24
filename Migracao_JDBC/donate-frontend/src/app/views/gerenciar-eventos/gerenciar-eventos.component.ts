@@ -5,13 +5,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MunicipioService, Municipio } from '../../services/municipio/municipio.service';
+import { HeadearComponent } from '../headear/headear.component';
 
 @Component({
   selector: 'app-gerenciar-eventos',
   templateUrl: './gerenciar-eventos.component.html',
   styleUrls: ['./gerenciar-eventos.component.css'],
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule]
+  imports: [CommonModule, MatCardModule, MatButtonModule,HeadearComponent]
 })
 export class GerenciarEventosComponent implements OnInit {
   eventos: Evento[] = [];

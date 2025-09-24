@@ -1,4 +1,11 @@
+<app-headear></app-headear>
 <div class="adicionar-evento-container">
+
+  <!-- Botão Voltar no topo -->
+  <div class="voltar-container">
+    <button class="btn-voltar" (click)="voltar()">← Voltar</button>
+  </div>
+
   <h2>📢 Adicionar Evento/Notícia</h2>
 
   <form [formGroup]="eventoForm" (ngSubmit)="salvarEvento()">
@@ -36,8 +43,8 @@
     </mat-form-field>
 
     <div class="botoes-container">
-      <button mat-stroked-button color="accent" type="button" (click)="voltar()">← Voltar</button>
       <button mat-raised-button color="primary" type="submit">Salvar</button>
     </div>
+
   </form>
 </div>

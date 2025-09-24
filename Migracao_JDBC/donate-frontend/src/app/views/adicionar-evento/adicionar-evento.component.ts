@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { EventosService } from '../../services/eventos/eventos.service';
 import { MunicipioService, Municipio } from '../../services/municipio/municipio.service';
 import { CommonModule } from '@angular/common';
+import { HeadearComponent } from '../headear/headear.component';
 
 @Component({
   selector: 'app-adicionar-evento',
@@ -20,7 +21,8 @@ import { CommonModule } from '@angular/common';
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
-    CommonModule
+    CommonModule,
+    HeadearComponent
   ]
 })
 export class AdicionarEventoComponent implements OnInit {

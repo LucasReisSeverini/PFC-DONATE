@@ -1,5 +1,12 @@
+<app-headear></app-headear>
 <div class="agendamentos-container">
+
   <h2>Meus Agendamentos</h2>
+
+  <!-- Botão Voltar no topo -->
+  <div class="voltar-container">
+    <button class="btn-voltar" (click)="voltar()">← Voltar</button>
+  </div>
 
   <!-- Filtros -->
   <div class="filtros">
@@ -12,53 +19,38 @@
       <option value="reagendamento solicitado">Reagendamento Solicitado</option>
     </select>
     <select [(ngModel)]="ordenarData">
-      <option value="recentes">Data: Mais recentes</option>
-      <option value="antigas">Data: Mais antigas</option>
+      <option value="recentes">Mais recentes</option>
+      <option value="antigas">Mais antigas</option>
     </select>
   </div>
 
-  <!-- Tabela/Lista de Agendamentos -->
-  <table>
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Data</th>
-      <th>Status</th>
-      <th>ML</th>
-      <th>Doadora</th>
-      <th>Banco de Leite</th>
-      <th>Rua</th>
-      <th>Número</th>
-      <th>Bairro</th>
-      <th>Ações</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let agendamento of agendamentosFiltrados()">
-      <td data-label="ID">{{ agendamento.id }}</td>
-      <td data-label="Data">{{ formatarData(agendamento.data_doacao) }}</td>
-      <td data-label="Status">{{ agendamento.status }}</td>
-      <td data-label="ML">{{ agendamento.quantidade_ml }} ml</td>
-      <td data-label="Doadora">{{ agendamento.nome_doadora }}</td>
-      <td data-label="Banco de Leite">{{ agendamento.nome_banco_leite }}</td>
-      <td data-label="Rua">{{ agendamento.rua }}</td>
-      <td data-label="Número">{{ agendamento.numero }}</td>
-      <td data-label="Bairro">{{ agendamento.bairro }}</td>
-      <td data-label="Ações" class="acoes-container">
-        <div class="acoes-botoes">
-          <button class="cancelar-btn" (click)="cancelarAgendamento(agendamento.id)">Cancelar</button>
-        </div>
-        <div class="reagendamento">
-          <input type="datetime-local" [(ngModel)]="novaDataReagendamento[agendamento.id]" />
-          <button class="reagendar-btn" (click)="solicitarReagendamento(agendamento.id)">Solicitar Reagendamento</button>
-        </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <!-- Cards -->
+  <div class="cards">
+    <div class="card-agendamento" *ngFor="let agendamento of agendamentosFiltrados()"
+         [ngClass]="{
+           'pendente': agendamento.status === 'pendente',
+           'aceito': agendamento.status === 'aceito',
+           'recusado': agendamento.status === 'recusado',
+           'reagendamento': agendamento.status === 'reagendamento solicitado'
+         }">
 
-  <!-- Botão Voltar -->
-  <div>
-    <button class="botao-voltar" (click)="voltar()">Voltar</button>
+      <h3>{{ agendamento.nome_doadora }}</h3>
+      <p><strong>Status:</strong> {{ agendamento.status }}</p>
+      <p><strong>Data:</strong> {{ formatarData(agendamento.data_doacao) }}</p>
+      <p><strong>Banco:</strong> {{ agendamento.nome_banco_leite }}</p>
+      <p><strong>ML:</strong> {{ agendamento.quantidade_ml }} ml</p>
+      <p><strong>Endereço:</strong> {{ agendamento.rua || '-' }}, {{ agendamento.numero || '-' }}, {{ agendamento.bairro || '-' }}</p>
+
+      <!-- Ações -->
+      <div class="acoes-card">
+        <button class="acao-btn cancelar" (click)="cancelarAgendamento(agendamento.id)">Cancelar</button>
+        <div class="reagendamento-card">
+          <input type="datetime-local" [(ngModel)]="novaDataReagendamento[agendamento.id]" />
+          <button class="acao-btn reagendar" (click)="solicitarReagendamento(agendamento.id)">Solicitar Reagendamento</button>
+        </div>
+      </div>
+
+    </div>
   </div>
+
 </div>

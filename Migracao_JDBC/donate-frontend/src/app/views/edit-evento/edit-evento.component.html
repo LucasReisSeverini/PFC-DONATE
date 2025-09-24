@@ -1,30 +1,37 @@
+<app-headear></app-headear>
+
+<!-- Se for Evento, use "edit-evento-container"; se Notícia, "edit-noticia-container" -->
 <div class="edit-evento-container">
-  <h2>Editar Evento</h2>
 
-  <!-- Botão voltar -->
-  <button type="button" class="btn-voltar" (click)="voltarParaGerenciar()">
-    ← Voltar
-  </button>
+  <!-- Header do formulário -->
+  <header class="edit-header">
+    <button type="button" class="btn-voltar" (click)="voltarParaGerenciar()">
+      ← Voltar
+    </button>
+    <h2>Editar Evento</h2>
+  </header>
 
+  <!-- Formulário -->
   <form [formGroup]="eventoForm" (ngSubmit)="salvar()">
+
     <div class="full-width">
-      <label>Título</label>
-      <input formControlName="titulo" />
+      <label for="titulo">Título</label>
+      <input id="titulo" formControlName="titulo" placeholder="Digite o título" />
     </div>
 
     <div class="full-width">
-      <label>Descrição</label>
-      <textarea formControlName="descricao"></textarea>
+      <label for="descricao">Descrição</label>
+      <textarea id="descricao" formControlName="descricao" placeholder="Digite a descrição"></textarea>
     </div>
 
     <div class="full-width">
-      <label>Data</label>
-      <input type="date" formControlName="data" />
+      <label for="data">Data</label>
+      <input id="data" type="date" formControlName="data" />
     </div>
 
     <div class="full-width">
-      <label>Município</label>
-      <select formControlName="id_municipio">
+      <label for="municipio">Município</label>
+      <select id="municipio" formControlName="id_municipio">
         <option [ngValue]="null" disabled>Selecione um município</option>
         <option *ngFor="let municipio of municipios" [ngValue]="municipio.id">
           {{ municipio.nome }} - {{ municipio.unidadeFederativa.sigla }}
@@ -35,5 +42,6 @@
     <div class="botoes-container">
       <button type="submit" [disabled]="eventoForm.invalid">Salvar</button>
     </div>
+
   </form>
 </div>

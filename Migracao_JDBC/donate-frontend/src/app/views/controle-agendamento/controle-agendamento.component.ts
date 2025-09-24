@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { ControleAgendamentoService } from '../../services/agendamento/controle-agendamento.service';
 import { BancoService } from '../../services/banco/banco.service';
-
+import { HeadearComponent } from '../headear/headear.component';
 export interface AgendamentoDto {
   id: number;
   tipo: string;
@@ -25,7 +25,7 @@ export interface AgendamentoDto {
 @Component({
   selector: 'app-controle-agendamento',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, HeadearComponent],
   templateUrl: './controle-agendamento.component.html',
   styleUrls: ['./controle-agendamento.component.css']
 })

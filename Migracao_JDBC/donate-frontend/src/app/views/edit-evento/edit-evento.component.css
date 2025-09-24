@@ -1,8 +1,10 @@
-/* Container geral do formulário */
+/* ========================= */
+/* Container principal       */
+/* ========================= */
 .edit-evento-container {
-  max-width: 700px;
+  max-width: 1000px;
   margin: 0 auto 30px auto;
-  padding: 25px;
+  padding: 20px;
   background-color: #fce4ec; /* rosa clarinho */
   border-left: 4px solid #ec407a; /* borda rosa forte */
   border-radius: 8px;
@@ -11,24 +13,29 @@
   color: #333;
 }
 
-/* Título */
-.edit-evento-container h2 {
-  font-size: 24px;
-  margin-bottom: 25px;
-  color: #c2185b; /* rosa forte */
+/* Header do formulário */
+.edit-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.edit-header h2 {
+  font-size: 22px;
+  color: #c2185b;
+  margin: 0;
 }
 
 /* Botão voltar */
 .btn-voltar {
-  align-self: flex-start;
-  margin-bottom: 20px;
   font-weight: 600;
-  font-size: 1rem;
-  padding: 0.6rem 1.5rem;
+  font-size: 0.9rem;
+  padding: 0.4rem 1rem;
   color: #c2185b;
   background-color: #fff;
   border: 1px solid #ec407a;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
@@ -39,61 +46,74 @@
 }
 
 /* Formulário */
-.edit-evento-container form {
+form {
   display: flex;
   flex-direction: column;
+  gap: 16px;
 }
 
-/* Cada campo do formulário */
-.edit-evento-container form div {
+/* Campos */
+.full-width {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  width: 100%;
 }
 
-/* Labels */
-.edit-evento-container label {
+label {
   font-weight: 600;
-  margin-bottom: 5px;
-  color: #c2185b; /* rosa forte */
+  margin-bottom: 6px;
+  color: #c2185b;
 }
 
-/* Inputs e textarea */
-.edit-evento-container input,
-.edit-evento-container textarea {
+input,
+textarea,
+select {
   padding: 10px;
-  border: 1px solid #b0bec5; /* cinza claro */
-  border-radius: 8px;
+  border: 1px solid #b0bec5;
+  border-radius: 6px;
   font-size: 1rem;
   font-family: inherit;
-  resize: vertical;
+  background-color: #fff;
+  transition: border-color 0.2s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #ec407a;
+  outline: none;
 }
 
 /* Textarea maior */
-.edit-evento-container textarea {
+textarea {
   min-height: 100px;
+  resize: vertical;
 }
 
 /* Botão salvar */
-.edit-evento-container button[type="submit"] {
-  align-self: flex-start;
-  margin-top: 15px;
+.botoes-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+button[type="submit"] {
   font-weight: 600;
-  font-size: 1rem;
-  padding: 0.8rem 2rem;
+  font-size: 0.95rem;
+  padding: 0.6rem 1.4rem;
   color: #fff;
-  background-color: #ec407a; /* rosa forte */
+  background-color: #ec407a;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-.edit-evento-container button[type="submit"]:disabled {
-  background-color: #f48fb1; /* rosa claro para disabled */
-  cursor: not-allowed;
+button[type="submit"]:hover:not(:disabled) {
+  background-color: #c2185b;
 }
 
-.edit-evento-container button[type="submit"]:hover:not(:disabled) {
-  background-color: #c2185b; /* rosa mais escuro no hover */
+button[type="submit"]:disabled {
+  background-color: #f48fb1;
+  cursor: not-allowed;
 }

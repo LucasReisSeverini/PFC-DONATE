@@ -1,13 +1,15 @@
-<div class="eventos-container">
-  <h2>📢 Gerenciar Eventos & Novidades</h2>
+<app-headear></app-headear>
+<div class="gerenciar-eventos-container">
+
+  <h2>Gerenciar Eventos & Novidades</h2>
 
   <!-- Botão voltar -->
-  <button mat-stroked-button color="accent" (click)="voltarParaPainel()">
+  <button type="button" class="btn-voltar" (click)="voltarParaPainel()">
     ← Voltar
   </button>
 
   <!-- Botão adicionar evento -->
-  <button mat-raised-button color="primary" (click)="adicionarEvento()">
+  <button type="button" class="btn-adicionar" (click)="adicionarEvento()">
     + Adicionar Evento/Notícia
   </button>
 

@@ -1,12 +1,12 @@
+<app-headear></app-headear>
+
 <div class="agendamentos-container">
   <h2>Controle de Agendamentos</h2>
 
-  <!-- Botão Voltar + Botões de banco próximo / todos -->
-  <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+  <!-- Botões de ação -->
+  <div class="agendamentos-header">
     <button class="btn-voltar" (click)="voltarHome()">← Voltar</button>
-    <button class="btn-proximos" (click)="agendamentosProximos()" style="font-weight: bold;">
-      📍 Agendamentos próximos
-    </button>
+    <button class="btn-proximos" (click)="agendamentosProximos()">📍 Agendamentos próximos</button>
     <button class="btn-todos" (click)="mostrarTodosAgendamentos()">Mostrar todos</button>
   </div>
 
@@ -22,49 +22,36 @@
       <option value="Reagendamento Solicitado">Reagendamento Solicitado</option>
     </select>
     <select [(ngModel)]="ordenarData">
-      <option value="recentes">Data: Mais recentes</option>
-      <option value="antigas">Data: Mais antigas</option>
+      <option value="recentes">Mais recentes</option>
+      <option value="antigas">Mais antigas</option>
     </select>
   </div>
 
-  <!-- Tabela de Agendamentos -->
-  <table>
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Data</th>
-      <th>Status</th>
-      <th>ML</th>
-      <th>Doadora</th>
-      <th>Banco de Leite</th>
-      <th>Rua</th>
-      <th>Número</th>
-      <th>Bairro</th>
-      <th>Ações</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let agendamento of agendamentosFiltrados()">
-      <td data-label="ID">{{ agendamento.id }}</td>
-      <td data-label="Data">{{ formatarData(agendamento.data_agendamento) }}</td>
-      <td data-label="Status">{{ agendamento.status }}</td>
-      <td data-label="ML">{{ agendamento.quantidade_ml }} ml</td>
-      <td data-label="Doadora">{{ agendamento.nome_doadora }}</td>
-      <td data-label="Banco de Leite">{{ agendamento.bancoDeLeite }}</td>
-      <td data-label="Rua">{{ agendamento.rua || '-' }}</td>
-      <td data-label="Número">{{ agendamento.numero || '-' }}</td>
-      <td data-label="Bairro">{{ agendamento.bairro || '-' }}</td>
-      <td data-label="Ações" class="acoes-container">
-        <div class="acoes-botoes">
-          <button class="btn-aceitar" (click)="aceitar(agendamento.id)">Aceitar</button>
-          <button class="btn-recusar" (click)="recusar(agendamento.id)">Recusar</button>
-        </div>
-        <div class="reagendamento">
-          <input type="datetime-local" [(ngModel)]="novaDataReagendamento[agendamento.id]" />
-          <button class="btn-reagendar" (click)="reagendar(agendamento.id)">Reagendar</button>
-        </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <!-- Cards de agendamentos -->
+  <div class="cards">
+    <div class="card-agendamento" *ngFor="let agendamento of agendamentosFiltrados()"
+         [ngClass]="{
+           'pendente': agendamento.status === 'Pendente',
+           'aceito': agendamento.status === 'Aceito',
+           'recusado': agendamento.status === 'Recusado',
+           'reagendamento': agendamento.status === 'Reagendamento Solicitado'
+         }">
+      <h3>{{ agendamento.nome_doadora }}</h3>
+      <p><strong>Status:</strong> {{ agendamento.status }}</p>
+      <p><strong>Data:</strong> {{ formatarData(agendamento.data_agendamento) }}</p>
+      <p><strong>Banco:</strong> {{ agendamento.bancoDeLeite }}</p>
+      <p><strong>ML:</strong> {{ agendamento.quantidade_ml }} ml</p>
+      <p><strong>Endereço:</strong> {{ agendamento.rua || '-' }}, {{ agendamento.numero || '-' }}, {{ agendamento.bairro || '-' }}</p>
+
+      <div class="acoes-card">
+        <button class="acao-btn aceitar" (click)="aceitar(agendamento.id)">Aceitar</button>
+        <button class="acao-btn recusar" (click)="recusar(agendamento.id)">Recusar</button>
+      </div>
+
+      <div class="reagendamento-card">
+        <input type="datetime-local" [(ngModel)]="novaDataReagendamento[agendamento.id]" />
+        <button class="acao-btn reagendar" (click)="reagendar(agendamento.id)">Reagendar</button>
+      </div>
+    </div>
+  </div>
 </div>

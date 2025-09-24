@@ -5,11 +5,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { MapComponent } from '../map/map.component';
 import { RouterModule } from '@angular/router';
 import { BancoProximoDto } from '../../domain/dto/banco-proximo.dto';
-
+import { HeadearComponent } from '../headear/headear.component';
 @Component({
   selector: 'app-banco-proximo',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, MapComponent, RouterModule],
+  imports: [CommonModule, HeadearComponent, HttpClientModule, MapComponent, RouterModule],
   templateUrl: './banco-proximo.component.html',
   styleUrls: ['./banco-proximo.component.css']
   // removi providers: [BancoService]

@@ -1,0 +1,19 @@
+<!-- HEADER -->
+<header>
+  <div class="logo"><span class="material-icons">local_hospital</span> Donate</div>
+  <nav>
+    <button mat-button [routerLink]="'/perfil'"><span class="material-icons">person</span> Meu Perfil</button>
+    <button mat-button [routerLink]="'/meus-agendamentos'"><span class="material-icons">event</span> Meus Agendamentos</button>
+
+    <mat-menu #areaProfMenu="matMenu">
+      <button mat-menu-item [routerLink]="'/controle-agendamento'"><span class="material-icons">calendar_today</span> Controle de Agendamentos</button>
+      <button mat-menu-item [routerLink]="'/gerenciar-eventos'"><span class="material-icons">newspaper</span> Gerenciar Notícias</button>
+    </mat-menu>
+
+    <button mat-button *ngIf="roleUsuario==='PROFISSIONAL'" [matMenuTriggerFor]="areaProfMenu">
+      <span class="material-icons">workspace_premium</span> Área Profissional
+    </button>
+
+    <button mat-raised-button color="warn" (click)="sair()"><span class="material-icons">logout</span> Sair</button>
+  </nav>
+</header>

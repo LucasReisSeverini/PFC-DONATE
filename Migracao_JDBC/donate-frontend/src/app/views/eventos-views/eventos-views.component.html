@@ -1,26 +1,26 @@
+<app-headear></app-headear>
 <div class="eventos-container">
-  <h2>📢 Eventos & Novidades</h2>
 
-  <!-- Botão Voltar -->
-  <button mat-raised-button color="primary" (click)="voltarPainel()">
-    ← Voltar para Home
-  </button>
+  <!-- Header da página -->
+  <div class="eventos-header">
+    <button type="button" class="btn-voltar" (click)="voltarPainel()">
+      ← Voltar
+    </button>
+    <h2>Eventos & Novidades</h2>
+  </div>
 
   <!-- Filtros -->
-  <div class="filtros" style="margin: 10px 0; display: flex; gap: 10px;">
-    <!-- Filtro UF -->
+  <div class="filtros">
     <select [(ngModel)]="filtroUF" (change)="onUFChange()">
       <option [ngValue]="null">Todas as UFs</option>
       <option *ngFor="let uf of ufs" [ngValue]="uf.id">{{ uf.nome }}</option>
     </select>
 
-    <!-- Filtro Município -->
     <select [(ngModel)]="filtroMunicipio" (change)="aplicarFiltros()">
       <option [ngValue]="null">Todos os municípios</option>
       <option *ngFor="let m of municipios" [ngValue]="m.id">{{ m.nome }}</option>
     </select>
 
-    <!-- Filtro Tipo -->
     <select [(ngModel)]="filtroTipo" (change)="aplicarFiltros()">
       <option value="Todos">Todos</option>
       <option value="evento">Evento</option>
@@ -29,8 +29,8 @@
   </div>
 
   <!-- Botão Eventos Próximos -->
-  <div style="margin: 10px 0;">
-    <button mat-stroked-button color="accent" (click)="eventosProximos()" style="font-weight: bold;">
+  <div class="eventos-proximos">
+    <button type="button" class="btn-proximos" (click)="eventosProximos()">
       📍 Eventos próximos
     </button>
   </div>

@@ -1,42 +1,122 @@
+/* ========================= */
+/* Container geral           */
+/* ========================= */
+.gerenciar-eventos-container,
 .eventos-container {
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: 1000px;
+  margin: 0 auto 30px auto;
   padding: 20px;
+  background-color: #fce4ec; /* rosa clarinho */
+  border: 1px solid #ddd; /* borda leve em todos os lados */
+  border-left: 4px solid transparent; /* cor será do tipo */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
 }
 
-h2 {
-  text-align: center;
-  color: #1565c0;
+/* ========================= */
+/* Header / Título           */
+/* ========================= */
+.eventos-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
   margin-bottom: 20px;
 }
 
-button {
-  display: block;
-  margin: 0 auto 20px auto;
+.eventos-header h2 {
+  font-size: 22px;
+  color: #c2185b; /* rosa forte */
+  margin: 0;
 }
 
-.cards {
+/* ========================= */
+/* Botões                    */
+/* ========================= */
+.btn-voltar {
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.4rem 1rem;
+  color: #c2185b;
+  background-color: #fff;
+  border: 1px solid #ec407a;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-voltar:hover {
+  background-color: #ec407a;
+  color: #fff;
+}
+
+.btn-adicionar,
+.btn-proximos {
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.5rem 1.4rem;
+  color: #fff;
+  background-color: #ec407a; /* rosa forte */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 20px;
+}
+
+.btn-adicionar:hover,
+.btn-proximos:hover {
+  background-color: #c2185b;
+}
+
+/* ========================= */
+/* Filtros                   */
+/* ========================= */
+.filtros {
   display: flex;
+  gap: 12px;
   flex-wrap: wrap;
-  gap: 20px;
-  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.filtros select {
+  padding: 8px 12px;
+  border: 1px solid #b0bec5;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background-color: #fff;
+}
+
+/* ========================= */
+/* Cards de eventos           */
+/* ========================= */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
 }
 
 .card-evento {
-  flex: 1 1 300px;
-  border-left: 4px solid #42a5f5;
+  padding: 12px;
   border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, border-left-color 0.3s;
+  border: 1px solid #ddd; /* borda leve em todos os lados */
+  border-left: 4px solid transparent; /* será ajustada pelo tipo */
+  background-color: #fff;
 }
 
 .card-evento:hover {
   transform: scale(1.02);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
+/* Diferenciação de cores */
 .card-evento.evento {
   background-color: #e3f2fd;
+  border-left-color: #42a5f5;
 }
 
 .card-evento.noticia {
@@ -44,22 +124,20 @@ button {
   border-left-color: #ffb74d;
 }
 
+/* Título e subtítulo */
 mat-card-title {
   font-weight: 600;
+  color: #333;
 }
 
 mat-card-subtitle {
   font-size: 0.9rem;
   color: #555;
 }
-.full-screen-dialog .mat-dialog-container {
-  width: 100vw !important;
-  height: 100vh !important;
-  max-width: 100vw !important;
-  max-height: 100vh !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
+
+/* Ações dentro do card */
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
-
-
-

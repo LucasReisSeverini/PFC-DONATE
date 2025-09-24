@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { DoacaoService } from '../../services/agendamento/doacao.service';
 import { BancoService } from '../../services/banco/banco.service';
 import { DoacaoDto } from '../../domain/dto/doacao.dto';
-
+import { HeadearComponent } from '../headear/headear.component';
 @Component({
   selector: 'app-doacao',
   standalone: true,
@@ -19,7 +19,8 @@ import { DoacaoDto } from '../../domain/dto/doacao.dto';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    HeadearComponent
   ],
   templateUrl: './doacao.component.html',
   styleUrls: ['./doacao.component.css'],

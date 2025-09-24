@@ -1,31 +1,17 @@
+<app-headear></app-headear>
 <div class="painel-container">
 
   <!-- HEADER -->
-  <header>
-    <div class="logo"><span class="material-icons">local_hospital</span> Donate</div>
-    <nav>
-      <button mat-button [routerLink]="'/perfil'"><span class="material-icons">person</span> Meu Perfil</button>
-      <button mat-button [routerLink]="'/meus-agendamentos'"><span class="material-icons">event</span> Meus Agendamentos</button>
 
-      <mat-menu #areaProfMenu="matMenu">
-        <button mat-menu-item [routerLink]="'/controle-agendamento'"><span class="material-icons">calendar_today</span> Controle de Agendamentos</button>
-        <button mat-menu-item [routerLink]="'/gerenciar-eventos'"><span class="material-icons">newspaper</span> Gerenciar Notícias</button>
-      </mat-menu>
-
-      <button mat-button *ngIf="roleUsuario==='PROFISSIONAL'" [matMenuTriggerFor]="areaProfMenu">
-        <span class="material-icons">workspace_premium</span> Área Profissional
-      </button>
-
-      <button mat-raised-button color="warn" (click)="sair()"><span class="material-icons">logout</span> Sair</button>
-    </nav>
-  </header>
 
   <!-- HERO SECTION -->
   <section class="hero">
     <div class="hero-text">
       <h1>🤱 Doe Leite Materno e Salve Vidas</h1>
       <p>Seu gesto transforma a vida de bebês prematuros e doentes. Contribua agora!</p>
-      <button mat-raised-button color="accent" [routerLink]="'/doacao'"><span class="material-icons">volunteer_activism</span> FAÇA SUA DOAÇÃO</button>
+      <button mat-raised-button color="accent" [routerLink]="'/doacao'">
+        <span class="material-icons">volunteer_activism</span> FAÇA SUA DOAÇÃO
+      </button>
     </div>
   </section>
 
@@ -41,14 +27,18 @@
       <span class="material-icons">place</span>
       <h3>Banco de Leite mais próximo</h3>
       <p>Veja no mapa o local mais próximo para realizar sua doação.</p>
-      <button mat-raised-button color="primary" (click)="irParaBancoProximo()"><span class="material-icons">map</span> VER BANCO</button>
+      <button mat-raised-button color="primary" (click)="irParaBancoProximo()">
+        <span class="material-icons">map</span> VER BANCO
+      </button>
     </div>
 
     <div class="card eventos-novidades">
       <span class="material-icons">campaign</span>
       <h3>Eventos & Novidades</h3>
       <p>Fique atualizado sobre ações, campanhas e novidades da doação de leite materno.</p>
-      <button mat-raised-button color="primary" [routerLink]="'/eventos'"><span class="material-icons">event_note</span> VER EVENTOS</button>
+      <button mat-raised-button color="primary" [routerLink]="'/eventos'">
+        <span class="material-icons">event_note</span> VER EVENTOS
+      </button>
     </div>
   </section>
 

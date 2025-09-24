@@ -1,72 +1,75 @@
-<div class="register-container">
-  <div class="logo-container">
-    <span class="material-icons logo-icon">local_hospital</span>
-    <h1 class="logo">Donate</h1>
+<app-headear></app-headear>
+<div class="wrapper">
+  <div class="register-container">
+    <div class="logo-container">
+      <span class="material-icons logo-icon">local_hospital</span>
+      <h1 class="logo">Donate</h1>
+    </div>
+
+    <p class="subtitle">Cadastre-se agora!</p>
+    <p class="description">Seja uma doadora ou encontre leite materno. Preencha o formulário abaixo 💖</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <input matInput formControlName="nome" placeholder="Nome completo" />
+        <span class="material-icons input-icon">person</span>
+      </div>
+
+      <div class="input-group">
+        <input matInput type="email" formControlName="email" placeholder="Email" />
+        <span class="material-icons input-icon">email</span>
+      </div>
+
+      <div class="input-group">
+        <input matInput formControlName="telefone" placeholder="Telefone" />
+        <span class="material-icons input-icon">phone</span>
+      </div>
+
+      <div class="input-group">
+        <input matInput formControlName="cpf" placeholder="CPF" />
+        <span class="material-icons input-icon">badge</span>
+      </div>
+
+      <div class="input-group">
+        <input matInput type="password" formControlName="senha" placeholder="Senha" />
+        <span class="material-icons input-icon">lock</span>
+      </div>
+
+      <div class="input-group">
+        <input matInput type="password" formControlName="confirmarSenha" placeholder="Repetir senha" />
+        <span class="material-icons input-icon">lock</span>
+      </div>
+
+      <div class="perfil-group">
+        <label>Tipo de usuário:</label>
+        <mat-radio-group formControlName="perfil" class="radio-group">
+          <mat-radio-button value="doadora">Doadora</mat-radio-button>
+          <mat-radio-button value="receptora">Receptora</mat-radio-button>
+          <mat-radio-button value="profissional">Profissional de saúde</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="input-group">
+        <input matInput [matAutocomplete]="auto" [formControl]="municipioControl" placeholder="Município" />
+        <span class="material-icons input-icon">place</span>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onMunicipioSelecionado($event)">
+          <mat-option *ngFor="let municipio of municipiosFiltrados$ | async" [value]="municipio.nome">
+            {{ municipio.nome }} - {{ municipio.unidadeFederativa.sigla }}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+
+      <input type="hidden" formControlName="id_municipio" />
+      <input type="hidden" formControlName="latitude" />
+      <input type="hidden" formControlName="longitude" />
+
+      <p class="policy-text">
+        Ao se cadastrar, você concorda com as políticas de uso de dados pessoais.
+      </p>
+
+      <button type="submit">Cadastrar</button>
+    </form>
+
+    <p class="register-prompt">Já tem uma conta? <a routerLink="/login">Entrar</a></p>
   </div>
-
-  <p class="subtitle">Cadastre-se agora!</p>
-  <p class="description">Seja uma doadora ou encontre leite materno. Preencha o formulário abaixo 💖</p>
-
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <div class="input-group">
-      <input matInput formControlName="nome" placeholder="Nome completo" />
-      <span class="material-icons input-icon">person</span>
-    </div>
-
-    <div class="input-group">
-      <input matInput type="email" formControlName="email" placeholder="Email" />
-      <span class="material-icons input-icon">email</span>
-    </div>
-
-    <div class="input-group">
-      <input matInput formControlName="telefone" placeholder="Telefone" />
-      <span class="material-icons input-icon">phone</span>
-    </div>
-
-    <div class="input-group">
-      <input matInput formControlName="cpf" placeholder="CPF" />
-      <span class="material-icons input-icon">badge</span>
-    </div>
-
-    <div class="input-group">
-      <input matInput type="password" formControlName="senha" placeholder="Senha" />
-      <span class="material-icons input-icon">lock</span>
-    </div>
-
-    <div class="input-group">
-      <input matInput type="password" formControlName="confirmarSenha" placeholder="Repetir senha" />
-      <span class="material-icons input-icon">lock</span>
-    </div>
-
-    <div class="perfil-group">
-      <label>Tipo de usuário:</label>
-      <mat-radio-group formControlName="perfil" class="radio-group">
-        <mat-radio-button value="doadora">Doadora</mat-radio-button>
-        <mat-radio-button value="receptora">Receptora</mat-radio-button>
-        <mat-radio-button value="profissional">Profissional de saúde</mat-radio-button>
-      </mat-radio-group>
-    </div>
-
-    <div class="input-group">
-      <input matInput [matAutocomplete]="auto" [formControl]="municipioControl" placeholder="Município" />
-      <span class="material-icons input-icon">place</span>
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onMunicipioSelecionado($event)">
-        <mat-option *ngFor="let municipio of municipiosFiltrados$ | async" [value]="municipio.nome">
-          {{ municipio.nome }} - {{ municipio.unidadeFederativa.sigla }}
-        </mat-option>
-      </mat-autocomplete>
-    </div>
-
-    <input type="hidden" formControlName="id_municipio" />
-    <input type="hidden" formControlName="latitude" />
-    <input type="hidden" formControlName="longitude" />
-
-    <p class="policy-text">
-      Ao se cadastrar, você concorda com as políticas de uso de dados pessoais.
-    </p>
-
-    <button type="submit">Cadastrar</button>
-  </form>
-
-  <p class="register-prompt">Já tem uma conta? <a routerLink="/login">Entrar</a></p>
 </div>

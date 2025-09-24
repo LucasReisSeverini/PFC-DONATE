@@ -1,211 +1,128 @@
+/* Container geral */
 .agendamentos-container {
   max-width: 1000px;
-  width: 95%;
-  margin: 20px auto;
-  padding: 15px;
+  margin: 0 auto;
+  padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(145deg, #fff0f5, #ffe6f0);
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  color: #333;
+  background-color: #fce4ec; /* fundo rosa clarinho */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .agendamentos-container h2 {
-  color: #d81b60;
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 22px;
+  color: #c2185b;
+  margin-bottom: 20px;
   border-bottom: 2px solid #f8bbd0;
-  padding-bottom: 6px;
-  margin-bottom: 12px;
+  padding-bottom: 8px;
 }
 
-/* FILTROS */
+/* Botão Voltar no topo */
+.voltar-container {
+  margin-bottom: 20px;
+}
+
+.btn-voltar {
+  background-color: #fff;       /* fundo branco */
+  color: #c2185b;               /* texto rosa */
+  border: 1px solid #ec407a;    /* borda rosa forte */
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn-voltar:hover {
+  background-color: #ec407a;    /* hover rosa forte */
+  color: #fff;                  /* texto branco */
+  transform: translateY(-2px);
+}
+
+/* Filtros */
 .filtros {
   display: flex;
+  gap: 12px;
   flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-start;
+  margin-bottom: 20px;
 }
 
-.filtros input,
-.filtros select {
+.filtros input, .filtros select {
   padding: 8px 12px;
-  font-size: 13px;
+  border: 1px solid #b0bec5;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 0.95rem;
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.card-agendamento {
+  padding: 16px;
   border-radius: 8px;
-  border: 1px solid #d81b60;
-  background-color: #fff;
-  transition: all 0.3s ease;
-  flex: 1 1 150px;
-  min-width: 120px;
+  border-left: 4px solid transparent;
+  background-color: #fce4ec; /* rosa claro padrão */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
 }
 
-.filtros input:focus,
-.filtros select:focus {
-  outline: none;
-  border-color: #880e4f;
-  box-shadow: 0 0 6px rgba(216,27,96,0.2);
+.card-agendamento:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* TABELA */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-  table-layout: fixed;
-}
-
-thead {
-  background-color: #ffe6f0;
-}
-
-thead th {
-  text-align: left;
-  padding: 8px;
-  color: #d81b60;
-  font-weight: 600;
-  border-bottom: 2px solid #f8bbd0;
-}
-
-tbody td {
-  padding: 8px;
-  border-bottom: 1px solid #f0d6e3;
-  word-wrap: break-word;
-}
+/* Status dos cards */
+.card-agendamento.aceito { background-color: #c8e6c9; border-left-color: #2e7d32; }
+.card-agendamento.recusado { background-color: #ffcdd2; border-left-color: #c62828; }
+.card-agendamento.reagendamento { background-color: #bbdefb; border-left-color: #1565c0; }
+.card-agendamento.pendente { background-color: #fce4ec; border-left-color: #ffb74d; }
 
 /* Ações */
-.acoes-container {
+.acoes-card {
+  margin-top: 12px;
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-.cancelar-btn {
-  background-color: #ffcdd2;
-  color: #c62828;
-  padding: 5px 10px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-.reagendar-btn {
-  background-color: #bbdefb;
-  color: #1565c0;
-  padding: 5px 10px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-.cancelar-btn:hover,
-.reagendar-btn:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
-
-/* Botão Voltar */
-.botao-voltar {
-  padding: 10px 18px;
-  background-color: #e91e63;
+.acao-btn.cancelar {
+  background-color: #c62828;
   color: #fff;
-  border-radius: 20px;
-  font-weight: 600;
-  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
   border: none;
-  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.botao-voltar:hover {
-  background-color: #d81b60;
-  transform: translateY(-1px);
+.acao-btn.cancelar:hover { opacity: 0.9; }
+
+.acao-btn.reagendar {
+  background-color: #1565c0; /* azul igual admin */
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
 }
 
-/* RESPONSIVO MOBILE & APP */
-@media screen and (max-width: 768px) {
+.acao-btn.reagendar:hover { opacity: 0.9; }
 
-  /* Filtros empilhados */
-  .filtros {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .filtros input,
-  .filtros select {
-    flex: 1 1 100%;
-  }
-
-  /* Transformando tabela em cards */
-  table, thead, tbody, th, td, tr {
-    display: block;
-    width: 100%;
-  }
-
-  thead tr {
-    display: none; /* oculta cabeçalho */
-  }
-
-  tbody tr {
-    margin-bottom: 15px;
-    background: #fff0f6;
-    border-radius: 10px;
-    padding: 8px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-  }
-
-  tbody td {
-    display: flex;
-    justify-content: space-between;
-    padding: 4px 8px;
-    border-bottom: 1px solid #f8bbd0;
-    font-size: 12px;
-  }
-
-  tbody td::before {
-    content: attr(data-label);
-    font-weight: 600;
-    color: #880e4f;
-    width: 40%;
-    flex-shrink: 0;
-    font-size: 12px;
-  }
-
-  .acoes-container {
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  /* Botão voltar menor */
-  .botao-voltar {
-    font-size: 12px;
-    padding: 8px 16px;
-  }
+.reagendamento-card {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
 }
 
-@media screen and (max-width: 480px) {
-  .agendamentos-container {
-    padding: 10px;
-    gap: 10px;
-  }
-
-  .agendamentos-container h2 {
-    font-size: 20px;
-  }
-
-  .filtros input,
-  .filtros select {
-    font-size: 12px;
-    padding: 6px 10px;
-  }
-
-  .cancelar-btn,
-  .reagendar-btn {
-    font-size: 11px;
-    padding: 4px 8px;
-  }
+.reagendamento-card input[type="datetime-local"] {
+  flex: 1;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }

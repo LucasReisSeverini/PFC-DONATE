@@ -1,17 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Quicksand:wght@500;700&display=swap');
 
-.register-container {
-  max-width: 450px;
-  margin: 60px auto;
-  padding: 35px 30px;
+/* Fundo rosa da página inteira */
+body {
+  margin: 0;
+  min-height: 100vh;
   background: linear-gradient(145deg, #fff0f5, #ffe6f0);
+  font-family: 'Inter', sans-serif;
+}
+
+/* Wrapper para centralizar o container */
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* garante que ocupe toda a tela */
+  padding: 20px;
+}
+
+/* Container do formulário */
+.register-container {
+  width: 100%;
+  max-width: 450px;
+  padding: 35px 30px;
+  background-color: #fce4ec; /* rosa clarinho */
   border-radius: 25px;
   box-shadow: 0 10px 28px rgba(0,0,0,0.08);
   text-align: center;
-  font-family: 'Inter', sans-serif;
   overflow: hidden;
 }
 
+/* Logo */
 .logo-container {
   display: flex;
   justify-content: center;
@@ -36,6 +54,7 @@
   font-weight: 700;
 }
 
+/* Subtítulo e descrição */
 .subtitle {
   font-size: 17px;
   color: #444;
@@ -50,12 +69,15 @@
   line-height: 1.4;
 }
 
+/* Inputs */
 .input-group {
   position: relative;
   margin-bottom: 14px;
 }
 
-.input-group input {
+.input-group input,
+.input-group textarea,
+.input-group select {
   width: 100%;
   padding: 12px 42px 12px 12px;
   border-radius: 10px;
@@ -64,9 +86,12 @@
   outline: none;
   transition: all 0.3s ease;
   box-sizing: border-box;
+  background-color: #fff;
 }
 
-.input-group input:focus {
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
   border-color: #d46a92;
   box-shadow: 0 3px 12px rgba(212,106,146,0.2);
 }
@@ -80,6 +105,7 @@
   font-size: 20px;
 }
 
+/* Tipo de usuário */
 .perfil-group {
   text-align: left;
   margin-bottom: 14px;
@@ -96,6 +122,7 @@
   margin-right: 12px;
 }
 
+/* Botão */
 button {
   width: 100%;
   padding: 12px;
@@ -117,6 +144,7 @@ button:hover {
   box-shadow: 0 8px 22px rgba(216,27,96,0.3);
 }
 
+/* Política e link */
 .policy-text {
   font-size: 12px;
   color: #555;
@@ -135,6 +163,7 @@ button:hover {
   text-decoration: none;
 }
 
+/* Responsivo */
 @media (max-width: 480px) {
   .register-container {
     max-width: 95%;
@@ -150,7 +179,9 @@ button:hover {
     padding: 8px;
   }
 
-  .input-group input {
+  .input-group input,
+  .input-group textarea,
+  .input-group select {
     padding: 10px 38px 10px 10px;
     font-size: 12px;
   }

@@ -5,6 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 import { ControleAgendamentoService } from '../../services/agendamento/controle-agendamento.service';
 import { BancoService } from '../../services/banco/banco.service';
 import { HeadearComponent } from '../headear/headear.component';
+
 export interface AgendamentoDto {
   id: number;
   tipo: string;
@@ -38,6 +39,10 @@ export class ControleAgendamentoComponent implements OnInit {
   filtroBanco: string = '';
   filtroStatus: string = '';
   ordenarData: 'recentes' | 'antigas' = 'recentes';
+
+  // NOVO: filtro por intervalo de datas
+  dataInicial: string = '';
+  dataFinal: string = '';
 
   constructor(
     private controleAgendamentoService: ControleAgendamentoService,
@@ -77,7 +82,6 @@ export class ControleAgendamentoComponent implements OnInit {
     });
   }
 
-
   agendamentosFiltrados(): AgendamentoDto[] {
     return this.agendamentos
       .filter(a => {
@@ -85,9 +89,24 @@ export class ControleAgendamentoComponent implements OnInit {
         const nomeDoadora = (a.nome_doadora || '').toLowerCase();
         const status = (a.status || '').toLowerCase();
 
-        return (!this.filtroDoadora || nomeDoadora.includes(this.filtroDoadora.toLowerCase())) &&
-               (!this.filtroBanco || bancoNome.includes(this.filtroBanco.toLowerCase())) &&
-               (!this.filtroStatus || status === this.filtroStatus.toLowerCase());
+        // Filtros padrão
+        let ok = (!this.filtroDoadora || nomeDoadora.includes(this.filtroDoadora.toLowerCase())) &&
+                 (!this.filtroBanco || bancoNome.includes(this.filtroBanco.toLowerCase())) &&
+                 (!this.filtroStatus || status === this.filtroStatus.toLowerCase());
+
+        // Filtro por intervalo de datas
+        if (ok && this.dataInicial) {
+          const dataIni = new Date(this.dataInicial);
+          const dataAgendamento = new Date(a.data_agendamento);
+          ok = dataAgendamento >= dataIni;
+        }
+        if (ok && this.dataFinal) {
+          const dataFim = new Date(this.dataFinal);
+          const dataAgendamento = new Date(a.data_agendamento);
+          ok = ok && dataAgendamento <= dataFim;
+        }
+
+        return ok;
       })
       .sort((a, b) => {
         const dataA = new Date(a.data_agendamento).getTime() || 0;

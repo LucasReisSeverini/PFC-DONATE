@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Quicksand:wght@500;700&display=swap');
+
 /* ========================= */
 /* Container geral           */
 /* ========================= */
@@ -25,6 +26,41 @@
   gap: 15px;
   margin-bottom: 20px;
 }
+
+/* ========================= */
+/* Filtros                   */
+/* ========================= */
+.filtros {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.filtros select,
+.filtros input[type="date"] {
+  padding: 8px 12px;
+  border: 1px solid #b0bec5;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.filtros select:focus,
+.filtros input[type="date"]:focus {
+  outline: none;
+  border-color: #ec407a;
+  box-shadow: 0 0 0 2px rgba(236, 64, 122, 0.2);
+}
+
+.filtros input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(45%) sepia(15%) saturate(400%) hue-rotate(300deg) brightness(90%) contrast(85%);
+}
+
 
 .eventos-header h2 {
   font-size: 22px;
@@ -81,7 +117,8 @@
   margin-bottom: 20px;
 }
 
-.filtros select {
+.filtros select,
+.filtros input[type="date"] {
   padding: 8px 12px;
   border: 1px solid #b0bec5;
   border-radius: 6px;
@@ -141,4 +178,18 @@ mat-card-subtitle {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+}
+
+/* ========================= */
+/* Filtros por Data           */
+/* ========================= */
+.filtros .data-filtro {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.filtros .data-filtro label {
+  font-size: 0.9rem;
+  color: #555;
 }

@@ -11,21 +11,38 @@
 
   <!-- Filtros -->
   <div class="filtros">
+
+    <!-- Filtro por UF -->
     <select [(ngModel)]="filtroUF" (change)="onUFChange()">
       <option [ngValue]="null">Todas as UFs</option>
       <option *ngFor="let uf of ufs" [ngValue]="uf.id">{{ uf.nome }}</option>
     </select>
 
+    <!-- Filtro por Município -->
     <select [(ngModel)]="filtroMunicipio" (change)="aplicarFiltros()">
       <option [ngValue]="null">Todos os municípios</option>
       <option *ngFor="let m of municipios" [ngValue]="m.id">{{ m.nome }}</option>
     </select>
 
+    <!-- Filtro por Tipo -->
     <select [(ngModel)]="filtroTipo" (change)="aplicarFiltros()">
       <option value="Todos">Todos</option>
       <option value="evento">Evento</option>
       <option value="noticia">Notícia</option>
     </select>
+
+    <!-- Filtros por Data -->
+    <div class="filtros-datas">
+      <label>
+        Data Inicial
+        <input type="date" [(ngModel)]="filtroDataInicio" (change)="aplicarFiltros()">
+      </label>
+      <label>
+        Data Final
+        <input type="date" [(ngModel)]="filtroDataFim" (change)="aplicarFiltros()">
+      </label>
+    </div>
+
   </div>
 
   <!-- Botão Eventos Próximos -->

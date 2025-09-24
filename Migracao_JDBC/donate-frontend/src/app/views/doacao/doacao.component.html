@@ -18,16 +18,17 @@
 
     <!-- Banco de leite -->
     <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Banco de leite</mat-label>
+      <mat-label>Ponto de coleta / Banco de Leite Humano</mat-label>
       <mat-select formControlName="id_bancos_de_leite">
         <mat-option *ngFor="let banco of bancosDeLeite" [value]="banco.id">
           {{ banco.nome }}
         </mat-option>
       </mat-select>
       <mat-error *ngIf="doacaoForm.get('id_bancos_de_leite')?.hasError('required') && doacaoForm.get('id_bancos_de_leite')?.touched">
-        Selecione um banco de leite.
+        Selecione um ponto de coleta ou banco de leite.
       </mat-error>
     </mat-form-field>
+
 
     <!-- Quantidade -->
     <mat-form-field appearance="fill" class="full-width">

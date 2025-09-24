@@ -130,6 +130,7 @@ nav button:hover {
   box-shadow: 0 4px 16px rgba(0,0,0,0.05);
   display: flex;
   flex-direction: column;
+  justify-content: space-between; /* garante botão na base */
   gap: 12px;
   transition: transform 0.2s ease;
 }
@@ -149,10 +150,12 @@ nav button:hover {
 .card p {
   font-size: 1rem;
   color: #444;
+  flex-grow: 1; /* ocupa espaço e empurra botão para baixo */
 }
 
 .card button {
-  align-self: flex-start;
+  align-self: flex-start; /* alinha botão à esquerda do card */
+  margin-top: auto; /* empurra botão para a base do card */
   font-weight: 600;
 }
 

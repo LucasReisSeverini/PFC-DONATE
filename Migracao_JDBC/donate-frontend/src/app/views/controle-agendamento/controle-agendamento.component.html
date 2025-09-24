@@ -13,7 +13,14 @@
   <!-- Filtros -->
   <div class="filtros">
     <input type="text" placeholder="Filtrar por Doadora" [(ngModel)]="filtroDoadora" />
-    <input type="text" placeholder="Filtrar por Banco de Leite" [(ngModel)]="filtroBanco" />
+    <input type="text" placeholder="Filtrar por Ponto de Coleta/Banco" [(ngModel)]="filtroBanco" />
+
+    <!-- Intervalo de datas -->
+    <label>Data Inicial:</label>
+    <input type="date" [(ngModel)]="dataInicial" />
+    <label>Data Final:</label>
+    <input type="date" [(ngModel)]="dataFinal" />
+
     <select [(ngModel)]="filtroStatus">
       <option value="">Todos os Status</option>
       <option value="Pendente">Pendente</option>
@@ -21,6 +28,7 @@
       <option value="Recusado">Recusado</option>
       <option value="Reagendamento Solicitado">Reagendamento Solicitado</option>
     </select>
+
     <select [(ngModel)]="ordenarData">
       <option value="recentes">Mais recentes</option>
       <option value="antigas">Mais antigas</option>
@@ -39,7 +47,7 @@
       <h3>{{ agendamento.nome_doadora }}</h3>
       <p><strong>Status:</strong> {{ agendamento.status }}</p>
       <p><strong>Data:</strong> {{ formatarData(agendamento.data_agendamento) }}</p>
-      <p><strong>Banco:</strong> {{ agendamento.bancoDeLeite }}</p>
+      <p><strong>Ponto de Coleta / Banco de Leite:</strong> {{ agendamento.bancoDeLeite }}</p>
       <p><strong>ML:</strong> {{ agendamento.quantidade_ml }} ml</p>
       <p><strong>Endereço:</strong> {{ agendamento.rua || '-' }}, {{ agendamento.numero || '-' }}, {{ agendamento.bairro || '-' }}</p>
 

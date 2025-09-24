@@ -42,6 +42,8 @@ export class EventosViewsComponent implements OnInit {
   filtroUF: number | null = null;
   filtroMunicipio: number | null = null;
   filtroTipo: string = 'Todos';
+  filtroDataInicio: string | null = null; // 'YYYY-MM-DD'
+  filtroDataFim: string | null = null;    // 'YYYY-MM-DD'
 
   constructor(
     private eventosService: EventosService,
@@ -61,7 +63,7 @@ export class EventosViewsComponent implements OnInit {
         this.municipiosFull = res;
         this.municipios = [...res];
 
-        // Extrai UFs únicas a partir do objeto unidadeFederativa de cada município
+        // Extrai UFs únicas
         const ufsMap = new Map<number, { id: number; nome: string }>();
         res.forEach(m => {
           if (m.unidadeFederativa && !ufsMap.has(m.unidadeFederativa.id)) {
@@ -102,13 +104,19 @@ export class EventosViewsComponent implements OnInit {
     this.aplicarFiltros();
   }
 
+  // Aplica todos os filtros: UF, município, tipo e datas
   aplicarFiltros() {
     this.eventosFiltrados = this.eventos.filter(e => {
       const municipioOk = this.filtroMunicipio ? e.id_municipio === this.filtroMunicipio : true;
       const tipoOk = this.filtroTipo.toLowerCase() === 'todos'
         ? true
         : e.tipo?.toLowerCase() === this.filtroTipo.toLowerCase();
-      return municipioOk && tipoOk;
+
+      const dataEvento = new Date(e.data);
+      const dataInicioOk = this.filtroDataInicio ? dataEvento >= new Date(this.filtroDataInicio) : true;
+      const dataFimOk = this.filtroDataFim ? dataEvento <= new Date(this.filtroDataFim) : true;
+
+      return municipioOk && tipoOk && dataInicioOk && dataFimOk;
     });
   }
 

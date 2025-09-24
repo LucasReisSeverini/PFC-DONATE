@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Quicksand:wght@500;700&display=swap');
+
 .agendamentos-container {
   max-width: 1000px;
   margin: 0 auto;
@@ -47,109 +48,50 @@
   transform: translateY(-2px);
 }
 
-.btn-proximos {
-  background-color: #42a5f5;
+.btn-proximos, .btn-todos {
+  background-color: #ec407a;
   color: #fff;
 }
 
-.btn-proximos:hover {
-  background-color: #1e88e5;
+.btn-proximos:hover, .btn-todos:hover {
+  background-color: #c2185b;
   transform: translateY(-2px);
 }
 
-.btn-todos,
-.btn-proximos {
-  background-color: #ec407a; /* mesma cor rosa forte */
-  color: #fff;
-}
-
-.btn-todos:hover,
-.btn-proximos:hover {
-  background-color: #c2185b; /* hover igual */
-}
-
-
-/* Filtros */
-.filtros {
+/* Filtros gerais */
+.filtros, .filtros-datas {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
   margin-bottom: 20px;
 }
 
-.filtros input,
-.filtros select {
+.filtros input, .filtros select,
+.filtros-datas input[type="date"] {
   padding: 8px 12px;
   border: 1px solid #b0bec5;
   border-radius: 6px;
   background: #fff;
   font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.filtros-datas input[type="date"]:focus,
+.filtros input:focus,
+.filtros select:focus {
+  border-color: #c2185b;
+  outline: none;
+}
+
+.filtros-datas label {
+  font-size: 0.9rem;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 /* Cards */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-}
-
-.card-agendamento {
-  padding: 14px;
-  border-radius: 8px;
-  border-left: 4px solid transparent;
-  background-color: #fff; /* fundo branco do card */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card-agendamento:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-/* Cores da borda por status */
-.card-agendamento.pendente { border-left-color: #ffb74d; }
-.card-agendamento.aceito { border-left-color: #42a5f5; }
-.card-agendamento.recusado { border-left-color: #ef5350; }
-.card-agendamento.reagendamento { border-left-color: #ab47bc; }
-
-/* Ações */
-.acoes-card {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.reagendamento-card {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.acao-btn {
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  border: none;
-  font-size: 0.85rem;
-  transition: transform 0.2s, opacity 0.8s;
-}
-
-.acao-btn.aceitar { background-color: #c8e6c9; color: #2e7d32; }
-.acao-btn.recusar { background-color: #ffcdd2; color: #c62828; }
-.acao-btn.reagendar { background-color: #bbdefb; color: #1565c0; }
-
-.acao-btn:hover {
-  transform: translateY(-2px);
-  opacity: 0.9;
-}
-
-input[type="datetime-local"] {
-  padding: 6px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -161,8 +103,9 @@ input[type="datetime-local"] {
   padding: 16px;
   border-radius: 8px;
   background-color: #fce4ec; /* rosa claro padrão */
+  border-left: 4px solid transparent;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s, border-left-color 0.3s;
 }
 
 .card-agendamento:hover {
@@ -171,27 +114,28 @@ input[type="datetime-local"] {
 }
 
 /* Status dinâmico */
-.card-agendamento.aceito {
-  background-color: #c8e6c9; /* verde claro */
-}
-
-.card-agendamento.recusado {
-  background-color: #ffcdd2; /* vermelho claro */
-}
-
-.card-agendamento.reagendamento {
-  background-color: #bbdefb; /* azul claro */
-}
-
 .card-agendamento.pendente {
-  background-color: #fce4ec; /* rosa claro */
+  background-color: #fce4ec;
+  border-left-color: #ffb74d;
+}
+.card-agendamento.aceito {
+  background-color: #c8e6c9;
+  border-left-color: #42a5f5;
+}
+.card-agendamento.recusado {
+  background-color: #ffcdd2;
+  border-left-color: #ef5350;
+}
+.card-agendamento.reagendamento {
+  background-color: #bbdefb;
+  border-left-color: #ab47bc;
 }
 
-/* Botões de ação */
+/* Botões de ação dentro dos cards */
 .acoes-card {
-  margin-top: 12px;
   display: flex;
   gap: 8px;
+  margin-top: 12px;
 }
 
 .acao-btn {
@@ -200,15 +144,16 @@ input[type="datetime-local"] {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: transform 0.2s, opacity 0.2s;
 }
 
 .acao-btn.aceitar { background-color: #2e7d32; color: #fff; }
 .acao-btn.recusar { background-color: #c62828; color: #fff; }
 .acao-btn.reagendar { background-color: #1565c0; color: #fff; }
 
-.acao-btn:hover { opacity: 0.9; }
+.acao-btn:hover { opacity: 0.9; transform: translateY(-2px); }
 
+/* Reagendamento */
 .reagendamento-card {
   margin-top: 8px;
   display: flex;
@@ -221,4 +166,3 @@ input[type="datetime-local"] {
   border-radius: 6px;
   border: 1px solid #ccc;
 }
-

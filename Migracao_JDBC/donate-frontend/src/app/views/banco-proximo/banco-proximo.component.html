@@ -1,12 +1,14 @@
-<app-headear></app-headear><!-- Alerta de erro -->
+<app-headear></app-headear>
+
+<!-- Alerta de erro -->
 <div *ngIf="erro" class="alerta-erro">
   {{ erro }}
 </div>
 
-<!-- Exibição do banco de leite mais próximo -->
+<!-- Exibição do ponto de coleta / banco de leite mais próximo -->
 <div *ngIf="banco" class="banco-container">
   <h2 class="banco-titulo">
-    Banco de leite mais próximo
+    Ponto de Coleta / Banco de Leite Humano mais próximo
   </h2>
 
   <div class="banco-info">
@@ -27,7 +29,6 @@
   <!-- Botão para voltar ao painel -->
   <div class="voltar-container">
     <button class="btn-voltar" [routerLink]="'/painel'" routerLinkActive="active">Voltar para o painel</button>
-
   </div>
 
   <div *ngIf="banco?.latitude && banco?.longitude" style="width: 100%; max-width: 600px; margin: auto;">
@@ -36,8 +37,4 @@
       [longitude]="banco.longitude ? +banco.longitude : 0">
     </app-map>
   </div>
-
-  <!-- Exibir mapa apenas se banco estiver disponível -->
-
-
 </div>

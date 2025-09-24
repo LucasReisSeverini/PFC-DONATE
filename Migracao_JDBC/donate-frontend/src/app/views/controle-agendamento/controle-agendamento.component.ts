@@ -40,7 +40,6 @@ export class ControleAgendamentoComponent implements OnInit {
   filtroStatus: string = '';
   ordenarData: 'recentes' | 'antigas' = 'recentes';
 
-  // NOVO: filtro por intervalo de datas
   dataInicial: string = '';
   dataFinal: string = '';
 
@@ -64,14 +63,13 @@ export class ControleAgendamentoComponent implements OnInit {
         this.agendamentos = res.map(a => ({
           id: a.id,
           tipo: 'entrega',
-          bancoDeLeite: a.nomeBanco || '-', // nomeBanco direto do DTO
+          bancoDeLeite: a.nomeBanco || '-',
           data_agendamento: a.dataDoacao || '',
           horario: '',
           status: a.status || 'Pendente',
           quantidade_ml: a.quantidadeMl || 0,
-          nome_doadora: a.nomeUsuario || '-', // nomeUsuario direto do DTO
+          nome_doadora: a.nomeUsuario || '-',
           observacoes: a.observacoes || '',
-          // ENDEREÇO VINDO DO AGENDAMENTO (tabela doacao)
           rua: a.rua || '-',
           numero: a.numero || '-',
           bairro: a.bairro || '-'
@@ -89,12 +87,10 @@ export class ControleAgendamentoComponent implements OnInit {
         const nomeDoadora = (a.nome_doadora || '').toLowerCase();
         const status = (a.status || '').toLowerCase();
 
-        // Filtros padrão
         let ok = (!this.filtroDoadora || nomeDoadora.includes(this.filtroDoadora.toLowerCase())) &&
                  (!this.filtroBanco || bancoNome.includes(this.filtroBanco.toLowerCase())) &&
                  (!this.filtroStatus || status === this.filtroStatus.toLowerCase());
 
-        // Filtro por intervalo de datas
         if (ok && this.dataInicial) {
           const dataIni = new Date(this.dataInicial);
           const dataAgendamento = new Date(a.data_agendamento);
@@ -153,7 +149,8 @@ export class ControleAgendamentoComponent implements OnInit {
       return;
     }
 
-    this.controleAgendamentoService.reagendarAgendamento(id, novaData).subscribe({
+    // Envia como string pura, igual ao AgendamentoUsuarioComponent
+    this.controleAgendamentoService.reagendarAgendamento(id, `"${novaData}"`).subscribe({
       next: () => {
         const ag = this.agendamentos.find(a => a.id === id);
         if (ag) {

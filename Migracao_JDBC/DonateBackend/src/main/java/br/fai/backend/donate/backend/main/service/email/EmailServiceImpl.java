@@ -62,10 +62,22 @@ public class EmailServiceImpl implements EmailService {
                         nomeUsuario, dataFormatada, horarioFormatado
                 );
                 break;
+            case "reagendamento solicitado":
+                corpo = String.format(
+                        "Olá %s,\n\nFoi solicitado um reagendamento do seu agendamento para o dia %s às %s.\n\nAguarde a confirmação.\n\nAtenciosamente,\nEquipe Donate",
+                        nomeUsuario, dataFormatada, horarioFormatado
+                );
+                break;
+            case "pendente":
+                corpo = String.format(
+                        "Olá %s,\n\nSeu agendamento para o dia %s às %s está pendente de confirmação.\n\nAtenciosamente,\nEquipe Donate",
+                        nomeUsuario, dataFormatada, horarioFormatado
+                );
+                break;
             default:
                 corpo = String.format(
-                        "Olá %s,\n\nHá uma atualização no seu agendamento.\n\nAtenciosamente,\nEquipe Donate",
-                        nomeUsuario
+                        "Olá %s,\n\nHá uma atualização no seu agendamento para o dia %s às %s.\n\nAtenciosamente,\nEquipe Donate",
+                        nomeUsuario, dataFormatada, horarioFormatado
                 );
         }
 
@@ -74,6 +86,8 @@ public class EmailServiceImpl implements EmailService {
 
         mailSender.send(message);
     }
+
+
 
 
 

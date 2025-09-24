@@ -104,6 +104,9 @@ export class RegisterComponent implements OnInit {
         this.registerForm.get('confirmarSenha')?.setValue(val.replace(/\s/g, ''), { emitEvent: false });
       }
     });
+
+    // Formata o telefone visualmente
+    this.registerForm.get('telefone')?.valueChanges.subscribe(() => this.formatTelefone());
   }
 
   getLocation(): void {
@@ -159,15 +162,16 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    let formatted = '';
     if (tel.length <= 2) {
-      tel = `(${tel}`;
+      formatted = `(${tel}`;
     } else if (tel.length <= 7) {
-      tel = `(${tel.slice(0, 2)}) ${tel.slice(2)}`;
+      formatted = `(${tel.slice(0, 2)}) ${tel.slice(2)}`;
     } else {
-      tel = `(${tel.slice(0, 2)}) ${tel.slice(2, 7)}-${tel.slice(7)}`;
+      formatted = `(${tel.slice(0, 2)}) ${tel.slice(2, 7)}-${tel.slice(7, 11)}`;
     }
 
-    this.registerForm.get('telefone')?.setValue(tel, { emitEvent: false });
+    this.registerForm.get('telefone')?.setValue(formatted, { emitEvent: false });
   }
 
   formatCpf(): void {
@@ -196,10 +200,6 @@ export class RegisterComponent implements OnInit {
     return (this.registerForm.get('cpf')?.value || '').replace(/\D/g, '');
   }
 
-  getTelefoneForBackend(): string {
-    return (this.registerForm.get('telefone')?.value || '').replace(/\D/g, '');
-  }
-
   onSubmit(): void {
     this.submitAttempted = true;
     this.mensagemErro = '';
@@ -223,8 +223,11 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    const telefoneValido = this.registerForm.get('telefone')?.value?.replace(/\D/g, '').length === 11;
-    const cpfValido = this.registerForm.get('cpf')?.value?.replace(/\D/g, '').length === 11;
+    // Garante formatação do telefone
+    this.formatTelefone();
+
+    const telefoneValido = (this.registerForm.get('telefone')?.value || '').replace(/\D/g, '').length === 11;
+    const cpfValido = this.getCpfForBackend().length === 11;
 
     if (!this.registerForm.valid || !telefoneValido || !cpfValido) {
       if (this.registerForm.errors?.['senhasDiferentes']) {
@@ -243,8 +246,8 @@ export class RegisterComponent implements OnInit {
     const dto: RegisterDto = {
       nome: f.nome,
       email: f.email,
-      telefone: this.getTelefoneForBackend(),
-      cpf: this.getCpfForBackend(),
+      telefone: f.telefone,      // envia já formatado (ddd) 00000-0000
+      cpf: this.getCpfForBackend(), // CPF permanece como antes
       senha: f.senha,
       latitude: f.latitude,
       longitude: f.longitude,

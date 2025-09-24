@@ -15,6 +15,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatOptionModule } from '@angular/material/core';
 import { Observable, map, startWith } from 'rxjs';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MunicipioService } from '../../../services/municipio/municipio.service';
 import { RegisterDto } from '../../../domain/dto/register.dto';
 import { HeadearComponent } from '../../headear/headear.component';
@@ -41,6 +42,7 @@ export interface MunicipioComUF {
     MatAutocompleteModule,
     MatOptionModule,
     MatRadioModule,
+    MatCheckboxModule,
     HeadearComponent
   ],
   templateUrl: './register.component.html',
@@ -49,9 +51,11 @@ export interface MunicipioComUF {
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   municipioControl = new FormControl('');
+  politicaControl = new FormControl(false, Validators.requiredTrue);
   municipios: MunicipioComUF[] = [];
   municipiosFiltrados$: Observable<MunicipioComUF[]> = new Observable();
   mensagemErro: string = '';
+  submitAttempted = false;
 
   private fb = inject(FormBuilder);
   private router = inject(Router);
@@ -134,9 +138,16 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.submitAttempted = true;
     this.mensagemErro = '';
     this.municipioNaoSelecionadoErro = false;
     this.perfilNaoSelecionadoErro = false;
+
+    // Validação do checkbox de política
+    if (this.politicaControl.invalid) {
+      this.mensagemErro = 'Você deve aceitar a política de uso de dados pessoais para se cadastrar.';
+      return;
+    }
 
     if (!this.registerForm.value.perfil) {
       this.perfilNaoSelecionadoErro = true;
@@ -181,7 +192,6 @@ export class RegisterComponent implements OnInit {
       },
       error: err => {
         console.error(err);
-        // Corrigido: mostra exatamente a mensagem do backend
         if (err.status === 409 && typeof err.error === 'string') {
           this.mensagemErro = err.error;
         } else {

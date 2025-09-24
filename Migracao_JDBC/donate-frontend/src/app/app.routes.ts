@@ -14,6 +14,7 @@ import { EventosViewsComponent } from './views/eventos-views/eventos-views.compo
 import { GerenciarEventosComponent } from './views/gerenciar-eventos/gerenciar-eventos.component';
 import { EditEventoComponent } from './views/edit-evento/edit-evento.component';
 import { RecuperarSenhaComponent } from './views/account/recuperar-senha/recuperar-senha.component';
+import { PoliticaComponent } from './views//politica/politica.component'; // <-- Import do componente de política
 
 export const routes: Routes = [
   // rota padrão
@@ -25,6 +26,7 @@ export const routes: Routes = [
   { path: 'recuperar-senha', component: RecuperarSenhaComponent },
   { path: 'eventos', component: EventosViewsComponent },
   { path: 'banco-proximo', component: BancoProximoComponent },
+  { path: 'politica-de-privacidade', component: PoliticaComponent }, // <-- Nova rota
 
   // painel (mostra conteúdo dependendo se usuário está logado)
   { path: 'painel', component: PainelComponent },

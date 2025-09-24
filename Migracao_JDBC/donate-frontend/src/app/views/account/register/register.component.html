@@ -75,9 +75,15 @@
       <input type="hidden" formControlName="latitude" />
       <input type="hidden" formControlName="longitude" />
 
-      <p class="policy-text">
-        Ao se cadastrar, você concorda com as políticas de uso de dados pessoais.
-      </p>
+      <!-- Checkbox de política usando Reactive Forms -->
+      <div class="policy-group" [ngClass]="{'error': politicaControl.invalid && submitAttempted}">
+        <mat-checkbox [formControl]="politicaControl">
+          Li e aceito a <a routerLink="/politica-de-privacidade" target="_blank">política de uso de dados pessoais</a>.
+        </mat-checkbox>
+        <div *ngIf="politicaControl.invalid && submitAttempted" class="error-text">
+          Você deve aceitar a política para se cadastrar.
+        </div>
+      </div>
 
       <button type="submit">Cadastrar</button>
     </form>

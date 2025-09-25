@@ -22,16 +22,20 @@ export class ControleAgendamentoService {
     return this.http.get<AgendamentoDto[]>(this.apiUrl, { headers: this.getAuthHeaders() });
   }
 
-  aceitarAgendamento(id: number): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/${id}/aceitar`, {}, { headers: this.getAuthHeaders() });
-  }
 
   recusarAgendamento(id: number): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/${id}/recusar`, {}, { headers: this.getAuthHeaders() });
   }
 
+
   reagendarAgendamento(id: number, novaData: string): Observable<void> {
     // Mandar como string simples igual ao AgendamentoService
     return this.http.put<void>(`${this.apiUrl}/${id}/reagendar`, `"${novaData}"`, { headers: this.getAuthHeaders() });
   }
+  aceitarAgendamento(id: number): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/${id}/aceitar`, {}, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
 }

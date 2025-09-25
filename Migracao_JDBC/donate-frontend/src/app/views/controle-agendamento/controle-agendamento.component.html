@@ -26,7 +26,8 @@
       <option value="Pendente">Pendente</option>
       <option value="Aceito">Aceito</option>
       <option value="Recusado">Recusado</option>
-      <option value="Reagendamento Solicitado">Reagendamento Solicitado</option>
+      <option value="Reagendamento Solicitado pelo Profissional de Saúde">Reagendamento Solicitado pelo Profissional de Saúde</option>
+      <option value="Reagendamento Solicitado pela Doadora">Reagendamento Solicitado pela Doadora</option>
     </select>
 
     <select [(ngModel)]="ordenarData">
@@ -38,12 +39,7 @@
   <!-- Cards de agendamentos -->
   <div class="cards">
     <div class="card-agendamento" *ngFor="let agendamento of agendamentosFiltrados()"
-         [ngClass]="{
-           'pendente': agendamento.status === 'Pendente',
-           'aceito': agendamento.status === 'Aceito',
-           'recusado': agendamento.status === 'Recusado',
-           'reagendamento': agendamento.status === 'Reagendamento Solicitado'
-         }">
+         [ngClass]="getStatusClass(agendamento.status)">
       <h3>{{ agendamento.nome_doadora }}</h3>
       <p><strong>Status:</strong> {{ agendamento.status }}</p>
       <p><strong>Data:</strong> {{ formatarData(agendamento.data_agendamento) }}</p>

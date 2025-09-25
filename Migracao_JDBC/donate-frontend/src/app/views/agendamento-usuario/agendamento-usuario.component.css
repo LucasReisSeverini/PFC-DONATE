@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Quicksand:wght@500;700&display=swap');
+
 /* Container geral */
 .agendamentos-container {
   max-width: 1000px;
@@ -93,28 +94,63 @@
   flex-wrap: wrap;
 }
 
+/* Botão Excluir */
 .acao-btn.cancelar {
-  background-color: #c62828;
+  background-color: #c62828; /* vermelho */
   color: #fff;
   padding: 6px 12px;
   border-radius: 6px;
   border: none;
   cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.3s;
 }
 
 .acao-btn.cancelar:hover { opacity: 0.9; }
 
+/* Botão Solicitar Reagendamento */
 .acao-btn.reagendar {
-  background-color: #1565c0; /* azul igual admin */
+  background-color: #1565c0; /* azul */
   color: #fff;
   padding: 6px 12px;
   border-radius: 6px;
   border: none;
   cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.3s;
 }
 
 .acao-btn.reagendar:hover { opacity: 0.9; }
 
+/* Botão Recusar Reagendamento */
+.acao-btn.recusar {
+  background-color: #ff9800; /* laranja */
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.3s;
+}
+
+.acao-btn.recusar:hover { opacity: 0.9; }
+
+/* Botão Aceitar Reagendamento */
+.acao-btn.aceitar {
+  background-color: #4caf50; /* verde */
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.3s;
+}
+
+.acao-btn.aceitar:hover { opacity: 0.9; }
+
+/* Input datetime local no card de reagendamento */
 .reagendamento-card {
   margin-top: 8px;
   display: flex;

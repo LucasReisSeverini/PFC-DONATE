@@ -118,17 +118,21 @@
   background-color: #fce4ec;
   border-left-color: #ffb74d;
 }
+
 .card-agendamento.aceito {
   background-color: #c8e6c9;
   border-left-color: #42a5f5;
 }
+
 .card-agendamento.recusado {
   background-color: #ffcdd2;
   border-left-color: #ef5350;
 }
-.card-agendamento.reagendamento {
+
+/* Azul para reagendamentos solicitados */
+.card-agendamento.reagendamento-azul {
   background-color: #bbdefb;
-  border-left-color: #ab47bc;
+  border-left-color: #1565c0;
 }
 
 /* Botões de ação dentro dos cards */

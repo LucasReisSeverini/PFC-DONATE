@@ -40,7 +40,7 @@ export class AgendamentoUsuarioComponent implements OnInit {
           id: a.id,
           data_doacao: a.dataDoacao ? new Date(a.dataDoacao) : null,
           nome_banco_leite: a.nomeBanco || 'Não informado',
-          status: (a.status || 'pendente').toLowerCase(),
+          status: a.status || 'Pendente',
           quantidade_ml: a.quantidadeMl || 0,
           nome_doadora: a.nomeUsuario || 'Não informado',
           rua: a.rua || 'Não informado',
@@ -88,15 +88,29 @@ export class AgendamentoUsuarioComponent implements OnInit {
   }
 
   recusarReagendamento(id: number): void {
-    if (confirm('Deseja recusar este reagendamento solicitado pelo banco?')) {
+    if (confirm('Deseja recusar este reagendamento?')) {
       this.agendamentoService.recusarAgendamento(id).subscribe({
         next: () => {
           const agendamento = this.agendamentos.find(a => a.id === id);
           if (agendamento) {
-            agendamento.status = 'recusado'; // apenas muda o status
+            agendamento.status = 'Recusado';
           }
         },
         error: (err: any) => console.error('Erro ao recusar:', err)
+      });
+    }
+  }
+
+  aceitarReagendamento(id: number): void {
+    if (confirm('Deseja aceitar este reagendamento solicitado pelo profissional?')) {
+      this.agendamentoService.aceitarAgendamento(id).subscribe({
+        next: () => {
+          const agendamento = this.agendamentos.find(a => a.id === id);
+          if (agendamento) {
+            agendamento.status = 'Aceito';
+          }
+        },
+        error: (err: any) => console.error('Erro ao aceitar:', err)
       });
     }
   }
@@ -109,16 +123,46 @@ export class AgendamentoUsuarioComponent implements OnInit {
     }
 
     this.agendamentoService.reagendar(id, novaData).subscribe({
-      next: () => {
-        const agendamento = this.agendamentos.find(a => a.id === id);
-        if (agendamento) {
-          agendamento.data_doacao = new Date(novaData);
-          agendamento.status = 'reagendamento solicitado';
+      next: (res: any) => {
+        if (res) {
+          const index = this.agendamentos.findIndex(a => a.id === id);
+          if (index !== -1) {
+            this.agendamentos[index] = {
+              ...this.agendamentos[index],
+              data_doacao: res.dataDoacao ? new Date(res.dataDoacao) : this.agendamentos[index].data_doacao,
+              status: res.status || this.agendamentos[index].status
+            };
+          }
         }
         this.novaDataReagendamento[id] = '';
       },
       error: (err: any) => console.error('Erro ao solicitar reagendamento:', err)
     });
+  }
+
+  // Retorna a cor baseada no status do agendamento
+  corStatus(status: string): string {
+    if (!status) return 'gray';
+    status = status.toLowerCase();
+    if (status.includes('profissional')) return 'blue';
+    if (status.includes('doadora')) return 'lightblue';
+    if (status.includes('aceito')) return 'green';
+    if (status.includes('recusado')) return 'red';
+    if (status.includes('pendente')) return 'orange';
+    return 'gray';
+  }
+
+  // Lógica de exibição de botões
+  mostrarAceitar(status: string): boolean {
+    return status.toLowerCase().includes('profissional');
+  }
+
+  mostrarReagendar(status: string): boolean {
+    return status.toLowerCase().includes('doadora') || status.toLowerCase().includes('pendente') || status.toLowerCase().includes('profissional');
+  }
+
+  mostrarRecusar(status: string): boolean {
+    return status.toLowerCase().includes('profissional');
   }
 
   voltar(): void {

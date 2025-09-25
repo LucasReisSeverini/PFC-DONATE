@@ -126,21 +126,23 @@ export class ControleAgendamentoComponent implements OnInit {
     this.controleAgendamentoService.aceitarAgendamento(id).subscribe({
       next: () => {
         const ag = this.agendamentos.find(a => a.id === id);
-        if (ag) ag.status = 'Aceito';
+        if (ag) ag.status = 'Aceito'; // Atualiza manualmente
       },
       error: (err) => console.error('Erro ao aceitar agendamento', err)
     });
   }
 
+
   recusar(id: number) {
     this.controleAgendamentoService.recusarAgendamento(id).subscribe({
       next: () => {
         const ag = this.agendamentos.find(a => a.id === id);
-        if (ag) ag.status = 'Recusado';
+        if (ag) ag.status = 'Recusado'; // atualiza manualmente
       },
       error: (err) => console.error('Erro ao recusar agendamento', err)
     });
   }
+
 
   reagendar(id: number) {
     const novaData = this.novaDataReagendamento[id];
@@ -149,13 +151,12 @@ export class ControleAgendamentoComponent implements OnInit {
       return;
     }
 
-    // Envia como string pura, igual ao AgendamentoUsuarioComponent
     this.controleAgendamentoService.reagendarAgendamento(id, `"${novaData}"`).subscribe({
-      next: () => {
+      next: (res: any) => {
         const ag = this.agendamentos.find(a => a.id === id);
-        if (ag) {
-          ag.data_agendamento = novaData;
-          ag.status = 'Reagendamento Solicitado';
+        if (ag && res) {
+          ag.data_agendamento = res.dataDoacao ? res.dataDoacao : ag.data_agendamento;
+          ag.status = res.status || ag.status;
         }
         this.novaDataReagendamento[id] = '';
       },
@@ -197,4 +198,20 @@ export class ControleAgendamentoComponent implements OnInit {
   mostrarTodosAgendamentos() {
     this.agendamentos = [...this.agendamentosOriginais];
   }
+
+  // Função auxiliar para retornar a classe CSS do status
+  // Função auxiliar para retornar a classe CSS do status
+  getStatusClass(status: string): string {
+    const s = status.toLowerCase();
+    if (s === 'pendente') return 'pendente';
+    if (s === 'aceito') return 'aceito';
+    if (s === 'recusado') return 'recusado';
+    // Reagendamento solicitado pelo profissional ou doadora → azul
+    if (
+      s === 'reagendamento solicitado pelo profissional de saúde' ||
+      s === 'reagendamento solicitado pela doadora'
+    ) return 'reagendamento-azul';
+    return '';
+  }
+
 }

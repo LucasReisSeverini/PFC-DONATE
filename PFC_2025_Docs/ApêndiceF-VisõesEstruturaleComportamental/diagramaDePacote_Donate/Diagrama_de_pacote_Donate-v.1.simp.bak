@@ -112,16 +112,14 @@
   <items>
     <item id="6802565ee95947caa45ce09358402f3a" cid="C001" type="class" name="UsuarioService" owner="120849094b914291868a94b973970a74" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="1588c2bdbcf7466cabe919db10a8e6f4" cid="C001" type="class" name="JwtAuthFilter" owner="4d1f1a01980d4349baf593981246b631" creation-date="05/01/2025 09:52:32" visibility="undefined" />
-    <item id="b4b773c26dea4412ac0afe9fd2ea2b64" cid="C001" type="class" name="EventoPostgresDaoImpl" owner="9cac4a32d78b4964acdd1cd4e3aaf9d3" creation-date="05/01/2025 09:52:32" visibility="undefined" />
+    <item id="b4b773c26dea4412ac0afe9fd2ea2b64" cid="C001" type="class" name="UsuarioRepositoy" owner="9cac4a32d78b4964acdd1cd4e3aaf9d3" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="d0531f96319a4ca2b5fbfd2174a0d389" cid="PKG016" type="package" name="user" owner="120849094b914291868a94b973970a74" creation-date="09/26/2025 11:58:23" visibility="undefined" />
     <item id="2f8540300e674d9598515d41b82a11e5" cid="PKG006" type="package" name="interceptor" owner="22fe4ae08e744f7f8fc98127d074611b" creation-date="05/01/2025 09:45:50" visibility="undefined" />
     <item id="13b45f5498564fbba505c622f12587b7" cid="PKG006" type="package" name="account" owner="36094cf7b5514f8696865476f733b826" creation-date="05/01/2025 09:45:50" visibility="undefined">
       <owned-items />
     </item>
     <item id="8030477d7faa4749bba7f0967a807cd3" cid="C001" type="class" name="bancoRoutes" creation-date="05/01/2025 09:52:32" visibility="undefined" />
-    <item id="049ef51a3d83434499db4e550893f7f7" cid="C001" type="class" name="UpdatePasswordDto" owner="1b54ac8e63b646f8bce3c0bbee78ad2e" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="85cc8a356e1541918f0292709c72723e" cid="PKG006" type="package" name="edit-evento" creation-date="05/01/2025 09:45:50" visibility="undefined" />
-    <item id="ab8b16db6ca944a296459a594fbf3344" cid="C001" type="class" name="RecuperarSenhaPostgresDaoImpl" owner="9cac4a32d78b4964acdd1cd4e3aaf9d3" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="f2689fe0f4d84abe8767c4f39b26e4ea" cid="C001" type="class" name="DoacaoModel" owner="449b84066abf4735b3a91f8c495be26d" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="7cba6053603d4c0ca9e4bcada2d5d619" cid="PKG006" type="package" name="register" owner="13b45f5498564fbba505c622f12587b7" creation-date="05/01/2025 09:45:50" visibility="undefined" />
     <item id="3dd03e7f30724078b0e1a49a942a3398" cid="C001" type="class" name="AtualizarLocalizacaoDto" owner="1b54ac8e63b646f8bce3c0bbee78ad2e" creation-date="05/01/2025 09:52:32" visibility="undefined" />
@@ -131,12 +129,10 @@
     <item id="df0e12573bbb4c6aa11b1cc964f6a3a2" cid="PKG006" type="package" name="map" owner="36094cf7b5514f8696865476f733b826" creation-date="05/01/2025 09:45:50" visibility="undefined" />
     <item id="f744bb06bae14e0aaff2f1004b4f802f" cid="PKG016" type="package" name="email" owner="120849094b914291868a94b973970a74" creation-date="09/26/2025 11:58:23" visibility="undefined" />
     <item id="f3571d1210fe495b8f088f6be30a57d9" cid="PKG006" type="package" name="cidade" owner="e92101329cf44d2f802dc51b0e0b4e88" creation-date="05/01/2025 09:45:50" visibility="undefined" />
-    <item id="9de7a17199994a15be501c86b55541fd" cid="C001" type="class" name="EventoPostgresDaoImpl" owner="9cac4a32d78b4964acdd1cd4e3aaf9d3" creation-date="05/01/2025 09:52:32" visibility="undefined" />
-    <item id="a30fc06befe948c3ab3514263f2ad944" cid="C001" type="class" name="UserPostgresDaoImpl" owner="9cac4a32d78b4964acdd1cd4e3aaf9d3" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="351acf5ade51402d877c62cb31610810" cid="C001" type="class" name="AtualizarPerfilDto" owner="1b54ac8e63b646f8bce3c0bbee78ad2e" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="9fab2cee9373405caf197123590d4cc6" cid="PKG006" type="package" name="perfil" owner="13b45f5498564fbba505c622f12587b7" creation-date="05/01/2025 09:45:50" visibility="undefined" />
     <item id="1e3badc126ff4a84b9e11b7c69eed7c8" cid="C001" type="class" name="EventoModel" owner="449b84066abf4735b3a91f8c495be26d" creation-date="05/01/2025 09:52:32" visibility="undefined" />
-    <item id="dec1cb89efe8420f98c3de70027d284b" cid="C001" type="class" name="RecoveryPasswordDto" owner="1b54ac8e63b646f8bce3c0bbee78ad2e" creation-date="05/01/2025 09:52:32" visibility="undefined" />
+    <item id="dec1cb89efe8420f98c3de70027d284b" cid="C001" type="class" name="JwtTokenDto" owner="1b54ac8e63b646f8bce3c0bbee78ad2e" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="7f0ade4be9cf44149b9b61d66ada6d1e" cid="PKG016" type="package" name="evento" owner="120849094b914291868a94b973970a74" creation-date="09/26/2025 11:58:23" visibility="undefined" />
     <item id="86a73e3725374d96ad1e2dc4e33c2e5f" cid="PKG006" type="package" name="agendamento" owner="e92101329cf44d2f802dc51b0e0b4e88" creation-date="05/01/2025 09:45:50" visibility="undefined" />
     <item id="161c33737d8a441fa8c0e8f3c6fee702" cid="C001" type="class" name="SecurityConfig" owner="4d1f1a01980d4349baf593981246b631" creation-date="05/01/2025 09:52:32" visibility="undefined" />
@@ -176,12 +172,12 @@
     <item id="e48b164375634ce992cce440806d6100" cid="PKG016" type="package" name="doacao" owner="120849094b914291868a94b973970a74" creation-date="09/26/2025 11:58:23" visibility="undefined" />
     <item id="5f5a95cf66be451ea706b62d3d2a5ef1" cid="C001" type="class" name="JwtTokenDto" owner="1b54ac8e63b646f8bce3c0bbee78ad2e" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="3fe5d45802a64021907692945f1a92d2" cid="PKG006" type="package" name="recuperar_senha" owner="13b45f5498564fbba505c622f12587b7" creation-date="05/01/2025 09:45:50" visibility="undefined" />
-    <item id="ead896147b654cdfbd6f858d3c9b3319" cid="C001" type="class" name="BancoLeitePostgresDaoImpl" owner="9cac4a32d78b4964acdd1cd4e3aaf9d3" creation-date="05/01/2025 09:52:32" visibility="undefined" />
+    <item id="ead896147b654cdfbd6f858d3c9b3319" cid="C001" type="class" name="BancoLeiteRepository" owner="9cac4a32d78b4964acdd1cd4e3aaf9d3" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="4120f861c4e645c187c6b15b89f3633a" cid="PKG006" type="package" name="evento-views" creation-date="05/01/2025 09:45:50" visibility="undefined" />
     <item id="2a4ee066dd774ea8ae095f8e7ee6a5c7" cid="PKG006" type="package" name="banco" owner="e92101329cf44d2f802dc51b0e0b4e88" creation-date="05/01/2025 09:45:50" visibility="undefined" />
     <item id="e9c1d7a76dd44d2480a1129fd1299aee" cid="C001" type="class" name="BancoLeiteModel" owner="449b84066abf4735b3a91f8c495be26d" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="3ccd7a1959e14b56855eab7fe0cbfb5d" cid="PKG006" type="package" name="controle-agendamento" owner="36094cf7b5514f8696865476f733b826" creation-date="05/01/2025 09:45:50" visibility="undefined" />
-    <item id="c91cce1519f141d5a9e58b38d6e6cee5" cid="C001" type="class" name="DoacaoDaoImpl" owner="9cac4a32d78b4964acdd1cd4e3aaf9d3" creation-date="05/01/2025 09:52:32" visibility="undefined" />
+    <item id="c91cce1519f141d5a9e58b38d6e6cee5" cid="C001" type="class" name="CidadeRepository" owner="9cac4a32d78b4964acdd1cd4e3aaf9d3" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="9261418b2536469f8fc6b95afaa60979" cid="C001" type="class" name="UsuarioService" owner="120849094b914291868a94b973970a74" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="676de9de9e494ce494fc37242d4c85bb" cid="C001" type="class" name="MunicipioModel" owner="449b84066abf4735b3a91f8c495be26d" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="5aab020fc92a44dc86a5f9549a33c31b" cid="C001" type="class" name="Appconfiguration" owner="bc2e4ba371f54336949595e467d5ae0b" creation-date="05/01/2025 09:52:32" visibility="undefined" />
@@ -197,15 +193,11 @@
     <item id="8023ff4d61384ab9828062556d65736b" cid="PKG016" type="package" name="bancoLeite" owner="120849094b914291868a94b973970a74" creation-date="09/26/2025 11:58:23" visibility="undefined" />
     <item id="168cf0f07f8240eaa523f496ee5289b5" cid="PKG016" type="package" name="municipo" owner="120849094b914291868a94b973970a74" creation-date="09/26/2025 11:58:23" visibility="undefined" />
     <item id="889ca9ec64694693961ed74adab4274c" cid="C001" type="class" name="AuthenticationController" owner="4d1f1a01980d4349baf593981246b631" creation-date="05/01/2025 09:52:32" visibility="undefined" />
-    <item id="cb7fe0eba72f477295535750cc2df444" cid="C001" type="class" name="UserDto" owner="1b54ac8e63b646f8bce3c0bbee78ad2e" creation-date="05/01/2025 09:52:32" visibility="undefined">
-      <source-codes>
-        <source-code language="ActionScript" />
-      </source-codes>
-    </item>
+    <item id="cb7fe0eba72f477295535750cc2df444" cid="C001" type="class" name="UsuarioDto" owner="1b54ac8e63b646f8bce3c0bbee78ad2e" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="fc991e02bc0f4959b544061e21a6dfe9" cid="C001" type="class" name="EventoController" owner="39649450bbf84495b2cfade6d5cd1f0a" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="b360b4f9d2e444598e70ee8bf664fbdb" cid="PKG006" type="package" name="model" owner="ac5ab4a0dd6e4c698dce982dd455e388" creation-date="05/01/2025 09:45:50" visibility="undefined" />
     <item id="df7b6904a5ff4f9b992e086768356c58" cid="PKG006" type="package" name="perfil" owner="e92101329cf44d2f802dc51b0e0b4e88" creation-date="05/01/2025 09:45:50" visibility="undefined" />
-    <item id="9cac4a32d78b4964acdd1cd4e3aaf9d3" cid="PKG011" type="package" name="Dao" owner="ff02b233e9de49eeae9ce59a043ce94e" creation-date="05/01/2025 09:54:16" visibility="undefined">
+    <item id="9cac4a32d78b4964acdd1cd4e3aaf9d3" cid="PKG011" type="package" name="repository" owner="ff02b233e9de49eeae9ce59a043ce94e" creation-date="05/01/2025 09:54:16" visibility="undefined">
       <owned-items />
     </item>
     <item id="02c45894f51d4c918f2ce9349b5f890d" cid="PKG006" type="package" name="painel" owner="36094cf7b5514f8696865476f733b826" creation-date="05/01/2025 09:45:50" visibility="undefined" />
@@ -224,7 +216,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-package" id="p079e0b22ff504264827d9f39ae2321d0_832304216" name="DiagramaDePacote_Donate" order-index="1" uid="" name-style="" auto-routed-paths="false" default-line-style="default" view-location="-44,-241" zoom="0.7">
+      <diagram type="uml-package" id="p079e0b22ff504264827d9f39ae2321d0_832304216" name="DiagramaDePacote_Donate" order-index="1" uid="" name-style="" auto-routed-paths="false" default-line-style="default" view-location="-127,-75" zoom="0.7">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -236,7 +228,7 @@
           </authors>
           <description />
           <creation-date>05/01/2025 09:44:05</creation-date>
-          <change-date>09/26/2025 12:11:59</change-date>
+          <change-date>09/26/2025 12:08:13</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
@@ -440,7 +432,7 @@
             <package name-in-body="false" />
           </item>
           <item id="0855e991877340088ede9a66d6679139" iid="1d63520d738e443bb5e4243ce624d324" creation-date="05/01/2025 09:45:04" order-index="2" type="entity">
-            <layout ax="1313" ay="565.4512" awidth="300" aheight="200" x="1313" y="565.4512" width="300" height="200" expanded="1313,565.4512,300,200" collapsed="0,0,0,0" />
+            <layout ax="1268" ay="577" awidth="300" aheight="200" x="1268" y="577" width="300" height="200" expanded="1268,577,300,200" collapsed="0,0,0,0" />
             <package name-in-body="false" />
           </item>
           <item id="f3571d1210fe495b8f088f6be30a57d9" iid="fc9c6c0553f24d0fb5224c6a4b09b2cf" container="e92101329cf44d2f802dc51b0e0b4e88" container-iid="ab893879bc744c81b0dc6e7e7c64177b" creation-date="05/01/2025 09:45:50" order-index="0" type="entity">
@@ -571,10 +563,10 @@
             <relation from="22fe4ae08e744f7f8fc98127d074611b" from-iid="991bda23857e4e9a9b31bc6fd3d573f2" to="39649450bbf84495b2cfade6d5cd1f0a" to-iid="d817a9ba9ed84cefaa1643d9a5819150" />
           </item>
           <item id="1637816d435d419b9902b54fee384925" iid="3d0bab45e3e64961965f60bfcfb39230" creation-date="05/01/2025 10:12:19" order-index="17" type="relation">
-            <layout line-style="oblique" start-auto-side="false" lock-start-point="true" lock-to-fields="false" auto-path="" x1="1263" y1="1112" x2="1418" y2="765" start-border-pos="0.32726602256298065" end-border-pos="0.6622855631510417" start-local-pos="454" end-local-pos="205" name-position="0,20">
+            <layout line-style="oblique" start-auto-side="false" lock-start-point="true" lock-to-fields="false" auto-path="" x1="1263" y1="1112" x2="1382" y2="777" start-border-pos="0.32726602256298065" end-border-pos="0.6546935017903646" start-local-pos="454" end-local-pos="205" name-position="0,20">
               <points>
                 <point x="1263" y="1112" />
-                <point x="1418" y="765" />
+                <point x="1382" y="777" />
               </points>
             </layout>
             <relation from="ff02b233e9de49eeae9ce59a043ce94e" from-iid="8c4187bb00eb4e9797b1d151656d3541" to="0855e991877340088ede9a66d6679139" to-iid="1d63520d738e443bb5e4243ce624d324" />
@@ -689,15 +681,15 @@
             <class />
           </item>
           <item id="9cac4a32d78b4964acdd1cd4e3aaf9d3" iid="f541f879f50e48d19191447b5e6fb738" container="ff02b233e9de49eeae9ce59a043ce94e" container-iid="8c4187bb00eb4e9797b1d151656d3541" creation-date="05/01/2025 09:54:16" order-index="0" type="entity">
-            <layout ax="736" ay="2452" awidth="499" aheight="560" x="736" y="2452" width="499" height="560" expanded="736,2452,499,560" collapsed="0,0,0,0" />
+            <layout ax="768" ay="2657" awidth="335" aheight="292" x="768" y="2657" width="335" height="200" expanded="768,2657,335,292" collapsed="0,0,0,0" />
             <package name-in-body="false" />
           </item>
           <item id="bc2e4ba371f54336949595e467d5ae0b" iid="92002040937d49dc9b3cc359d84f0459" container="ff02b233e9de49eeae9ce59a043ce94e" container-iid="8c4187bb00eb4e9797b1d151656d3541" creation-date="05/01/2025 09:54:16" order-index="0" type="entity">
-            <layout ax="736" ay="2190.4785" awidth="300" aheight="234.52148" x="736" y="2190.4785" width="300" height="200" expanded="736,2190.4785,300,234.52148" collapsed="0,0,0,0" />
+            <layout ax="768" ay="2377.6523" awidth="300" aheight="234.52148" x="768" y="2377.6523" width="300" height="200" expanded="768,2377.6523,300,234.52148" collapsed="0,0,0,0" />
             <package name-in-body="false" />
           </item>
           <item id="5aab020fc92a44dc86a5f9549a33c31b" iid="e294c2e5eebb42e7a576a31562625135" container="bc2e4ba371f54336949595e467d5ae0b" container-iid="92002040937d49dc9b3cc359d84f0459" show-fields="true" creation-date="05/01/2025 09:52:32" order-index="0" type="entity">
-            <layout ax="770" ay="2256" awidth="120" aheight="119" x="754" y="1748" width="120" height="119" />
+            <layout ax="802" ay="2443.1738" awidth="120" aheight="119" x="754" y="1748" width="120" height="119" />
             <classifier />
             <class />
           </item>
@@ -736,7 +728,7 @@
             <package name-in-body="false" />
           </item>
           <item id="1b54ac8e63b646f8bce3c0bbee78ad2e" iid="62bfd99aab504c368183e87929212b78" container="ff02b233e9de49eeae9ce59a043ce94e" container-iid="8c4187bb00eb4e9797b1d151656d3541" creation-date="05/01/2025 09:54:16" order-index="0" type="entity">
-            <layout ax="736" ay="1686.4785" awidth="479" aheight="477" x="736" y="1686.4785" width="479" height="477" expanded="736,1686.4785,479,477" collapsed="0,0,0,0" />
+            <layout ax="736" ay="1686.4785" awidth="479" aheight="664" x="736" y="1686.4785" width="479" height="664" expanded="736,1686.4785,479,664" collapsed="0,0,0,0" />
             <package name-in-body="false" />
           </item>
           <item id="3dd03e7f30724078b0e1a49a942a3398" iid="1793a745695045b68d4d5105d9c4f852" container="1b54ac8e63b646f8bce3c0bbee78ad2e" container-iid="62bfd99aab504c368183e87929212b78" show-fields="true" creation-date="05/01/2025 09:52:32" order-index="1" type="entity">
@@ -770,12 +762,7 @@
             <class />
           </item>
           <item id="dec1cb89efe8420f98c3de70027d284b" iid="43048a78d5ad4b01811efb7568bc3057" container="1b54ac8e63b646f8bce3c0bbee78ad2e" container-iid="62bfd99aab504c368183e87929212b78" show-fields="true" creation-date="05/01/2025 09:52:32" order-index="0" type="entity">
-            <layout ax="892" ay="2005.4785" awidth="120" aheight="119" x="892" y="2005.4785" width="120" height="119" />
-            <classifier />
-            <class />
-          </item>
-          <item id="049ef51a3d83434499db4e550893f7f7" iid="222ddb4cb65d44fab736960989abcd90" container="1b54ac8e63b646f8bce3c0bbee78ad2e" container-iid="62bfd99aab504c368183e87929212b78" show-fields="true" creation-date="05/01/2025 09:52:32" order-index="0" type="entity">
-            <layout ax="1046" ay="2005.4785" awidth="120" aheight="119" x="1046" y="2005.4785" width="120" height="119" />
+            <layout ax="916" ay="2018" awidth="120" aheight="119" x="916" y="2018" width="120" height="119" />
             <classifier />
             <class />
           </item>
@@ -785,32 +772,17 @@
             <class />
           </item>
           <item id="ead896147b654cdfbd6f858d3c9b3319" iid="848925f5b1224fa2a3ebe2d3b8a5c67b" container="9cac4a32d78b4964acdd1cd4e3aaf9d3" container-iid="f541f879f50e48d19191447b5e6fb738" show-fields="true" creation-date="05/01/2025 09:52:32" order-index="0" type="entity">
-            <layout ax="770" ay="2506" awidth="120" aheight="119" x="770" y="2506" width="120" height="119" />
+            <layout ax="768" ay="2693" awidth="120" aheight="119" x="720" y="1973" width="120" height="119" />
             <classifier />
             <class />
           </item>
           <item id="b4b773c26dea4412ac0afe9fd2ea2b64" iid="d9b37d32ec6942228fab41978f532399" container="9cac4a32d78b4964acdd1cd4e3aaf9d3" container-iid="f541f879f50e48d19191447b5e6fb738" show-fields="true" creation-date="05/01/2025 09:52:32" order-index="1" type="entity">
-            <layout ax="770" ay="2639" awidth="120" aheight="119" x="770" y="2639" width="120" height="119" />
-            <classifier />
-            <class />
-          </item>
-          <item id="9de7a17199994a15be501c86b55541fd" iid="38467300a31744e5a70f2203c2705490" container="9cac4a32d78b4964acdd1cd4e3aaf9d3" container-iid="f541f879f50e48d19191447b5e6fb738" show-fields="true" creation-date="05/01/2025 09:52:32" order-index="0" type="entity">
-            <layout ax="949" ay="2639" awidth="120" aheight="119" x="949" y="2639" width="120" height="119" />
-            <classifier />
-            <class />
-          </item>
-          <item id="ab8b16db6ca944a296459a594fbf3344" iid="00094fa2799c482b8a4022aedab1e1f4" container="9cac4a32d78b4964acdd1cd4e3aaf9d3" container-iid="f541f879f50e48d19191447b5e6fb738" show-fields="true" creation-date="05/01/2025 09:52:32" order-index="0" type="entity">
-            <layout ax="770" ay="2782" awidth="120" aheight="119" x="770" y="2782" width="120" height="119" />
-            <classifier />
-            <class />
-          </item>
-          <item id="a30fc06befe948c3ab3514263f2ad944" iid="8b5e102aef7f4be78f26e0cf33a15e63" container="9cac4a32d78b4964acdd1cd4e3aaf9d3" container-iid="f541f879f50e48d19191447b5e6fb738" show-fields="true" creation-date="05/01/2025 09:52:32" order-index="0" type="entity">
-            <layout ax="949" ay="2782" awidth="120" aheight="119" x="949" y="2782" width="120" height="119" />
+            <layout ax="768" ay="2830" awidth="120" aheight="119" x="720" y="2110" width="120" height="119" />
             <classifier />
             <class />
           </item>
           <item id="c91cce1519f141d5a9e58b38d6e6cee5" iid="d584a1b996c647b599bfd3074767ff3c" container="9cac4a32d78b4964acdd1cd4e3aaf9d3" container-iid="f541f879f50e48d19191447b5e6fb738" show-fields="true" creation-date="05/01/2025 09:52:32" order-index="2" type="entity">
-            <layout ax="949" ay="2506" awidth="120" aheight="119" x="949" y="2506" width="120" height="119" />
+            <layout ax="930" ay="2693" awidth="120" aheight="119" x="882" y="1973" width="120" height="119" />
             <classifier />
             <class />
           </item>

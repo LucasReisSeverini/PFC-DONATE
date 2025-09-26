@@ -115,3 +115,13 @@
 --    usado       BOOLEAN DEFAULT FALSE,
 --    CONSTRAINT recuperar_senha_usuario_id_fkey FOREIGN KEY (usuario_id) REFERENCES usuario(id)
 --);
+-- ===============================
+-- TABELA HISTÓRICO DE SENHA
+-- ===============================
+--CREATE TABLE usuario_senha_historico (
+--    id              BIGSERIAL PRIMARY KEY,
+--    usuario_id      BIGINT NOT NULL,
+--    senha           VARCHAR(255) NOT NULL,
+--    data_alteracao  TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+--    CONSTRAINT fk_usuario_senha FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+--);

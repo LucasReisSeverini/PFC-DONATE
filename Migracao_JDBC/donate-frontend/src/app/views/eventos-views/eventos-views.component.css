@@ -27,6 +27,12 @@
   margin-bottom: 20px;
 }
 
+.eventos-header h2 {
+  font-size: 22px;
+  color: #c2185b; /* rosa forte */
+  margin: 0;
+}
+
 /* ========================= */
 /* Filtros                   */
 /* ========================= */
@@ -59,13 +65,6 @@
 .filtros input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   filter: invert(45%) sepia(15%) saturate(400%) hue-rotate(300deg) brightness(90%) contrast(85%);
-}
-
-
-.eventos-header h2 {
-  font-size: 22px;
-  color: #c2185b; /* rosa forte */
-  margin: 0;
 }
 
 /* ========================= */
@@ -105,25 +104,6 @@
 .btn-adicionar:hover,
 .btn-proximos:hover {
   background-color: #c2185b;
-}
-
-/* ========================= */
-/* Filtros                   */
-/* ========================= */
-.filtros {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-.filtros select,
-.filtros input[type="date"] {
-  padding: 8px 12px;
-  border: 1px solid #b0bec5;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  background-color: #fff;
 }
 
 /* ========================= */
@@ -192,4 +172,16 @@ mat-card-subtitle {
 .filtros .data-filtro label {
   font-size: 0.9rem;
   color: #555;
+}
+
+/* ========================= */
+/* Ajuste para truncar texto */
+/* ========================= */
+.card-evento p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* limite de linhas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 }

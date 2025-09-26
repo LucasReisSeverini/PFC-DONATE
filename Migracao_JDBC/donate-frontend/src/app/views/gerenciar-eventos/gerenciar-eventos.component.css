@@ -126,3 +126,15 @@ mat-card-subtitle {
   justify-content: flex-end;
   gap: 10px;
 }
+/* ========================= */
+/* Ajuste para truncar texto */
+/* ========================= */
+.card-evento p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* número de linhas visíveis */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+

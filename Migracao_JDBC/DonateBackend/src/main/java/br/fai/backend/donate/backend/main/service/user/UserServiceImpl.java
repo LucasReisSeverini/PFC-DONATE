@@ -3,6 +3,7 @@ package br.fai.backend.donate.backend.main.service.user;
 import br.fai.backend.donate.backend.main.domain.UsuarioModel;
 import br.fai.backend.donate.backend.main.dto.AtualizarPerfilDto;
 import br.fai.backend.donate.backend.main.port.dao.user.UserDao;
+import br.fai.backend.donate.backend.main.port.dao.user.UpdatePasswordDao;
 import br.fai.backend.donate.backend.main.port.service.user.UserService;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,10 +19,12 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
+    private final UpdatePasswordDao updatePasswordDao;
     private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserDao userDao, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserDao userDao, UpdatePasswordDao updatePasswordDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
+        this.updatePasswordDao = updatePasswordDao;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -117,16 +121,24 @@ public class UserServiceImpl implements UserService {
 
         if (!passwordEncoder.matches(oldPassword, user.getSenha())) return false;
 
-        String senhaCriptografada = passwordEncoder.encode(newPassword);
-        return userDao.updatePassword(id, senhaCriptografada);
+        String novaSenhaHash = passwordEncoder.encode(newPassword);
+        try {
+            return updatePasswordDao.updatePassword(id, novaSenhaHash);
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar a senha: " + e.getMessage(), e);
+        }
     }
 
     @Override
     public boolean recoveryPassword(int id, String newPassword) {
         if (id <= 0 || newPassword == null || newPassword.isEmpty()) return false;
 
-        String senhaCriptografada = passwordEncoder.encode(newPassword);
-        return userDao.updatePassword(id, senhaCriptografada);
+        String novaSenhaHash = passwordEncoder.encode(newPassword);
+        try {
+            return updatePasswordDao.updatePassword(id, novaSenhaHash);
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao recuperar a senha: " + e.getMessage(), e);
+        }
     }
 
     // =================== Consulta ===================
@@ -175,17 +187,38 @@ public class UserServiceImpl implements UserService {
             if (!passwordEncoder.matches(dto.getSenhaAntiga(), existente.getSenha())) {
                 throw new IllegalArgumentException("Senha atual incorreta");
             }
-            existente.setSenha(passwordEncoder.encode(dto.getNovaSenha()));
+
+            try {
+                // Pega últimas 3 senhas do usuário
+                List<String> ultimasSenhas = userDao.getUltimasSenhas((long) id, 3);
+
+                // Verifica se a nova senha já foi usada
+                for (String hash : ultimasSenhas) {
+                    if (passwordEncoder.matches(dto.getNovaSenha(), hash)) {
+                        throw new IllegalArgumentException("Senha já utilizada nas últimas 3 alterações");
+                    }
+                }
+
+                // Criptografa e atualiza a senha
+                String novaSenhaHash = passwordEncoder.encode(dto.getNovaSenha());
+                updatePasswordDao.updatePassword(id, novaSenhaHash);
+                existente.setSenha(novaSenhaHash);
+
+            } catch (SQLException e) {
+                throw new RuntimeException("Erro ao atualizar a senha: " + e.getMessage(), e);
+            }
         }
 
+        // Atualiza demais informações
         userDao.updateInformation(id, existente);
         return true;
     }
+
+
 
 
     @Override
     public Optional<UsuarioModel> buscarPorCpf(String cpf) {
         return Optional.ofNullable(userDao.findByCpf(cpf));
     }
-
 }

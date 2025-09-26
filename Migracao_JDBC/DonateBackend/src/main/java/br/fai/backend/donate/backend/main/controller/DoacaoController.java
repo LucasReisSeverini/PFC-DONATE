@@ -83,10 +83,16 @@ public class DoacaoController {
     }
 
     @PutMapping("/{id}/reagendar")
-    public ResponseEntity<Void> reagendar(@PathVariable Long id, @RequestBody String novaData) {
+    public ResponseEntity<DoacaoListDTO> reagendar(@PathVariable Long id, @RequestBody String novaData) {
         doacaoService.reagendar(id, LocalDateTime.parse(novaData.replace("\"", "")));
-        return ResponseEntity.ok().build();
+
+        // Buscar novamente a doação atualizada como DTO
+        Optional<DoacaoListDTO> doacaoAtualizada = doacaoService.buscarPorIdDTO(id);
+
+        return doacaoAtualizada.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
@@ -95,7 +101,7 @@ public class DoacaoController {
     }
 
     @PostMapping("/{id}/aceitar")
-    @PreAuthorize("hasRole('PROFISSIONAL')")
+    @PreAuthorize("hasRole('PROFISSIONAL') or hasRole('DOADORA')")
     public ResponseEntity<Void> aceitar(@PathVariable Long id) {
         doacaoService.atualizarStatus(id, "Aceito");
         return ResponseEntity.ok().build();

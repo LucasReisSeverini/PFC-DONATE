@@ -7,7 +7,10 @@ import br.fai.backend.donate.backend.main.port.dao.user.UserDao;
 import br.fai.backend.donate.backend.main.port.service.doacao.DoacaoService;
 import br.fai.backend.donate.backend.main.port.service.email.EmailService;
 import br.fai.backend.donate.backend.main.domain.UsuarioModel;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -69,23 +72,38 @@ public class DoacaoServiceImpl implements DoacaoService {
         return 0;
     }
 
-    @Override
     public int reagendar(Long id, LocalDateTime novaDataHora) {
         Optional<DoacaoModel> optional = doacaoDao.buscarPorId(id);
         if (optional.isPresent()) {
             DoacaoModel doacao = optional.get();
             doacao.setDataDoacao(novaDataHora);
-            doacao.setStatus("Reagendamento Solicitado");
+
+            // Pega a role do usuário logado a partir do token
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String role = authentication.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .findFirst()
+                    .orElse("");
+
+            // Define status de acordo com a role
+            if ("ROLE_DOADORA".equalsIgnoreCase(role)) {
+                doacao.setStatus("Reagendamento Solicitado pela Doadora");
+            } else if ("ROLE_PROFISSIONAL".equalsIgnoreCase(role)) {
+                doacao.setStatus("Reagendamento Solicitado pelo Profissional de Saúde");
+            } else {
+                doacao.setStatus("Reagendamento Solicitado"); // fallback genérico
+            }
+
             int result = doacaoDao.atualizar(doacao);
 
-            // Notificar usuário sobre reagendamento
-            String mensagem = "Seu agendamento foi reagendado para: " + novaDataHora;
-            notificarUsuario(doacao, mensagem);
+            // Notificar usuário sobre reagendamento usando o status correto
+            notificarUsuario(doacao, doacao.getStatus());
 
             return result;
         }
         return 0;
     }
+
 
     @Override
     public boolean existeAgendamento(Long idBanco, LocalDateTime dataHora) {
@@ -112,7 +130,6 @@ public class DoacaoServiceImpl implements DoacaoService {
         // Buscar usuário pelo idUsuario da doação
         UsuarioModel usuario = usuarioDao.readByID(doacao.getUsuarioId().intValue());
         if (usuario == null || usuario.getEmail() == null || usuario.getEmail().isEmpty()) {
-            // Não tem usuário ou e-mail válido
             return;
         }
 
@@ -130,16 +147,20 @@ public class DoacaoServiceImpl implements DoacaoService {
             case "reagendado":
                 status = "reagendado";
                 break;
+            case "reagendamento solicitado pelo profissional de saúde":
+                status = "reagendamento solicitado pelo profissional de saúde";
+                break;
+            case "reagendamento solicitado pela doadora":
+                status = "reagendamento solicitado pela doadora";
+                break;
             default:
-                status = "atualizado"; // caso genérico
+                status = statusOuMensagem; // passa exatamente o que veio do banco
                 break;
         }
 
-        // Extrai data e hora do agendamento
         LocalDate data = doacao.getDataDoacao().toLocalDate();
         LocalTime horario = doacao.getDataDoacao().toLocalTime();
 
-        // Chama o método de envio de e-mail HTML/formal
         emailService.enviarEmailAgendamento(
                 usuario.getEmail(),
                 usuario.getNome(),
@@ -148,6 +169,7 @@ public class DoacaoServiceImpl implements DoacaoService {
                 horario
         );
     }
+
 
 
 }

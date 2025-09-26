@@ -5,6 +5,8 @@
 --DROP TABLE IF EXISTS usuario CASCADE;
 --DROP TABLE IF EXISTS municipio CASCADE;
 --DROP TABLE IF EXISTS unidade_federativa CASCADE;
+--DROP TABLE IF EXISTS notificacao CASCADE;
+--DROP TABLE IF EXISTS recuperar_senha CASCADE;
 --
 ---- ===============================
 ---- TABELA UNIDADE FEDERATIVA
@@ -22,6 +24,8 @@
 --    id                  BIGSERIAL PRIMARY KEY,
 --    nome                VARCHAR(255) NOT NULL,
 --    id_unidade_federativa BIGINT NOT NULL,
+--    latitude            DOUBLE PRECISION,
+--    longitude           DOUBLE PRECISION,
 --    CONSTRAINT fk_municipio_uf FOREIGN KEY (id_unidade_federativa) REFERENCES unidade_federativa(id)
 --);
 --
@@ -98,4 +102,16 @@
 --    datahora_envio  TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
 --    mensagem        VARCHAR(255) NOT NULL,
 --    CONSTRAINT fk_notificacao_banco FOREIGN KEY (id_banco_leite) REFERENCES bancos_de_leite(id)
+--);
+--
+---- ===============================
+---- TABELA RECUPERAR SENHA
+---- ===============================
+--CREATE TABLE recuperar_senha (
+--    id          BIGSERIAL PRIMARY KEY,
+--    usuario_id  BIGINT NOT NULL,
+--    codigo      VARCHAR(6) NOT NULL,
+--    data_expiracao TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+--    usado       BOOLEAN DEFAULT FALSE,
+--    CONSTRAINT recuperar_senha_usuario_id_fkey FOREIGN KEY (usuario_id) REFERENCES usuario(id)
 --);

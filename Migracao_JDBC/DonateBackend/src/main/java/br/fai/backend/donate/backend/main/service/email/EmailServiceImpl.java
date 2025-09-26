@@ -68,6 +68,12 @@ public class EmailServiceImpl implements EmailService {
                         nomeUsuario, dataFormatada, horarioFormatado
                 );
                 break;
+            case "reagendamento solicitado pelo profissional de saúde":
+                corpo = String.format(
+                        "Olá %s,\n\nUm profissional de saúde solicitou a alteração da data do seu agendamento para o dia %s às %s.\n\nPor favor, acesse o sistema Doante para confirmar ou sugerir uma nova data que seja conveniente para você.\n\nAguardamos sua resposta.\n\nAtenciosamente,\nEquipe Donate",
+                        nomeUsuario, dataFormatada, horarioFormatado
+                );
+                break;
             case "pendente":
                 corpo = String.format(
                         "Olá %s,\n\nSeu agendamento para o dia %s às %s está pendente de confirmação.\n\nAtenciosamente,\nEquipe Donate",
@@ -80,6 +86,7 @@ public class EmailServiceImpl implements EmailService {
                         nomeUsuario, dataFormatada, horarioFormatado
                 );
         }
+
 
         message.setText(corpo);
         message.setFrom("donateavisos@gmail.com");
@@ -99,7 +106,7 @@ public class EmailServiceImpl implements EmailService {
             helper.setTo(to);
             helper.setSubject(assunto);
             helper.setText(corpo, true); // true = HTML
-            helper.setFrom("donateavisos@gmail"); // altere para seu e-mail real
+            helper.setFrom("donateavisos@gmail.com"); // altere para seu e-mail real
             mailSender.send(message);
         } catch (MessagingException e) {
             e.printStackTrace();

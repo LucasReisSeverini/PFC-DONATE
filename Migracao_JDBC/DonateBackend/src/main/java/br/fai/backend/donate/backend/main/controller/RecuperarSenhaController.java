@@ -61,7 +61,7 @@ public class RecuperarSenhaController {
 
         Map<String, Object> response = new HashMap<>();
         response.put("sucesso", sucesso);
-        response.put("mensagem", sucesso ? "Senha atualizada com sucesso" : "Erro ao atualizar senha");
+        response.put("mensagem", sucesso ? "Senha atualizada com sucesso" : "Erro ao atualizar senha, código invalido");
 
         return ResponseEntity.ok(response);
     }

@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RecuperarSenhaService } from '../../../services/recuperar-senha/recuperar-senha.service';
 import { HeadearComponent } from '../../headear/headear.component';
+
 @Component({
   selector: 'app-recuperar-senha',
   standalone: true,
@@ -30,10 +31,10 @@ export class RecuperarSenhaComponent {
 
     this.recuperarSenhaService.enviarCodigo(this.email).subscribe({
       next: (res: any) => {
-        this.codigoEnviado = true;
-        this.mensagem = 'Código enviado! Verifique seu e-mail.';
+        this.codigoEnviado = res.sucesso;
+        this.mensagem = res.mensagem;
       },
-      error: (err: any) => {
+      error: () => {
         this.mensagem = 'Erro ao enviar código. Tente novamente.';
       }
     });
@@ -45,18 +46,21 @@ export class RecuperarSenhaComponent {
       return;
     }
 
-    this.recuperarSenhaService.resetarSenha(this.email, this.codigo, this.novaSenha).subscribe({
-      next: (res: any) => {
-        this.mensagem = 'Senha redefinida com sucesso!';
-        this.codigoEnviado = false;
-        this.email = '';
-        this.codigo = '';
-        this.novaSenha = '';
-      },
-      error: (err: any) => {
-        this.mensagem = 'Erro ao redefinir senha. Verifique o código e tente novamente.';
-      }
-    });
+    this.recuperarSenhaService.resetarSenha(this.email, this.codigo, this.novaSenha)
+      .subscribe({
+        next: (res: any) => {
+          this.mensagem = res.mensagem;  // usa a mensagem retornada pelo backend
+          if (res.sucesso) {
+            this.codigoEnviado = false;
+            this.email = '';
+            this.codigo = '';
+            this.novaSenha = '';
+          }
+        },
+        error: () => {
+          this.mensagem = 'Erro ao redefinir senha. Tente novamente mais tarde.';
+        }
+      });
   }
 
   voltarLogin() {

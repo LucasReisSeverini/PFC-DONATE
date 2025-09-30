@@ -6,13 +6,13 @@ import { MapComponent } from '../map/map.component';
 import { RouterModule } from '@angular/router';
 import { BancoProximoDto } from '../../domain/dto/banco-proximo.dto';
 import { HeadearComponent } from '../headear/headear.component';
+
 @Component({
   selector: 'app-banco-proximo',
   standalone: true,
   imports: [CommonModule, HeadearComponent, HttpClientModule, MapComponent, RouterModule],
   templateUrl: './banco-proximo.component.html',
   styleUrls: ['./banco-proximo.component.css']
-  // removi providers: [BancoService]
 })
 export class BancoProximoComponent implements OnInit {
   banco: BancoProximoDto | null = null;
@@ -62,5 +62,26 @@ export class BancoProximoComponent implements OnInit {
     } else {
       this.erro = 'Geolocalização não suportada pelo navegador.';
     }
+  }
+
+  /**
+   * Formata número de telefone em padrões brasileiros
+   * Ex: 3534211234 -> (35) 3421-1234
+   * Ex: 35999991234 -> (35) 99999-1234
+   */
+  formatarTelefone(numero?: string): string {
+    if (!numero) return 'Não informado';
+
+    const digits = numero.replace(/\D/g, '');
+
+    if (digits.length === 10) {
+      return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+    }
+
+    if (digits.length === 11) {
+      return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+    }
+
+    return numero; // fallback
   }
 }

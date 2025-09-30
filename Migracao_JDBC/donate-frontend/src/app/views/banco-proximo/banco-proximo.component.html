@@ -21,6 +21,11 @@
       <span>{{ banco.endereco }}</span>
     </p>
     <p>
+      <strong>Telefone:</strong>
+      <span>{{ formatarTelefone(banco.telefone) }}</span>
+
+    </p>
+    <p>
       <strong>Distância:</strong>
       <span class="banco-distancia">{{ banco.distancia | number:'1.1-2' }} km</span>
     </p>
@@ -28,7 +33,9 @@
 
   <!-- Botão para voltar ao painel -->
   <div class="voltar-container">
-    <button class="btn-voltar" [routerLink]="'/painel'" routerLinkActive="active">Voltar para o painel</button>
+    <button class="btn-voltar" [routerLink]="'/painel'" routerLinkActive="active">
+      Voltar para o painel
+    </button>
   </div>
 
   <div *ngIf="banco?.latitude && banco?.longitude" style="width: 100%; max-width: 600px; margin: auto;">

@@ -1,13 +1,13 @@
 export interface BancoProximoDto {
-  id?: number;
-  nome: string;          // nome do banco (ajustei para 'nome', não 'nome_banco_leite')
-  endereco?: string;     // endereço, como string (opcional)
-  distancia?: number;    // distância em km (opcional)
-  latitude: number | string;
-  longitude: number | string;
+  id: number;
+  nome: string;
+  endereco: string;
+  latitude: string;
+  longitude: string;
+  distancia: number;
+  telefone?: string; // 👈 adiciona aqui
   coordenadas?: {
     lat: number;
     lng: number;
   };
-  // outros campos, se existirem
 }

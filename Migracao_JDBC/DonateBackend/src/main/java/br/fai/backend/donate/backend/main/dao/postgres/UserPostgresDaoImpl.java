@@ -26,14 +26,17 @@ public class UserPostgresDaoImpl implements UserDao, UpdatePasswordDao {
         if (readByEmail(entity.getEmail()) != null) throw new RuntimeException("Email já cadastrado");
         if (readByCpf(entity.getCpf()) != null) throw new RuntimeException("CPF já cadastrado");
 
-        if ((entity.getDoadora() == null || !entity.getDoadora())
-                && (entity.getReceptora() == null || !entity.getReceptora())
-                && (entity.getProfissional() == null || !entity.getProfissional())) {
+        if ((entity.getAdmin() == null || !entity.getAdmin()) &&
+                (entity.getDoadora() == null || !entity.getDoadora()) &&
+                (entity.getReceptora() == null || !entity.getReceptora()) &&
+                (entity.getProfissional() == null || !entity.getProfissional())) {
             entity.setDoadora(true);
         }
 
-        String sql = "INSERT INTO usuario (nome, telefone, senha, email, cpf, doadora, receptora, profissional, latitude, longitude, id_municipio) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        // Adicionei o campo admin no INSERT
+        String sql = "INSERT INTO usuario (nome, telefone, senha, email, cpf, doadora, receptora, profissional, latitude, longitude, id_municipio, admin) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             connection.setAutoCommit(false);
@@ -51,6 +54,7 @@ public class UserPostgresDaoImpl implements UserDao, UpdatePasswordDao {
                 if (entity.getLongitude() != null) ps.setDouble(10, entity.getLongitude());
                 else ps.setNull(10, Types.DOUBLE);
                 ps.setInt(11, entity.getIdMunicipio());
+                ps.setBoolean(12, entity.getAdmin() != null && entity.getAdmin()); // novo campo
                 ps.executeUpdate();
 
                 try (ResultSet rs = ps.getGeneratedKeys()) {
@@ -60,7 +64,6 @@ public class UserPostgresDaoImpl implements UserDao, UpdatePasswordDao {
 
             // Salvar senha inicial no histórico
             salvarSenhaNoHistorico((long) entity.getId(), entity.getSenha());
-
 
             connection.commit();
             return entity.getId();
@@ -141,6 +144,7 @@ public class UserPostgresDaoImpl implements UserDao, UpdatePasswordDao {
         usuario.setLatitude(rs.getObject("latitude") != null ? rs.getDouble("latitude") : null);
         usuario.setLongitude(rs.getObject("longitude") != null ? rs.getDouble("longitude") : null);
         usuario.setIdMunicipio(rs.getInt("id_municipio"));
+        usuario.setAdmin(rs.getBoolean("admin")); // novo campo
         return usuario;
     }
 

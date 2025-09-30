@@ -54,6 +54,7 @@ public class UserRestController {
         usuario.setDoadora(usuarioDto.getDoadora());
         usuario.setReceptora(usuarioDto.getReceptora());
         usuario.setProfissional(usuarioDto.getProfissional());
+        usuario.setAdmin(usuarioDto.getAdmin());
         usuario.setLatitude(usuarioDto.getLatitude());
         usuario.setLongitude(usuarioDto.getLongitude());
         usuario.setIdMunicipio(municipio.getId());

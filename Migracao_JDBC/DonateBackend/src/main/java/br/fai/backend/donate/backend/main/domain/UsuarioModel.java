@@ -23,6 +23,7 @@ public class UsuarioModel {
     private Boolean doadora;
     private Boolean receptora;
     private Boolean profissional;
+    private Boolean admin; // novo campo para a role ADMIN
 
     @JsonProperty("id_municipio")
     private Integer idMunicipio;

@@ -35,11 +35,13 @@ public class JwtService {
     }
 
     private String determinarRole(UsuarioModel usuario) {
+        if (Boolean.TRUE.equals(usuario.getAdmin())) return "ADMIN";
         if (Boolean.TRUE.equals(usuario.getProfissional())) return "PROFISSIONAL";
         if (Boolean.TRUE.equals(usuario.getReceptora())) return "RECEPTORA";
         if (Boolean.TRUE.equals(usuario.getDoadora())) return "DOADORA";
         return "USUARIO"; // padrão
     }
+
 
     public String extrairUsername(String token) {
         return Jwts.parserBuilder().setSigningKey(key).build()

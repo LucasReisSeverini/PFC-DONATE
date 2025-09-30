@@ -15,6 +15,10 @@ import { GerenciarEventosComponent } from './views/gerenciar-eventos/gerenciar-e
 import { EditEventoComponent } from './views/edit-evento/edit-evento.component';
 import { RecuperarSenhaComponent } from './views/account/recuperar-senha/recuperar-senha.component';
 import { PoliticaComponent } from './views//politica/politica.component'; // <-- Import do componente de política
+import { AdminUsersComponent } from './views/admin-users/admin-users.component'; // <-- Import do componente admin
+
+
+
 
 export const routes: Routes = [
   // rota padrão
@@ -59,5 +63,13 @@ export const routes: Routes = [
     component: EditEventoComponent,
     canActivate: [AuthGuard],
     data: { allowedRoles: ['PROFISSIONAL'] }
-  }
+  },
+
+    {
+      path: 'admin/users',
+      component: AdminUsersComponent,
+      canActivate: [AuthGuard],
+      data: { allowedRoles: ['ADMIN'] } // apenas administradores podem acessar
+    }
+
 ];

@@ -4,82 +4,113 @@
   <!-- HERO SECTION -->
   <section class="hero">
     <div class="hero-text">
-      <h1>🤱 Doe leite materno e salve vidas</h1>
-      <p>Seu gesto transforma a vida de bebês prematuros e doentes. Contribua agora!</p>
-      <button mat-raised-button color="accent" (click)="irParaDoacaoOuControle()">
-        <span class="material-icons">volunteer_activism</span>
-        {{ roleUsuario === 'PROFISSIONAL' ? 'CONTROLE DE AGENDAMENTOS' : 'FAÇA SUA DOAÇÃO' }}
-      </button>
+      <h1 *ngIf="roleUsuario === 'PROFISSIONAL'">👨‍💼 Perfil Profissional</h1>
+      <h1 *ngIf="roleUsuario === 'ADMIN'">👨‍💼 Painel do Administrador</h1>
+      <h1 *ngIf="!roleUsuario || roleUsuario === 'DOADORA'">🤱 Doe leite materno e salve vidas</h1>
+
+      <p *ngIf="roleUsuario === 'PROFISSIONAL'">
+        Gerencie seus agendamentos e eventos de forma prática e rápida.
+      </p>
+      <p *ngIf="roleUsuario === 'ADMIN'">
+        Gerencie usuários, bancos de leite e municípios de forma rápida e segura.
+      </p>
+      <p *ngIf="!roleUsuario || roleUsuario === 'DOADORA'">
+        Seu gesto transforma a vida de bebês prematuros e doentes. Contribua agora!
+      </p>
+
+
+
+      <ng-container *ngIf="roleUsuario === 'ADMIN'">
+        <button mat-raised-button color="accent" [routerLink]="'/admin/users'">
+          <span class="material-icons">manage_accounts</span>
+          GERENCIAR USUÁRIOS
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="!roleUsuario || roleUsuario === 'DOADORA'">
+        <button mat-raised-button color="accent" (click)="irParaDoacaoOuControle()">
+          <span class="material-icons">volunteer_activism</span>
+          FAÇA SUA DOAÇÃO
+        </button>
+      </ng-container>
+
     </div>
   </section>
 
   <!-- CARDS INFORMATIVOS -->
   <section class="cards">
+
+    <!-- Card 1 -->
     <div class="card info-doacao">
       <span class="material-icons">favorite</span>
-      <h3>A importância de doar</h3>
-      <p>Doar leite materno salva vidas. Ajude bebês prematuros e doentes a receberem nutrientes essenciais.</p>
+
+      <!-- Título -->
+      <h3 *ngIf="roleUsuario === 'PROFISSIONAL'">Controle de Agendamentos</h3>
+      <h3 *ngIf="roleUsuario === 'ADMIN'">Adicionar UF</h3>
+      <h3 *ngIf="!roleUsuario || roleUsuario === 'DOADORA'">A importância de doar</h3>
+
+      <!-- Descrição -->
+      <p *ngIf="roleUsuario === 'PROFISSIONAL'">
+        Acesse e gerencie todos os agendamentos da sua instituição.
+      </p>
+      <p *ngIf="roleUsuario === 'ADMIN'">
+        Adicione novas unidades federativas ao sistema.
+      </p>
+      <p *ngIf="!roleUsuario || roleUsuario === 'DOADORA'">
+        Doar leite materno salva vidas. Ajude bebês prematuros e doentes a receberem nutrientes essenciais.
+      </p>
+
+      <!-- Botão -->
+      <button mat-raised-button color="accent" *ngIf="roleUsuario === 'PROFISSIONAL'" (click)="irParaDoacaoOuControle()">
+        <span class="material-icons">volunteer_activism</span>
+        CONTROLE DE AGENDAMENTOS
+      </button>
     </div>
 
+    <!-- Card 2 -->
     <div class="card localizacao">
       <span class="material-icons">place</span>
-      <h3>Ponto de Coleta / Banco de Leite Humano mais próximo</h3>
-      <p>Veja no mapa o local mais próximo para realizar sua doação.</p>
-      <button mat-raised-button color="primary" (click)="irParaBancoProximo()">
+      <h3 *ngIf="roleUsuario !== 'ADMIN'">Ponto de Coleta / Banco de Leite Humano mais próximo</h3>
+      <h3 *ngIf="roleUsuario === 'ADMIN'">Adicionar Município</h3>
+      <p *ngIf="roleUsuario !== 'ADMIN'">Veja no mapa o local mais próximo para realizar sua doação.</p>
+      <p *ngIf="roleUsuario === 'ADMIN'">Cadastre novos municípios no sistema.</p>
+      <button mat-raised-button color="primary" *ngIf="roleUsuario !== 'ADMIN'" (click)="irParaBancoProximo()">
         <span class="material-icons">map</span> VER PONTO DE COLETA
       </button>
-    </div>
-
-    <div class="card eventos-novidades">
-      <span class="material-icons">campaign</span>
-      <h3>{{ roleUsuario === 'PROFISSIONAL' ? 'Gerenciar Eventos' : 'Eventos & Novidades' }}</h3>
-      <p>
-        {{ roleUsuario === 'PROFISSIONAL'
-        ? 'Gerencie eventos e campanhas da sua instituição.'
-        : 'Fique atualizado sobre ações, campanhas e novidades da doação de leite materno.' }}
-      </p>
-      <button mat-raised-button color="primary" (click)="irParaEventosOuGerenciar()">
-        <span class="material-icons">event_note</span>
-        {{ roleUsuario === 'PROFISSIONAL' ? 'GERENCIAR EVENTOS' : 'VER EVENTOS' }}
+      <button mat-raised-button color="primary" *ngIf="roleUsuario === 'ADMIN'" [routerLink]="'/adicionar-municipio'">
+        <span class="material-icons">location_city</span> ADICIONAR MUNICÍPIO
       </button>
     </div>
-  </section>
 
-  <!-- CONTEÚDOS EDUCATIVOS -->
-  <section class="conteudos-educativos">
-    <h2><span class="material-icons">school</span> Conteúdos Educativos</h2>
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>💡 Técnicas de Coleta e Armazenamento</mat-panel-title>
-        </mat-expansion-panel-header>
-        <ul>
-          <li>Lave bem as mãos antes de iniciar a coleta.</li>
-          <li>Use recipientes esterilizados.</li>
-          <li>Higienize a bomba tira-leite antes e depois do uso.</li>
-          <li>Massageie os seios para estimular o fluxo.</li>
-        </ul>
-      </mat-expansion-panel>
+    <!-- Card 3 -->
+    <div class="card eventos-novidades">
+      <span class="material-icons">campaign</span>
+      <h3 *ngIf="roleUsuario === 'PROFISSIONAL'">Gerenciar Eventos</h3>
+      <h3 *ngIf="roleUsuario === 'ADMIN'">Adicionar Banco de Leite</h3>
+      <h3 *ngIf="!roleUsuario || roleUsuario === 'DOADORA'">Eventos & Novidades</h3>
 
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>👩‍⚕️ Cuidados com a Mãe e o Bebê</mat-panel-title>
-        </mat-expansion-panel-header>
-        <ul>
-          <li>Mantenha alimentação equilibrada e hidratação.</li>
-          <li>Descanse sempre que possível.</li>
-          <li>Evite medicamentos sem orientação médica.</li>
-          <li>Amamentação exclusiva até 6 meses.</li>
-        </ul>
-      </mat-expansion-panel>
+      <p *ngIf="roleUsuario === 'PROFISSIONAL'">
+        Gerencie eventos e campanhas da sua instituição.
+      </p>
+      <p *ngIf="roleUsuario === 'ADMIN'">
+        Cadastre novos bancos de leite no sistema.
+      </p>
+      <p *ngIf="!roleUsuario || roleUsuario === 'DOADORA'">
+        Fique atualizado sobre ações, campanhas e novidades da doação de leite materno.
+      </p>
 
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>📢 Incentivo e Conscientização</mat-panel-title>
-        </mat-expansion-panel-header>
-        <p>Compartilhe informações, incentive outras mães e amplie a rede de apoio.</p>
-      </mat-expansion-panel>
-    </mat-accordion>
+      <!-- Botão -->
+      <button mat-raised-button color="primary" *ngIf="roleUsuario === 'PROFISSIONAL'" (click)="irParaEventosOuGerenciar()">
+        <span class="material-icons">event_note</span> GERENCIAR EVENTOS
+      </button>
+      <button mat-raised-button color="primary" *ngIf="roleUsuario === 'ADMIN'" [routerLink]="'/adicionar-banco'">
+        <span class="material-icons">local_hospital</span> ADICIONAR BANCO DE LEITE
+      </button>
+      <button mat-raised-button color="primary" *ngIf="!roleUsuario || roleUsuario === 'DOADORA'" (click)="irParaEventosOuGerenciar()">
+        <span class="material-icons">event_note</span> VER EVENTOS
+      </button>
+    </div>
+
   </section>
 
 </div>

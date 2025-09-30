@@ -11,5 +11,10 @@ public interface UserDao extends CrudDao<UsuarioModel>, ReadByEmailDao, UpdatePa
     UsuarioModel findByCpf(String cpf);
     UsuarioModel readByCpf(String cpf);
     public List<String> getUltimasSenhas(Long usuarioId, int limite) throws SQLException;
+    boolean setUserAsAdmin(int id);
+    boolean deleteUser(int id);
+    boolean setUserRole(int id, boolean admin, boolean doadora, boolean receptora, boolean profissional);
+
+
 
 }

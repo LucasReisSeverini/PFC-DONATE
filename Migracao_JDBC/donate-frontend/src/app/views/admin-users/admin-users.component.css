@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Container geral */
+.admin-users-cards-container {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fce4ec; /* rosa clarinho */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-family: 'Inter', sans-serif;
+  color: #333;
+}
+
+.admin-users-cards-container h2 {
+  font-size: 22px;
+  color: #c2185b;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #f8bbd0;
+  padding-bottom: 8px;
+  text-align: center;
+}
+
+/* Grid de cards */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Card individual */
+.user-card {
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  background-color: #fff;
+  border-left: 4px solid #c2185b; /* destaque de cor */
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.user-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Informações do usuário */
+.user-info p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+/* Botões de ação */
+.user-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.user-actions button {
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+/* Botões primários */
+.user-actions button[color="primary"] {
+  background-color: #1565c0;
+  color: #fff;
+}
+
+.user-actions button[color="primary"]:hover {
+  opacity: 0.9;
+}
+
+/* Botão de excluir */
+.user-actions button[color="warn"] {
+  background-color: #c62828;
+  color: #fff;
+}
+
+.user-actions button[color="warn"]:hover {
+  opacity: 0.9;
+}
+
+/* Botões padrão (sem cor definida) */
+.user-actions button:not([color]) {
+  background-color: #fff;
+  color: #c2185b;
+  border: 1px solid #ec407a;
+}
+
+.user-actions button:not([color]):hover {
+  background-color: #ec407a;
+  color: #fff;
+}

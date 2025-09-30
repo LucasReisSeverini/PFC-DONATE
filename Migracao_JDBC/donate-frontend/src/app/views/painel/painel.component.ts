@@ -53,6 +53,11 @@ export class PainelComponent implements OnInit {
     }
   }
 
+  /** Navega para página de administração de usuários */
+  irParaAdminUsers() {
+    this.router.navigate(['/admin/users']);
+  }
+
   /** Realiza logout */
   sair() {
     localStorage.removeItem('token');

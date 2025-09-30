@@ -219,6 +219,53 @@ public class UserPostgresDaoImpl implements UserDao, UpdatePasswordDao {
         }
         return null;
     }
+    @Override
+    public boolean setUserAsAdmin(int id) {
+        String sql = "UPDATE usuario SET admin = TRUE, doadora = FALSE, receptora = FALSE, profissional = FALSE WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0; // retorna true se alguma linha foi atualizada
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean deleteUser(int id) {
+        String sql = "DELETE FROM usuario WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0; // true se algum registro foi deletado
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean setUserRole(int id, boolean admin, boolean doadora, boolean receptora, boolean profissional) {
+        String sql = "UPDATE usuario SET admin = ?, doadora = ?, receptora = ?, profissional = ? WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setBoolean(1, admin);
+            ps.setBoolean(2, doadora);
+            ps.setBoolean(3, receptora);
+            ps.setBoolean(4, profissional);
+            ps.setInt(5, id);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
+
+
+
+
 
     @Override
     public boolean senhaJaUtilizada(Long usuarioId, String novaSenhaHash) throws SQLException {

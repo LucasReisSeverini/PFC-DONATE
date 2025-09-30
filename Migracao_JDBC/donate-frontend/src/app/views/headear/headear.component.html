@@ -8,15 +8,39 @@
   <nav>
     <!-- Se logado -->
     <ng-container *ngIf="isLoggedIn; else guestMenu">
+
+      <!-- Perfil -->
       <button mat-button [routerLink]="'/perfil'">
         <span class="material-icons">person</span> Meu Perfil
       </button>
 
-      <button mat-button [routerLink]="roleUsuario==='PROFISSIONAL' ? '/controle-agendamento' : '/meus-agendamentos'">
-        <span class="material-icons">event</span>
-        {{ roleUsuario==='PROFISSIONAL' ? 'Controle de Agendamentos' : 'Meus Agendamentos' }}
+      <!-- Meus Agendamentos (Doadora/Receptora) -->
+      <button mat-button *ngIf="roleUsuario==='DOADORA' || roleUsuario==='RECEPTORA'" [routerLink]="'/meus-agendamentos'">
+        <span class="material-icons">event</span> Meus Agendamentos
       </button>
 
+      <!-- Menu Administrativo -->
+      <mat-menu #adminMenu="matMenu">
+        <button mat-menu-item [routerLink]="'/admin/users'">
+          <span class="material-icons">manage_accounts</span> Gerenciamento de Usuários
+        </button>
+        <button mat-menu-item [routerLink]="'/adicionar-banco-leite'">
+          <span class="material-icons">local_hospital</span> Adicionar Banco de Leite
+        </button>
+        <button mat-menu-item [routerLink]="'/adicionar-uf'">
+          <span class="material-icons">map</span> Adicionar UF
+        </button>
+        <button mat-menu-item [routerLink]="'/adicionar-municipio'">
+          <span class="material-icons">location_city</span> Adicionar Município
+        </button>
+      </mat-menu>
+
+      <!-- Botão para abrir menu admin -->
+      <button mat-button *ngIf="roleUsuario==='ADMIN'" [matMenuTriggerFor]="adminMenu">
+        <span class="material-icons">admin_panel_settings</span> Área Administrativa
+      </button>
+
+      <!-- Menu para usuários profissionais -->
       <mat-menu #areaProfMenu="matMenu">
         <button mat-menu-item [routerLink]="'/controle-agendamento'">
           <span class="material-icons">calendar_today</span> Controle de Agendamentos
@@ -30,9 +54,11 @@
         <span class="material-icons">workspace_premium</span> Área Profissional
       </button>
 
+      <!-- Botão de logout -->
       <button mat-raised-button color="warn" (click)="sair()">
         <span class="material-icons">logout</span> Sair
       </button>
+
     </ng-container>
 
     <!-- Se NÃO logado -->

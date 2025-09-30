@@ -7,6 +7,7 @@ import br.fai.backend.donate.backend.main.dto.UpdatePasswordDto;
 import br.fai.backend.donate.backend.main.port.service.municipio.MunicipioService;
 import br.fai.backend.donate.backend.main.port.service.user.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -137,6 +138,74 @@ public class UserRestController {
             return ResponseEntity.status(500).body("Erro interno do servidor");
         }
     }
+
+    // ---------------------- ENDPOINTS ADMIN ----------------------
+
+    /**
+     * Excluir qualquer usuário (admin)
+     */
+    @DeleteMapping("/admin/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> deleteUserAsAdmin(@PathVariable int id) {
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * Tornar um usuário admin
+     */
+    @PutMapping("/admin/{id}/set-admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> setUserAsAdmin(@PathVariable int id) {
+        boolean atualizado = userService.setUserAsAdmin(id);
+        if (!atualizado) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().build();
+    }
+
+
+    /**
+     * Remover o papel de admin de um usuário
+     */
+    @PutMapping("/admin/{id}/remove-admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> removeAdminRole(@PathVariable int id) {
+        UsuarioModel usuario = userService.findById(id);
+        if (usuario == null) {
+            return ResponseEntity.notFound().build();
+        }
+        usuario.setAdmin(false);
+        userService.update(id, usuario);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> deleteUser(@PathVariable int id) {
+        boolean deleted = userService.deleteUser(id);
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/admin/{id}/set-role")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> setUserRole(
+            @PathVariable int id,
+            @RequestParam boolean admin,
+            @RequestParam boolean doadora,
+            @RequestParam boolean receptora,
+            @RequestParam boolean profissional) {
+
+        boolean updated = userService.updateUserRole(id, admin, doadora, receptora, profissional);
+        return updated ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
+
+
+
 
 
 }

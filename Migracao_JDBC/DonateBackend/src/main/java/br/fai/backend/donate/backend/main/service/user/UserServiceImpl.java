@@ -101,6 +101,8 @@ public class UserServiceImpl implements UserService {
         if (entity.getDoadora() == null) entity.setDoadora(existente.getDoadora());
         if (entity.getReceptora() == null) entity.setReceptora(existente.getReceptora());
         if (entity.getProfissional() == null) entity.setProfissional(existente.getProfissional());
+        if (entity.getAdmin() == null) entity.setAdmin(existente.getAdmin());
+
 
         if (entity.getSenha() != null && !entity.getSenha().isEmpty()) {
             entity.setSenha(passwordEncoder.encode(entity.getSenha()));
@@ -221,4 +223,24 @@ public class UserServiceImpl implements UserService {
     public Optional<UsuarioModel> buscarPorCpf(String cpf) {
         return Optional.ofNullable(userDao.findByCpf(cpf));
     }
+
+    @Override
+    public boolean setUserAsAdmin(int id) {
+        return userDao.setUserAsAdmin(id);
+    }
+
+
+    @Override
+    public boolean deleteUser(int id) {
+        return userDao.deleteUser(id);
+    }
+
+    public boolean updateUserRole(int id, boolean admin, boolean doadora, boolean receptora, boolean profissional) {
+        return userDao.setUserRole(id, admin, doadora, receptora, profissional);
+    }
+
+
+
+
+
 }

@@ -27,6 +27,8 @@ public class MunicipioController {
         return municipioService.findById(id).orElse(null); // 🔹 corrigi aqui
     }
 
+
+
     @PostMapping
     public int create(@RequestBody MunicipioModel cidade) {
         return municipioService.create(cidade); // 🔹 corrigi aqui

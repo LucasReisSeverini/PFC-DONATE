@@ -20,4 +20,11 @@ public interface UserService extends CrudService<UsuarioModel>, UpdatePasswordSe
 
     boolean atualizarPerfil(int id, AtualizarPerfilDto dto);
     Optional<UsuarioModel> buscarPorCpf(String cpf);
+
+    boolean setUserAsAdmin(int id);
+
+    boolean deleteUser(int id);
+
+    boolean updateUserRole(int id, boolean admin, boolean doadora, boolean receptora, boolean profissional);
+
 }

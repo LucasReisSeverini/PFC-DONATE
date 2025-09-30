@@ -1,0 +1,49 @@
+<app-headear></app-headear>
+
+<div class="admin-users-cards-container">
+
+  <!-- Botão Voltar -->
+  <div class="voltar-container">
+    <button type="button" class="btn-voltar" (click)="voltarPainel()">
+      ← Voltar
+    </button>
+  </div>
+
+  <h2>Gerenciamento de Usuários</h2>
+
+  <div *ngIf="loading">Carregando usuários...</div>
+  <div *ngIf="errorMsg">{{ errorMsg }}</div>
+
+  <div *ngIf="!loading && users.length" class="cards-grid">
+    <div *ngFor="let user of users" class="user-card" [ngClass]="{
+          'admin': user.admin,
+          'doadora': user.doadora,
+          'receptora': user.receptora,
+          'profissional': user.profissional
+        }">
+
+      <div class="user-info">
+        <p><strong>Nome:</strong> {{ user.nome }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>CPF:</strong> {{ user.cpf }}</p>
+        <p><strong>Role:</strong>
+          <span *ngIf="user.admin">Admin</span>
+          <span *ngIf="user.doadora">Doadora</span>
+          <span *ngIf="user.receptora">Receptora</span>
+          <span *ngIf="user.profissional">Profissional</span>
+        </p>
+      </div>
+
+      <div class="user-actions">
+        <button mat-button color="primary" (click)="setRole(user, 'admin')">Admin</button>
+        <button mat-button (click)="setRole(user, 'doadora')">Doadora</button>
+        <button mat-button (click)="setRole(user, 'receptora')">Receptora</button>
+        <button mat-button (click)="setRole(user, 'profissional')">Profissional</button>
+        <button mat-button color="warn" (click)="deleteUser(user)">Excluir</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div *ngIf="!loading && users.length === 0">Nenhum usuário encontrado.</div>
+</div>

@@ -11,11 +11,32 @@
 
   <h2>Gerenciamento de Usuários</h2>
 
+  <!-- Filtros -->
+  <div class="filtros-container">
+    <input
+      type="text"
+      placeholder="Filtrar por email"
+      [(ngModel)]="filtroEmail"
+    />
+    <input
+      type="text"
+      placeholder="Filtrar por CPF"
+      [(ngModel)]="filtroCPF"
+    />
+    <select [(ngModel)]="filtroRole">
+      <option value="">Todas as roles</option>
+      <option value="admin">Admin</option>
+      <option value="doadora">Doadora</option>
+      <option value="receptora">Receptora</option>
+      <option value="profissional">Profissional</option>
+    </select>
+  </div>
+
   <div *ngIf="loading">Carregando usuários...</div>
   <div *ngIf="errorMsg">{{ errorMsg }}</div>
 
-  <div *ngIf="!loading && users.length" class="cards-grid">
-    <div *ngFor="let user of users" class="user-card" [ngClass]="{
+  <div *ngIf="!loading && usuariosFiltrados.length" class="cards-grid">
+    <div *ngFor="let user of usuariosFiltrados" class="user-card" [ngClass]="{
           'admin': user.admin,
           'doadora': user.doadora,
           'receptora': user.receptora,
@@ -45,5 +66,7 @@
     </div>
   </div>
 
-  <div *ngIf="!loading && users.length === 0">Nenhum usuário encontrado.</div>
+  <div *ngIf="!loading && usuariosFiltrados.length === 0">
+    Nenhum usuário encontrado.
+  </div>
 </div>

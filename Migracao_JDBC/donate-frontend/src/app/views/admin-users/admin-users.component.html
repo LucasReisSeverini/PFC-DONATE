@@ -11,6 +11,11 @@
 
   <h2>Gerenciamento de Usuários</h2>
 
+  <!-- Mensagem de feedback -->
+  <div *ngIf="mensagem" class="mensagem" [ngClass]="{ 'sucesso': sucesso, 'erro': !sucesso }">
+    {{ mensagem }}
+  </div>
+
   <!-- Filtros -->
   <div class="filtros-container">
     <input

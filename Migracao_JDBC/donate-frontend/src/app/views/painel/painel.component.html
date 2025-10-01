@@ -18,8 +18,6 @@
         Seu gesto transforma a vida de bebês prematuros e doentes. Contribua agora!
       </p>
 
-
-
       <ng-container *ngIf="roleUsuario === 'ADMIN'">
         <button mat-raised-button color="accent" [routerLink]="'/admin/users'">
           <span class="material-icons">manage_accounts</span>
@@ -40,21 +38,19 @@
   <!-- CARDS INFORMATIVOS -->
   <section class="cards">
 
-    <!-- Card 1 -->
+    <!-- Card 1: PERFIL ADMIN / CONTROLE DE AGENDAMENTOS -->
     <div class="card info-doacao">
       <span class="material-icons">favorite</span>
 
-      <!-- Título -->
       <h3 *ngIf="roleUsuario === 'PROFISSIONAL'">Controle de Agendamentos</h3>
-      <h3 *ngIf="roleUsuario === 'ADMIN'">Adicionar UF</h3>
+      <h3 *ngIf="roleUsuario === 'ADMIN'">Perfil Administrador</h3>
       <h3 *ngIf="!roleUsuario || roleUsuario === 'DOADORA'">A importância de doar</h3>
 
-      <!-- Descrição -->
       <p *ngIf="roleUsuario === 'PROFISSIONAL'">
         Acesse e gerencie todos os agendamentos da sua instituição.
       </p>
       <p *ngIf="roleUsuario === 'ADMIN'">
-        Adicione novas unidades federativas ao sistema.
+        Utilize este painel para gerenciar usuários, bancos e municípios.
       </p>
       <p *ngIf="!roleUsuario || roleUsuario === 'DOADORA'">
         Doar leite materno salva vidas. Ajude bebês prematuros e doentes a receberem nutrientes essenciais.
@@ -67,7 +63,7 @@
       </button>
     </div>
 
-    <!-- Card 2 -->
+    <!-- Card 2: MUNICÍPIOS -->
     <div class="card localizacao">
       <span class="material-icons">place</span>
       <h3 *ngIf="roleUsuario !== 'ADMIN'">Ponto de Coleta / Banco de Leite Humano mais próximo</h3>
@@ -82,7 +78,7 @@
       </button>
     </div>
 
-    <!-- Card 3 -->
+    <!-- Card 3: EVENTOS / BANCOS -->
     <div class="card eventos-novidades">
       <span class="material-icons">campaign</span>
       <h3 *ngIf="roleUsuario === 'PROFISSIONAL'">Gerenciar Eventos</h3>
@@ -99,7 +95,7 @@
         Fique atualizado sobre ações, campanhas e novidades da doação de leite materno.
       </p>
 
-      <!-- Botão -->
+      <!-- Botões -->
       <button mat-raised-button color="primary" *ngIf="roleUsuario === 'PROFISSIONAL'" (click)="irParaEventosOuGerenciar()">
         <span class="material-icons">event_note</span> GERENCIAR EVENTOS
       </button>

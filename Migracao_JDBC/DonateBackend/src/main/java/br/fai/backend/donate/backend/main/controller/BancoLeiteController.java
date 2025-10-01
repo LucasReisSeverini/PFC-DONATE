@@ -42,4 +42,15 @@ public class BancoLeiteController {
         }
         return ResponseEntity.ok(bancos);
     }
+
+    @PostMapping("/add")
+    public ResponseEntity<BancoLeiteModel> adicionarBanco(@RequestBody BancoLeiteModel bancoLeite) {
+        try {
+            int id = bancoLeiteService.create(bancoLeite);
+            bancoLeite.setId((long) id);
+            return ResponseEntity.status(201).body(bancoLeite);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
+    }
 }

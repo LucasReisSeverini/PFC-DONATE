@@ -17,7 +17,7 @@ import { RecuperarSenhaComponent } from './views/account/recuperar-senha/recuper
 import { PoliticaComponent } from './views//politica/politica.component'; // <-- Import do componente de política
 import { AdminUsersComponent } from './views/admin-users/admin-users.component'; // <-- Import do componente admin
 import { MunicipioCreateComponent } from './views/municipio-create/municipio-create.component'; // <-- Import do componente admin
-
+import { BancoLeiteCreateComponent } from './views/banco-leite-create/banco-leite-create.component';
 
 
 export const routes: Routes = [
@@ -77,6 +77,13 @@ export const routes: Routes = [
     component: MunicipioCreateComponent,
     canActivate: [AuthGuard],
     data: { allowedRoles: ['ADMIN'] } // apenas administradores podem acessar
+  },
+
+  {
+     path: 'adicionar-banco',
+     component: BancoLeiteCreateComponent,
+     canActivate: [AuthGuard],
+     data: { allowedRoles: ['ADMIN'] } // apenas administradores podem acessar
   },
 
 

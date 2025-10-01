@@ -1,0 +1,42 @@
+<app-headear></app-headear>
+
+<div class="municipio-container">
+
+  <!-- Botão de voltar -->
+  <button class="btn-voltar" (click)="voltar()">← Voltar</button>
+
+  <!-- Título -->
+  <h1>Cadastrar Município</h1>
+
+  <!-- Mensagem de sucesso ou erro -->
+  <div *ngIf="mensagem" class="mensagem-box" [ngClass]="sucesso ? 'sucesso' : 'erro'">
+    {{ mensagem }}
+  </div>
+
+  <!-- Formulário -->
+  <form [formGroup]="municipioForm" (ngSubmit)="cadastrarMunicipio()">
+
+    <!-- Nome do município -->
+    <div>
+      <label>Nome do município:</label>
+      <input type="text" formControlName="nome" placeholder="Digite o nome">
+    </div>
+
+    <!-- Seleção da UF -->
+    <div formGroupName="unidadeFederativa">
+      <label>UF:</label>
+      <select formControlName="id">
+        <option value="">Selecione</option>
+        <option *ngFor="let uf of ufs" [value]="uf.id">
+          {{ uf.sigla }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Botão de submit -->
+    <button type="submit" class="btn-submit" [disabled]="municipioForm.invalid">
+      Cadastrar Município
+    </button>
+
+  </form>
+</div>

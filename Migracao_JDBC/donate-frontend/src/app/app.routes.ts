@@ -16,7 +16,7 @@ import { EditEventoComponent } from './views/edit-evento/edit-evento.component';
 import { RecuperarSenhaComponent } from './views/account/recuperar-senha/recuperar-senha.component';
 import { PoliticaComponent } from './views//politica/politica.component'; // <-- Import do componente de política
 import { AdminUsersComponent } from './views/admin-users/admin-users.component'; // <-- Import do componente admin
-
+import { MunicipioCreateComponent } from './views/municipio-create/municipio-create.component'; // <-- Import do componente admin
 
 
 
@@ -65,11 +65,20 @@ export const routes: Routes = [
     data: { allowedRoles: ['PROFISSIONAL'] }
   },
 
-    {
-      path: 'admin/users',
-      component: AdminUsersComponent,
-      canActivate: [AuthGuard],
-      data: { allowedRoles: ['ADMIN'] } // apenas administradores podem acessar
-    }
+  {
+    path: 'admin/users',
+    component: AdminUsersComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['ADMIN'] } // apenas administradores podem acessar
+  },
+
+  {
+    path: 'adicionar-municipio',
+    component: MunicipioCreateComponent,
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['ADMIN'] } // apenas administradores podem acessar
+  },
+
+
 
 ];

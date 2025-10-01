@@ -44,4 +44,8 @@ export class MunicipioService {
   deleteMunicipio(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  cadastrarMunicipio(municipio: any): Observable<any> {
+      return this.http.post(`${this.apiUrl}`, municipio);
+    }
 }

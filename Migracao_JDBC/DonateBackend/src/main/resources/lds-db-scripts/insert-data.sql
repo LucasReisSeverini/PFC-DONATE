@@ -47,7 +47,7 @@ INSERT INTO municipio (id, nome, id_unidade_federativa) VALUES (3, 'Santa Rita d
 --VALUES (2, 'João Souza', 'joao@email.com', '11999998888', '98765432100', '123', -23.5505, -46.6333, 2, FALSE, FALSE, TRUE);
 --
 --INSERT INTO usuario (id, nome, email, telefone, cpf, senha, id_municipio, doadora, receptora, profissional)
---VALUES (3, 'Admin', 'admin@teste.com', '11911112222', '11122233344', '123456', 2, FALSE, FALSE, TRUE);
+--VALUES (3, 'admin', 'admin@teste.com', '11911112222', '11122233344', '123456', 2, FALSE, FALSE, TRUE);
 --
 ---- ===============================
 ---- BANCOS DE LEITE

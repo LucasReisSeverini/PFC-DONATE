@@ -52,20 +52,24 @@ INSERT INTO municipio (id, nome, id_unidade_federativa) VALUES (3, 'Santa Rita d
 ---- ===============================
 ---- BANCOS DE LEITE
 ---- ===============================
---INSERT INTO bancos_de_leite (id, nome, endereco, telefone, latitude, longitude, id_municipio)
---VALUES (1, 'Banco de Leite Central', 'Rua A, 100', '3133334444', -19.9191, -43.9386, 1);
---
---INSERT INTO bancos_de_leite (id, nome, endereco, telefone, latitude, longitude, id_municipio)
---VALUES (2, 'Banco de Leite Paulista', 'Av. Paulista, 2000', '1144445555', -23.5610, -46.6558, 2);
+INSERT INTO bancos_de_leite (id, nome, endereco, telefone, latitude, longitude, id_municipio)
+VALUES (1, 'Banco de Leite Central', 'Rua A, 100', '3133334444', -19.9191, -43.9386, 1);
+
+INSERT INTO bancos_de_leite (id, nome, endereco, telefone, latitude, longitude, id_municipio)
+VALUES (2, 'Banco de Leite Paulista', 'Av. Paulista, 2000', '1144445555', -23.5610, -46.6558, 2);
+
+INSERT INTO bancos_de_leite (id, nome, endereco, telefone, latitude, longitude, id_municipio)
+VALUES (3, 'Banco de Leite de Pouso Alegre', 'Rua das Flores, 123', '3534123456', -22.2300, -45.9339, 1);
+
 --
 ---- ===============================
 ---- EVENTOS
 ---- ===============================
---INSERT INTO eventos (id, titulo, descricao, data, tipo, id_municipio)
---VALUES (1, 'Campanha Doe Leite', 'Evento de arrecadação de leite materno em Minas', '2025-09-20', 'evento', 1);
---
---INSERT INTO eventos (id, titulo, descricao, data, tipo, id_municipio)
---VALUES (2, 'Semana da Amamentação', 'Evento educativo sobre aleitamento materno em São Paulo', '2025-08-10', 'noticia', 2);
+INSERT INTO eventos (id, titulo, descricao, data, tipo, id_municipio)
+VALUES (1, 'Campanha Doe Leite', 'Evento de arrecadação de leite materno em Minas', '2025-09-20', 'evento', 1);
+
+INSERT INTO eventos (id, titulo, descricao, data, tipo, id_municipio)
+VALUES (2, 'Semana da Amamentação', 'Evento educativo sobre aleitamento materno em São Paulo', '2025-08-10', 'noticia', 2);
 --
 ---- ===============================
 ---- DOAÇÕES

@@ -1,14 +1,41 @@
----- ===============================
----- UNIDADES FEDERATIVAS
----- ===============================
---INSERT INTO unidade_federativa (id, nome, sigla) VALUES (1, 'Minas Gerais', 'MG');
---INSERT INTO unidade_federativa (id, nome, sigla) VALUES (2, 'São Paulo', 'SP');
---
----- ===============================
----- MUNICÍPIOS
----- ===============================
---INSERT INTO municipio (id, nome, id_unidade_federativa) VALUES (1, 'Belo Horizonte', 1);
---INSERT INTO municipio (id, nome, id_unidade_federativa) VALUES (2, 'São Paulo', 2);
+-- ===============================
+-- UNIDADES FEDERATIVAS
+-- ===============================
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (1, 'Minas Gerais', 'MG');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (2, 'São Paulo', 'SP');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (3, 'Acre', 'AC');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (4, 'Alagoas', 'AL');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (5, 'Amapá', 'AP');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (6, 'Amazonas', 'AM');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (7, 'Bahia', 'BA');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (8, 'Ceará', 'CE');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (9, 'Distrito Federal', 'DF');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (10, 'Espírito Santo', 'ES');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (11, 'Goiás', 'GO');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (12, 'Maranhão', 'MA');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (13, 'Mato Grosso', 'MT');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (14, 'Mato Grosso do Sul', 'MS');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (15, 'Pará', 'PA');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (16, 'Paraíba', 'PB');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (17, 'Paraná', 'PR');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (18, 'Pernambuco', 'PE');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (19, 'Piauí', 'PI');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (20, 'Rio de Janeiro', 'RJ');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (21, 'Rio Grande do Norte', 'RN');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (22, 'Rio Grande do Sul', 'RS');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (23, 'Rondônia', 'RO');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (24, 'Roraima', 'RR');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (25, 'Santa Catarina', 'SC');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (26, 'Sergipe', 'SE');
+INSERT INTO unidade_federativa (id, nome, sigla) VALUES (27, 'Tocantins', 'TO');
+
+
+-- ===============================
+-- MUNICÍPIOS
+-- ===============================
+INSERT INTO municipio (id, nome, id_unidade_federativa) VALUES (1, 'Belo Horizonte', 1);
+INSERT INTO municipio (id, nome, id_unidade_federativa) VALUES (2, 'São Paulo', 2);
+INSERT INTO municipio (id, nome, id_unidade_federativa) VALUES (3, 'Santa Rita do Sapucaí', 1);
 --
 ---- ===============================
 ---- USUÁRIOS

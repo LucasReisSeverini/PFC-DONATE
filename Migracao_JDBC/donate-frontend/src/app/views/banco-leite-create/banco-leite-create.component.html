@@ -1,0 +1,47 @@
+<app-headear></app-headear>
+
+<div class="banco-container">
+
+  <!-- Botão de voltar -->
+  <button class="btn-voltar" (click)="voltar()">← Voltar</button>
+
+  <!-- Título -->
+  <h1>Cadastrar Banco de Leite</h1>
+
+  <!-- Mensagem de sucesso ou erro -->
+  <div *ngIf="mensagem" [ngClass]="{'sucesso': sucesso, 'erro': !sucesso}" class="mensagem">
+    {{ mensagem }}
+  </div>
+
+  <!-- Formulário -->
+  <form [formGroup]="bancoForm" (ngSubmit)="cadastrarBanco()">
+
+    <label>Nome:</label>
+    <input type="text" formControlName="nome" placeholder="Digite o nome">
+
+    <label>Endereço:</label>
+    <input type="text" formControlName="endereco" placeholder="Digite o endereço">
+
+    <label>Telefone:</label>
+    <input type="text" formControlName="telefone" placeholder="Digite o telefone">
+
+    <label>Latitude:</label>
+    <input type="number" step="any" formControlName="latitude" placeholder="Digite a latitude">
+
+    <label>Longitude:</label>
+    <input type="number" step="any" formControlName="longitude" placeholder="Digite a longitude">
+
+    <label>Município:</label>
+    <select formControlName="idMunicipio">
+      <option value="">Selecione</option>
+      <option *ngFor="let m of municipios" [value]="m.id">
+        {{ m.nome }} ({{ m.unidadeFederativa.sigla }})
+      </option>
+    </select>
+
+    <button type="submit" class="btn-submit" [disabled]="bancoForm.invalid">
+      Cadastrar Banco de Leite
+    </button>
+
+  </form>
+</div>

@@ -5,7 +5,10 @@
   <p><strong>Tipo:</strong> {{ evento.tipo | titlecase }}</p>
   <p *ngIf="evento.cidadeNome"><strong>Cidade:</strong> {{ evento.cidadeNome }}</p>
 
-  <p>{{ evento.descricao }}</p>
+  <!-- Ajuste da descrição para respeitar quebras de linha -->
+  <div class="evento-descricao">
+    <p *ngFor="let linha of evento.descricao.split('\n')">{{ linha }}</p>
+  </div>
 
   <button mat-raised-button color="primary" (click)="fechar()">Fechar</button>
 </div>

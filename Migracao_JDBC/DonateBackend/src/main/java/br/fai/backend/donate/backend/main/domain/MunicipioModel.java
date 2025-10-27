@@ -11,5 +11,6 @@ public class MunicipioModel {
 
     private int id;
     private String nome;
+
     private UnidadeFederativaModel unidadeFederativa; // referência à UF
 }

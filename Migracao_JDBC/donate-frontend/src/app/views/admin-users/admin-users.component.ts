@@ -22,6 +22,10 @@ export class AdminUsersComponent implements OnInit {
   loading = false;
   errorMsg = '';
 
+  // Mensagem de feedback
+  mensagem: string = '';
+  sucesso: boolean = true;
+
   // filtros
   filtroEmail: string = '';
   filtroCPF: string = '';
@@ -66,8 +70,19 @@ export class AdminUsersComponent implements OnInit {
     if (!confirm(`Deseja realmente excluir ${user.nome}?`)) return;
 
     this.userService.deleteUser(user.id).subscribe({
-      next: () => this.fetchUsers(),
-      error: (err: any) => console.error(err)
+      next: () => {
+        this.mensagem = `Usuário ${user.nome} excluído com sucesso!`;
+        this.sucesso = true;
+        this.fetchUsers();
+        // Limpar mensagem após 5 segundos
+        setTimeout(() => this.mensagem = '', 5000);
+      },
+      error: (err: any) => {
+        console.error(err);
+        this.mensagem = `Erro ao excluir ${user.nome}.`;
+        this.sucesso = false;
+        setTimeout(() => this.mensagem = '', 5000);
+      }
     });
   }
 

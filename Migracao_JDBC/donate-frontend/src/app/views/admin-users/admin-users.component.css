@@ -5,10 +5,10 @@
 /* ========================= */
 .admin-users-cards-container {
   max-width: 1000px;
-  margin: 20px auto;
-  padding: 20px;
+  margin: 40px auto 40px auto; /* igual painel */
+  padding: 24px;
   background-color: #fce4ec; /* rosa clarinho */
-  border-radius: 8px;
+  border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   font-family: 'Inter', sans-serif;
   color: #333;

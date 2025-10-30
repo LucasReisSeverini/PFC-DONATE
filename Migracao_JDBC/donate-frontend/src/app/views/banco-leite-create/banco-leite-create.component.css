@@ -4,9 +4,9 @@
 /* Container geral           */
 /* ========================= */
 .banco-container {
-  max-width: 900px;
-  margin: 0 auto 30px auto;
-  padding: 25px;
+  max-width: 1000px;
+  margin: 40px auto 40px auto; /* igual painel */
+  padding: 24px;
   background-color: #fce4ec; /* rosa clarinho */
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

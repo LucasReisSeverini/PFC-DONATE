@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Quicksand:wght@500;700&display=swap');
 .adicionar-evento-container {
   max-width: 700px;
-  margin: 0 auto 30px auto;
-  padding: 25px;
+  margin: 40px auto 40px auto; /* igual painel */
+  padding: 24px;
   background-color: #fce4ec; /* rosa clarinho */
-  border-radius: 8px;
+  border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 

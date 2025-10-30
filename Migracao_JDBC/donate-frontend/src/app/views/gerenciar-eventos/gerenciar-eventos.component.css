@@ -4,12 +4,12 @@
 /* ========================= */
 .gerenciar-eventos-container {
   max-width: 900px;
-  margin: 0 auto 30px auto;
-  padding: 20px;
+  margin: 40px auto 40px auto; /* igual painel */
+  padding: 24px;
   background-color: #fce4ec; /* rosa clarinho */
   border: 1px solid #ddd; /* borda fina em todos os lados */
   border-left: 4px solid transparent; /* cor será do tipo */
-  border-radius: 8px;
+  border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   font-weight: 700; /* igual ao header */
   color: #333;

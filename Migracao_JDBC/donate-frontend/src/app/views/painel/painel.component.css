@@ -24,19 +24,7 @@ body, html {
   background-color: #fff;
 }
 
-/* HEADER */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 0;
-  border-bottom: 2px solid #f1f1f1;
-  position: sticky;
-  top: 0;
-  background: #fff;
-  z-index: 10;
-  flex-wrap: wrap;
-}
+
 
 .logo {
   font-family: 'Quicksand', sans-serif;
@@ -74,15 +62,17 @@ nav button:hover {
 .hero {
   display: flex;
   align-items: center;
+  margin: 20px auto 30px auto; /* igual painel */
+  padding: 24px; /* igual painel */
   justify-content: space-between;
   background: #fce4ec;
-  padding: 40px 24px;
-  border-radius: 16px;
-  margin-bottom: 32px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+  border-radius: 20px; /* mesmo arredondamento */
+  margin-bottom: 40px; /* mesmo espaçamento inferior */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* sombra igual à do doacao-container */
   flex-wrap: wrap;
   gap: 20px;
 }
+
 
 .hero-text {
   flex: 1 1 300px;
@@ -161,7 +151,7 @@ nav button:hover {
 
 /* CONTEÚDOS EDUCATIVOS */
 .conteudos-educativos {
-  margin-top: 40px;
+  margin-top: 0; /* espaçamento alinhado às demais seções */
   width: 100%;
 }
 

@@ -6,13 +6,13 @@
 .gerenciar-eventos-container,
 .eventos-container {
   max-width: 1000px;
-  margin: 0 auto 30px auto;
-  padding: 20px;
-  background-color: #fce4ec; /* rosa clarinho */
-  border: 1px solid #ddd; /* borda leve em todos os lados */
-  border-left: 4px solid transparent; /* cor será do tipo */
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin: 40px auto 40px auto; /* igual painel */
+  padding: 24px;          /* padding interno consistente */
+  background-color: #fce4ec;   /* rosa clarinho */
+  border-radius: 20px; /* mesmo arredondamento */       /* cantos arredondados */
+  border: 1px solid #ddd;      /* borda leve */
+  border-left: 4px solid transparent; /* cor será ajustada pelo tipo */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05); /* sombra mais suave */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
 }
@@ -24,12 +24,12 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 24px; /* espaçamento consistente */
 }
 
 .eventos-header h2 {
   font-size: 22px;
-  color: #c2185b; /* rosa forte */
+  color: #c2185b;
   margin: 0;
 }
 
@@ -40,7 +40,7 @@
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 24px; /* aumenta levemente para ficar mais limpo */
 }
 
 .filtros select,
@@ -93,12 +93,12 @@
   font-size: 0.95rem;
   padding: 0.5rem 1.4rem;
   color: #fff;
-  background-color: #ec407a; /* rosa forte */
+  background-color: #ec407a;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-bottom: 20px;
+  margin-bottom: 24px; /* mesmo espaçamento do final do container */
 }
 
 .btn-adicionar:hover,
@@ -116,22 +116,21 @@
 }
 
 .card-evento {
-  padding: 12px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   cursor: pointer;
   transition: transform 0.2s, border-left-color 0.3s;
-  border: 1px solid #ddd; /* borda leve em todos os lados */
-  border-left: 4px solid transparent; /* será ajustada pelo tipo */
+  border: 1px solid #ddd;
+  border-left: 4px solid transparent;
   background-color: #fff;
 }
 
 .card-evento:hover {
   transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
 
-/* Diferenciação de cores */
 .card-evento.evento {
   background-color: #e3f2fd;
   border-left-color: #42a5f5;
@@ -161,27 +160,24 @@ mat-card-subtitle {
 }
 
 /* ========================= */
-/* Filtros por Data           */
-/* ========================= */
-.filtros .data-filtro {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
-
-.filtros .data-filtro label {
-  font-size: 0.9rem;
-  color: #555;
-}
-
-/* ========================= */
-/* Ajuste para truncar texto */
+/* Ajuste para truncar texto  */
 /* ========================= */
 .card-evento p {
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* limite de linhas */
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
+}
+
+/* ========================= */
+/* Responsividade             */
+/* ========================= */
+@media (max-width: 768px) {
+  .gerenciar-eventos-container,
+  .eventos-container {
+    margin-top: 24px;
+    padding: 20px;
+  }
 }

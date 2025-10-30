@@ -1,40 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Quicksand:wght@500;700&display=swap');
+
 /* ========================= */
 /* Container geral           */
 /* ========================= */
-
 .doacao-container {
-  max-width: 900px; /* igual ao exemplo */
-  margin: 0 auto 30px auto;
-  padding: 20px;
+  max-width: 900px;
+  margin: 40px auto 40px auto; /* igual painel */
+  padding: 24px; /* igual painel */
   background-color: #fce4ec; /* rosa clarinho */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 20px; /* mesmo arredondamento */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05); /* sombra igual painel */
+  font-family: 'Inter', sans-serif; /* padronizado com painel */
   color: #333;
+  line-height: 1.6;
 }
+
 
 /* ========================= */
 /* Título                    */
 /* ========================= */
 .doacao-container h1 {
-  font-size: 22px;
-  margin-bottom: 20px;
-  color: #c2185b; /* rosa forte */
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 24px; /* maior espaçamento igual painel */
+  color: #c2185b;
   text-align: left;
 }
 
 /* ========================= */
 /* Botões                     */
 /* ========================= */
+.btn-voltar,
+.btn-accent {
+  display: block;
+  width: fit-content;
+}
+
 .btn-voltar {
-  margin-bottom: 15px;
+  margin-bottom: 24px; /* espaçamento igual painel */
   font-weight: 600;
-  font-size: 0.9rem;
-  padding: 0.4rem 1rem;
+  font-size: 0.95rem;
+  padding: 0.5rem 1.2rem;
   color: #c2185b;
   background-color: #fff;
   border: 1px solid #ec407a;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
@@ -45,14 +55,14 @@
 }
 
 .btn-accent {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   font-weight: 600;
-  font-size: 0.95rem;
-  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  padding: 0.6rem 1.4rem;
   color: #fff;
   background-color: #ec407a;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -63,14 +73,15 @@
 
 .btn-submit {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   background-color: #e91e63;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
   transition: background 0.3s ease;
+  margin-top: 16px;
 }
 
 .btn-submit:hover {
@@ -82,7 +93,7 @@
 /* ========================= */
 mat-form-field.full-width {
   width: 100%;
-  margin-bottom: 16px;
+  margin-bottom: 24px; /* espaçamento maior igual painel */
 }
 
 mat-label {
@@ -100,7 +111,7 @@ input, mat-select {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-  margin-bottom: 16px;
+  margin-bottom: 24px; /* mais espaçamento */
 }
 
 .endereco-container mat-form-field,
@@ -112,6 +123,7 @@ input, mat-select {
 .calendario-container {
   position: relative;
   width: 100%;
+  margin-bottom: 24px;
 }
 
 .calendario {
@@ -170,7 +182,7 @@ input, mat-select {
 }
 
 .dia-mes {
-  padding: 8px 0;
+  padding: 10px 0;
   cursor: pointer;
   border-radius: 50%;
   transition: all 0.2s;
@@ -187,16 +199,24 @@ input, mat-select {
   font-weight: bold;
 }
 
-/* Responsividade */
+/* ========================= */
+/* Responsividade             */
+/* ========================= */
+@media (max-width: 900px) {
+  .doacao-container {
+    padding: 20px;
+  }
+
+  .endereco-container,
+  .data-horario {
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 500px) {
   .doacao-container {
     margin: 20px;
-    padding: 20px 15px;
-  }
-
-  .data-horario,
-  .endereco-container {
-    flex-direction: column;
+    padding: 16px;
   }
 
   .calendario {

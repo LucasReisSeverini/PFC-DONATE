@@ -4,11 +4,11 @@
 /* ========================= */
 .edit-evento-container {
   max-width: 1000px;
-  margin: 0 auto 30px auto;
-  padding: 20px;
+  margin: 40px auto 40px auto; /* igual painel */
+  padding: 24px; /* igual painel */
   background-color: #fce4ec; /* rosa clarinho */
   border-left: 4px solid #ec407a; /* borda rosa forte */
-  border-radius: 8px;
+  border-radius: 20px; /* mesmo arredondamento */
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;

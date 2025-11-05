@@ -42,39 +42,43 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.loginForm.valid) {
-      const loginData: LoginDto = this.loginForm.value;
-
-      this.authService.login(loginData.email, loginData.senha).subscribe({
-        next: (res: any) => {
-          if (res.token) {
-            localStorage.setItem('token', res.token);
-
-            try {
-              const payload = JSON.parse(atob(res.token.split('.')[1]));
-              if (payload.role) {
-                localStorage.setItem('role', payload.role);
-              }
-            } catch (err) {
-              console.error('Erro ao decodificar token:', err);
-            }
-
-            alert('Login realizado com sucesso!');
-
-            this.ngZone.run(() => {
-              this.router.navigate(['/painel']);
-            });
-          } else {
-            alert('Erro ao logar: token não recebido');
-          }
-        },
-        error: (err: any) => {
-          console.error(err);
-          alert('Email ou senha inválidos');
-        }
-      });
+    if (this.loginForm.invalid) {
+      alert('Por favor, preencha todos os campos obrigatórios.');
+      return;
     }
+
+    const loginData: LoginDto = this.loginForm.value;
+
+    this.authService.login(loginData.email, loginData.senha).subscribe({
+      next: (res: any) => {
+        if (res.token) {
+          localStorage.setItem('token', res.token);
+
+          try {
+            const payload = JSON.parse(atob(res.token.split('.')[1]));
+            if (payload.role) {
+              localStorage.setItem('role', payload.role);
+            }
+          } catch (err) {
+            console.error('Erro ao decodificar token:', err);
+          }
+
+          alert('Login realizado com sucesso!');
+
+          this.ngZone.run(() => {
+            this.router.navigate(['/painel']);
+          });
+        } else {
+          alert('Erro ao logar: token não recebido');
+        }
+      },
+      error: (err: any) => {
+        console.error(err);
+        alert('Email ou senha inválidos');
+      }
+    });
   }
+
 
   // Alterna entre mostrar e ocultar a senha
   toggleSenha(): void {

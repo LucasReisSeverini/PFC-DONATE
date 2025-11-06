@@ -5,7 +5,7 @@
 /* ========================= */
 .municipio-container {
   max-width: 900px;
-  margin: 45px auto 45px auto; /* igual painel */
+  margin: 40px auto 40px auto; /* igual painel */
   padding: 24px;
   background-color: #fce4ec; /* rosa clarinho */
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);

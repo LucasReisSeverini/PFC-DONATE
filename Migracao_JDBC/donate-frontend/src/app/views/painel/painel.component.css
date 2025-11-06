@@ -62,7 +62,7 @@ nav button:hover {
 .hero {
   display: flex;
   align-items: center;
-  margin: 20px auto 30px auto; /* igual painel */
+  margin: 40px auto 40px auto; /* igual painel */
   padding: 24px; /* igual painel */
   justify-content: space-between;
   background: #fce4ec;

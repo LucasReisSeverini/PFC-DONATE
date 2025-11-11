@@ -65,7 +65,7 @@ public class DoacaoDaoImpl implements DoacaoDao {
                    b.nome AS nome_banco
             FROM doacao d
             JOIN usuario u ON d.id_usuario = u.id
-            JOIN bancos_de_leite b ON d.id_bancos_de_leite = b.id
+            JOIN banco_de_leite b ON d.id_bancos_de_leite = b.id
         """;
 
         List<DoacaoListDTO> doacoes = new ArrayList<>();
@@ -103,7 +103,7 @@ public class DoacaoDaoImpl implements DoacaoDao {
                    b.nome AS nome_banco
             FROM doacao d
             JOIN usuario u ON d.id_usuario = u.id
-            JOIN bancos_de_leite b ON d.id_bancos_de_leite = b.id
+            JOIN banco_de_leite b ON d.id_bancos_de_leite = b.id
             WHERE d.id_usuario = ?
         """;
 
@@ -225,7 +225,7 @@ public class DoacaoDaoImpl implements DoacaoDao {
                b.nome AS nome_banco
         FROM doacao d
         JOIN usuario u ON d.id_usuario = u.id
-        JOIN bancos_de_leite b ON d.id_bancos_de_leite = b.id
+        JOIN banco_de_leite b ON d.id_bancos_de_leite = b.id
         WHERE d.id = ?
     """;
 

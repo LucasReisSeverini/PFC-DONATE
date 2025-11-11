@@ -17,20 +17,20 @@ public class RecuperarSenhaPostgresDaoImpl implements RecuperarSenhaDao {
 
     @Override
     public void salvarCodigo(int usuarioId, String codigo, LocalDateTime dataExpiracao) {
-        String sql = "INSERT INTO recuperar_senha (usuario_id, codigo, data_expiracao, usado) VALUES (?, ?, ?, false)";
+        String sql = "INSERT INTO token_recuperacao (usuario_id, codigo, data_expiracao, usado) VALUES (?, ?, ?, false)";
         jdbcTemplate.update(sql, usuarioId, codigo, dataExpiracao);
     }
 
     @Override
     public boolean validarCodigo(int usuarioId, String codigo) {
-        String sql = "SELECT COUNT(*) FROM recuperar_senha WHERE usuario_id = ? AND codigo = ? AND usado = false AND data_expiracao >= now()";
+        String sql = "SELECT COUNT(*) FROM token_recuperacao WHERE usuario_id = ? AND codigo = ? AND usado = false AND data_expiracao >= now()";
         Integer count = jdbcTemplate.queryForObject(sql, Integer.class, usuarioId, codigo);
         return count != null && count > 0;
     }
 
     @Override
     public void marcarComoUsado(int usuarioId, String codigo) {
-        String sql = "UPDATE recuperar_senha SET usado = true WHERE usuario_id = ? AND codigo = ?";
+        String sql = "UPDATE token_recuperacao SET usado = true WHERE usuario_id = ? AND codigo = ?";
         jdbcTemplate.update(sql, usuarioId, codigo);
     }
 }

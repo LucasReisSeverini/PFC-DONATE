@@ -53,7 +53,7 @@
 ---- ===============================
 ---- TABELA EVENTOS
 ---- ===============================
---CREATE TABLE eventos (
+--CREATE TABLE evento (
 --    id          BIGSERIAL PRIMARY KEY,
 --    titulo      VARCHAR(255) NOT NULL,
 --    descricao   TEXT,
@@ -66,7 +66,7 @@
 ---- ===============================
 ---- TABELA BANCOS DE LEITE
 ---- ===============================
---CREATE TABLE bancos_de_leite (
+--CREATE TABLE banco_de_leite (
 --    id                  BIGSERIAL PRIMARY KEY,
 --    nome                VARCHAR(255) NOT NULL,
 --    endereco            VARCHAR(255),
@@ -109,7 +109,7 @@
 ---- ===============================
 ---- TABELA RECUPERAR SENHA
 ---- ===============================
---CREATE TABLE recuperar_senha (
+--CREATE TABLE token_recuperacao (
 --    id          BIGSERIAL PRIMARY KEY,
 --    usuario_id  BIGINT NOT NULL,
 --    codigo      VARCHAR(6) NOT NULL,

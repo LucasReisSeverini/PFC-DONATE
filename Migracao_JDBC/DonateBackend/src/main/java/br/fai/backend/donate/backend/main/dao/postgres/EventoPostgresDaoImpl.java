@@ -22,7 +22,7 @@ public class EventoPostgresDaoImpl implements EventoDao {
 
     @Override
     public int add(EventoModel entity) {
-        String sql = "INSERT INTO eventos (titulo, descricao, data, tipo, id_municipio) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO evento (titulo, descricao, data, tipo, id_municipio) VALUES (?, ?, ?, ?, ?)";
 
         try {
             connection.setAutoCommit(false);
@@ -56,7 +56,7 @@ public class EventoPostgresDaoImpl implements EventoDao {
 
     @Override
     public void remove(int id) {
-        String sql = "DELETE FROM eventos WHERE id = ?";
+        String sql = "DELETE FROM evento WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -67,7 +67,7 @@ public class EventoPostgresDaoImpl implements EventoDao {
 
     @Override
     public EventoModel readByID(int id) {
-        String sql = "SELECT * FROM eventos WHERE id = ?";
+        String sql = "SELECT * FROM evento WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
@@ -83,7 +83,7 @@ public class EventoPostgresDaoImpl implements EventoDao {
 
     @Override
     public List<EventoModel> readAll() {
-        String sql = "SELECT * FROM eventos";
+        String sql = "SELECT * FROM evento";
         List<EventoModel> eventos = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
@@ -100,7 +100,7 @@ public class EventoPostgresDaoImpl implements EventoDao {
 
     @Override
     public void updateInformation(int id, EventoModel entity) {
-        String sql = "UPDATE eventos SET titulo = ?, descricao = ?, data = ?, tipo = ?, id_municipio = ? WHERE id = ?";
+        String sql = "UPDATE evento SET titulo = ?, descricao = ?, data = ?, tipo = ?, id_municipio = ? WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, entity.getTitulo());
             ps.setString(2, entity.getDescricao());

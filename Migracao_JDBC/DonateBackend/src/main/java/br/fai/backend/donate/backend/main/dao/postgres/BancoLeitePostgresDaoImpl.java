@@ -22,7 +22,7 @@ public class BancoLeitePostgresDaoImpl implements BancoLeiteDao {
 
     @Override
     public int add(BancoLeiteModel entity) {
-        String sql = "INSERT INTO bancos_de_leite (nome, endereco, telefone, latitude, longitude, id_municipio) " +
+        String sql = "INSERT INTO banco_de_leite (nome, endereco, telefone, latitude, longitude, id_municipio) " +
                 "VALUES (?, ?, ?, ?, ?, ?)";
         try {
             connection.setAutoCommit(false);
@@ -58,7 +58,7 @@ public class BancoLeitePostgresDaoImpl implements BancoLeiteDao {
 
     @Override
     public void remove(int id) {
-        String sql = "DELETE FROM bancos_de_leite WHERE id = ?";
+        String sql = "DELETE FROM banco_de_leite WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -69,7 +69,7 @@ public class BancoLeitePostgresDaoImpl implements BancoLeiteDao {
 
     @Override
     public BancoLeiteModel readByID(int id) {
-        String sql = "SELECT * FROM bancos_de_leite WHERE id = ?";
+        String sql = "SELECT * FROM banco_de_leite WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
@@ -93,7 +93,7 @@ public class BancoLeitePostgresDaoImpl implements BancoLeiteDao {
 
     @Override
     public List<BancoLeiteModel> readAll() {
-        String sql = "SELECT * FROM bancos_de_leite";
+        String sql = "SELECT * FROM banco_de_leite";
         List<BancoLeiteModel> bancos = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
@@ -119,7 +119,7 @@ public class BancoLeitePostgresDaoImpl implements BancoLeiteDao {
 
     @Override
     public void updateInformation(int id, BancoLeiteModel entity) {
-        String sql = "UPDATE bancos_de_leite SET nome=?, endereco=?, telefone=?, latitude=?, longitude=?, id_municipio=? WHERE id=?";
+        String sql = "UPDATE banco_de_leite SET nome=?, endereco=?, telefone=?, latitude=?, longitude=?, id_municipio=? WHERE id=?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, entity.getNome());
             ps.setString(2, entity.getEndereco());

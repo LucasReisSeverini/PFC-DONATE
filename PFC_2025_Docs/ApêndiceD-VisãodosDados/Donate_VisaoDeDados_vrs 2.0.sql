@@ -1,0 +1,126 @@
+DROP DATABASE IF EXISTS donate;
+CREATE DATABASE donate;
+
+\c donate;
+
+-- ===============================
+-- REMOVER TABELAS CASO EXISTAM
+-- ===============================
+DROP TABLE IF EXISTS doacao CASCADE;
+DROP TABLE IF EXISTS banco_de_leite CASCADE;
+DROP TABLE IF EXISTS evento CASCADE;
+DROP TABLE IF EXISTS usuario CASCADE;
+DROP TABLE IF EXISTS municipio CASCADE;
+DROP TABLE IF EXISTS unidade_federativa CASCADE;
+DROP TABLE IF EXISTS token_recuperacao CASCADE;
+DROP TABLE IF EXISTS usuario_senha_historico CASCADE;
+
+-- ===============================
+-- TABELA: UNIDADE FEDERATIVA
+-- ===============================
+CREATE TABLE unidade_federativa (
+    id BIGSERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    sigla VARCHAR(255) NOT NULL UNIQUE
+);
+
+-- ===============================
+-- TABELA: MUNICÍPIO
+-- ===============================
+CREATE TABLE municipio (
+    id BIGSERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    id_unidade_federativa BIGINT NOT NULL,
+    latitude DOUBLE PRECISION,
+    longitude DOUBLE PRECISION,
+    CONSTRAINT fk_municipio_uf FOREIGN KEY (id_unidade_federativa) REFERENCES unidade_federativa(id)
+);
+
+-- ===============================
+-- TABELA: USUÁRIO
+-- ===============================
+CREATE TABLE usuario (
+    id BIGSERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    telefone VARCHAR(255),
+    cpf VARCHAR(255) UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    doadora BOOLEAN DEFAULT FALSE NOT NULL,
+    receptora BOOLEAN DEFAULT FALSE NOT NULL,
+    profissional BOOLEAN DEFAULT FALSE NOT NULL,
+    admin BOOLEAN DEFAULT FALSE NOT NULL,
+    latitude DOUBLE PRECISION,
+    longitude DOUBLE PRECISION,
+    id_municipio BIGINT,
+    CONSTRAINT fk_usuario_municipio FOREIGN KEY (id_municipio) REFERENCES municipio(id)
+);
+
+-- ===============================
+-- TABELA: EVENTO
+-- ===============================
+CREATE TABLE evento (
+    id BIGSERIAL PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    descricao TEXT,
+    data VARCHAR(255),
+    tipo VARCHAR(255) CHECK (tipo IN ('evento', 'noticia')),
+    id_municipio BIGINT,
+    CONSTRAINT fk_evento_municipio FOREIGN KEY (id_municipio) REFERENCES municipio(id)
+);
+
+-- ===============================
+-- TABELA: BANCO DE LEITE
+-- ===============================
+CREATE TABLE banco_de_leite (
+    id BIGSERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    endereco VARCHAR(255),
+    telefone VARCHAR(255),
+    latitude DOUBLE PRECISION,
+    longitude DOUBLE PRECISION,
+    id_municipio BIGINT,
+    CONSTRAINT fk_banco_municipio FOREIGN KEY (id_municipio) REFERENCES municipio(id)
+);
+
+-- ===============================
+-- TABELA: DOAÇÃO
+-- ===============================
+CREATE TABLE doacao (
+    id BIGSERIAL PRIMARY KEY,
+    id_bancos_de_leite BIGINT NOT NULL,
+    quantidade_ml INTEGER NOT NULL,
+    data_doacao TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    id_usuario BIGINT NOT NULL,
+    status VARCHAR(255) NOT NULL DEFAULT 'pendente',
+    rua VARCHAR(255),
+    numero VARCHAR(255),
+    bairro VARCHAR(255),
+    CONSTRAINT fk_doacao_banco FOREIGN KEY (id_bancos_de_leite) REFERENCES banco_de_leite(id),
+    CONSTRAINT fk_doacao_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+);
+
+-- ===============================
+-- TABELA: TOKEN RECUPERAÇÃO
+-- ===============================
+CREATE TABLE token_recuperacao (
+    id BIGSERIAL PRIMARY KEY,
+    usuario_id BIGINT NOT NULL,
+    codigo VARCHAR(6) NOT NULL,
+    data_expiracao TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    usado BOOLEAN DEFAULT FALSE,
+    CONSTRAINT fk_token_usuario FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+);
+
+-- ===============================
+-- TABELA: HISTÓRICO DE SENHA
+-- ===============================
+CREATE TABLE usuario_senha_historico (
+    id BIGSERIAL PRIMARY KEY,
+    usuario_id BIGINT NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    data_alteracao TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    CONSTRAINT fk_usuario_senha FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+);
+
+COMMIT;

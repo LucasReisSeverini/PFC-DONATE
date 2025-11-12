@@ -15,7 +15,7 @@
         Gerencie usuários, bancos de leite e municípios de forma rápida e segura.
       </p>
       <p *ngIf="!roleUsuario || roleUsuario === 'DOADORA'">
-        Seu gesto transforma a vida de bebês prematuros e doentes. Contribua agora!
+        Seu gesto ajuda bebês prematuros ou doentes...
       </p>
 
       <ng-container *ngIf="roleUsuario === 'ADMIN'">
@@ -71,7 +71,7 @@
       <p *ngIf="roleUsuario !== 'ADMIN'">Veja no mapa o local mais próximo para realizar sua doação.</p>
       <p *ngIf="roleUsuario === 'ADMIN'">Cadastre novos municípios no sistema.</p>
       <button mat-raised-button color="primary" *ngIf="roleUsuario !== 'ADMIN'" (click)="irParaBancoProximo()">
-        <span class="material-icons">map</span> VER PONTO DE COLETA
+        <span class="material-icons">map</span> Consultar postos de coleta ou bancos de leite materno
       </button>
       <button mat-raised-button color="primary" *ngIf="roleUsuario === 'ADMIN'" [routerLink]="'/adicionar-municipio'">
         <span class="material-icons">location_city</span> ADICIONAR MUNICÍPIO
@@ -83,7 +83,7 @@
       <span class="material-icons">campaign</span>
       <h3 *ngIf="roleUsuario === 'PROFISSIONAL'">Gerenciar Eventos/Noticias e Conscientizações</h3>
       <h3 *ngIf="roleUsuario === 'ADMIN'">Adicionar Ponto de Coleta / Banco de Leite Humano</h3>
-      <h3 *ngIf="!roleUsuario || roleUsuario === 'DOADORA'">Eventos & Novidades & Conscientizações</h3>
+      <h3 *ngIf="!roleUsuario || roleUsuario === 'DOADORA'">Eventos e noticias</h3>
 
       <p *ngIf="roleUsuario === 'PROFISSIONAL'">
         Gerencie eventos e campanhas da sua instituição.
@@ -103,7 +103,7 @@
         <span class="material-icons">local_hospital</span> ADICIONAR BANCO DE LEITE
       </button>
       <button mat-raised-button color="primary" *ngIf="!roleUsuario || roleUsuario === 'DOADORA'" (click)="irParaEventosOuGerenciar()">
-        <span class="material-icons">event_note</span> VER EVENTOS
+        <span class="material-icons">event_note</span> Consultar eventos
       </button>
     </div>
 

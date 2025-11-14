@@ -7,5 +7,10 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
+
+    // Configurações para vídeos
+    video: true,                 // Habilita gravação de vídeo
+    videosFolder: "cypress/videos", // Pasta onde os vídeos serão salvos
+    trashAssetsBeforeRuns: true, // Limpa vídeos antigos antes de cada execução
   },
 });

@@ -38,23 +38,26 @@ describe('Rotas Públicas - Sistema Donate', () => {
       }
     });
   });
+
   it('Não deve acessar /doacao sem estar logado (deve redirecionar para login)', () => {
     cy.visit('/doacao');
-
-    // Deve redirecionar automaticamente para login
     cy.url().should('include', '/login');
-
-    // Deve mostrar elemento da tela de login
     cy.contains('Entrar').should('be.visible');
   });
 
+  it('Não deve acessar /meus-agendamentos sem estar logado', () => {
+    cy.visit('/meus-agendamentos');
+    cy.url().should('include', '/login');
+    cy.contains('Entrar').should('be.visible');
+  });
 
-
+  it('Não deve acessar /perfil sem estar logado', () => {
+    cy.visit('/perfil');
+    cy.url().should('include', '/login');
+    cy.contains('Entrar').should('be.visible');
+  });
 
 });
-
-
-
 
 // 🔐 ROTAS PRIVADAS
 describe('Rotas Privadas - Sistema Donate', () => {
@@ -73,9 +76,6 @@ describe('Rotas Privadas - Sistema Donate', () => {
     });
   });
 
-
-
-
   it('Deve acessar a página de doação', function () {
     cy.visit('/doacao');
     cy.url().should('include', '/doacao');
@@ -84,6 +84,28 @@ describe('Rotas Privadas - Sistema Donate', () => {
     cy.contains('Usar banco de leite mais próximo').should('be.visible');
     cy.contains('Quantidade (ml)').should('be.visible');
     cy.contains('Agendar').should('be.visible');
+  });
+
+  it('Deve acessar a página de meus agendamentos', function () {
+    cy.visit('/meus-agendamentos');
+    cy.url().should('include', '/meus-agendamentos');
+
+    cy.contains('Meus Agendamentos').should('be.visible');
+    cy.contains('Todos os Status').should('be.visible');   // select
+    cy.contains('Mais recentes').should('be.visible');    // outro select
+  });
+
+  it('Deve acessar a página de perfil', function () {
+    cy.visit('/perfil');
+    cy.url().should('include', '/perfil');
+
+    cy.contains('Meu Perfil').should('be.visible');
+    cy.get('#nome').should('be.visible');
+    cy.get('#email').should('be.visible');
+    cy.get('#telefone').should('be.visible');
+    cy.get('#senhaAntiga').should('be.visible');
+    cy.contains('Salvar Alterações').should('be.visible');
+    cy.contains('Sair').should('be.visible');
   });
 
 });

@@ -14,13 +14,10 @@
   <div class="filtros">
     <input type="text" placeholder="Filtrar por Doadora" [(ngModel)]="filtroDoadora" />
     <input type="text" placeholder="Filtrar por Ponto de Coleta/Banco" [(ngModel)]="filtroBanco" />
-
-    <!-- Intervalo de datas -->
     <label>Data Inicial:</label>
     <input type="date" [(ngModel)]="dataInicial" />
     <label>Data Final:</label>
     <input type="date" [(ngModel)]="dataFinal" />
-
     <select [(ngModel)]="filtroStatus">
       <option value="">Todos os Status</option>
       <option value="Pendente">Pendente</option>
@@ -29,7 +26,6 @@
       <option value="Reagendamento Solicitado pelo Profissional de Saúde">Reagendamento Solicitado pelo Profissional de Saúde</option>
       <option value="Reagendamento Solicitado pela Doadora">Reagendamento Solicitado pela Doadora</option>
     </select>
-
     <select [(ngModel)]="ordenarData">
       <option value="recentes">Mais recentes</option>
       <option value="antigas">Mais antigas</option>
@@ -47,12 +43,13 @@
       <p><strong>ML:</strong> {{ agendamento.quantidade_ml }} ml</p>
       <p><strong>Endereço:</strong> {{ agendamento.rua || '-' }}, {{ agendamento.numero || '-' }}, {{ agendamento.bairro || '-' }}</p>
 
-      <div class="acoes-card">
+      <!-- Ações somente se não estiver aceito, recusado ou reagendado -->
+      <div class="acoes-card" *ngIf="agendamento.status !== 'Aceito' && agendamento.status !== 'Recusado' && !agendamento.status.includes('Reagendamento')">
         <button class="acao-btn aceitar" (click)="aceitar(agendamento.id)">Aceitar</button>
         <button class="acao-btn recusar" (click)="recusar(agendamento.id)">Recusar</button>
       </div>
 
-      <div class="reagendamento-card">
+      <div class="reagendamento-card" *ngIf="agendamento.status !== 'Aceito' && agendamento.status !== 'Recusado' && !agendamento.status.includes('Reagendamento')">
         <input type="datetime-local" [(ngModel)]="novaDataReagendamento[agendamento.id]" />
         <button class="acao-btn reagendar" (click)="reagendar(agendamento.id)">Reagendar</button>
       </div>

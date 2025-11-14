@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Quicksand:wght@500;700&display=swap');
+
 /* ========================= */
 /* Container geral           */
 /* ========================= */
 .gerenciar-eventos-container {
   max-width: 900px;
-  margin: 40px auto 40px auto; /* igual painel */
+  margin: 40px auto;
   padding: 24px;
-  background-color: #fce4ec; /* rosa clarinho */
-  border: 1px solid #ddd; /* borda fina em todos os lados */
-  border-left: 4px solid transparent; /* cor será do tipo */
+  background-color: #fce4ec;
+  border: 1px solid #ddd;
+  border-left: 4px solid transparent;
   border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  font-weight: 700; /* igual ao header */
+  font-weight: 700;
   color: #333;
 }
 
@@ -20,10 +21,10 @@
 /* ========================= */
 .gerenciar-eventos-container h2 {
   font-family: 'Quicksand', sans-serif;
-  font-weight: 700; /* igual ao header */
+  font-weight: 700;
   font-size: 22px;
   margin-bottom: 20px;
-  color: #c2185b; /* rosa forte */
+  color: #c2185b;
 }
 
 /* ========================= */
@@ -32,7 +33,7 @@
 .btn-voltar,
 .btn-adicionar {
   font-family: 'Quicksand', sans-serif;
-  font-weight: 700; /* igual ao header */
+  font-weight: 700;
 }
 
 .btn-voltar {
@@ -57,7 +58,7 @@
   font-size: 0.95rem;
   padding: 0.5rem 1.2rem;
   color: #fff;
-  background-color: #ec407a; /* rosa forte */
+  background-color: #ec407a;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -78,16 +79,19 @@
 }
 
 .card-evento {
+  display: flex;
+  flex-direction: column;
   padding: 12px;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   cursor: pointer;
   transition: transform 0.2s, border-left-color 0.3s;
-  border: 1px solid #ddd; /* borda fina em todos os lados */
-  border-left: 4px solid transparent; /* será ajustada pelo tipo */
+  border: 1px solid #ddd;
+  border-left: 4px solid transparent;
   background-color: #fff;
   font-family: 'Quicksand', sans-serif;
-  font-weight: 700; /* igual ao header */
+  font-weight: 700;
+  min-height: 220px; /* força altura mínima para alinhamento */
 }
 
 .card-evento:hover {
@@ -109,32 +113,49 @@
 /* Título e subtítulo */
 mat-card-title {
   font-family: 'Quicksand', sans-serif;
-  font-weight: 700; /* igual ao header */
+  font-weight: 700;
   color: #333;
 }
 
 mat-card-subtitle {
   font-family: 'Quicksand', sans-serif;
-  font-weight: 700; /* igual ao header */
+  font-weight: 700;
   font-size: 0.9rem;
   color: #555;
 }
 
 /* Ações dentro do card */
 .card-actions {
+  margin-top: auto; /* força o alinhamento dos botões na base */
   display: flex;
   justify-content: flex-end;
   gap: 10px;
 }
+
+/* Botões dentro do card */
+.card-actions button {
+  cursor: pointer;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  border: none;
+  font-weight: 700;
+  color: #fff;
+  background-color: #ec407a;
+  transition: background-color 0.3s;
+}
+
+.card-actions button:hover {
+  background-color: #c2185b;
+}
+
 /* ========================= */
 /* Ajuste para truncar texto */
 /* ========================= */
 .card-evento p {
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* número de linhas visíveis */
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
 }
-

@@ -1,1 +1,42 @@
+import { Component } from '@angular/core';
+import { LoginComponent } from './login/login.component';
+import { ThemeService } from './theme.service';
+
+@Component({
+selector: 'app-root',
+standalone: true,
+imports: [LoginComponent],
+template: `
+<div class="theme-toggle-container">
+  <button (click)="themeService.toggleTheme()">
+    {{ themeService.isDarkTheme() ? '☀️ Claro' : '🌙 Escuro' }}
+  </button>
+</div>
+
 <app-login></app-login>
+`,
+styles: [`
+.theme-toggle-container {
+position: fixed;
+top: 10px;
+right: 10px;
+z-index: 1000;
+}
+
+button {
+padding: 8px 16px;
+cursor: pointer;
+border: none;
+border-radius: 4px;
+background-color: var(--button-bg-color);
+color: var(--button-text-color);
+transition: background-color 0.3s, color 0.3s;
+}
+`]
+})
+export class AppComponent {
+constructor(public themeService: ThemeService) {
+// ✅ REMOVA a linha que adiciona 'theme-light' aqui
+// O ThemeService já cuida disso no constructor
+}
+}

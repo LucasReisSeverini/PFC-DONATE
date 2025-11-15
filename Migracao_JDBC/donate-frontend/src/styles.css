@@ -8,7 +8,7 @@ body.theme-dark {
 body.theme-dark * {
   background-color: #000000 !important;
   color: #ffffff !important;
-  /* REMOVIDO position: relative e z-index */
+  /* REMOVIDO position: relative e z-index para scroll passar por baixo do header */
 }
 
 /* REMOVE COMPLETAMENTE O "ADESIVO" DOS BOTÕES */
@@ -38,7 +38,149 @@ body.theme-dark label {
   background-color: transparent !important;
 }
 
-/* ====== CORREÇÕES ESPECÍFICAS PARA LOGIN/CADASTRO ====== */
+/* ====== CORREÇÃO ESPECÍFICA PARA A PARTE ROSA/BRANCA ====== */
+/* Remove qualquer fundo colorido em containers principais */
+body.theme-dark [class*="recovery"],
+body.theme-dark [class*="recuperar"],
+body.theme-dark [class*="forgot"],
+body.theme-dark .recovery-container,
+body.theme-dark .password-container,
+body.theme-dark .forgot-password-container {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Remove fundos claros em cards e containers */
+body.theme-dark .mat-card,
+body.theme-dark .card,
+body.theme-dark .container,
+body.theme-dark .form-container,
+body.theme-dark .auth-wrapper {
+  background-color: #000000 !important;
+  border: 1px solid #333 !important;
+}
+
+/* Remove qualquer gradiente ou cor de fundo específica */
+body.theme-dark [style*="gradient"],
+body.theme-dark [style*="linear-gradient"],
+body.theme-dark [style*="radial-gradient"],
+body.theme-dark [class*="gradient"],
+body.theme-dark [class*="background"] {
+  background: #000000 !important;
+  background-color: #000000 !important;
+}
+
+/* Remove cores específicas por RGB/RGBA */
+body.theme-dark [style*="rgb("],
+body.theme-dark [style*="rgba("],
+body.theme-dark [style*="255,255,255"],
+body.theme-dark [style*="255, 255, 255"] {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Remove fundos brancos ou claros específicos */
+body.theme-dark [style*="background: white"],
+body.theme-dark [style*="background:white"],
+body.theme-dark [style*="background-color: white"],
+body.theme-dark [style*="background-color:white"],
+body.theme-dark [style*="background: #fff"],
+body.theme-dark [style*="background:#fff"],
+body.theme-dark [style*="background-color: #fff"],
+body.theme-dark [style*="background-color:#fff"],
+body.theme-dark [style*="background: #ffffff"],
+body.theme-dark [style*="background:#ffffff"],
+body.theme-dark [style*="background-color: #ffffff"],
+body.theme-dark [style*="background-color:#ffffff"] {
+  background: #000000 !important;
+  background-color: #000000 !important;
+}
+
+/* ====== CORREÇÃO ESPECÍFICA APENAS PARA PERFIL E RECUPERAR SENHA ====== */
+
+/* PERFIL - Remove fundo rosa/branco */
+body.theme-dark .perfil-container,
+body.theme-dark .perfil-form,
+body.theme-dark .bem-vindo,
+body.theme-dark .form-group {
+  background-color: #000000 !important;
+  background: #000000 !important;
+}
+
+/* Garante que todos os elementos dentro do perfil sejam pretos */
+body.theme-dark .perfil-container * {
+  background-color: #000000 !important;
+  background: #000000 !important;
+}
+
+/* RECUPERAR SENHA - Remove fundo rosa/branco */
+body.theme-dark .login-container,
+body.theme-dark .logo-container,
+body.theme-dark .input-group,
+body.theme-dark .description {
+  background-color: #000000 !important;
+  background: #000000 !important;
+}
+
+/* Garante que todos os elementos dentro do recuperar senha sejam pretos */
+body.theme-dark .login-container * {
+  background-color: #000000 !important;
+  background: #000000 !important;
+}
+
+/* Remove qualquer gradiente ou imagem de fundo nessas telas específicas */
+body.theme-dark .perfil-container,
+body.theme-dark .login-container {
+  background-image: none !important;
+}
+
+/* ====== CORREÇÕES ESPECÍFICAS PARA A TELA DE PERFIL ====== */
+body.theme-dark [class*="perfil"],
+body.theme-dark [class*="profile"],
+body.theme-dark [class*="user"],
+body.theme-dark .perfil-container,
+body.theme-dark .profile-container,
+body.theme-dark .user-profile {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Garante que todos os elementos dentro do perfil sejam pretos */
+body.theme-dark [class*="perfil"] *,
+body.theme-dark [class*="profile"] *,
+body.theme-dark [class*="user"] *,
+body.theme-dark .perfil-container *,
+body.theme-dark .profile-container *,
+body.theme-dark .user-profile * {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Menu do perfil - totalmente preto */
+body.theme-dark [class*="menu"],
+body.theme-dark .menu-perfil,
+body.theme-dark .profile-menu {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #333 !important;
+}
+
+body.theme-dark [class*="menu"] *,
+body.theme-dark .menu-perfil *,
+body.theme-dark .profile-menu * {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Linhas separadoras no perfil */
+body.theme-dark hr,
+body.theme-dark [class*="divider"],
+body.theme-dark [class*="separator"] {
+  border-color: #333 !important;
+  background-color: #333 !important;
+}
+
+/* ====== CORREÇÕES LOGIN/CADASTRO ====== */
 body.theme-dark .login-container,
 body.theme-dark .cadastro-container,
 body.theme-dark .auth-container,
@@ -112,14 +254,6 @@ body.theme-dark a[class*="link"] {
   text-align: center !important;
   display: block !important;
   margin-top: 15px !important;
-}
-
-/* CARD DE LOGIN */
-body.theme-dark .mat-card,
-body.theme-dark .card {
-  background-color: #000000 !important;
-  border: 1px solid #333 !important;
-  border-radius: 8px !important;
 }
 
 /* TÍTULOS DAS PÁGINAS */
@@ -204,20 +338,6 @@ body.theme-dark .alert-danger {
   background-color: transparent !important;
 }
 
-/* PERFIL - REMOVER QUALQUER COR ROSA */
-body.theme-dark [class*="perfil"],
-body.theme-dark [class*="profile"],
-body.theme-dark [class*="menu"],
-body.theme-dark [class*="user"],
-body.theme-dark .perfil-container,
-body.theme-dark .profile-container,
-body.theme-dark .menu-perfil,
-body.theme-dark .user-profile {
-  background-color: #000000 !important;
-  color: #ffffff !important;
-  border-color: #333 !important;
-}
-
 /* Remove cores rosa */
 body.theme-dark [style*="pink"],
 body.theme-dark [style*="rosa"],
@@ -240,19 +360,6 @@ body.theme-dark [style*="background-color"][style*="#"] {
   color: #ffffff !important;
 }
 
-/* Força preto absoluto */
-body.theme-dark div,
-body.theme-dark section,
-body.theme-dark article,
-body.theme-dark main,
-body.theme-dark header,
-body.theme-dark footer,
-body.theme-dark nav,
-body.theme-dark aside {
-  background-color: #000000 !important;
-  color: #ffffff !important;
-}
-
 /* ====== HEADER FIXO SEM BUG ====== */
 body.theme-dark header.main-header {
   position: fixed;
@@ -265,12 +372,12 @@ body.theme-dark header.main-header {
   box-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
 
-/* Conteúdo abaixo do header fixo - scroll vai passar por baixo */
+/* Conteúdo abaixo do header fixo - scroll passa por baixo */
 body.theme-dark main,
 body.theme-dark .content-wrapper,
 body.theme-dark .page-wrapper,
 body.theme-dark router-outlet,
 body.theme-dark .mat-sidenav-content {
-  margin-top: 0; /* REMOVIDO para que scroll passe por baixo */
-  padding-top: 70px; /* só empurra o conteúdo visualmente */
+  margin-top: 0;
+  padding-top: 70px; /* só empurra visualmente */
 }

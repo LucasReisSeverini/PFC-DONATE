@@ -4,10 +4,11 @@ body.theme-dark {
   color: #ffffff !important;
 }
 
-/* FUNDO PRETO EM TUDO - mas de forma inteligente */
+/* FUNDO PRETO EM TUDO - sem interferir no z-index do header */
 body.theme-dark * {
   background-color: #000000 !important;
   color: #ffffff !important;
+  /* REMOVIDO position: relative e z-index */
 }
 
 /* REMOVE COMPLETAMENTE O "ADESIVO" DOS BOTÕES */
@@ -17,8 +18,6 @@ body.theme-dark .donate-button,
 body.theme-dark mat-raised-button,
 body.theme-dark mat-button {
   background-color: #333333 !important;
-  position: relative !important;
-  z-index: 10 !important;
 }
 
 /* REMOVE COMPLETAMENTE O "ADESIVO" DA LOGO E TÍTULOS */
@@ -29,8 +28,6 @@ body.theme-dark h4,
 body.theme-dark h5,
 body.theme-dark h6 {
   background-color: transparent !important;
-  position: relative !important;
-  z-index: 10 !important;
 }
 
 /* REMOVE COMPLETAMENTE O "ADESIVO" DOS TEXTOS */
@@ -39,13 +36,9 @@ body.theme-dark span,
 body.theme-dark li,
 body.theme-dark label {
   background-color: transparent !important;
-  position: relative !important;
-  z-index: 10 !important;
 }
 
 /* ====== CORREÇÕES ESPECÍFICAS PARA LOGIN/CADASTRO ====== */
-
-/* CONTAINERS DE LOGIN E CADASTRO */
 body.theme-dark .login-container,
 body.theme-dark .cadastro-container,
 body.theme-dark .auth-container,
@@ -60,7 +53,7 @@ body.theme-dark [class*="auth"] {
   max-width: 400px !important;
 }
 
-/* CAMPOS DE FORMULÁRIO - CORRIGIDOS */
+/* CAMPOS DE FORMULÁRIO */
 body.theme-dark input,
 body.theme-dark select,
 body.theme-dark textarea,
@@ -92,7 +85,7 @@ body.theme-dark label {
   margin-bottom: 8px !important;
 }
 
-/* BOTÕES DE LOGIN/CADASTRO ESPECÍFICOS */
+/* BOTÕES */
 body.theme-dark .btn-login,
 body.theme-dark .btn-cadastrar,
 body.theme-dark .btn-entrar,
@@ -109,12 +102,11 @@ body.theme-dark [class*="cadastro-btn"] {
   margin-top: 20px !important;
 }
 
-/* LINKS DE REDIRECIONAMENTO (Cadastrar/Entrar) */
+/* LINKS DE REDIRECIONAMENTO */
 body.theme-dark .auth-link,
 body.theme-dark .redirect-link,
 body.theme-dark a[class*="link"] {
   color: #90caf9 !important;
-  background-color: transparent !important;
   text-decoration: none !important;
   font-weight: 500 !important;
   text-align: center !important;
@@ -130,7 +122,7 @@ body.theme-dark .card {
   border-radius: 8px !important;
 }
 
-/* TÍTULOS DAS PÁGINAS - Melhor hierarquia */
+/* TÍTULOS DAS PÁGINAS */
 body.theme-dark .login-container h2,
 body.theme-dark .cadastro-container h2,
 body.theme-dark .recovery-container h2 {
@@ -139,9 +131,7 @@ body.theme-dark .recovery-container h2 {
   font-size: 24px !important;
 }
 
-/* ====== CORREÇÃO DO DROPDOWN DE MUNICÍPIO ====== */
-
-/* DROPDOWN/MENU DE SELEÇÃO */
+/* DROPDOWN */
 body.theme-dark .mat-select-panel,
 body.theme-dark .mat-option,
 body.theme-dark .mat-autocomplete-panel,
@@ -150,6 +140,7 @@ body.theme-dark .cdk-overlay-pane {
   color: #ffffff !important;
   border: 1px solid #333 !important;
   border-radius: 4px !important;
+  z-index: 2000 !important;
 }
 
 /* OPÇÕES DO DROPDOWN */
@@ -163,13 +154,12 @@ body.theme-dark .mat-option:hover {
   background-color: #333333 !important;
 }
 
-/* OPÇÃO SELECIONADA */
 body.theme-dark .mat-option.mat-selected {
   background-color: #1a1a1a !important;
   color: #ffffff !important;
 }
 
-/* OVERLAY DO DROPDOWN */
+/* OVERLAY */
 body.theme-dark .cdk-overlay-container,
 body.theme-dark .cdk-overlay-connected-position-bounding-box {
   background-color: transparent !important;
@@ -179,7 +169,7 @@ body.theme-dark .cdk-overlay-dark-backdrop {
   background: rgba(0, 0, 0, 0.8) !important;
 }
 
-/* Remove qualquer overlay/ripple que possa causar o efeito */
+/* Remove overlay/ripple */
 body.theme-dark .mat-button-focus-overlay,
 body.theme-dark .mat-ripple,
 body.theme-dark ::before,
@@ -189,13 +179,13 @@ body.theme-dark ::after {
   background: transparent !important;
 }
 
-/* CORREÇÃO PARA CAMPOS COM ERRO/VALIDAÇÃO */
+/* ERROS */
 body.theme-dark .mat-form-field-invalid .mat-input-element,
 body.theme-dark .ng-invalid.ng-touched {
   border-color: #f44336 !important;
 }
 
-/* FOCO NOS CAMPOS */
+/* FOCO */
 body.theme-dark input:focus,
 body.theme-dark select:focus,
 body.theme-dark textarea:focus {
@@ -204,7 +194,7 @@ body.theme-dark textarea:focus {
   box-shadow: 0 0 0 2px rgba(144, 202, 249, 0.2) !important;
 }
 
-/* MENSAGENS DE ERRO - Mais claras */
+/* MENSAGENS DE ERRO */
 body.theme-dark .error-message,
 body.theme-dark .alert-danger {
   color: #ff6b6b !important;
@@ -214,7 +204,7 @@ body.theme-dark .alert-danger {
   background-color: transparent !important;
 }
 
-/* ====== CORREÇÃO RADICAL DO PERFIL - REMOVER QUALQUER COR ROSA ====== */
+/* PERFIL - REMOVER QUALQUER COR ROSA */
 body.theme-dark [class*="perfil"],
 body.theme-dark [class*="profile"],
 body.theme-dark [class*="menu"],
@@ -224,25 +214,11 @@ body.theme-dark .profile-container,
 body.theme-dark .menu-perfil,
 body.theme-dark .user-profile {
   background-color: #000000 !important;
-  background: #000000 !important;
   color: #ffffff !important;
   border-color: #333 !important;
 }
 
-body.theme-dark [class*="perfil"] *,
-body.theme-dark [class*="profile"] *,
-body.theme-dark [class*="menu"] *,
-body.theme-dark [class*="user"] *,
-body.theme-dark .perfil-container *,
-body.theme-dark .profile-container *,
-body.theme-dark .menu-perfil *,
-body.theme-dark .user-profile * {
-  background-color: #000000 !important;
-  background: #000000 !important;
-  color: #ffffff !important;
-}
-
-/* Remove qualquer cor rosa/rosa que possa estar aplicada */
+/* Remove cores rosa */
 body.theme-dark [style*="pink"],
 body.theme-dark [style*="rosa"],
 body.theme-dark [style*="magenta"],
@@ -254,18 +230,17 @@ body.theme-dark [class*="magenta"],
 body.theme-dark [class*="fuchsia"],
 body.theme-dark [class*="hotpink"] {
   background-color: #000000 !important;
-  background: #000000 !important;
   color: #ffffff !important;
 }
 
-/* Remove cores de fundo específicas por valor hexadecimal */
+/* Remove cores de fundo hex */
 body.theme-dark [style*="background"][style*="#"],
 body.theme-dark [style*="background-color"][style*="#"] {
   background-color: #000000 !important;
-  background: #000000 !important;
+  color: #ffffff !important;
 }
 
-/* Força preto absoluto em todos os elementos */
+/* Força preto absoluto */
 body.theme-dark div,
 body.theme-dark section,
 body.theme-dark article,
@@ -275,23 +250,27 @@ body.theme-dark footer,
 body.theme-dark nav,
 body.theme-dark aside {
   background-color: #000000 !important;
-  background: #000000 !important;
+  color: #ffffff !important;
 }
-/* ====== FIXAR HEADER PRINCIPAL SEM BUG ====== */
+
+/* ====== HEADER FIXO SEM BUG ====== */
 body.theme-dark header.main-header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 70px; /* ajuste conforme o tamanho real do header */
-  z-index: 1000; /* só o suficiente para ficar sobre o conteúdo */
-  background-color: #000000 !important; /* mantém o tema escuro */
+  height: 70px; /* altura do header */
+  z-index: 3000; /* sempre acima de overlays */
+  background-color: #000000 !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
 
-/* empurra o conteúdo da página para baixo do header fixo */
+/* Conteúdo abaixo do header fixo - scroll vai passar por baixo */
 body.theme-dark main,
-body.theme-dark .content-wrapper {
-  margin-top: 70px; /* mesma altura do header */
+body.theme-dark .content-wrapper,
+body.theme-dark .page-wrapper,
+body.theme-dark router-outlet,
+body.theme-dark .mat-sidenav-content {
+  margin-top: 0; /* REMOVIDO para que scroll passe por baixo */
+  padding-top: 70px; /* só empurra o conteúdo visualmente */
 }
-
-

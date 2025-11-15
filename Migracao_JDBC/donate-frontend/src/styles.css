@@ -1,8 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
+/* =========================
+   Estilos globais existentes
+========================= */
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -21,3 +19,36 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   line-height: 1.5rem;
 }
 
+/* =========================
+   Temas de acessibilidade
+========================= */
+
+/* Tema claro (padrão) */
+.theme-light {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: #1976d2;
+}
+
+/* Tema escuro */
+.theme-dark {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --primary-color: #90caf9;
+}
+
+/* Aplicar variáveis globalmente */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}

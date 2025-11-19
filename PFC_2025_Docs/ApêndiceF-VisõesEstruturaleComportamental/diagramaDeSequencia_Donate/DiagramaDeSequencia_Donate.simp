@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<sim-project version="14.60" multi-file="no" uid="simp2729efe290034df993e0e6386e46b01e" creation-date="05/01/2025 14:06:50">
+<sim-project version="14.82" multi-file="no" uid="simp2729efe290034df993e0e6386e46b01e" creation-date="05/01/2025 14:06:50">
   <meta>
     <name>DiagramaDeSequencia_Doante</name>
-    <authors>Mateus Boche</authors>
+    <authors>Dilton Thales</authors>
     <description />
   </meta>
   <counters models="1">
@@ -67,11 +67,11 @@
       </counter>
       <counter>
         <item-type type-id="class" type="Class" />
-        <value>20</value>
+        <value>21</value>
       </counter>
       <counter>
         <item-type type-id="property" type="Property" />
-        <value>20</value>
+        <value>21</value>
       </counter>
       <counter>
         <item-type type-id="universal-connector" type="Universal Connector" />
@@ -142,6 +142,16 @@
         <phone-number />
         <description />
         <color>#00000000</color>
+        <working-schedule uid="ws-1ee870733afd4188b17e856d17edad64" hours="8" monday="8" tuesday="8" wednesday="8" thursday="8" friday="8" saturday="0" sunday="0" />
+      </person>
+      <person id="">
+        <first-name>Dilton</first-name>
+        <last-name>Thales</last-name>
+        <role />
+        <e-mail />
+        <phone-number />
+        <description />
+        <color>#00000000</color>
       </person>
     </persons>
     <teams />
@@ -174,8 +184,9 @@
         <type id="Class:88adac0bf3614e5c89d644a6440a8b7a" name="AuthenticationController" class-ref="88adac0bf3614e5c89d644a6440a8b7a" />
         <type id="Class:5f2fb22507c4480ab6c766e85d6a9957" name="LoginComponent" class-ref="5f2fb22507c4480ab6c766e85d6a9957" />
         <type id="Class:c99bbebcdb884fa5bb9a1924c9360d89" name="DoacaoRepository" class-ref="c99bbebcdb884fa5bb9a1924c9360d89" />
-        <type id="Class:c6608aad42ae41d48d3f734c297c62a5" name="BancoLeiteDao" class-ref="c6608aad42ae41d48d3f734c297c62a5" />
+        <type id="Class:73e006c0caf9495fa0dd76c0347ba1a2" name="BancoLeiteService" class-ref="73e006c0caf9495fa0dd76c0347ba1a2" />
         <type id="Class:982d0c941abb43cda24fedeacb3901e8" name="JwtService" class-ref="982d0c941abb43cda24fedeacb3901e8" />
+        <type id="Class:c6608aad42ae41d48d3f734c297c62a5" name="BancoLeiteDao" class-ref="c6608aad42ae41d48d3f734c297c62a5" />
         <type id="Class:a9321599eb154132ac478086a2da5ba5" name="DoacaoComponent" class-ref="a9321599eb154132ac478086a2da5ba5" />
         <type id="Class:815161de00e9465e8abbccdf4624dbb0" name="UsuarioDao" class-ref="815161de00e9465e8abbccdf4624dbb0" />
       </types>
@@ -189,7 +200,7 @@
       <structural-feature type="DoacaoRepository" type-id="Class:c99bbebcdb884fa5bb9a1924c9360d89" />
     </item>
     <item id="a9321599eb154132ac478086a2da5ba5" cid="C009" type="class" name="DoacaoComponent" creator="" creation-date="06/07/2025 12:30:45" visibility="undefined" />
-    <item id="2c1ee7b95c714814a4ffcead39ed47ea" cid="PROP019" type="property" creator="" creation-date="09/26/2025 13:44:11">
+    <item id="2c1ee7b95c714814a4ffcead39ed47ea" cid="PROP019" type="property" creator="" creation-date="09/26/2025 13:44:11" visibility="undefined">
       <structural-feature type="UsuarioDao" type-id="Class:815161de00e9465e8abbccdf4624dbb0" />
     </item>
     <item id="8fb16fe188a846e0a6a90bceb822e972" cid="C014" type="class" name="BancoLeiteController" creator="" creation-date="06/07/2025 12:59:16" visibility="undefined" />
@@ -242,7 +253,7 @@
     <item id="31e31c09ee7a4e88b77ec51acab44b4d" cid="PROP007" type="property" creator="" creation-date="06/07/2025 12:30:05" visibility="undefined">
       <structural-feature type="UsuarioService" type-id="Class:633eef1542e347dcb921abda5f31ce44" />
     </item>
-    <item id="95e0de8add4444ce81581fac2ced6e74" cid="C018" type="class" name="DoacaoDao" creator="" creation-date="09/26/2025 13:43:55" />
+    <item id="95e0de8add4444ce81581fac2ced6e74" cid="C018" type="class" name="DoacaoDao" creator="" creation-date="09/26/2025 13:43:55" visibility="undefined" />
     <item id="1c4485957a0e4ef88b20a8cf88cbc4dd" cid="LL002" type="lifeline" creation-date="05/01/2025 14:08:18" visibility="undefined">
       <owned-items />
       <lifeline classifier-name="AuthenticationManager" classifier-ref="0ab875a2d5464dea85c93fc671768995" selector="" is-multi-object="false" />
@@ -252,16 +263,16 @@
     </item>
     <item id="b6fd7e450ac74ccfbe6fa45e7c506ca2" cid="C011" type="class" name="DoacaoService" creator="" creation-date="06/07/2025 12:37:12" visibility="undefined" />
     <item id="8a4ea04bc1514a98bfb94f26cd97cf6d" cid="ES006" type="activation-bar" name="ExecutionSpecification6" creation-date="05/01/2025 14:22:33" visibility="undefined" />
-    <item id="4feae80eaac44f36a3acc85395420580" cid="AC001" type="actor" name="Usuário" creation-date="05/01/2025 14:07:41" visibility="undefined">
-      <owned-items />
-    </item>
+    <item id="adca49b88eb0480c93f84a3d0c7d4f9c" cid="ES002" type="activation-bar" name="ExecutionSpecification2" creation-date="05/01/2025 14:11:40" visibility="undefined" />
     <item id="699fb1446853449689443918935851ad" cid="SM002" type="sequence-action" name="Message2" creation-date="05/01/2025 14:18:45" from="f7f03f165f69427c9d109ad6cb9e91ce" to="d4668bb32edd4ad4bcfedbd619d2781a" visibility="package">
       <sequence-action type="call" message="SelecionarEntrar(email,senha)" is-asynchronous="false" return-value="" assign-to-variable="">
         <parameters />
       </sequence-action>
     </item>
-    <item id="adca49b88eb0480c93f84a3d0c7d4f9c" cid="ES002" type="activation-bar" name="ExecutionSpecification2" creation-date="05/01/2025 14:11:40" visibility="undefined" />
-    <item id="c6608aad42ae41d48d3f734c297c62a5" cid="C017" type="class" name="BancoLeiteDao" creator="" creation-date="09/26/2025 13:43:43" />
+    <item id="4feae80eaac44f36a3acc85395420580" cid="AC001" type="actor" name="Usuário" creation-date="05/01/2025 14:07:41" visibility="undefined">
+      <owned-items />
+    </item>
+    <item id="c6608aad42ae41d48d3f734c297c62a5" cid="C017" type="class" name="BancoLeiteDao" creator="" creation-date="09/26/2025 13:43:43" visibility="undefined" />
     <item id="7f194a94c4bf46a385510aa7e7b11966" cid="ES004" type="activation-bar" name="ExecutionSpecification4" creation-date="05/01/2025 14:11:52" visibility="undefined" />
     <item id="80c44793b22f436794eca1bdf595a196" cid="PROP003" type="property" creator="" creation-date="06/07/2025 12:28:58" visibility="undefined">
       <structural-feature type="LoginComponent" type-id="Class:5f2fb22507c4480ab6c766e85d6a9957" />
@@ -271,8 +282,8 @@
         <parameters />
       </sequence-action>
     </item>
-    <item id="36aeab0314a14d1b89e63c939e44bff2" cid="ES002" type="activation-bar" name="ExecutionSpecification2" creation-date="05/01/2025 14:11:40" visibility="undefined" />
     <item id="6976ecb39f14414fa0363bc1bc6deac4" cid="ES001" type="activation-bar" name="ExecutionSpecification1" owner="4feae80eaac44f36a3acc85395420580" creation-date="05/01/2025 14:07:55" visibility="undefined" />
+    <item id="36aeab0314a14d1b89e63c939e44bff2" cid="ES002" type="activation-bar" name="ExecutionSpecification2" creation-date="05/01/2025 14:11:40" visibility="undefined" />
     <item id="f25b4ad3664047958b36d5d85d256189" cid="PROP013" type="property" creator="" creation-date="06/07/2025 12:58:11" visibility="undefined">
       <structural-feature type="BancoProximoComponent" type-id="Class:b7be6c68e8b445b5aeffa5db673b8864" />
     </item>
@@ -286,12 +297,12 @@
       </sequence-action>
     </item>
     <item id="e820439c977245acbc1a47f532375043" cid="ES001" type="activation-bar" name="ExecutionSpecification1" creation-date="05/01/2025 14:07:55" visibility="undefined" />
-    <item id="2e029eef038b4009b3def19a94b78da0" cid="PROP017" type="property" creator="" creation-date="09/26/2025 13:43:43">
+    <item id="2e029eef038b4009b3def19a94b78da0" cid="PROP017" type="property" creator="" creation-date="09/26/2025 13:43:43" visibility="undefined">
       <structural-feature type="BancoLeiteDao" type-id="Class:c6608aad42ae41d48d3f734c297c62a5" />
     </item>
     <item id="f733ba9b6f044d0ca510af304a663f6a" cid="ES001" type="activation-bar" name="ExecutionSpecification1" creation-date="05/01/2025 14:07:55" visibility="undefined" />
     <item id="15db87dfc4214dbbb96dc4dd36ceebb3" cid="SM019" type="sequence-action" name="Message19" creation-date="05/01/2025 14:25:56" from="99a9aab452424776a8af48a784fb34f9" to="70f56c53f78b44aea668ec03c463c9ea" visibility="package">
-      <sequence-action type="reply" message="Optional&lt;UsuarioModel&gt;&#xD;&#xA;" is-asynchronous="false" return-value="" assign-to-variable="">
+      <sequence-action type="reply" message="return usuarioAuthentication" is-asynchronous="false" return-value="" assign-to-variable="">
         <parameters />
       </sequence-action>
     </item>
@@ -305,32 +316,36 @@
       </sequence-action>
     </item>
     <item id="62c5aeb1bfa7470280f83b8e3cec73d8" cid="C015" type="class" name="BamcoLeiteService" creator="" creation-date="06/07/2025 12:59:35" visibility="undefined" />
-    <item id="a94093ffa8f74c239391c85dddcb7733" cid="ES003" type="activation-bar" name="ExecutionSpecification3" owner="d4668bb32edd4ad4bcfedbd619d2781a" creation-date="05/01/2025 14:11:48" visibility="undefined">
-      <activation-bar lifeline-ref="d4668bb32edd4ad4bcfedbd619d2781a" />
-    </item>
     <item id="a486a07df49a492eae1667f6812552cf" cid="PROP002" type="property" name="UsuarioService" creator="" creation-date="06/06/2025 11:25:33" visibility="undefined">
       <structural-feature type=":" type-id="Class:4ce4e1c42c214f6fbcf28613c562c756" />
+    </item>
+    <item id="a94093ffa8f74c239391c85dddcb7733" cid="ES003" type="activation-bar" name="ExecutionSpecification3" owner="d4668bb32edd4ad4bcfedbd619d2781a" creation-date="05/01/2025 14:11:48" visibility="undefined">
+      <activation-bar lifeline-ref="d4668bb32edd4ad4bcfedbd619d2781a" />
     </item>
     <item id="74e3bd3f80ff48c0bba06375fa537677" cid="PROP008" type="property" creator="" creation-date="06/07/2025 12:30:17" visibility="undefined">
       <structural-feature type="UsuarioRepository" type-id="Class:c0e08375444f4f05accbbcd938e5866c" />
     </item>
-    <item id="fc01c4a271ab4757aa1b3c7195e6c686" cid="ES004" type="activation-bar" name="ExecutionSpecification4" creation-date="05/01/2025 14:11:52" visibility="undefined" />
     <item id="92c8b9567d84442ca55203e5fc21952f" cid="C006" type="class" name="AuthenticationManager" creator="" creation-date="06/07/2025 12:29:48" visibility="undefined" />
+    <item id="fc01c4a271ab4757aa1b3c7195e6c686" cid="ES004" type="activation-bar" name="ExecutionSpecification4" creation-date="05/01/2025 14:11:52" visibility="undefined" />
     <item id="c99bbebcdb884fa5bb9a1924c9360d89" cid="C012" type="class" name="DoacaoRepository" creator="" creation-date="06/07/2025 12:37:46" visibility="undefined" />
-    <item id="815161de00e9465e8abbccdf4624dbb0" cid="C019" type="class" name="UsuarioDao" creator="" creation-date="09/26/2025 13:44:11" />
+    <item id="ae6d0d2998d649679c89649963312203" cid="PROP020" type="property" creator="" creation-date="11/15/2025 15:42:20">
+      <structural-feature type="BancoLeiteService" type-id="Class:73e006c0caf9495fa0dd76c0347ba1a2" />
+    </item>
     <item id="5f2fb22507c4480ab6c766e85d6a9957" cid="C003" type="class" name="LoginComponent" creator="" creation-date="06/07/2025 12:28:58" visibility="undefined" />
+    <item id="815161de00e9465e8abbccdf4624dbb0" cid="C019" type="class" name="UsuarioDao" creator="" creation-date="09/26/2025 13:44:11" visibility="undefined" />
     <item id="846f15511c99415abce1417421bb7f5c" cid="ES003" type="activation-bar" name="ExecutionSpecification3" creation-date="05/01/2025 14:11:48" visibility="undefined" />
+    <item id="73e006c0caf9495fa0dd76c0347ba1a2" cid="C020" type="class" name="BancoLeiteService" creator="" creation-date="11/15/2025 15:42:20" />
     <item id="075093822ce44651aa0588e47d4a7fc0" cid="ES003" type="activation-bar" name="ExecutionSpecification3" creation-date="05/01/2025 14:11:48" visibility="undefined" />
     <item id="91cd0a58f80b4aaa9288e2c6e7f5ab91" cid="PROP016" type="property" creator="" creation-date="06/07/2025 13:00:06" visibility="undefined">
       <structural-feature type="BancoLeiteRepository" type-id="Class:6fd9bf442a2240c4b7dfe559da30b71e" />
     </item>
-    <item id="20e08f423da445d5ac56c81658ed00f9" cid="PROP018" type="property" creator="" creation-date="09/26/2025 13:43:55">
-      <structural-feature type="DoacaoDao" type-id="Class:95e0de8add4444ce81581fac2ced6e74" />
-    </item>
+    <item id="982d0c941abb43cda24fedeacb3901e8" cid="C005" type="class" name="JwtService" creator="" creation-date="06/07/2025 12:29:40" visibility="undefined" />
     <item id="c3ea2a2dc1744b2eb0c8ff49518c719f" cid="PROP014" type="property" creator="" creation-date="06/07/2025 12:59:16" visibility="undefined">
       <structural-feature type="BancoLeiteController" type-id="Class:8fb16fe188a846e0a6a90bceb822e972" />
     </item>
-    <item id="982d0c941abb43cda24fedeacb3901e8" cid="C005" type="class" name="JwtService" creator="" creation-date="06/07/2025 12:29:40" visibility="undefined" />
+    <item id="20e08f423da445d5ac56c81658ed00f9" cid="PROP018" type="property" creator="" creation-date="09/26/2025 13:43:55" visibility="undefined">
+      <structural-feature type="DoacaoDao" type-id="Class:95e0de8add4444ce81581fac2ced6e74" />
+    </item>
     <item id="2706627f82d643eeaa2895896e77d003" cid="ES003" type="activation-bar" name="ExecutionSpecification3" creation-date="05/01/2025 14:11:48" visibility="undefined" />
     <item id="9bb1a6035a6743009746ab297aeb2c8b" cid="ES006" type="activation-bar" name="ExecutionSpecification6" creation-date="05/01/2025 14:22:33" visibility="undefined" />
     <item id="a95f81d14b0b4945ab8b81daf6be9a77" cid="PROP005" type="property" creator="" creation-date="06/07/2025 12:29:40" visibility="undefined">
@@ -352,7 +367,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-sequence" id="paba8c076ecdc4b879d50a43aba4a4b9d_441017654" name="SequenceDiagram1" order-index="1" uid="" name-style="" auto-routed-paths="false" default-line-style="default" view-location="255,-294" zoom="0.7">
+      <diagram type="uml-sequence" id="paba8c076ecdc4b879d50a43aba4a4b9d_441017654" name="SequenceDiagram1" order-index="1" uid="" name-style="" auto-routed-paths="false" default-line-style="default" view-location="-195,87" zoom="0.6">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -371,7 +386,7 @@
         <abstract-items>
           <item id="9e7027d50760401d9ccbe8ffbda1ef2e" cid="LL020" type="lifeline" creator="" creation-date="06/07/2025 12:59:22" visibility="undefined">
             <owned-items />
-            <lifeline classifier-name="BamcoLeiteService" classifier-ref="e1b17012674e4d54b57125c6a71bc5e4" selector="" is-multi-object="false" />
+            <lifeline classifier-name="BancoLeiteService" classifier-ref="ae6d0d2998d649679c89649963312203" selector="" is-multi-object="false" />
           </item>
           <item id="61dcc2344e084c5d9de6893440761c24" cid="SM018" type="sequence-action" name="Message18" creation-date="05/01/2025 14:22:48" from="7c08832eed3e4eb3b8144453590b925c" visibility="package">
             <sequence-action type="call" message="userPostgresDaoImpl.findByEmail(email)&#xD;&#xA;" is-asynchronous="false" return-value="" assign-to-variable="">
@@ -474,10 +489,10 @@
           <item id="903c2ceecb63412a9b367611022ff354" cid="ES028" type="activation-bar" name="ExecutionSpecification26" owner="de2edee9c8d94870ad42d95873a01179" creator="" creation-date="06/07/2025 12:50:18" visibility="undefined">
             <activation-bar lifeline-ref="de2edee9c8d94870ad42d95873a01179" />
           </item>
+          <item id="65a3753370244890a78e2c28302f4658" cid="ES001" type="activation-bar" name="ExecutionSpecification1" owner="03d3a08df9cf4f3ba064ab53bcbe2052" creator="" creation-date="05/01/2025 14:07:55" visibility="undefined" />
           <item id="89231a49ce7e444cb0491fd1d29cb0f5" cid="ES018" type="activation-bar" name="ExecutionSpecification17" owner="be1c0e3a54984327af5596145924c3fa" creator="" creation-date="06/06/2025 11:57:23" visibility="undefined">
             <activation-bar lifeline-ref="be1c0e3a54984327af5596145924c3fa" />
           </item>
-          <item id="65a3753370244890a78e2c28302f4658" cid="ES001" type="activation-bar" name="ExecutionSpecification1" owner="03d3a08df9cf4f3ba064ab53bcbe2052" creator="" creation-date="05/01/2025 14:07:55" visibility="undefined" />
           <item id="f001177e6e6e47c9a59f69f8c32a9d60" cid="ES034" type="activation-bar" name="ExecutionSpecification32" owner="9e7027d50760401d9ccbe8ffbda1ef2e" creator="" creation-date="06/07/2025 13:02:36" visibility="undefined">
             <activation-bar lifeline-ref="9e7027d50760401d9ccbe8ffbda1ef2e" />
           </item>
@@ -559,21 +574,21 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="c04d864e8a7f4cd4ada375e473cb2e69" cid="SM060" type="sequence-action" name="Message58" creator="" creation-date="06/07/2025 12:52:20" from="903c2ceecb63412a9b367611022ff354" to="bf81a3b098834d22894b6ca9937144b2" visibility="package">
-            <sequence-action type="reply" message="return" is-asynchronous="false" return-value="" assign-to-variable="">
-              <parameters />
-            </sequence-action>
-          </item>
           <item id="9a1fd2acc6ab4dbaa91aa91aa3203b5e" cid="SM056" type="sequence-action" name="Message54" creator="" creation-date="06/07/2025 12:45:38" from="b88f8067a140489290629822a1b579a9" visibility="package">
             <sequence-action type="call" message="doacaoPostgresDao.save(doacao)" is-asynchronous="false" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
-          <item id="71bdccbdb8804c0eab6809eec773011d" cid="ES013" type="activation-bar" name="ExecutionSpecification12" owner="4ad8e7c8a62c417ebe802632fa080a7d" creator="" creation-date="06/06/2025 11:24:03" visibility="undefined">
-            <activation-bar lifeline-ref="4ad8e7c8a62c417ebe802632fa080a7d" />
+          <item id="c04d864e8a7f4cd4ada375e473cb2e69" cid="SM060" type="sequence-action" name="Message58" creator="" creation-date="06/07/2025 12:52:20" from="903c2ceecb63412a9b367611022ff354" to="bf81a3b098834d22894b6ca9937144b2" visibility="package">
+            <sequence-action type="reply" message="return" is-asynchronous="false" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
           </item>
           <item id="8216930edb5543c68ada19b2a53bb26a" cid="ES002" type="activation-bar" name="ExecutionSpecification2" owner="4e3e0e0c99cf4b91bf4b554add238504" creator="" creation-date="05/01/2025 14:11:40" visibility="undefined">
             <activation-bar lifeline-ref="4e3e0e0c99cf4b91bf4b554add238504" />
+          </item>
+          <item id="71bdccbdb8804c0eab6809eec773011d" cid="ES013" type="activation-bar" name="ExecutionSpecification12" owner="4ad8e7c8a62c417ebe802632fa080a7d" creator="" creation-date="06/06/2025 11:24:03" visibility="undefined">
+            <activation-bar lifeline-ref="4ad8e7c8a62c417ebe802632fa080a7d" />
           </item>
           <item id="a5735d6374d5429eb557d9bccab1411f" cid="ES040" type="activation-bar" name="ExecutionSpecification38" owner="be1c0e3a54984327af5596145924c3fa" creator="" creation-date="06/07/2025 13:06:54" visibility="undefined">
             <activation-bar lifeline-ref="be1c0e3a54984327af5596145924c3fa" />
@@ -603,7 +618,7 @@
             <lifeline classifier-name="BancoLeiteDao" classifier-ref="2e029eef038b4009b3def19a94b78da0" selector="" is-multi-object="false" />
           </item>
           <item id="c8455871642f418297e02edcb3885059" cid="SM019" type="sequence-action" name="Message19" creation-date="05/01/2025 14:25:56" from="10559920992143b881474d37f465c429" to="99a9aab452424776a8af48a784fb34f9" visibility="package">
-            <sequence-action type="reply" message="Optional&lt;UsuarioModel&gt;&#xD;&#xA;" is-asynchronous="false" return-value="" assign-to-variable="">
+            <sequence-action type="reply" message="return usuarioAuthentication" is-asynchronous="false" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -627,6 +642,7 @@
             <owned-items />
             <lifeline classifier-name="JwtService" classifier-ref="a95f81d14b0b4945ab8b81daf6be9a77" selector="" is-multi-object="false" />
           </item>
+          <item id="90a8a237a90641e287abd0b6065fdc40" cid="ES003" type="activation-bar" name="ExecutionSpecification3" creator="" creation-date="05/01/2025 14:11:48" visibility="undefined" />
           <item id="76635926617941288815584028b68cfe" cid="LL009" type="lifeline" creator="" creation-date="06/06/2025 11:56:09" visibility="undefined">
             <stereotypes>
               <stereotype name="entity" />
@@ -637,7 +653,6 @@
             <owned-items />
             <lifeline classifier-name="UsuarioDao" classifier-ref="2c1ee7b95c714814a4ffcead39ed47ea" selector="" is-multi-object="false" />
           </item>
-          <item id="90a8a237a90641e287abd0b6065fdc40" cid="ES003" type="activation-bar" name="ExecutionSpecification3" creator="" creation-date="05/01/2025 14:11:48" visibility="undefined" />
           <item id="88fb622ce9754f5db1b15aab4d547d20" cid="SM001" type="sequence-action" name="Message1" creator="" creation-date="05/01/2025 14:15:06" from="65a3753370244890a78e2c28302f4658" to="8216930edb5543c68ada19b2a53bb26a" visibility="package">
             <sequence-action type="call" message="AgendarColeta()" is-asynchronous="false" return-value="" assign-to-variable="">
               <parameters />
@@ -774,7 +789,7 @@
             <sequence-action show-sequence-number="false" />
           </item>
           <item id="15db87dfc4214dbbb96dc4dd36ceebb3" iid="5469613076724683a33d8f2994181a56" creation-date="05/01/2025 14:25:56" order-index="14" type="relation">
-            <layout message-x="1422" message-y="-373" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="1510" y1="-399" x2="1309" y2="-399" start-border-pos="0.751" end-border-pos="0.28728070175438597" start-local-pos="53" end-local-pos="17" name-position="12,26">
+            <layout message-x="1416.5" message-y="-376" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="1510" y1="-399" x2="1309" y2="-399" start-border-pos="0.751" end-border-pos="0.28728070175438597" start-local-pos="53" end-local-pos="17" name-position="6.5,23">
               <points>
                 <point x="1510" y="-399" />
                 <point x="1309" y="-399" />
@@ -874,7 +889,7 @@
             </layout>
           </item>
           <item id="c8455871642f418297e02edcb3885059" iid="6cdb0be94ade4b43a97cc9f4b50f2f30" creation-date="05/01/2025 14:25:56" order-index="3" type="relation">
-            <layout message-x="1653" message-y="-394" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="1767" y1="-427" x2="1530" y2="-427" start-border-pos="0.751" end-border-pos="0.3679245283018868" start-local-pos="126" end-local-pos="25" name-position="5,33">
+            <layout message-x="1651.5" message-y="-385.9131" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="1767" y1="-427" x2="1530" y2="-427" start-border-pos="0.751" end-border-pos="0.3679245283018868" start-local-pos="126" end-local-pos="25" name-position="3.5,41.086914">
               <points>
                 <point x="1767" y="-427" />
                 <point x="1530" y="-427" />

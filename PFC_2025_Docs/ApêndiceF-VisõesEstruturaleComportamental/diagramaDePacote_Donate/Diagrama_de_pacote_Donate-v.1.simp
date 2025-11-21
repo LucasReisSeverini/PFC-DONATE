@@ -100,6 +100,16 @@
         <phone-number />
         <description />
         <color>#00000000</color>
+        <working-schedule uid="ws-a9503bae0d6640dd8a11e20b7b479693" hours="8" monday="8" tuesday="8" wednesday="8" thursday="8" friday="8" saturday="0" sunday="0" />
+      </person>
+      <person id="">
+        <first-name>Dilton</first-name>
+        <last-name>Thales</last-name>
+        <role />
+        <e-mail />
+        <phone-number />
+        <description />
+        <color>#00000000</color>
       </person>
     </persons>
     <teams />
@@ -218,8 +228,8 @@
     <item id="4f6c9d583745440d804c2b8108b5545d" cid="C001" type="class" name="authMiddleware" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="b4b773c26dea4412ac0afe9fd2ea2b64" cid="C001" type="class" name="EventoPostgresDaoImpl" owner="9cac4a32d78b4964acdd1cd4e3aaf9d3" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="168cf0f07f8240eaa523f496ee5289b5" cid="PKG016" type="package" name="municipo" owner="120849094b914291868a94b973970a74" creation-date="09/26/2025 11:58:23" visibility="undefined" />
-    <item id="bbb4e3574ca34011a7dc6347ef2c33f6" cid="C001" type="class" name="bancoLeiteService" owner="120849094b914291868a94b973970a74" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="d0531f96319a4ca2b5fbfd2174a0d389" cid="PKG016" type="package" name="user" owner="120849094b914291868a94b973970a74" creation-date="09/26/2025 11:58:23" visibility="undefined" />
+    <item id="bbb4e3574ca34011a7dc6347ef2c33f6" cid="C001" type="class" name="bancoLeiteService" owner="120849094b914291868a94b973970a74" creation-date="05/01/2025 09:52:32" visibility="undefined" />
     <item id="161c33737d8a441fa8c0e8f3c6fee702" cid="C001" type="class" name="SecurityConfig" owner="4d1f1a01980d4349baf593981246b631" creation-date="05/01/2025 09:52:32" visibility="undefined" />
   </items>
   <models>
@@ -236,7 +246,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-package" id="p079e0b22ff504264827d9f39ae2321d0_832304216" name="DiagramaDePacote_Donate" order-index="1" uid="" name-style="" auto-routed-paths="false" default-line-style="default" view-location="-1,310" zoom="0.7">
+      <diagram type="uml-package" id="p079e0b22ff504264827d9f39ae2321d0_832304216" name="DiagramaDePacote_Donate" order-index="1" uid="" name-style="" auto-routed-paths="false" default-line-style="default" view-location="431,-182" zoom="1.6">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -319,7 +329,7 @@
               <stereotype id="c94c260a318e414fa54c1d2d0cf559e5_access_c" type="access" creation-date="05/01/2025 10:05:47" ref="" />
             </stereotype-instances>
           </item>
-          <item id="ff02b233e9de49eeae9ce59a043ce94e" cid="PKG002" type="package" name="Beck-end" creator="" creation-date="05/01/2025 09:44:46" visibility="undefined">
+          <item id="ff02b233e9de49eeae9ce59a043ce94e" cid="PKG002" type="package" name="Back-end" creator="" creation-date="05/01/2025 09:44:46" visibility="undefined">
             <owned-items />
           </item>
           <item id="b175c4f75c0e43aebe70d8d78eb74d35" cid="ELEM009" type="usage" owner="ff02b233e9de49eeae9ce59a043ce94e" creator="" creation-date="05/01/2025 10:09:44" from="39649450bbf84495b2cfade6d5cd1f0a" visibility="package">

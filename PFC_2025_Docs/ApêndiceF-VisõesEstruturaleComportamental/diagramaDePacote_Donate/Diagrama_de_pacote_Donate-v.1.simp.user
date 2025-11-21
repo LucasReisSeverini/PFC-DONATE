@@ -1,6 +1,6 @@
 ﻿<user-preferences>
   <open-windows>
-    <window type="FolderOverview" resource="pf942c39a1aaa451c85a978ed433ad987_239765300" active="false" />
     <window type="Diagram" resource="p079e0b22ff504264827d9f39ae2321d0_832304216" active="true" />
+    <window type="FolderOverview" resource="pf942c39a1aaa451c85a978ed433ad987_239765300" active="false" />
   </open-windows>
 </user-preferences>
